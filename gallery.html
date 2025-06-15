@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Gallery — Connor Button</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+</head>
+<body>
+
+<!-- Header -->
+<section id="header">
+	<header>
+		<span class="image avatar"><img src="/images/avatar.jpg" alt="Connor's Avatar" /></span>
+		<h1 id="logo"><a href="#">Connor Button</a></h1>
+		<p><strong>Create. Deliver. Capture.</strong><br />
+		Driven by curiosity, clarity, and practical solutions.</p>
+	</header>
+  <nav id="nav">
+    <ul>
+      <li><a href="index.html#one">About</a></li>
+      <li><a href="index.html#two" class="active">Gallery</a></li>
+      <li><a href="index.html#three">Highlights</a></li>
+      <li><a href="index.html#four">Contact</a></li>
+    </ul>
+  </nav>
+	<footer>
+		    <!-- Icons -->
+<ul class="icons">
+  <li>
+    <a href="https://www.linkedin.com/in/connor-button-a9097833b/" class="icon brands fa-linkedin" target="_blank">
+      <span class="label">LinkedIn</span>
+    </a>
+  </li>
+  <li>
+    <a href="https://www.instagram.com/couuor/" class="icon brands fa-instagram" target="_blank">
+      <span class="label">Instagram</span>
+    </a>
+  </li>
+  <li>
+    <a href="mailto:connorbutton1@gmail.com" class="icon solid fa-envelope">
+      <span class="label">Email</span>
+    </a>
+  </li>
+</ul>
+</footer>
+</section>
+
+<!-- Wrapper and Main -->
+
+  <div id="wrapper">
+    <div id="main">
+
+<!-- Gallery -->
+
+      <section id="category-gallery">
+        <div class="container">
+          <header class="major">
+            <h2 id="cat-title"></h2>
+            <p>Photos from this category.</p>
+          </header>
+          <div id="gallery-grid" class="row gtr-uniform">
+            <!-- images/videos will go here -->
+          </div>
+          <p><a href="index.html#two" class="button">← Home</a></p>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- load your normal scripts first... -->
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cat = location.hash.slice(1);
+    if (!cat) {
+      document.getElementById('cat-title').textContent = 'No category selected';
+      return;
+    }
+
+    fetch('images/gallery/manifest.json')
+      .then(r => r.json())
+      .then(galleries => {
+        const files = galleries[cat];
+        if (!files) {
+          document.getElementById('cat-title').textContent = 'Category not found';
+          return;
+        }
+
+        // Set the heading
+        const humanName = cat.charAt(0).toUpperCase() + cat.slice(1);
+        document.getElementById('cat-title').textContent = humanName;
+
+        const grid = document.getElementById('gallery-grid');
+        files.forEach(fname => {
+          const ext = fname.split('.').pop().toLowerCase();
+          let html;
+
+          if (['mp4','webm','ogg'].includes(ext)) {
+            html = `
+              <video controls class="image fit">
+                <source src="images/gallery/${cat}/${fname}" type="video/${ext}">
+                Your browser doesn’t support this video.
+              </video>`;
+          } else {
+            html = `
+              <span class="image fit">
+                <img src="images/gallery/${cat}/${fname}"
+                     alt="${humanName} photo">
+              </span>`;
+          }
+
+          const col = document.createElement('div');
+          col.className = 'col-4 col-6-medium col-12-small';
+          col.innerHTML = html;
+          grid.appendChild(col);
+        });
+      })
+      .catch(err => {
+        console.error(err);
+        document.getElementById('cat-title').textContent = 'Error loading gallery';
+      });
+  });
+  </script>
+  
+		<!-- Scripts -->
+			<script src="assets/js/jquery.min.js"></script>
+			<script src="assets/js/jquery.scrollex.min.js"></script>
+			<script src="assets/js/jquery.scrolly.min.js"></script>
+			<script src="assets/js/browser.min.js"></script>
+			<script src="assets/js/breakpoints.min.js"></script>
+			<script src="assets/js/util.js"></script>
+			<script src="assets/js/main.js"></script>
+
+</body>
+</html>
