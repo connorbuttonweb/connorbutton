@@ -119,23 +119,26 @@
         document.getElementById('cat-title').textContent = humanName;
 
         const grid = document.getElementById('gallery-grid');
-        files.forEach((fname, i)=> {
+          files.forEach((fname, i) => {
           const ext = fname.split('.').pop().toLowerCase();
+          const isVideo = ['mp4', 'webm', 'ogg'].includes(ext);
           let html;
-
-          if (['mp4','webm','ogg'].includes(ext)) {
+        
+          if (isVideo) {
             html = `
-              <video controls class="image fit">
-                <source src="images/gallery/${cat}/${fname}" type="video/${ext}">
-                Your browser doesn’t support this video.
-              </video>`;
+              <span class="image fit gallery-item" data-index="${i}">
+                <video muted preload="metadata">
+                  <source src="images/gallery/${cat}/${fname}" type="video/${ext}">
+                  Your browser doesn’t support this video.
+                </video>
+              </span>`;
           } else {
             html = `
-            <span class="image fit gallery-image" data-index="${i}">
-              <img src="images/gallery/${cat}/${fname}" alt="${humanName} photo">
-            </span>`;
+              <span class="image fit gallery-item" data-index="${i}">
+                <img src="images/gallery/${cat}/${fname}" alt="${humanName} photo">
+              </span>`;
           }
-
+        
           const col = document.createElement('div');
           col.className = 'col-4 col-6-medium col-12-small';
           col.innerHTML = html;
@@ -144,19 +147,36 @@
                 let currentIndex = 0;
         const lightbox = document.getElementById('lightbox');
         const lightboxImg = document.getElementById('lightbox-img');
+        const lightboxVideo = document.getElementById('lightbox-video');
         
         function showImage(index) {
-          const fname = files[index];
+        const fname = files[index];
+        const ext = fname.split('.').pop().toLowerCase();
+        const isVideo = ['mp4', 'webm', 'ogg'].includes(ext);
+      
+        if (isVideo) {
+          lightboxImg.style.display = 'none';
+          lightboxVideo.style.display = 'block';
+          lightboxVideo.src = `images/gallery/${cat}/${fname}`;
+          lightboxVideo.load(); // force refresh
+        } else {
+          lightboxVideo.pause();
+          lightboxVideo.style.display = 'none';
+          lightboxImg.style.display = 'block';
           lightboxImg.src = `images/gallery/${cat}/${fname}`;
-          currentIndex = index;
-          lightbox.style.display = 'flex';
         }
+      
+        currentIndex = index;
+        lightbox.style.display = 'flex';
+      }
         
-        document.querySelectorAll('.gallery-image').forEach((el, i) => {
-          el.addEventListener('click', () => showImage(i));
+        document.querySelectorAll('.gallery-item').forEach(el => {
+          const index = parseInt(el.getAttribute('data-index'), 10);
+          el.addEventListener('click', () => showImage(index));
         });
         
         document.getElementById('lightbox-close').onclick = () => {
+          lightboxVideo.pause();
           lightbox.style.display = 'none';
         };
         
@@ -183,12 +203,13 @@
   });
   </script>
   
-  <div id="lightbox" style="display:none;">
-    <span id="lightbox-close">&times;</span>
-    <img id="lightbox-img" src="" alt="">
-    <span id="lightbox-prev">&#10094;</span>
-    <span id="lightbox-next">&#10095;</span>
-  </div>
+<div id="lightbox" style="display:none;">
+  <span id="lightbox-close">&times;</span>
+  <img id="lightbox-img" src="" alt="">
+  <video id="lightbox-video" controls playsinline style="max-width: 90vw; max-height: 90vh;"></video>
+  <span id="lightbox-prev">&#10094;</span>
+  <span id="lightbox-next">&#10095;</span>
+</div>
 
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
