@@ -131,10 +131,9 @@
               </video>`;
           } else {
             html = `
-              <span class="image fit">
-                <img src="images/gallery/${cat}/${fname}"
-                     alt="${humanName} photo">
-              </span>`;
+            <span class="image fit gallery-image" data-index="${i}">
+              <img src="images/gallery/${cat}/${fname}" alt="${humanName} photo">
+            </span>`;
           }
 
           const col = document.createElement('div');
