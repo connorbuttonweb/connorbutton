@@ -5,6 +5,33 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Gallery — Connor Button</title>
   <link rel="stylesheet" href="assets/css/main.css" />
+
+  <style>
+    #lightbox {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100vw; height: 100vh;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 10000;
+    }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+    }
+    #lightbox span {
+      color: white;
+      position: absolute;
+      font-size: 2em;
+      cursor: pointer;
+      user-select: none;
+    }
+    #lightbox-close { top: 20px; right: 30px; }
+    #lightbox-prev { top: 50%; left: 30px; transform: translateY(-50%); }
+    #lightbox-next { top: 50%; right: 30px; transform: translateY(-50%); }
+  </style>
 </head>
 <body>
 
@@ -115,6 +142,40 @@
           col.innerHTML = html;
           grid.appendChild(col);
         });
+                let currentIndex = 0;
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        
+        function showImage(index) {
+          const fname = files[index];
+          lightboxImg.src = `images/gallery/${cat}/${fname}`;
+          currentIndex = index;
+          lightbox.style.display = 'flex';
+        }
+        
+        document.querySelectorAll('.gallery-image').forEach((el, i) => {
+          el.addEventListener('click', () => showImage(i));
+        });
+        
+        document.getElementById('lightbox-close').onclick = () => {
+          lightbox.style.display = 'none';
+        };
+        
+        document.getElementById('lightbox-prev').onclick = () => {
+          if (currentIndex > 0) showImage(currentIndex - 1);
+        };
+        
+        document.getElementById('lightbox-next').onclick = () => {
+          if (currentIndex < files.length - 1) showImage(currentIndex + 1);
+        };
+        
+        document.addEventListener('keydown', (e) => {
+          if (lightbox.style.display !== 'none') {
+            if (e.key === 'ArrowLeft') document.getElementById('lightbox-prev').click();
+            if (e.key === 'ArrowRight') document.getElementById('lightbox-next').click();
+            if (e.key === 'Escape') lightbox.style.display = 'none';
+          }
+        });
       })
       .catch(err => {
         console.error(err);
@@ -123,6 +184,13 @@
   });
   </script>
   
+  <div id="lightbox" style="display:none;">
+    <span id="lightbox-close">&times;</span>
+    <img id="lightbox-img" src="" alt="">
+    <span id="lightbox-prev">&#10094;</span>
+    <span id="lightbox-next">&#10095;</span>
+  </div>
+
 		<!-- Scripts -->
 			<script src="assets/js/jquery.min.js"></script>
 			<script src="assets/js/jquery.scrollex.min.js"></script>
