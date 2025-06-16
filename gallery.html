@@ -119,7 +119,7 @@
         document.getElementById('cat-title').textContent = humanName;
 
         const grid = document.getElementById('gallery-grid');
-        files.forEach(fname => {
+        files.forEach((fname, i)=> {
           const ext = fname.split('.').pop().toLowerCase();
           let html;
 
