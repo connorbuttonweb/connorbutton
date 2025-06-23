@@ -1700,11 +1700,12 @@ input, select, textarea {
 
 /* Container */
 
-	.container {
-		margin: 0 auto;
-		max-width: calc(100% - 3em);
-		width: 60em;
-	}
+    .container {
+      margin: 0 auto;
+      max-width: 75em;     /* allows wider layout */
+      width: 100%;         /* let it stretch */
+      padding: 0 5em;      /* adds controlled side spacing */
+    }
 
 		.container.xsmall {
 			width: 11.25em;
