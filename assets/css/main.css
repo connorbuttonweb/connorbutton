@@ -1702,9 +1702,9 @@ input, select, textarea {
 
     .container {
       margin: 0 auto;
-      max-width: 75em;     /* allows wider layout */
-      width: 100%;         /* let it stretch */
-      padding: 0 5em;      /* adds controlled side spacing */
+      max-width: 72em;     /* slightly thinner than 75em or 77.5em */
+      width: 100%;
+      padding: 0 5.5em;    /* slightly wider side margins */
     }
 
 		.container.xsmall {
