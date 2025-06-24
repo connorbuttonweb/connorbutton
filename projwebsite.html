@@ -5,6 +5,25 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
   <title>Project Title — Connor Button</title>
   <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+  /* Lightbox overlay, hidden by default */
+  #lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    z-index: 10000;
+  }
+  /* The enlarged image */
+  #lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  </style>
 </head>
 <body class="is-preload">
 
@@ -141,6 +160,31 @@
   <script src="assets/js/breakpoints.min.js"></script>
   <script src="assets/js/util.js"></script>
   <script src="assets/js/main.js"></script>
+
+  <!-- Lightbox container -->
+  <div id="lightbox-overlay">
+    <img src="" alt="Expanded image">
+  </div>
+  
+  <!-- Lightbox script -->
+  <script>
+    // 1) Find all your project-page images you want clickable:
+    document.querySelectorAll('.image.fit img').forEach(img => {
+      img.style.cursor = 'zoom-in';            // show zoom cursor
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();                   // don’t bubble
+        const overlay = document.getElementById('lightbox-overlay');
+        overlay.querySelector('img').src = this.src;
+        overlay.style.display = 'flex';
+      });
+    });
+  
+    // 2) Clicking anywhere on the overlay closes it:
+    document.getElementById('lightbox-overlay')
+      .addEventListener('click', function() {
+        this.style.display = 'none';
+      });
+  </script>
 
 </body>
 </html>
