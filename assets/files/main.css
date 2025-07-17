@@ -2817,7 +2817,9 @@ input, select, textarea {
 
 	#wrapper {
 		background: #fff;
-		padding-right: 23em;
+		padding: 0 1em;
+    margin: 0 auto;
+    max-width: 1100px;
 	}
 
 /* Main */
