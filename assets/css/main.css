@@ -1702,9 +1702,9 @@ input, select, textarea {
 
     .container {
       margin: 0 auto;
-      max-width: 70em;     /* slightly thinner than 75em or 77.5em */
+      max-width: 85em;     /* slightly thinner than 75em or 77.5em */
       width: 100%;
-      padding: 0 6em;    /* slightly wider side margins */
+      padding: 0 3em;    /* slightly wider side margins */
     }
 
 		.container.xsmall {
@@ -3391,3 +3391,42 @@ input, select, textarea {
 body {
   padding-top: 3.5em; /* prevents hiding behind the nav bar */
 }
+
+#top-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background: #5881ca;
+  color: white;
+  padding: 0.75em 0;
+  z-index: 9999;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.15);
+  overflow-x: auto;
+}
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 1em;
+  padding: 0 1em;
+}
+
+#top-nav a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+  white-space: nowrap;
+}
+
+#top-nav a:hover {
+  color: #e0ecfa;
+}
+
+#top-nav i {
+  margin-left: 0.4em;
+}
+
