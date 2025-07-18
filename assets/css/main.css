@@ -1702,9 +1702,9 @@ input, select, textarea {
 
     .container {
       margin: 0 auto;
-      max-width: 85em;     /* slightly thinner than 75em or 77.5em */
+      max-width: 95em;     /* slightly thinner than 75em or 77.5em */
       width: 100%;
-      padding: 0 3em;    /* slightly wider side margins */
+      padding: 0 2em;    /* slightly wider side margins */
     }
 
 		.container.xsmall {
@@ -2816,8 +2816,8 @@ input, select, textarea {
 /* Wrapper */
 
 	#wrapper {
-    padding: 0 1em;
-    max-width: 1400px;
+    padding: 0 2em;
+    max-width: 3200px;
     margin: 0 auto;
 	}
 
