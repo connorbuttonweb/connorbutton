@@ -1702,9 +1702,9 @@ input, select, textarea {
 
     .container {
       margin: 0 auto;
-      max-width: 95em;     /* slightly thinner than 75em or 77.5em */
+      max-width: 120em;     /* slightly thinner than 75em or 77.5em */
       width: 100%;
-      padding: 0 2em;    /* slightly wider side margins */
+      padding: 0 1em;    /* slightly wider side margins */
     }
 
 		.container.xsmall {
@@ -3387,3 +3387,16 @@ input, select, textarea {
   margin-left: 0.4em;
 }
 
+/* === Fullwidth Banner Override === */
+.fullwidth-image {
+  width: 100vw;            /* Full viewport width */
+  margin-left: calc(-50vw + 50%); /* Cancel container centering */
+  position: relative;
+}
+
+.fullwidth-image img {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 0;        /* Remove rounded corners */
+}
