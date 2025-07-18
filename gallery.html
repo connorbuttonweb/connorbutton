@@ -77,9 +77,11 @@
   <!-- load your normal scripts first... -->
   <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const cat = location.hash.slice(1);
-    if (!cat) {
-      document.getElementById('cat-title').textContent = 'No category selected';
+    const cat = location.hash ? location.hash.slice(1) : '';
+    const catTitle = document.getElementById('cat-title');
+    
+    if (!cat || cat === 'undefined') {
+      catTitle.textContent = 'Gallery';
       return;
     }
 
