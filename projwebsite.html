@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+  <title>Project Title — Connor Button</title>
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <style>
+  /* Lightbox overlay, hidden by default */
+  #lightbox-overlay {
+    position: fixed;
+    top: 0; left: 0;
+    width: 100vw; height: 100vh;
+    background: rgba(0,0,0,0.8);
+    display: none;
+    justify-content: center;
+    align-items: center;
+    cursor: zoom-out;
+    z-index: 10000;
+  }
+  /* The enlarged image */
+  #lightbox-overlay img {
+    max-width: 90vw;
+    max-height: 90vh;
+  }
+  </style>
+</head>
+<body class="is-preload">
+  
+  <!-- Header -->
+  
+    <header id="top-nav">
+    <div class="nav-container">
+      <a href="index.html#one">Home</a>
+      <a href="index.html#four">Contact</a>
+      <a href="https://www.linkedin.com/in/connor-button-a9097833b/" target="_blank">LinkedIn
+        <i class="fab fa-linkedin"></i>
+        </a>
+      <a href="/assets/files/Connor Button Resume.pdf" target="_blank">Resume
+        <i class="fas fa-file-alt"></i>
+        </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div id="wrapper">
+    <div id="main">
+      <section id="one">
+        <div class="container">
+        <header class="major">
+          <h2>The Website Project</h2>
+          <p>My self-built portfolio site developed with HTML, Python, CSS, and AI tools to showcase my projects and personal work.</p>
+        </header>
+        <div class="row gtr-50 aln-middle">
+          <div class="col-7 col-12-medium">
+            <p>
+              This website began as a blank canvas as a personal challenge to see how far I could go without relying on drag-and-drop builders or expensive subscriptions. 
+              I started with zero web development experience and used AI tools, curiosity, and persistence to bring it to life. Every section, feature, and bug fix taught 
+              me something new about design, code, and creative problem-solving. More than just a portfolio, this project reflects my values: practical learning, doing things 
+              the hard way when it’s worth it, and proving that initiative and resourcefulness go a long way.  Below are some of the many files I have created throughout this project. 
+              I have chosen each one to highlight something different and specific for a variety of reasons.
+            </p>
+          </div>
+          <div class="col-5 col-12-medium">
+            <span class="image fit">
+              <img src="images/WebImg3.jpg" alt="Website Screenshot" />
+            </span>
+          </div>
+        </div>
+        
+        <div>
+          <a href="assets/files/index.html.txt" target="_blank" class="button">
+            <span class="icon solid fa-file"></span>
+            index.hmtl
+          </a>
+        </div>
+        <div class="row gtr-50 aln-middle">
+          <div class="col-5 col-12-medium">
+            <span class="image fit">
+              <img src="images/WebCov.jpg" alt="Website Screenshot" />
+            </span>
+          </div>
+          <div class="col-7 col-12-medium">
+        <p>
+          First when looking at index.html I would like to highlight the standard html code that is used to build the general website. Using comments in the code I labeled the 
+          various sections. Most of the sections are fairly standard using < div > and < p > to create sections of code and text with the exception of
+          the gallery section which uses scripts. Another thing that index.html highlights is the different ways the user is redirected to new sites. This is shown in #three
+          when redirecting to the project pages. Another example of this is the use of the free website formspree.com which filters the contact section for spam and redirects emails
+          to my personal email account.
+        </p>
+          </div>
+        </div>
+          
+        <div>
+            <a href="assets/files/main.css" target="_blank" class="button">
+            <span class="icon solid fa-file"></span>
+            main.css
+          </a>
+        </div>
+        <p>
+          Paragraph about main.css
+        </p>
+        
+        <div>
+            <a href="assets/files/gallery.html.txt" target="_blank" class="button">
+            <span class="icon solid fa-file"></span>
+            gallery.html
+          </a>
+        </div>
+        <p>
+          Paragraph about gallery.html
+        </p>
+        
+        <div>
+            <a href="assets/files/make_gallery_manifest.py.txt" target="_blank" class="button">
+            <span class="icon solid fa-file"></span>
+            make_gallery_manifest.py
+          </a>
+        </div>
+        <p>
+          Paragraph about make_gallery_manifest.py
+        </p>
+        
+          <div>
+            <a href="https://chatgpt.com/share/6859eaa8-8bf4-800b-aba2-9652f34a9388" target="_blank" class="button">ChatGPT conversation example.</a>
+          </div>
+        <p>
+          Paragraph about how I used ChatGPT prompts, referencing this singular chat as an example.
+        </p>
+        
+        <p> </p>
+<!--        <ul>
+          <li>Written in HTML, CSS, and JavaScript</li>
+          <li>Responsive design using Flexbox</li>
+          <li>AI-assisted coding workflow</li>
+        </ul>
+-->
+        <p>
+          <a href="index.html#three" class="button">← Back to Projects</a>
+        </p>
+      </section>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="assets/js/jquery.min.js"></script>
+  <script src="assets/js/jquery.scrollex.min.js"></script>
+  <script src="assets/js/jquery.scrolly.min.js"></script>
+  <script src="assets/js/browser.min.js"></script>
+  <script src="assets/js/breakpoints.min.js"></script>
+  <script src="assets/js/util.js"></script>
+  <script src="assets/js/main.js"></script>
+
+  <!-- Lightbox container -->
+  <div id="lightbox-overlay">
+    <img src="" alt="Expanded image">
+  </div>
+  
+  <!-- Lightbox script -->
+  <script>
+    // 1) Find all your project-page images you want clickable:
+    document.querySelectorAll('.image.fit img').forEach(img => {
+      img.style.cursor = 'zoom-in';            // show zoom cursor
+      img.addEventListener('click', function(e) {
+        e.stopPropagation();                   // don’t bubble
+        const overlay = document.getElementById('lightbox-overlay');
+        overlay.querySelector('img').src = this.src;
+        overlay.style.display = 'flex';
+      });
+    });
+  
+    // 2) Clicking anywhere on the overlay closes it:
+    document.getElementById('lightbox-overlay')
+      .addEventListener('click', function() {
+        this.style.display = 'none';
+      });
+  </script>
+
+</body>
+</html>
