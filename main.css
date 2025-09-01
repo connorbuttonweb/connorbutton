@@ -167,3 +167,30 @@ body{
   position: relative;
   z-index: 1; /* make sure title is above banner */
 }
+
+.back-btn {
+  margin: 20px;
+}
+
+.back-btn a {
+  display: inline-block;
+  padding: 8px 16px;
+  border: 1px solid #000;
+  border-radius: 999px;
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  font-size: 14px;
+  transition: transform 0.15s ease, background 0.15s ease;
+}
+
+.back-btn a:hover {
+  background: #000;
+  color: #fff;
+  transform: translateY(-1px);
+}
+
+#form-status {
+  color: #111;
+  opacity: .8;
+}
