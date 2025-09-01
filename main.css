@@ -25,19 +25,7 @@ body{
   line-height:1.6;
 }
 
-.social{
-  position:fixed;
-  top:22px; left:28px;
-  display:flex; gap:16px;
-  z-index:10;
-}
-.social a{
-  display:inline-flex; align-items:center; justify-content:center;
-  width:26px; height:26px;
-  color:#000; opacity:.8; text-decoration:none;
-}
-.social a:hover{ opacity:1; transform:translateY(-1px); }
-
+/* --- Global brand/navigation (unchanged) --- */
 .brand{
   max-width:var(--maxw);
   margin:70px auto 10px;
@@ -75,6 +63,7 @@ body{
   height:2px; background:#000;
 }
 
+/* --- Hero (index) --- */
 .hero{
   max-width:var(--maxw);
   margin:46px auto 120px;
@@ -103,6 +92,7 @@ body{
 .col.text p + p{ color:#333; }
 .col.text p:last-of-type{ margin-bottom:26px; }
 
+/* --- Buttons --- */
 .btn{
   display:inline-block;
   border:1px solid #000;
@@ -112,7 +102,8 @@ body{
   color:#000;
   font-weight:600;
   font-size:14px;
-  transition:transform .15s ease, background .15s ease;
+  transition:transform .15s ease, background .15s ease, color .15s ease;
+  cursor:pointer;
 }
 .btn:hover{ transform:translateY(-1px); }
 .btn.primary{
@@ -120,7 +111,17 @@ body{
   color:#fff;
   margin-right:10px;
 }
+.btn.ghost{
+  background:transparent;
+  color:#000;
+  border-color:#000;
+}
+.btn.ghost:hover{
+  background:#000;
+  color:#fff;
+}
 
+/* --- Responsive tweaks --- */
 @media (max-width: 900px){
   .brand{ margin-top:54px; }
   .hero{
@@ -129,7 +130,6 @@ body{
   }
   .col.image{ order:1; }
   .col.text{ order:2; }
-  .social{ position:static; margin:14px 0 0 0; justify-content:center; }
 }
 
 /* --- Banner behind title --- */
@@ -140,38 +140,47 @@ body{
   padding: 0 var(--gutter);
   max-width: var(--maxw);
 }
-
 .brand .banner {
   position: absolute;
-  inset: 0; /* stretch to all sides */
-  z-index: -1; /* behind the text */
+  inset: 0;
+  z-index: -1;
   overflow: hidden;
   border-radius: var(--radius);
 }
-
 .brand .banner img {
   width: 100%;
   height: 100%;
-  object-fit: cover; /* scale and crop to fill */
-  opacity: 0.25; /* fade effect */
-  filter: brightness(80%); /* optional darken for readability */
+  object-fit: cover;
+  opacity: 0.25;
+  filter: brightness(80%);
 }
+.brand h1 { position: relative; z-index: 1; }
 
-.brand h1 {
-  margin: 0;
-  font-size: var(--brand-size);
-  font-weight: 800;
-  letter-spacing: .02em;
-  line-height: .95;
-  text-transform: uppercase;
-  position: relative;
-  z-index: 1; /* make sure title is above banner */
+/* --- Shared layout scaffolding (new) --- */
+.section{
+  padding: 10px var(--gutter) 80px;
 }
+.container{
+  max-width: var(--maxw);
+  margin: 0 auto;
+}
+.card{
+  background:#fff;
+  border:1px solid var(--line);
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  padding: clamp(16px, 3vw, 28px);
+}
+.small{ font-size: 0.92rem; color: var(--muted); }
+.lede{ color:#222; }
 
+.flex{ display:flex; }
+.cta-row{ display:flex; gap:12px; align-items:center; }
+
+/* --- Back button (shared) --- */
 .back-btn {
-  margin: 20px;
+  margin: 20px var(--gutter) 0;
 }
-
 .back-btn a {
   display: inline-block;
   padding: 8px 16px;
@@ -181,16 +190,102 @@ body{
   color: #000;
   font-weight: 600;
   font-size: 14px;
-  transition: transform 0.15s ease, background 0.15s ease;
+  transition: transform 0.15s ease, background 0.15s ease, color 0.15s ease;
 }
-
 .back-btn a:hover {
   background: #000;
   color: #fff;
   transform: translateY(-1px);
 }
 
-#form-status {
-  color: #111;
-  opacity: .8;
+/* --- Unified gallery grid (used on Experience, optional elsewhere) --- */
+.gallery{
+  display:grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: 12px;
+  margin-top: 12px;
 }
+.gallery img, .gallery video{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  border-radius: 12px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+  background:#f6f6f6;
+  min-height: 140px;
+}
+/* 3 across on desktop, 2 on small screens */
+.gallery > *{ grid-column: span 4; }
+@media (max-width: 640px){
+  .gallery{ grid-template-columns: repeat(6, 1fr); }
+  .gallery > *{ grid-column: span 3; }
+}
+
+/* --- Experience page styles --- */
+.exp-wrap{ max-width: var(--maxw); margin: 0 auto; }
+.exp-header{ margin-bottom: 18px; }
+.timeline{
+  display: grid;
+  gap: 22px;
+}
+.role{
+  border:1px solid var(--line);
+  border-radius: var(--radius);
+  padding: clamp(14px, 2.6vw, 22px);
+  background:#fff;
+  box-shadow: var(--shadow);
+}
+.role h3{ margin: 0 0 4px; }
+.role .meta{
+  font-size: 0.95rem;
+  color: var(--muted);
+  margin-bottom: 10px;
+}
+.role .body p{ margin: 0 0 10px; color:#222; }
+
+/* --- Contact page styles --- */
+.contact-wrap{
+  max-width: 760px;
+  margin: 0 auto;
+}
+.contact-wrap.card{ padding: clamp(18px, 3vw, 28px); }
+#contact-form{
+  display: grid;
+  gap: 14px;
+}
+.row{
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+@media (max-width: 640px){
+  .row{ grid-template-columns: 1fr; }
+}
+label{
+  display:block;
+  font-weight:600;
+  margin-bottom:6px;
+}
+input, textarea, select{
+  width:100%;
+  padding:12px 12px;
+  border:1px solid var(--line);
+  border-radius: 10px;
+  font: inherit;
+  color:#111;
+  background:#fff;
+  outline: none;
+  transition: border .15s ease, box-shadow .15s ease;
+}
+input:focus, textarea:focus, select:focus{
+  border-color:#111;
+  box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+}
+textarea{ min-height: 140px; resize: vertical; }
+#form-status{ color:#111; opacity:.85; }
+
+/* --- Utility visibility for any inline errors --- */
+.error{ color: #b00020; }
+
+/* --- End --- */
