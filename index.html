@@ -1,212 +1,42 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Connor Button</title>
+  <link rel="stylesheet" href="main.css" />
+</head>
+<body class="single-screen">
+  <main class="hero">
+    <!-- Full-bleed background image controlled by CSS -->
+    <div class="bg-image" aria-hidden="true"></div>
 
-<html>
-	<head>
-		<title>Connor Button</title>
-		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-		<link rel="stylesheet" href="assets/css/main.css" />
-	</head>
-	<body class="is-preload">
+    <div class="container">
+      <h1 class="title">CONNOR<br/>BUTTON</h1>
+      <p class="subtitle">Applied Economics | Builder | Problem‑Solver</p>
 
-<!-- Header -->
-  <header id="top-nav">
-    <div class="nav-container">
-      <a href="index.html#one">Home</a>
-      <a href="index.html#four">Contact</a>
-      <a href="https://www.linkedin.com/in/connor-button-a9097833b/" target="_blank">LinkedIn
-        <i class="fab fa-linkedin"></i>
-        </a>
-      <a href="/assets/files/Connor Button Resume.pdf" target="_blank">Resume
-        <i class="fas fa-file-alt"></i>
-        </a>
-    </div>
-  </header>
-
-		<!-- Wrapper -->
-			<div id="wrapper">
-
-				<!-- Main -->
-					<div id="main">
-					  
-<!-- Banner -->
-
-<section id="one">
-<div class="image main fullwidth-image" data-position="center">
-  <img src="/images/banner.jpg" alt="Banner Photo" />
-</div>
-
-<!-- Profile + Intro Captions -->
-<div class="about-intro row aln-middle">
-  <div class="col-4 col-12-small">
-    <span class="image fit profile-pic">
-      <img src="images/profile.jpg" alt="Connor Button Profile Photo" />
-    </span>
-  </div>
-  <div class="col-8 col-12-small">
-    <div class="badges">
-      <div class="badge">Proven Team Leader</div>
-      <div class="badge">Problem Solver</div>
-      <div class="badge">Avid Learner</div>
-    </div>
-  </div>
-</div>
-
-<!-- About -->
-
-	<div class="container">
-		<header class="major">
-			<h2>About Me</h2>
-			<p>This website is a space for me to share projects, ideas, and things I'm interested in professionally and personally.</p>
-		</header>
-		<p>
-		  I’m Connor, and I’ve always taken pride in being someone others can count on. Whether leading a team, managing a project, or working independently, I bring a thoughtful and capable approach to getting things done. My background includes hands on leadership roles and labor intensive work in fast-paced, long-shift environments with tightly coordinated teams. Reliability, communication, and follow-through are core to how I operate shaping both my day-to-day work and my overall mindset. I find joy in learning new things and even more from teaching people something new.
-      Outside of work, I’m an avid skier, rock climber, golfer, and traveler. Some of my most memorable experiences include hiking and climbing all around Greece in 2024, moving to Banff to ski and work full time, and golfing some of the best North American from Phoenix and Naples to Banff. I enjoy living an active lifestyle and challenging myself in new ways, including training for the Toronto Hyrox race in October 2025, as well as climbing my home crag's of Metcalf and Old Baldy.
-		</p>
-		<p>
-		  I’m building this site with the help of AI tools, a tight budget, and limited coding experience. By learning as I go and figuring things out one step at a time, I’ve managed to bootstrap this project with minimal time and money. It’s still a work in progress, and that’s part of the point. This process has shown me how powerful AI can be as a practical support tool, not just for individuals like me building from scratch, but for businesses of any size. I believe AI isn’t just a shortcut or a convenience but a transformative force capable of redefining how we solve problems, approach creativity, and expand what we believe is possible. What once felt out of reach is now attainable for anyone willing to take the leap.
-		</p>
-     <!-- Buttons -->
-      <ul class="actions">
-      </ul>							
-	</div>
-</section>
-
-<!-- Two -->
-<section id="two">
-  <div class="container">
-
-    <!-- section header -->
-    <header class="major">
-      <h2>Gallery</h2>
-      <p>Photos from the places, people, and experiences that matter to me.</p>
-    </header>
-
-    <!-- category buttons (populated by JS) -->
-    <ul class="actions fit small" id="gallery-buttons"></ul>
-
-  </div>
-</section>
-
-<!-- gallery-builder script -->
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-  fetch('images/gallery/manifest.json')
-    .then(res => res.json())
-    .then(galleries => {
-      const btnList = document.getElementById('gallery-buttons');
-
-      Object.entries(galleries).forEach(([cat, files]) => {
-        const previewImg = files[0];
-        const catName    = cat.charAt(0).toUpperCase() + cat.slice(1);
-        const url        = `images/gallery/${cat}/${previewImg}`;
-
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <a href="gallery.html#${cat}" class="gallery-thumb"
-             style="background-image: url('${url}')">
-            <span class="thumb-label">${catName}</span>
-          </a>`;
-        btnList.appendChild(li);
-      });
-    })
-    .catch(err => console.error('Gallery load error:', err));
-});
-</script>
-
-<!-- Three -->
-<section id="three">
-	<div class="container">
-	  <header class="major">
-	    <h2>Projects</h2>
-	    <p>A curated look at things I’ve made and accomplished as well as meaninful projects of mine. Forever a work in progress.</p>
-	  </header>
-		<div class="features">
-			<article>
-  <a href="projwebsite.html" class="image"><img src="images/WebCov.jpg" alt="WebCoverImg" /></a>
-  <div class="inner">
-    <h4>Website Project</h4>
-    <p>At a glance look this project seemed easy but is an undertaking that I am continually learning from. Serves me right for trying to out do wix.</p>
-  </div>
-</article>
-
-<article>
-  <a href="projvan.html" class="image"><img src="images/VanCov.jpg" alt="VanCoverImg" /></a>
-  <div class="inner">
-    <h4>Van Project</h4>
-    <p>This project during covid helped shape who I am today. The building of this van is where I believe the begining of my journey to success began.</p>
-  </div>
-</article>
-
-<article>
-  <a href="projschool.html" class="image"><img src="images/SchoolCov.jpg" alt="SchoolCoverImg" /></a>
-  <div class="inner">
-    <h4>School Projects</h4>
-    <p>A catalog of projects done throughout my schooling.</p>
-  </div>
-</article>
-
-<article>
-  <a href="projpines.html" class="image"><img src="images/PinesCov.jpg" alt="PinesCoverImg" /></a>
-  <div class="inner">
-    <h4>Pines Projects</h4>
-    <p>A catalog of projects done throughout my time at Pines.</p>
-  </div>
-</article>
-
-		</div>
-	</div>
-</section>
-
-<!-- Four -->
-<section id="four">
-	<div class="container">
-		<h3>Contact Me</h3>
-		<p>Send me a message!</p>
-		<form action="https://formspree.io/f/mgvylkyl" method="POST">
-      <div class="row gtr-uniform">
-        <div class="col-6 col-12-xsmall">
-          <input type="text" name="name" placeholder="Name" required />
-        </div>
-        <div class="col-6 col-12-xsmall">
-          <input type="email" name="email" placeholder="Email" required />
-        </div>
-        <div class="col-12">
-          <input type="text" name="subject" placeholder="Subject" />
-        </div>
-        <div class="col-12">
-          <textarea name="message" placeholder="Message" rows="6" required></textarea>
-        </div>
-        <div class="col-12">
-          <ul class="actions">
-            <li><input type="submit" class="primary" value="Send Message" /></li>
-            <li><input type="reset" value="Reset Form" /></li>
-          </ul>
-        </div>
+      <!-- Profile photo (optional) -->
+      <!-- Replace profile.jpg with your image path or remove this block if not needed -->
+      <div class="profile" style="margin: 0 auto 1rem; max-width: 180px;">
+        <img src="profile.jpg" alt="Profile photo of Connor Button" style="width:100%; border-radius:50%; border:1px solid var(--border);" />
       </div>
-    </form>
-	</div>
-</section>
 
-				<!-- Footer -->
-					<section id="footer">
-						<div class="container">
-							<ul class="copyright">
-								<li>&copy; Untitled. All rights reserved.</li><li></a></li>
-							</ul>
-						</div>
-					</section>
+      <!-- Who am I paragraph -->
+      <div class="card" style="margin: 0 auto 1.25rem; max-width: 720px;">
+        <p class="lede">
+          I’m Connor — a Queen’s Applied Economics student who likes building things that work both in spreadsheets and in the real world.
+          I’ve led landscaping crews on high‑spec projects, grown communities through the Queen’s Climbing Club, and dig into hands‑on
+          econometrics and problem solving. I value clear communication, reliable execution, and simple systems that scale.
+        </p>
+      </div>
 
-			</div>
-
-		<!-- Scripts -->
-			<script src="assets/js/jquery.min.js"></script>
-			<script src="assets/js/jquery.scrollex.min.js"></script>
-			<script src="assets/js/jquery.scrolly.min.js"></script>
-			<script src="assets/js/browser.min.js"></script>
-			<script src="assets/js/breakpoints.min.js"></script>
-			<script src="assets/js/util.js"></script>
-			<script src="assets/js/main.js"></script>
-
-	</body>
+      <div class="buttons">
+        <a class="button" href="experience.html">Experience</a>
+        <a class="button primary" href="https://www.linkedin.com/in/connor-button-a9097833b/" target="_blank" rel="noopener">LinkedIn</a>
+        <a class="button" href="Connor Button Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a class="button" href="contact.html">Contact Me</a>
+      </div>
+    </div>
+  </main>
+</body>
 </html>
