@@ -4,37 +4,35 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Connor Button</title>
-  <link rel="stylesheet" href="main.css" />
+  <link rel="stylesheet" href="assets/main.css" />
 </head>
-<body class="single-screen">
+<body>
   <main class="hero">
-    <!-- Full-bleed background image controlled by CSS -->
-    <div class="bg-image" aria-hidden="true"></div>
+    <div class="hero-inner">
+      <h1 class="brand">Connor<br/>Button</h1>
 
-    <div class="container">
-      <h1 class="title">CONNOR<br/>BUTTON</h1>
-      <p class="subtitle">Applied Economics | Builder | Problem‑Solver</p>
+      <!-- Underlined nav (like reference) -->
+      <nav class="nav" aria-label="Primary">
+        <a href="experience.html">Experience</a>
+        <a href="https://www.linkedin.com/in/connor-button-a9097833b/" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="Connor Button Resume.pdf" target="_blank" rel="noopener">Resume</a>
+        <a href="contact.html">Contact Me</a>
+      </nav>
 
-      <!-- Profile photo (optional) -->
-      <!-- Replace profile.jpg with your image path or remove this block if not needed -->
-      <div class="profile" style="margin: 0 auto 1rem; max-width: 180px;">
-        <img src="profile.jpg" alt="Profile photo of Connor Button" style="width:100%; border-radius:50%; border:1px solid var(--border);" />
+      <!-- Optional profile photo (use images/profile.jpg) -->
+      <div class="profile">
+        <img src="images/profile.jpg" alt="Connor Button portrait" />
       </div>
 
-      <!-- Who am I paragraph -->
-      <div class="card" style="margin: 0 auto 1.25rem; max-width: 720px;">
-        <p class="lede">
-          I’m Connor — a Queen’s Applied Economics student who likes building things that work both in spreadsheets and in the real world.
-          I’ve led landscaping crews on high‑spec projects, grown communities through the Queen’s Climbing Club, and dig into hands‑on
-          econometrics and problem solving. I value clear communication, reliable execution, and simple systems that scale.
-        </p>
+      <!-- Who am I card -->
+      <div class="about-card">
+        <p>I’m Connor — a Queen’s Applied Economics student and hands-on builder. I lead crews on high-spec landscaping jobs, help grow the Queen’s Climbing Club community, and enjoy tackling practical problems with clear, by-hand economics. I like simple systems, clean execution, and work that speaks for itself.</p>
       </div>
 
+      <!-- Optional button set -->
       <div class="buttons">
-        <a class="button" href="experience.html">Experience</a>
-        <a class="button primary" href="https://www.linkedin.com/in/connor-button-a9097833b/" target="_blank" rel="noopener">LinkedIn</a>
-        <a class="button" href="Connor Button Resume.pdf" target="_blank" rel="noopener">Resume</a>
-        <a class="button" href="contact.html">Contact Me</a>
+        <a class="button" href="experience.html">Explore Experience</a>
+        <a class="button primary" href="Connor Button Resume.pdf" target="_blank" rel="noopener">Open Resume</a>
       </div>
     </div>
   </main>
