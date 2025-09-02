@@ -72,60 +72,6 @@
   </style>
 </head>
 
-<script>
-(function () {
-  const lb = document.getElementById('lightbox');
-  const img = document.getElementById('lightbox-img');
-  const vid = document.getElementById('lightbox-video');
-  const cap = document.getElementById('lightbox-caption');
-  const closeBtn = document.querySelector('.lightbox-close');
-
-  function show({ src, caption = '', isVideo = false }) {
-    // Reset both players
-    img.classList.add('hidden'); img.removeAttribute('src');
-    vid.classList.add('hidden'); vid.pause(); vid.removeAttribute('src');
-
-    if (isVideo) {
-      vid.src = src;
-      vid.classList.remove('hidden');
-    } else {
-      img.src = src;
-      img.alt = caption || '';
-      img.classList.remove('hidden');
-    }
-    cap.textContent = caption || '';
-    lb.classList.remove('hidden');
-    lb.setAttribute('aria-hidden', 'false');
-    document.body.style.overflow = 'hidden';
-  }
-
-  function hide() {
-    lb.classList.add('hidden');
-    lb.setAttribute('aria-hidden', 'true');
-    document.body.style.overflow = '';
-    // Clear sources so old media doesn't “stick”
-    img.removeAttribute('src');
-    vid.pause(); vid.removeAttribute('src');
-  }
-
-  // Open on any thumb click
-  document.querySelectorAll('.media-thumb').forEach(el => {
-    el.addEventListener('click', (e) => {
-      e.preventDefault();
-      const src = el.dataset.full || el.currentSrc || el.src;
-      const caption = el.getAttribute('alt') || el.dataset.caption || '';
-      const isVideo = el.dataset.type === 'video';
-      show({ src, caption, isVideo });
-    });
-  });
-
-  // Close interactions
-  closeBtn.addEventListener('click', hide);
-  lb.addEventListener('click', (e) => { if (e.target === lb) hide(); });
-  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
-})();
-</script>
-
 <body>
   <div class="back-btn">
     <a href="index.html">← Back to Home</a>
@@ -157,11 +103,11 @@
         <p class="small">The complete construction of the front and back entrances to the 16-unit neighbourhood. Planting of 36 mature trees and front gardens for all units, with the engineered grading of the whole property. Drainage piping, electrical conduit, and communication cable were run throughout the entire property prior to asphalt and grading. The project finished on schedule, with praise from the developer and condo owners. This is a property that still to this day, Pines maintains and is proud to show off to prospective clients.</p>
         <div class="gallery" data-gallery="job1">
           <!-- Replace src paths with your real files in /images/... -->
-          <figure data-type="image" data-src="images/golf-sim-1.jpg" data-caption="Step Install Drone">
-            <img loading="lazy" src="images/Landry1.jpg" alt="Golf simulator framing stage" />
+          <figure data-type="image" data-src="images/Landry1.jpg" data-caption="Step Install Drone">
+            <img loading="lazy" src="images/Landry1.jpg" alt="Step Install Drone" />
           </figure>
-          <figure data-type="image" data-src="images/golf-sim-2.jpg" data-caption="Property Drone Shot">
-            <img loading="lazy" src="images/Landry2.jpg" alt="Projector alignment and netting" />
+          <figure data-type="image" data-src="images/Landry2.jpg" data-caption="Property Drone Shot">
+            <img loading="lazy" src="images/Landry2.jpg" alt="Property Drone Shot />
           </figure>
         </div>
       </section>
