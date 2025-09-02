@@ -72,6 +72,37 @@
   </style>
 </head>
 
+<script>
+(function () {
+  // 1) Images: eager-load the first couple above the fold; lazy-load the rest
+  const imgs = Array.from(document.querySelectorAll('img'));
+  imgs.forEach((img, i) => {
+    if (i < 2) {                 // first two images on the page
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
+    } else {
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+    }
+  });
+
+  // 2) Videos: don’t download until needed, and pause when off-screen
+  const vids = document.querySelectorAll('video');
+  vids.forEach(v => { v.preload = 'none'; });
+
+  const iv = new IntersectionObserver((entries) => {
+    entries.forEach(({isIntersecting, target:v}) => {
+      if (!isIntersecting && !v.paused) v.pause();
+    });
+  }, { threshold: 0.1 });
+  vids.forEach(v => iv.observe(v));
+
+  // 3) Lightbox thumbnails: (already using smaller thumbs)
+  // Make sure full-res loads ONLY when opened (your existing lightbox does this).
+})();
+</script>
+
 <body>
   <div class="back-btn">
     <a href="index.html">← Back to Home</a>
@@ -166,8 +197,6 @@
           </figure>
         </div>
       </section>
-    </div>
-  </section>
 
       <!-- ===== Bishops ===== -->
       <section class="job-block" aria-labelledby="job1">
@@ -201,6 +230,8 @@
           </figure>
         </div>
       </section>
+    </div>
+  </section>
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">

@@ -289,3 +289,15 @@ textarea{ min-height: 140px; resize: vertical; }
 .error{ color: #b00020; }
 
 /* --- End --- */
+
+/* --- Performance helpers --- */
+.section{
+  /* Skip rendering work for off-screen sections */
+  content-visibility: auto;
+  /* Reserve space so layout doesn’t thrash while lazy items load */
+  contain-intrinsic-size: 1000px 1200px; /* tweak if sections are taller/shorter */
+}
+
+figure, .gallery-item { overflow: hidden; border-radius: 12px; }
+img { display:block; max-width:100%; height:auto; }
+.lightbox.open { will-change: opacity; }  /* cheaper animation on the overlay */
