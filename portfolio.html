@@ -71,6 +71,61 @@
     }
   </style>
 </head>
+
+<script>
+(function () {
+  const lb = document.getElementById('lightbox');
+  const img = document.getElementById('lightbox-img');
+  const vid = document.getElementById('lightbox-video');
+  const cap = document.getElementById('lightbox-caption');
+  const closeBtn = document.querySelector('.lightbox-close');
+
+  function show({ src, caption = '', isVideo = false }) {
+    // Reset both players
+    img.classList.add('hidden'); img.removeAttribute('src');
+    vid.classList.add('hidden'); vid.pause(); vid.removeAttribute('src');
+
+    if (isVideo) {
+      vid.src = src;
+      vid.classList.remove('hidden');
+    } else {
+      img.src = src;
+      img.alt = caption || '';
+      img.classList.remove('hidden');
+    }
+    cap.textContent = caption || '';
+    lb.classList.remove('hidden');
+    lb.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function hide() {
+    lb.classList.add('hidden');
+    lb.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    // Clear sources so old media doesn't “stick”
+    img.removeAttribute('src');
+    vid.pause(); vid.removeAttribute('src');
+  }
+
+  // Open on any thumb click
+  document.querySelectorAll('.media-thumb').forEach(el => {
+    el.addEventListener('click', (e) => {
+      e.preventDefault();
+      const src = el.dataset.full || el.currentSrc || el.src;
+      const caption = el.getAttribute('alt') || el.dataset.caption || '';
+      const isVideo = el.dataset.type === 'video';
+      show({ src, caption, isVideo });
+    });
+  });
+
+  // Close interactions
+  closeBtn.addEventListener('click', hide);
+  lb.addEventListener('click', (e) => { if (e.target === lb) hide(); });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') hide(); });
+})();
+</script>
+
 <body>
   <div class="back-btn">
     <a href="index.html">← Back to Home</a>

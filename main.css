@@ -289,3 +289,36 @@ textarea{ min-height: 140px; resize: vertical; }
 .error{ color: #b00020; }
 
 /* --- End --- */
+
+.hidden { display: none !important; }
+
+.lightbox {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: grid;
+  grid-template-rows: 1fr auto;
+  justify-items: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 32px 24px;
+}
+
+.lightbox-media {
+  max-width: 90vw;
+  max-height: 80vh;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+  border-radius: 12px;
+}
+
+.lightbox-caption {
+  color: #eaeaea;
+  margin-top: 16px;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.lightbox-close {
+  position: absolute; top: 16px; right: 20px;
+  background: transparent; border: 0; color: #fff;
+  font-size: 2rem; line-height: 1; cursor: pointer;
+}
