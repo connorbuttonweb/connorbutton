@@ -163,12 +163,13 @@
           <figure data-type="image" data-src="images/TwinPeaks2.jpg">
             <img loading="lazy" src="images/TwinPeaks2.jpg"/>
           </figure>
-          <!-- Video Commented
-          <figure data-type="video" data-src="images/TwinPeaksVideo.mp4">
-            <video muted preload="metadata" src="images/TwinPeaksVideo.mp4"></video>
+          <figure
+            data-type="video"
+            data-src="images/TwinPeaksVideo.mp4"
+            data-poster="images/TwinPeaksVidPost.jpg">
+            <video muted preload="metadata" src="images/TwinPeaksVideo.mp4" poster="images/TwinPeaksVidPost.jpg"></video>
             <span class="media-badge">Video</span>
           </figure>
-        -->
         </div>
       </section>
 
@@ -235,10 +236,10 @@
 
   <!-- Lightbox -->
   <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">
-    <button class="close" id="lbClose" aria-label="Close (Esc)">✕</button>
-    <button class="prev" id="lbPrev" aria-label="Previous (←)">←</button>
     <div class="lightbox-content" id="lbContent" tabindex="0" aria-live="polite"></div>
-    <button class="next" id="lbNext" aria-label="Next (→)">→</button>
+    <button class="close" id="lbClose" aria-label="Close (Esc)">✕</button>
+    <button class="prev" id="lbPrev" aria-label="Previous (←)">⬅</button>
+    <button class="next" id="lbNext" aria-label="Next (→)">➡</button>
     <p class="caption" id="lbCaption"></p>
   </div>
 
@@ -253,18 +254,23 @@
       const btnNext = document.getElementById('lbNext');
       const btnClose = document.getElementById('lbClose');
 
-      // Collect all figure elements inside .gallery
-      const media = [];
-      galleries.forEach(g => {
-        const tiles = Array.from(g.querySelectorAll('figure'));
-        tiles.forEach(t => media.push({
-          el: t,
-          gallery: g.dataset.gallery || 'gallery',
-          type: t.dataset.type || (t.querySelector('video') ? 'video' : 'image'),
-          src: t.dataset.src || t.querySelector('img,video')?.getAttribute('src'),
-          caption: t.dataset.caption || t.querySelector('img')?.getAttribute('alt') || ''
-        }));
-      });
+    // Collect all figure elements inside .gallery
+    const media = [];
+    galleries.forEach(g => {
+      const tiles = Array.from(g.querySelectorAll('figure'));
+      tiles.forEach(t => media.push({
+        el: t,
+        gallery: g.dataset.gallery || 'gallery',
+        type: t.dataset.type || (t.querySelector('video') ? 'video' : 'image'),
+        // allow multiple sources via CSV; fall back to the element src
+        src: (t.dataset.src
+                ? t.dataset.src.split(',').map(s => s.trim()).filter(Boolean)
+                : [t.querySelector('img,video')?.getAttribute('src')].filter(Boolean)),
+        poster: t.dataset.poster || t.querySelector('video')?.getAttribute('poster') || '',
+        caption: t.dataset.caption || t.querySelector('img')?.getAttribute('alt') || ''
+      }));
+    });
+
 
       let currentIndex = -1;
 
@@ -280,33 +286,60 @@
       function close(){
         lightbox.classList.remove('open');
         document.body.style.overflow = '';
-        const vid = lbContent.querySelector('video');
-        if (vid) { vid.pause(); vid.src = vid.src; }
+        stopActiveVideo();                 // fully stop/unload any playing video
         lbContent.innerHTML = '';
         lbCaption.textContent = '';
       }
 
-      function prev(){ openAt((currentIndex - 1 + media.length) % media.length); }
-      function next(){ openAt((currentIndex + 1) % media.length); }
+      // Unload any active <video> in the lightbox
+      function stopActiveVideo(){
+        const v = lbContent.querySelector('video');
+        if (v){
+          try { v.pause(); } catch(_) {}
+          // Remove sources so audio can’t keep playing on some mobiles
+          v.removeAttribute('src');
+          // Also clear <source> children if present
+          v.querySelectorAll('source').forEach(s => s.remove());
+          v.load();
+        }
+      }
+
+      function prev(){ stopActiveVideo(); openAt((currentIndex - 1 + media.length) % media.length); }
+      function next(){ stopActiveVideo(); openAt((currentIndex + 1) % media.length); }
 
       function renderMedia(item){
+        stopActiveVideo();
         lbContent.innerHTML = '';
-        if(item.type === 'video'){
+
+        if (item.type === 'video'){
           const v = document.createElement('video');
-          v.setAttribute('src', item.src);
-          v.setAttribute('controls', 'true');
-          v.setAttribute('playsinline', 'true');
-          v.setAttribute('preload', 'auto');
+          v.controls = true;
+          v.playsInline = true;
+          v.preload = 'metadata';         // lighter than 'auto'
+          if (item.poster) v.poster = item.poster;
           v.style.maxHeight = '92vh';
+
+          // Accept one or many sources (from data-src CSV)
+          const sources = Array.isArray(item.src) ? item.src : [item.src];
+          sources.forEach(src => {
+            const s = document.createElement('source');
+            s.src = src;
+            s.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+            v.appendChild(s);
+          });
+
           lbContent.appendChild(v);
+          // Try to start muted (mobile-safe). If it fails, user can tap play.
           v.muted = true;
           v.play().catch(()=>{});
         } else {
           const img = document.createElement('img');
-          img.setAttribute('src', item.src);
-          img.setAttribute('alt', item.caption || 'Expanded image');
+          img.src = Array.isArray(item.src) ? item.src[0] : item.src;
+          img.alt = item.caption || 'Expanded image';
+          img.style.maxHeight = '92vh';
           lbContent.appendChild(img);
         }
+
         lbCaption.textContent = item.caption || '';
       }
 
@@ -338,6 +371,20 @@
         else if(e.key === 'ArrowRight') next();
       });
     })();
+
+
+          // Swipe (mobile)
+      let touchStartX = null;
+      lightbox.addEventListener('touchstart', e => {
+        touchStartX = e.changedTouches[0].clientX;
+      }, { passive: true });
+
+      lightbox.addEventListener('touchend', e => {
+        if (touchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) { dx > 0 ? prev() : next(); }
+        touchStartX = null;
+      }, { passive: true });
   </script>
 </body>
 </html>
