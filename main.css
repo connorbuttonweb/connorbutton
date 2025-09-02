@@ -222,6 +222,15 @@ body{
   .gallery > *{ grid-column: span 3; }
 }
 
+.exp-wrap .gallery video { height: auto; }          /* override height:100% */
+.exp-wrap .gallery figure { overflow: visible; }    /* just in case */
+.exp-wrap .gallery figcaption {
+  margin-top: 6px;
+  text-align: center;
+  color: var(--muted);
+  font-size: 12px;
+}
+
 /* --- Experience page styles --- */
 .exp-wrap{ max-width: var(--maxw); margin: 0 auto; }
 .exp-header{ margin-bottom: 18px; }
