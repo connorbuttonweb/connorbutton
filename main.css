@@ -326,3 +326,7 @@ img { display:block; max-width:100%; height:auto; }
 @media (max-width: 640px){
   .xp-shot figcaption{ font-size: 0.88rem; margin-top: 6px; }
 }
+
+.hyrox-logo img {
+  border-radius: 0 !important;
+}
