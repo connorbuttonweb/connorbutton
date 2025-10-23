@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Build — Connor Button</title>
+  <link rel="stylesheet" href="main.css" />
+  <style>
+    /* Page-specific accents that still match your global style */
+    .page-title { margin: 0; }
+    .page-subtitle { margin: 6px 0 18px; color: var(--muted); }
+    .lede.card p { margin: 0; }
+    .pill {
+      display:inline-block; padding:6px 10px; border-radius:999px;
+      background:var(--surface-2, #f4f4f4); color:#222; font-size:.85rem; margin-right:8px;
+    }
+    .traits { margin: 12px 0 0; }
+
+    /* Section blocks */
+    .tri {
+      display:grid; gap:18px; margin:22px 0 28px;
+      grid-template-columns: repeat(3, minmax(220px,1fr));
+    }
+    .tri .card h3 { margin-top: 0; }
+    @media (max-width: 900px){
+      .tri { grid-template-columns: 1fr; }
+    }
+
+    /* Process timeline */
+    .timeline { margin: 10px 0 24px; }
+    .timeline .row {
+      display:grid; grid-template-columns: 120px 1fr; gap:12px;
+      padding:10px 0; border-bottom:1px dashed var(--line, #ddd);
+    }
+    .timeline .date { color: var(--muted); font-weight:600; }
+
+    /* Gallery (uses your Lightbox pattern) */
+    .gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap:12px; }
+    .gallery figure { grid-column: span 6; position:relative; cursor:zoom-in; border-radius:var(--radius); overflow:hidden; }
+    .gallery figure.wide { grid-column: span 12; }
+    .gallery img { width:100%; height:auto; display:block; }
+    @media (max-width: 900px){
+      .gallery figure, .gallery figure.wide { grid-column: span 12; }
+    }
+
+    /* “Folder” open-source section */
+    .folder { border:1px solid var(--line,#e6e6e6); border-radius:12px; overflow:hidden; }
+    .folder .bar {
+      display:flex; align-items:center; gap:8px; padding:10px 12px;
+      background:var(--surface-2,#f7f7f7); border-bottom:1px solid var(--line,#e6e6e6);
+    }
+    .dot { width:10px; height:10px; border-radius:50%; background:#ff5f56; }
+    .dot.yellow { background:#ffbd2e; } .dot.green { background:#27c93f; }
+    .folder table { width:100%; border-collapse:collapse; }
+    .folder th, .folder td { text-align:left; padding:10px 12px; border-bottom:1px dashed var(--line,#e6e6e6); }
+    .file-actions a {
+      display:inline-block; margin-right:10px; font-size:.9rem; text-decoration:underline;
+    }
+
+    /* Lightbox overlay (same as other pages) */
+    .lightbox { position:fixed; inset:0; display:none; align-items:center; justify-content:center; background:rgba(0,0,0,.9); z-index:9999; }
+    .lightbox.open{ display:flex; }
+    .lightbox-content{ position:relative; max-width:95vw; max-height:92vh; width:min(1100px,95vw); display:flex; align-items:center; justify-content:center; }
+    .lightbox img, .lightbox video{ max-width:100%; max-height:92vh; width:auto; height:auto; border-radius:12px; outline:1px solid rgba(255,255,255,.15); background:#000; }
+    .lightbox .close, .lightbox .prev, .lightbox .next{
+      position:absolute; top:50%; transform:translateY(-50%); border:0;
+      background:rgba(255,255,255,.12); color:#fff; padding:.65rem .8rem; border-radius:10px; cursor:pointer; font-weight:700;
+    }
+    .lightbox .close{ top:2%; right:2%; transform:none; }
+    .lightbox .prev{ left:1.2%; } .lightbox .next{ right:1.2%; }
+    .lightbox .close:hover, .lightbox .prev:hover, .lightbox .next:hover{ background:rgba(255,255,255,.22); }
+    .caption{ margin-top:.75rem; text-align:center; color:#f0f0f0; font-size:.95rem; opacity:.85; max-width:min(900px,90vw); }
+  </style>
+</head>
+<body>
+  <div class="back-btn">
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">Website Build Portfolio</h1>
+      <p class="page-subtitle">A living record of the work behind this site — decisions, dead-ends, and the wins that shipped.</p>
+
+      <div class="lede card">
+        <p>This project started as a blank page and became a place to experiment. I chased questions (How fast can this load? How accessible can I make the lightbox?), made calls without waiting for permission, and treated the design like a lab. Below are snapshots of that process — code, screens, threads — plus an open-source folder if you want to peek inside.</p>
+        <div class="traits">
+          <span class="pill">Curiosity</span>
+          <span class="pill">Agency</span>
+          <span class="pill">Creativity</span>
+        </div>
+      </div>
+
+      <!-- Three narrative pillars -->
+      <section class="tri">
+        <article class="card">
+          <h3>Curiosity</h3>
+          <p>Explored different page flows, wrote my own lightweight lightbox, and tested performance priorities (eager vs lazy images, deferring video loads, and intersection observers to pause off-screen media).</p>
+        </article>
+        <article class="card">
+          <h3>Agency</h3>
+          <p>Shipped quickly, refactored often. I built pages modularly (shared CSS, page-specific touches) and kept changes reversible so I could iterate without blocking the whole site.</p>
+        </article>
+        <article class="card">
+          <h3>Creativity</h3>
+          <p>Mixed narrative sections with galleries, used “title-row” patterns for brand links, and tuned micro-interactions to keep things clean, readable, and fast.</p>
+        </article>
+      </section>
+
+      <!-- Process timeline -->
+      <section class="card">
+        <h2>Process Log</h2>
+        <div class="timeline">
+          <div class="row"><div class="date">Week 1</div><div class="desc">Scaffolded pages, built baseline typography & color tokens, and a responsive grid.</div></div>
+          <div class="row"><div class="date">Week 2</div><div class="desc">First pass at portfolio lightbox, added keyboard + touch support.</div></div>
+          <div class="row"><div class="date">Week 3</div><div class="desc">Performance pass (fetchPriority, decoding, eager hero), accessibility tweaks (roles, labels).</div></div>
+          <div class="row"><div class="date">Week 4</div><div class="desc">New HYROX page narrative + image sets, refined card spacing and mobile grid.</div></div>
+        </div>
+      </section>
+
+      <!-- Screenshots gallery -->
+      <section>
+        <h2>Snapshots</h2>
+        <div class="gallery" data-gallery="website">
+          <!-- swap these placeholders with real images when ready -->
+          <figure data-type="image" data-caption="Code — lightbox & accessibility hooks." data-src="images/website/fillercode.jpg">
+            <img src="images/website/fillercode.jpg" alt="Screenshot of code" loading="lazy" decoding="async" />
+          </figure>
+          <figure class="wide" data-type="image" data-caption="Homepage layout — navigation, hero, and cards." data-src="images/website/fillersite.jpg">
+            <img src="images/website/fillersite.jpg" alt="Screenshot of finished website page" loading="lazy" decoding="async" />
+          </figure>
+          <figure data-type="image" data-caption="UX notes — component sketches + copy drafts." data-src="images/website/fillertext.jpg">
+            <img src="images/website/fillertext.jpg" alt="Notes and sketches" loading="lazy" decoding="async" />
+          </figure>
+          <figure data-type="image" data-caption="Portfolio grid — image weights & breakpoints test." data-src="images/website/fillergrid.jpg">
+            <img src="images/website/fillergrid.jpg" alt="Portfolio grid test" loading="lazy" decoding="async" />
+          </figure>
+        </div>
+      </section>
+
+      <!-- ChatGPT threads -->
+      <section class="card">
+        <h2>ChatGPT Threads</h2>
+        <p>These conversations show the iteration loops behind the scenes. I used them to sketch structure, verify math, and refactor copy.</p>
+        <ul class="arrow-list">
+          <li><a href="#" target="_blank" rel="noopener">Designing the Lightbox (placeholder link)</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Optimizing Image Loading Strategy (placeholder link)</a></li>
+          <li><a href="#" target="_blank" rel="noopener">HYROX Page Narrative & Layout (placeholder link)</a></li>
+          <li><a href="#" target="_blank" rel="noopener">Accessibility Pass: Roles, Labels, Keyboard Nav (placeholder link)</a></li>
+        </ul>
+        <p class="small">Replace the placeholders with share links to the relevant ChatGPT chats.</p>
+      </section>
+
+      <!-- Open-source folder -->
+      <section>
+        <h2>Open-source Code Folder</h2>
+        <div class="folder">
+          <div class="bar"><span class="dot"></span><span class="dot yellow"></span><span class="dot green"></span><strong style="margin-left:8px;">/site</strong></div>
+          <table>
+            <thead>
+              <tr><th>File</th><th>Purpose</th><th class="file-actions">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>index.html</td>
+                <td>Home and global navigation entry</td>
+                <td class="file-actions">
+                  <a href="index.html" target="_blank" rel="noopener">View</a>
+                  <a href="index.html" download>Download</a>
+                </td>
+              </tr>
+              <tr>
+                <td>portfolio.html</td>
+                <td>Project gallery with Lightbox</td>
+                <td class="file-actions">
+                  <a href="portfolio.html" target="_blank" rel="noopener">View</a>
+                  <a href="portfolio.html" download>Download</a>
+                </td>
+              </tr>
+              <tr>
+                <td>experience.html</td>
+                <td>Experience timeline & roles</td>
+                <td class="file-actions">
+                  <a href="experience.html" target="_blank" rel="noopener">View</a>
+                  <a href="experience.html" download>Download</a>
+                </td>
+              </tr>
+              <tr>
+                <td>hyrox.html</td>
+                <td>Race narrative + gallery</td>
+                <td class="file-actions">
+                  <a href="hyrox.html" target="_blank" rel="noopener">View</a>
+                  <a href="hyrox.html" download>Download</a>
+                </td>
+              </tr>
+              <tr>
+                <td>contact.html</td>
+                <td>Contact card & links</td>
+                <td class="file-actions">
+                  <a href="contact.html" target="_blank" rel="noopener">View</a>
+                  <a href="contact.html" download>Download</a>
+                </td>
+              </tr>
+              <tr>
+                <td>main.css</td>
+                <td>Global styles, grid & components</td>
+                <td class="file-actions">
+                  <a href="main.css" target="_blank" rel="noopener">View</a>
+                  <a href="main.css" download>Download</a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="small" style="margin-top:8px;">Optionally link a public repo or ZIP here: <a href="#" target="_blank" rel="noopener">Download complete source (placeholder)</a></p>
+      </section>
+    </div>
+  </section>
+
+  <!-- Lightbox root -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">
+    <div class="lightbox-content" id="lbContent" tabindex="0" aria-live="polite"></div>
+    <button class="close" id="lbClose" aria-label="Close (Esc)">✕</button>
+    <button class="prev" id="lbPrev" aria-label="Previous (←)">⬅</button>
+    <button class="next" id="lbNext" aria-label="Next (→)">➡</button>
+    <p class="caption" id="lbCaption"></p>
+  </div>
+
+  <!-- Performance + Lightbox JS (same pattern as other pages) -->
+  <script>
+    // lightweight lazy priorities
+    (function () {
+      const imgs = Array.from(document.querySelectorAll('img'));
+      imgs.forEach((img, i) => {
+        if (i < 2) { img.loading = 'eager'; img.fetchPriority = 'high'; }
+        else { img.loading = 'lazy'; img.decoding = 'async'; img.fetchPriority = 'low'; }
+      });
+    })();
+
+    // Lightbox
+    (function(){
+      const galleries = Array.from(document.querySelectorAll('.gallery'));
+      const lightbox = document.getElementById('lightbox');
+      const lbContent = document.getElementById('lbContent');
+      const lbCaption = document.getElementById('lbCaption');
+      const btnPrev = document.getElementById('lbPrev');
+      const btnNext = document.getElementById('lbNext');
+      const btnClose = document.getElementById('lbClose');
+
+      const media = [];
+      galleries.forEach(g => {
+        const tiles = Array.from(g.querySelectorAll('figure'));
+        tiles.forEach(t => media.push({
+          el: t,
+          gallery: g.dataset.gallery || 'gallery',
+          type: t.dataset.type || (t.querySelector('video') ? 'video' : 'image'),
+          src: (t.dataset.src
+                  ? t.dataset.src.split(',').map(s => s.trim()).filter(Boolean)
+                  : [t.querySelector('img,video')?.getAttribute('src')].filter(Boolean)),
+          poster: t.dataset.poster || t.querySelector('video')?.getAttribute('poster') || '',
+          caption: t.dataset.caption || t.querySelector('img')?.getAttribute('alt') || ''
+        }));
+      });
+
+      let currentIndex = -1;
+
+      function stopActiveVideo(){
+        const v = lbContent.querySelector('video');
+        if (v){
+          try { v.pause(); } catch(_) {}
+          v.removeAttribute('src');
+          v.querySelectorAll('source').forEach(s => s.remove());
+          v.load();
+        }
+      }
+      function renderMedia(item){
+        stopActiveVideo();
+        lbContent.innerHTML = '';
+        if (item.type === 'video'){
+          const v = document.createElement('video');
+          v.controls = true; v.playsInline = true; v.preload = 'metadata';
+          if (item.poster) v.poster = item.poster;
+          (Array.isArray(item.src) ? item.src : [item.src]).forEach(src => {
+            const s = document.createElement('source');
+            s.src = src; s.type = src.endsWith('.webm') ? 'video/webm' : 'video/mp4';
+            v.appendChild(s);
+          });
+          lbContent.appendChild(v); v.muted = true; v.play().catch(()=>{});
+        } else {
+          const img = document.createElement('img');
+          img.src = Array.isArray(item.src) ? item.src[0] : item.src;
+          img.alt = item.caption || 'Expanded image';
+          lbContent.appendChild(img);
+        }
+        lbCaption.textContent = item.caption || '';
+      }
+      function openAt(i){ if(i<0||i>=media.length) return; renderMedia(media[i]); currentIndex=i; lightbox.classList.add('open'); document.body.style.overflow='hidden'; lbContent.focus(); }
+      function close(){ lightbox.classList.remove('open'); document.body.style.overflow=''; stopActiveVideo(); lbContent.innerHTML=''; lbCaption.textContent=''; }
+      function prev(){ stopActiveVideo(); openAt((currentIndex - 1 + media.length) % media.length); }
+      function next(){ stopActiveVideo(); openAt((currentIndex + 1) % media.length); }
+
+      media.forEach((m, idx) => {
+        m.el.addEventListener('click', () => openAt(idx));
+        m.el.setAttribute('tabindex', '0');
+        m.el.setAttribute('role', 'button');
+        m.el.addEventListener('keydown', (e) => {
+          if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); openAt(idx); }
+        });
+      });
+      btnClose.addEventListener('click', close);
+      btnPrev.addEventListener('click', prev);
+      btnNext.addEventListener('click', next);
+      lightbox.addEventListener('click', (e) => { if(e.target === lightbox) close(); });
+      document.addEventListener('keydown', (e) => {
+        if(!lightbox.classList.contains('open')) return;
+        if(e.key === 'Escape') close();
+        else if(e.key === 'ArrowLeft') prev();
+        else if(e.key === 'ArrowRight') next();
+      });
+
+      // Swipe (mobile)
+      let touchStartX = null;
+      lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive:true });
+      lightbox.addEventListener('touchend', e => {
+        if (touchStartX === null) return;
+        const dx = e.changedTouches[0].clientX - touchStartX;
+        if (Math.abs(dx) > 50) { dx > 0 ? prev() : next(); }
+        touchStartX = null;
+      }, { passive:true });
+    })();
+  </script>
+</body>
+</html>
