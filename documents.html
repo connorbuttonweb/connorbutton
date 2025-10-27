@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Documents — Connor Button</title>
+  <link rel="stylesheet" href="main.css" />
+  <style>
+    /* Documents grid (reuses your design tokens) */
+    .docs-wrap{ max-width: var(--maxw); margin: 0 auto; }
+    .docs-header{ margin-bottom: 14px; }
+    .doc-grid{
+      display:grid; gap:12px;
+      grid-template-columns: repeat(12, 1fr);
+    }
+    /* 4-up on desktop, 2-up on phones */
+    .doc-card{ grid-column: span 3; }
+    @media (max-width: 640px){ .doc-card{ grid-column: span 6; } }
+
+    .doc-card{
+      display:flex; align-items:center; gap:12px;
+      padding:14px; border:1px solid var(--line);
+      border-radius: var(--radius); background:#fff; box-shadow: var(--shadow);
+      text-decoration:none; color:inherit;
+      transition: transform .15s ease, box-shadow .15s ease, border-color .15s ease;
+    }
+    .doc-card:hover{ transform: translateY(-2px); border-color:#ddd; box-shadow: 0 12px 28px rgba(0,0,0,.08); }
+    .doc-icon{
+      width:42px; height:42px; flex:0 0 42px;
+      display:grid; place-items:center; border-radius:10px; background:#f6f6f6;
+      outline:1px solid #eee;
+    }
+    .doc-meta{ min-width:0; }
+    .doc-name{
+      font-weight:600; line-height:1.2; margin:0 0 2px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+    }
+    .doc-type{ font-size:12px; color:var(--muted); }
+
+    /* Simple color accents by type */
+    .is-pdf .doc-icon{ background:#FFF4F2; outline-color:#FFD9D2; }
+    .is-excel .doc-icon{ background:#EFF9F1; outline-color:#D8F1DD; }
+    .is-word .doc-icon{ background:#F1F5FF; outline-color:#DDE6FF; }
+    .is-ppt .doc-icon{ background:#FFF6EB; outline-color:#FFE3C7; }
+    .is-image .doc-icon{ background:#F8F8F8; }
+    .is-video .doc-icon{ background:#F8F8F8; }
+    .is-other .doc-icon{ background:#F8F8F8; }
+
+    /* Back link spacing on this page */
+    .back-btn { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <div class="back-btn">
+    <a href="index.html">← Back to Home</a>
+  </div>
+
+  <section class="section">
+    <div class="docs-wrap">
+      <div class="docs-header">
+        <h2>Documents</h2>
+        <p class="small">Quick access to PDFs, spreadsheets, and more. Click any item to open in a new tab.</p>
+      </div>
+
+      <div class="doc-grid" id="docGrid">
+        <!-- ===== EXAMPLES (replace/extend these) ===== -->
+        <!-- Tip: point href to your actual files; keep target & rel so they open in a new tab. -->
+
+        <!-- Existing resume in your repo -->
+        <a class="doc-card" href="Connor Button Resume.pdf" target="_blank" rel="noopener" data-name="Connor Button Resume.pdf"></a>
+
+        <!-- Stats1 -->
+        <a class="doc-card" href="docs/Stats1.xlsx" target="_blank" rel="noopener" data-name="Stats1.xlsx"></a>
+       
+        <!-- Stats2 -->
+        <a class="doc-card" href="docs/Stats2.xlsx" target="_blank" rel="noopener" data-name="Stats2.xlsx"></a>
+    
+        <!-- ClubGear -->
+        <a class="doc-card" href="docs/ClubGear.xlsx" target="_blank" rel="noopener" data-name="ClubGear.xlsx"></a>
+
+        <!-- Sample Word file 
+        <a class="doc-card" href="docs/Policy-Proposal.docx" target="_blank" rel="noopener" data-name="Policy-Proposal.docx"></a>
+      -->
+        <!-- Sample PowerPoint 
+        <a class="doc-card" href="docs/Presentation.pptx" target="_blank" rel="noopener" data-name="Presentation.pptx"></a>
+      -->
+        <!-- Sample PDF -->
+        <a class="doc-card" href="docs/MEGThesis.pdf" target="_blank" rel="noopener" data-name="MegThesis.pdf"></a>
+
+        <!-- Sample PDF -->
+        <a class="doc-card" href="docs/InitialProposal.pdf" target="_blank" rel="noopener" data-name="InitialProposal.pdf"></a>
+
+        <!-- Images & video also handled (optional) -->
+        <a class="doc-card" href="images/TeamPhoto.jpg" target="_blank" rel="noopener" data-name="TeamPhoto.jpg"></a>
+        <a class="doc-card" href="images/LandryVideo.mp4" target="_blank" rel="noopener" data-name="LandryVideo.mp4"></a>
+        <!-- ========================================== -->
+      </div>
+    </div>
+  </section>
+
+  <script>
+    // Tiny helper: infer file type from href and render icon + labels.
+    (function(){
+      const ICONS = {
+        pdf:  `<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#E6563B" d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path fill="#fff" d="M9 17h6v-2H9v2m0-3h6v-2H9v2m0-3h4V7H9v4z"/></svg>`,
+        excel:`<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#107C41" d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path fill="#fff" d="M9 17h6v-2H9v2m0-3h6v-2H9v2m0-3h6V9H9v2"/></svg>`,
+        word: `<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#185ABD" d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path fill="#fff" d="M9 17h6v-2H9v2m0-3h6v-2H9v2m0-3h6V9H9v2"/></svg>`,
+        ppt:  `<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#D24726" d="M6 2h7l5 5v13a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2"/><path fill="#fff" d="M9 17h6V9H9v8m1-7h4v6h-4V10z"/></svg>`,
+        image:`<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#555" d="M19 3H5a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V5a2 2 0 0 0-2-2m0 16H5V5h14z"/><path fill="#555" d="M8.5 13.5L11 16l2.5-3L17 18H7z"/><circle cx="9" cy="9" r="1.5" fill="#555"/></svg>`,
+        video:`<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#555" d="M17 10.5V7a2 2 0 0 0-2-2H5C3.89 5 3 5.9 3 7v10c0 1.1.89 2 2 2h10a2 2 0 0 0 2-2v-3.5l4 4v-11l-4 4z"/></svg>`,
+        other:`<svg width="22" height="22" viewBox="0 0 24 24" aria-hidden="true"><path fill="#555" d="M14 2H6a2 2 0 0 0-2 2v16c0 1.11.89 2 2 2h12a2 2 0 0 0 2-2V8z"/><path fill="#fff" d="M14 2v6h6"/></svg>`
+      };
+
+      const byExt = (ext) => {
+        ext = ext.toLowerCase();
+        if (['.pdf'].includes(ext)) return 'pdf';
+        if (['.xls','.xlsx','.csv'].includes(ext)) return 'excel';
+        if (['.doc','.docx'].includes(ext)) return 'word';
+        if (['.ppt','.pptx'].includes(ext)) return 'ppt';
+        if (['.png','.jpg','.jpeg','.webp','.gif','.svg'].includes(ext)) return 'image';
+        if (['.mp4','.webm','.mov','.m4v'].includes(ext)) return 'video';
+        return 'other';
+      };
+
+      const cards = Array.from(document.querySelectorAll('.doc-card'));
+      cards.forEach(card => {
+        const href = card.getAttribute('href') || '';
+        const name = card.dataset.name || href.split('/').pop() || 'File';
+        const match = href.match(/\.[a-z0-9]+$/i);
+        const ext = match ? match[0] : '';
+        const type = byExt(ext);
+        card.classList.add(`is-${type}`);
+
+        const icon = document.createElement('div');
+        icon.className = 'doc-icon';
+        icon.innerHTML = ICONS[type];
+
+        const meta = document.createElement('div');
+        meta.className = 'doc-meta';
+        meta.innerHTML = `
+          <p class="doc-name" title="${name}">${name}</p>
+          <div class="doc-type">${type.toUpperCase()} ${ext ? `• ${ext.slice(1).toUpperCase()}` : ''}</div>
+        `;
+
+        card.appendChild(icon);
+        card.appendChild(meta);
+      });
+    })();
+  </script>
+</body>
+</html>
