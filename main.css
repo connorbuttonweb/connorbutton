@@ -171,6 +171,16 @@ body{
   border-radius: var(--radius);
   padding: clamp(16px, 3vw, 28px);
 }
+
+/* Snapshots: make the image fill the entire card */
+.snapshot-card { padding: 0; }
+.snapshot-card img{
+  display: block;
+  width: 100%;
+  height: auto;            /* keeps natural aspect ratio */
+  border-radius: inherit;  /* matches the card’s rounded corners */
+}
+
 .small{ font-size: 0.92rem; color: var(--muted); }
 .lede{ color:#222; }
 
