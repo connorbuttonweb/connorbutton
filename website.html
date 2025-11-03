@@ -70,7 +70,43 @@
     .lightbox .prev{ left:1.2%; } .lightbox .next{ right:1.2%; }
     .lightbox .close:hover, .lightbox .prev:hover, .lightbox .next:hover{ background:rgba(255,255,255,.22); }
     .caption{ margin-top:.75rem; text-align:center; color:#f0f0f0; font-size:.95rem; opacity:.85; max-width:min(900px,90vw); }
+  
+        /* Lightbox code viewer */
+    .lightbox pre {
+      background: #1e1e1e;   /* solid — no transparency */
+      color: #f1f1f1;
+      border-radius: 10px;
+      margin: 0;
+      max-height: 80vh;
+      overflow: auto;
+      padding: 16px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono","Courier New", monospace;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    /* Prism + line-numbers tweaks inside the lightbox */
+    .lightbox .line-numbers .line-numbers-rows {
+      border-right: 1px solid rgba(255,255,255,.12);
+    }
+    .lightbox .line-numbers-rows > span:before {
+      color: rgba(255,255,255,.5);
+    }
+  
   </style>
+      <!-- Prism core + theme -->
+    <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism-okaidia.css">
+    <script defer src="https://unpkg.com/prismjs/prism.js"></script>
+
+    <!-- Common languages you’ll likely need -->
+    <script defer src="https://unpkg.com/prismjs/components/prism-markup.min.js"></script>
+    <script defer src="https://unpkg.com/prismjs/components/prism-css.min.js"></script>
+    <script defer src="https://unpkg.com/prismjs/components/prism-javascript.min.js"></script>
+    <script defer src="https://unpkg.com/prismjs/components/prism-json.min.js"></script>
+
+    <!-- Line numbers plugin -->
+    <link rel="stylesheet" href="https://unpkg.com/prismjs/plugins/line-numbers/prism-line-numbers.css">
+    <script defer src="https://unpkg.com/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
 </head>
 <body>
   <div class="back-btn">
@@ -329,44 +365,68 @@
     })();
   </script>
 
-  <script>
-(function () {
-  const lb = document.getElementById('lightbox');
-  const content = document.getElementById('lbContent');
-  const caption = document.getElementById('lbCaption');
+    <script>
+    (function () {
+      const lb = document.getElementById('lightbox');
+      const content = document.getElementById('lbContent');
+      const caption = document.getElementById('lbCaption');
 
-  function escapeHTML(s){
-    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
-  }
+      function escapeHTML(s){
+        return s.replace(/&/g,'&amp;')
+                .replace(/</g,'&lt;')
+                .replace(/>/g,'&gt;');
+      }
 
-  async function openCode(file, label){
-    try {
-      const res = await fetch(file, { cache: 'no-store' });
-      const text = await res.text();
-      content.innerHTML =
-        '<pre style="white-space:pre;overflow:auto;max-height:80vh;margin:0;padding:16px;' +
-        'font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\\\"Liberation Mono\\\",\\\"Courier New\\\",monospace;' +
-        'font-size:14px;line-height:1.5;">' + escapeHTML(text) + '</pre>';
-      caption.textContent = label || file;
-      lb.classList.add('open');
-      content.focus();
-    } catch (e) {
-      content.innerHTML = '<div style="padding:24px;">Could not load file.</div>';
-      caption.textContent = file;
-      lb.classList.add('open');
-    }
-  }
+      // Map file extension -> Prism language class
+      function extToPrismLang(file){
+        const f = file.toLowerCase();
+        if (f.endsWith('.html') || f.endsWith('.htm')) return 'markup';
+        if (f.endsWith('.css')) return 'css';
+        if (f.endsWith('.js')) return 'javascript';
+        if (f.endsWith('.json')) return 'json';
+        if (f.endsWith('.md')) return 'markdown';
+        if (f.endsWith('.ts')) return 'ts';        // if you add prism-typescript
+        if (f.endsWith('.py')) return 'python';    // if you add prism-python
+        return 'markup'; // safe default
+      }
 
-  document.addEventListener('click', function (e) {
-    const a = e.target.closest('a.view-code');
-    if (!a) return;
-    e.preventDefault();
-    const file = a.dataset.file || a.getAttribute('href');
-    const label = file.split('/').pop();
-    openCode(file, label);
-  }, false);
-})();
-</script>
+      async function openCode(file, label){
+        try {
+          const res = await fetch(file, { cache: 'no-store' });
+          const text = await res.text();
+          const lang = extToPrismLang(file);
+
+          content.innerHTML =
+            '<pre class="line-numbers"><code class="language-' + lang + '">' +
+            escapeHTML(text) +
+            '</code></pre>';
+
+          // Highlight only inside the lightbox content
+          if (window.Prism && Prism.highlightAllUnder) {
+            Prism.highlightAllUnder(content);
+          }
+
+          caption.textContent = label || file.split('/').pop();
+          lb.classList.add('open');
+          document.body.style.overflow = 'hidden';
+          content.focus();
+        } catch (e) {
+          content.innerHTML = '<div style="padding:24px;">Could not load file.</div>';
+          caption.textContent = file;
+          lb.classList.add('open');
+        }
+      }
+
+      document.addEventListener('click', function (e) {
+        const a = e.target.closest('a.view-code');
+        if (!a) return;
+        e.preventDefault();
+        const file = a.dataset.file || a.getAttribute('href');
+        const label = file.split('/').pop();
+        openCode(file, label);
+      }, false);
+    })();
+    </script>
 
 </body>
 </html>
