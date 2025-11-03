@@ -120,11 +120,14 @@
       <!-- Screenshots gallery -->
       <section class="snapshot-card">
         <div class="card snapshot-card--cover">
-          <a href="images/website/mindmap.png"
-            data-lightbox="mindmap"
-            data-title="Website UI Mind Map">
-            <img src="images/website/mindmap.png" alt="Website mind map">
-          </a>
+          <div class="gallery" data-gallery="mindmap">
+            <figure
+              data-type="image"
+              data-src="images/website/mindmap.png"
+              data-caption="Website UI Mind Map">
+              <img src="images/website/mindmap.png" alt="Website mind map">
+            </figure>
+          </div>
         </div>
       </section>
 
@@ -142,7 +145,7 @@
       </section>
 
       <!-- Open-source folder -->
-      <section>
+      <section id="open-source">
         <h2>Open-source Code Folder</h2>
         <div class="folder">
           <div class="bar"><span class="dot"></span><span class="dot yellow"></span><span class="dot green"></span><strong style="margin-left:8px;">/site</strong></div>
@@ -154,55 +157,60 @@
               <tr>
                 <td>index.html</td>
                 <td>Home and global navigation entry</td>
-                <td class="file-actions">
-                  <a href="index.html" target="_blank" rel="noopener">View</a>
-                  <a href="index.html" download>Download</a>
+                <td>
+                  <a href="index.html" class="view-code" data-file="index.html">View</a>
+                  &nbsp; <a href="index.html" download>Download</a>
                 </td>
               </tr>
+
               <tr>
                 <td>portfolio.html</td>
                 <td>Project gallery with Lightbox</td>
-                <td class="file-actions">
-                  <a href="portfolio.html" target="_blank" rel="noopener">View</a>
-                  <a href="portfolio.html" download>Download</a>
+                <td>
+                  <a href="portfolio.html" class="view-code" data-file="portfolio.html">View</a>
+                  &nbsp; <a href="portfolio.html" download>Download</a>
                 </td>
               </tr>
+
               <tr>
                 <td>experience.html</td>
                 <td>Experience timeline & roles</td>
-                <td class="file-actions">
-                  <a href="experience.html" target="_blank" rel="noopener">View</a>
-                  <a href="experience.html" download>Download</a>
+                <td>
+                  <a href="experience.html" class="view-code" data-file="experience.html">View</a>
+                  &nbsp; <a href="experience.html" download>Download</a>
                 </td>
               </tr>
+
               <tr>
                 <td>hyrox.html</td>
                 <td>Race narrative + gallery</td>
-                <td class="file-actions">
-                  <a href="hyrox.html" target="_blank" rel="noopener">View</a>
-                  <a href="hyrox.html" download>Download</a>
+                <td>
+                  <a href="hyrox.html" class="view-code" data-file="hyrox.html">View</a>
+                  &nbsp; <a href="hyrox.html" download>Download</a>
                 </td>
               </tr>
+
               <tr>
                 <td>contact.html</td>
                 <td>Contact card & links</td>
-                <td class="file-actions">
-                  <a href="contact.html" target="_blank" rel="noopener">View</a>
-                  <a href="contact.html" download>Download</a>
+                <td>
+                  <a href="contact.html" class="view-code" data-file="contact.html">View</a>
+                  &nbsp; <a href="contact.html" download>Download</a>
                 </td>
               </tr>
+
               <tr>
                 <td>main.css</td>
                 <td>Global styles, grid & components</td>
-                <td class="file-actions">
-                  <a href="main.css" target="_blank" rel="noopener">View</a>
-                  <a href="main.css" download>Download</a>
+                <td>
+                  <a href="assets/main.css" class="view-code" data-file="assets/main.css">View</a>
+                  &nbsp; <a href="assets/main.css" download>Download</a>
                 </td>
               </tr>
             </tbody>
           </table>
         </div>
-        <p class="small" style="margin-top:8px;">Optionally link a public repo or ZIP here: <a href="#" target="_blank" rel="noopener">Download complete source (placeholder)</a></p>
+        <p class="small" style="margin-top:8px;">Public Repo: <a href="https://github.com/connorbuttonweb/connorbutton" target="_blank" rel="noopener">https://github.com/connorbuttonweb/connorbutton</a></p>
       </section>
     </div>
   </section>
@@ -308,6 +316,7 @@
         else if(e.key === 'ArrowRight') next();
       });
 
+
       // Swipe (mobile)
       let touchStartX = null;
       lightbox.addEventListener('touchstart', e => { touchStartX = e.changedTouches[0].clientX; }, { passive:true });
@@ -319,5 +328,45 @@
       }, { passive:true });
     })();
   </script>
+
+  <script>
+(function () {
+  const lb = document.getElementById('lightbox');
+  const content = document.getElementById('lbContent');
+  const caption = document.getElementById('lbCaption');
+
+  function escapeHTML(s){
+    return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+  }
+
+  async function openCode(file, label){
+    try {
+      const res = await fetch(file, { cache: 'no-store' });
+      const text = await res.text();
+      content.innerHTML =
+        '<pre style="white-space:pre;overflow:auto;max-height:80vh;margin:0;padding:16px;' +
+        'font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,\\\"Liberation Mono\\\",\\\"Courier New\\\",monospace;' +
+        'font-size:14px;line-height:1.5;">' + escapeHTML(text) + '</pre>';
+      caption.textContent = label || file;
+      lb.classList.add('open');
+      content.focus();
+    } catch (e) {
+      content.innerHTML = '<div style="padding:24px;">Could not load file.</div>';
+      caption.textContent = file;
+      lb.classList.add('open');
+    }
+  }
+
+  document.addEventListener('click', function (e) {
+    const a = e.target.closest('a.view-code');
+    if (!a) return;
+    e.preventDefault();
+    const file = a.dataset.file || a.getAttribute('href');
+    const label = file.split('/').pop();
+    openCode(file, label);
+  }, false);
+})();
+</script>
+
 </body>
 </html>
