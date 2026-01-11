@@ -817,6 +817,180 @@ body {
 }
 
 /* ==========================================
+   NAVBAR DROPDOWN
+   ========================================== */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f6f6ed; /* Matches your navbar background */
+    min-width: 180px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-8) 0;
+    list-style: none;
+    z-index: 1001;
+    margin-top: 10px; /* Gap so it doesn't close immediately on move */
+}
+
+/* Arrow pointer for the dropdown */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: #f6f6ed;
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show on hover */
+    animation: fadeInDown 0.2s var(--ease-standard);
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: var(--space-10) var(--space-20);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(var(--color-teal-500-rgb), 0.05);
+    color: var(--color-primary);
+    padding-left: var(--space-24); /* Subtle slide effect */
+}
+
+/* Animation for the dropdown */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Mobile Fix: Disable dropdown or stack it */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        display: block;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding-left: var(--space-16);
+        transform: none;
+    }
+    .dropdown-menu::before { display: none; }
+}
+
+/* ==========================================
+   NAVBAR DROPDOWN
+   ========================================== */
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-menu {
+    display: none; /* Hidden by default */
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f6f6ed; /* Matches your navbar background */
+    min-width: 180px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    padding: var(--space-8) 0;
+    list-style: none;
+    z-index: 1001;
+    margin-top: 10px; /* Gap so it doesn't close immediately on move */
+}
+
+/* Arrow pointer for the dropdown */
+.dropdown-menu::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%) rotate(45deg);
+    width: 10px;
+    height: 10px;
+    background: #f6f6ed;
+    border-top: 1px solid var(--color-border);
+    border-left: 1px solid var(--color-border);
+}
+
+.dropdown:hover .dropdown-menu {
+    display: block; /* Show on hover */
+    animation: fadeInDown 0.2s var(--ease-standard);
+}
+
+.dropdown-menu li a {
+    display: block;
+    padding: var(--space-10) var(--space-20);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+    text-decoration: none;
+    transition: all var(--duration-fast) var(--ease-standard);
+}
+
+.dropdown-menu li a:hover {
+    background-color: rgba(var(--color-teal-500-rgb), 0.05);
+    color: var(--color-primary);
+    padding-left: var(--space-24); /* Subtle slide effect */
+}
+
+/* Animation for the dropdown */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+/* Mobile Fix: Disable dropdown or stack it */
+@media (max-width: 768px) {
+    .dropdown-menu {
+        position: static;
+        display: block;
+        box-shadow: none;
+        border: none;
+        background: transparent;
+        padding-left: var(--space-16);
+        transform: none;
+    }
+    .dropdown-menu::before { display: none; }
+}
+
+/* ==========================================
    NAVIGATION BAR
    ========================================== */
 
@@ -1398,7 +1572,7 @@ body {
 /* ==========================================
    HOMEPORT
    ========================================== */
-   
+
   /* Page-specific light styling */
   .page-title { margin: 0; font-size: var(--font-size-3xl); } /* Slightly smaller title */
   .page-subtitle { margin: 4px 0 24px; color: var(--color-text-secondary); font-size: var(--font-size-sm); }
