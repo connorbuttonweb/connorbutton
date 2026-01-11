@@ -6,6 +6,67 @@
   <title>HYROX — Connor Button</title>
   <link rel="stylesheet" href="main.css" />
   <link rel="icon" type="image/png" href="images/favicon.png" />
+
+    <style>
+        /* Custom styles for this page to complement main.css */
+        .wsp-course-list { margin-top: 40px; }
+        
+        .course-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-24) 0;
+            border-bottom: 1px solid var(--color-border);
+            gap: var(--space-32);
+        }
+
+        .course-info { flex: 1; }
+        .course-title { 
+            font-size: var(--font-size-xl); 
+            color: var(--color-primary); 
+            margin-bottom: var(--space-8);
+        }
+        .course-desc { 
+            color: var(--color-text-secondary); 
+            line-height: 1.6;
+            max-width: 85%;
+        }
+
+        .certificate-status {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-width: 120px;
+            height: 100px;
+            border: 2px dashed var(--color-border);
+            border-radius: var(--radius-md);
+            transition: all var(--duration-normal) var(--ease-standard);
+        }
+
+        .certificate-status.completed {
+            border: 2px solid var(--color-success);
+            background: rgba(var(--color-success-rgb), 0.05);
+        }
+
+        .cert-link {
+            text-decoration: underline;
+            font-weight: var(--font-weight-semibold);
+            color: var(--color-text);
+            font-size: var(--font-size-sm);
+            margin-top: var(--space-8);
+        }
+
+        .check-icon { color: var(--color-success); font-size: 20px; }
+        .trophy-icon { color: #FFD700; font-size: 24px; } /* Gold Trophy */
+
+        @media (max-width: 768px) {
+            .course-row { flex-direction: column; align-items: flex-start; }
+            .certificate-status { width: 100%; height: 80px; flex-direction: row; gap: 16px; }
+            .course-desc { max-width: 100%; }
+        }
+    </style>
+
 </head>
 
 <body>
@@ -29,6 +90,70 @@
         </div>
     </nav>
 
+    <main class="container" style="padding-top: 120px; padding-bottom: 80px;">
+        <div class="page-title-group">
+            <h1>Wall Street Prep CPE Certifications</h1>
+            <p class="status--info">Financial and Valuation Modeling Certificate</p>
+        </div>
+
+        <div class="wsp-course-list">
+            
+            <div class="course-row">
+                <div class="course-info">
+                    <h3 class="course-title">Financial Statement Modeling</h3>
+                    <p class="course-desc">Built a comprehensive 3-statement model from scratch, including historical data input, circular debt-interest logic, and integrated cash flow projections for financial forecasting.</p>
+                </div>
+                <div class="certificate-status completed">
+                    <div class="flex items-center gap-8">
+                        <i class="fas fa-check-circle check-icon"></i>
+                        <i class="fas fa-trophy trophy-icon"></i>
+                    </div>
+                    <a href="images/wsp/FinancialStatementModeling.pdf" target="_blank" class="cert-link">CERTIFICATE</a>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-info">
+                    <h3 class="course-title">DCF Modeling</h3>
+                    <p class="course-desc">Mastered valuation techniques using the Unlevered Free Cash Flow method, WACC calculation, terminal value assumptions, and sensitivity analysis to determine enterprise value.</p>
+                </div>
+                <div class="certificate-status">
+                    <span style="color: var(--color-text-secondary); font-size: var(--font-size-xs);">IN PROGRESS</span>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-info">
+                    <h3 class="course-title">M&A Modeling</h3>
+                    <p class="course-desc">Analyzed the financial impact of mergers and acquisitions, focusing on accretion/dilution analysis, synergies, and pro-forma balance sheet adjustments.</p>
+                </div>
+                <div class="certificate-status">
+                    <span style="color: var(--color-text-secondary); font-size: var(--font-size-xs);">IN PROGRESS</span>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-info">
+                    <h3 class="course-title">Trading & Transaction Comps</h3>
+                    <p class="course-desc">Developed relative valuation skills by selecting peer groups and analyzing LTM multiples (EV/EBITDA, P/E) for both public market trading and historical M&A transactions.</p>
+                </div>
+                <div class="certificate-status">
+                    <span style="color: var(--color-text-secondary); font-size: var(--font-size-xs);">IN PROGRESS</span>
+                </div>
+            </div>
+
+            <div class="course-row">
+                <div class="course-info">
+                    <h3 class="course-title">LBO Modeling</h3>
+                    <p class="course-desc">Structured complex Leveraged Buyout models including sources and uses of funds, debt waterfall schedules, and internal rate of return (IRR) sensitivity tables.</p>
+                </div>
+                <div class="certificate-status">
+                    <span style="color: var(--color-text-secondary); font-size: var(--font-size-xs);">IN PROGRESS</span>
+                </div>
+            </div>
+
+        </div>
+    </main>
 
 
     <!-- Lightbox root -->
