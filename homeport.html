@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Portfolio Selections — Connor Button</title>
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <link rel="stylesheet" href="main.css" />
+  <style>
+    /* Page-specific light styling that respects your global design */
+    .page-title{ margin:0; }
+    .page-subtitle{ margin:6px 0 18px; color:var(--muted); }
+
+    .port-grid{
+      display:grid; gap:16px;
+      grid-template-columns: repeat(3, minmax(220px, 1fr));
+    }
+    @media (max-width: 1000px){ .port-grid{ grid-template-columns: repeat(2, 1fr);} }
+    @media (max-width: 640px){ .port-grid{ grid-template-columns: 1fr; } }
+
+    .port-card{
+      display:block; border:1px solid var(--line,#e6e6e6); border-radius:12px;
+      overflow:hidden; background:#fff; transition:transform .08s ease, box-shadow .08s ease;
+    }
+    .port-card:hover{ transform:translateY(-2px); box-shadow: var(--shadow, 0 10px 24px rgba(0,0,0,.08)); }
+    .port-thumb{
+      aspect-ratio: 16 / 9; width:100%; object-fit:cover; display:block;
+      background:#f2f2f2;
+    }
+    .port-meta{ padding:12px 14px; }
+    .port-title{ margin:0 0 4px; font-weight:700; }
+    .port-sub{ margin:0; color:var(--muted); font-size:.95rem; }
+  </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">CONNOR BUTTON</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">HOME</a></li>
+                <li><a href="index.html#about" class="nav-link">ABOUT</a></li>
+                <li><a href="Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
+                <li><a href="homeport.html" class="nav-link active">PORTFOLIO</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <a href="contact.html" class="contact-btn">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">Portfolio Selections</h1>
+      <p class="page-subtitle">Pick a project to explore. This space is where I will organize all projects I deem cool enough to show!</p>
+
+      <div class="port-grid">
+
+        <!-- HYROX -->
+        <a class="port-card" href="hyrox.html" aria-label="Open HYROX portfolio">
+          <!-- Use any HYROX shot; swap path if needed -->
+          <img class="port-thumb" src="images/hyrox/sign.JPG" alt="HYROX race arena signage" loading="lazy" decoding="async">
+          <div class="port-meta">
+            <h2 class="port-title">HYROX</h2>
+            <p class="port-sub">Race recap, training lead-up, splits, and takeaways.</p>
+          </div>
+        </a>
+
+        <!-- Pines Landscaping (Foreman portfolio) -->
+        <a class="port-card" href="portfolio.html" aria-label="Open Pines Landscaping portfolio">
+          <!-- Replace with your preferred Pines thumbnail -->
+          <img class="port-thumb" src="images/pines/TeamPhoto.jpg" alt="Pines Landscaping project collage" loading="lazy" decoding="async">
+          <div class="port-meta">
+            <h2 class="port-title">Pines Landscaping</h2>
+            <p class="port-sub">Foreman portfolio — leadership, operations, and project results.</p>
+          </div>
+        </a>
+
+        <!-- Website Build -->
+        <a class="port-card" href="website.html" aria-label="Open Website Build portfolio">
+          <!-- Placeholder screenshot; swap when ready -->
+          <img class="port-thumb" src="images/website/ss1.jpg" alt="Screenshot of this website" loading="lazy" decoding="async">
+          <div class="port-meta">
+            <h2 class="port-title">Website</h2>
+            <p class="port-sub">How this site was built — code, design choices, and open-source files. [vibe code heaven]</p>
+          </div>
+        </a>
+
+        <!-- Documents -->
+        <a class="port-card" href="documents.html" aria-label="Open Documents portfolio">
+          <!-- Placeholder image; swap when ready -->
+          <img class="port-thumb" src="images/documents/thumb.jpg" alt="Thumbnail for Documents portfolio" loading="lazy" decoding="async">
+          <div class="port-meta">
+            <h2 class="port-title">Documents</h2>
+            <p class="port-sub">A collection of work I've created.</p>
+          </div>
+        </a>
+
+      </div>
+    </div>
+  </section>
+</body>
+</html>

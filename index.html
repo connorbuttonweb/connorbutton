@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Connor Button | Finance, Economics, and Work Portfolio</title>
+    <meta name="description" content="Portfolio of Connor Button, a Queen’s University Applied Economics student specializing in finance, bond valuation, and capital asset pricing models.">
+    <link rel="icon" type="image/png" href="images/favicon.png" />
+    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script type="application/ld+json">
+{
+  "@context": "http://schema.org",
+  "@type": "Person",
+  "name": "Connor Button",
+  "jobTitle": "Finance Student & Analyst",
+  "url": "https://www.connorbutton.ca",
+  "sameAs": [
+    "https://www.linkedin.com/in/connor-button-a9097833b/",
+    "https://www.instagram.com/couuor/"
+  ],
+  "alumniOf": "Queen's University",
+  "knowsAbout": ["Finance", "Applied Economics", "Bond Valuation", "CAPM", "Portfolio Management"],
+  "description": "Applied Economics student specializing in finance, bond valuation, and capital asset pricing models."
+}
+</script>
+</head>
+
+<script>
+(function () {
+  // 1) Images: eager-load the first couple above the fold; lazy-load the rest
+  const imgs = Array.from(document.querySelectorAll('img'));
+  imgs.forEach((img, i) => {
+    if (i < 2) {                 // first two images on the page
+      img.loading = 'eager';
+      img.fetchPriority = 'high';
+    } else {
+      img.loading = 'lazy';
+      img.decoding = 'async';
+      img.fetchPriority = 'low';
+    }
+  });
+
+  // 2) Videos: don’t download until needed, and pause when off-screen
+  const vids = document.querySelectorAll('video');
+  vids.forEach(v => { v.preload = 'none'; });
+
+  const iv = new IntersectionObserver((entries) => {
+    entries.forEach(({isIntersecting, target:v}) => {
+      if (!isIntersecting && !v.paused) v.pause();
+    });
+  }, { threshold: 0.1 });
+  vids.forEach(v => iv.observe(v));
+})();
+</script>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">CONNOR BUTTON</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link active">HOME</a></li>
+                <li><a href="#about" class="nav-link">ABOUT</a></li>
+                <li><a href="Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
+                <li><a href="homeport.html" class="nav-link">PORTFOLIO</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <a href="contact.html" class="contact-btn">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+<section class="hero" id="home" style="background-image: url('images/background.jpg');">
+        <div class="hero-overlay"></div>
+        
+        <div class="hero-content">
+            
+            <div class="hero-text">
+                <h1 class="sr-only">Connor Button | Portfolio</h1>
+                
+                <div class="hero-title" aria-hidden="true">
+                    SMART ENOUGH TO FIND THE WAY<br>
+                    STRONG ENOUGH TO PAVE IT
+                </div>
+                
+                <p class="hero-subtitle">
+                    As I begin my career in finance, I aim to bring with me a steep 
+                    learning curve and a fresh perspective. <br><br>
+                    I'm ready to apply my curiosity and work ethic, to not only adapt 
+                    quickly, but exceed expectations.
+                </p>
+                
+                <a href="#about" class="btn btn--primary">ABOUT ME</a>
+                <a href="homeport.html" class="btn btn--primary">PORTFOLIO</a>
+            </div>
+            
+            <div class="hero-image">
+                <img src="images/avatar.png" alt="Professional Avatar">
+            </div>
+            
+        </div> <div class="social-icons">
+            <a href="https://www.linkedin.com/in/connor-button-a9097833b/" class="social-link" title="LinkedIn" target="_blank" rel="noopener">
+                <i class="fab fa-linkedin-in"></i>
+            </a>
+            <a href="https://www.instagram.com/couuor/" class="social-link" title="Instagram" target="_blank" rel="noopener">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="Connor Button Resume.pdf" class="social-link" title="Resume" target="_blank" rel="noopener">
+                <i class="fas fa-file-pdf"></i>
+            </a>
+        </div>
+    </section>
+
+    <section class="about-me" id="about">
+    <div class="about-container">
+        <div class="about-grid">
+            <div class="about-photo">
+            <div class="about-photo-grid">
+                <img src="images/Connor Button - Case Competition.jpg"  class="about-photo">
+
+                <img src="images/Connor Button - Pines Landscaping.jpg"  class="about-photo">
+
+                <img src="images/Connor Button - Golf.jpg"  class="about-photo">
+
+                <img src="images/Connor Button - Skiing.jpg"  class="about-photo">
+            </div>
+            </div>
+ 
+            <div class="about-text">
+                <h2>Who Am I</h2>
+                <p>
+                I’m Connor Button, a Queen’s Applied Economics student and Business Certificate candidate. 
+                My skillsets are the combination of hands-on leadership and analytical problem-solving. 
+                From leading construction projects as a foreman to excelling in the top percentiles of my 
+                economics courses, I’ve learned how to manage complex projects with both precision and adaptability.
+                <br><br> I love travel, the outdoors, and challenging myself with tough projects. Recently, that challenge 
+                has been teaching myself to code and design my personal website using experience from marketing
+                and computing coursework. This process has aided me in my greater goal of securing offers to
+                top financial firms while learning the intern processes for the first time. The outcome, I have 
+                built this website entirely from scratch without the assistance of pre-made platforms, which has 
+                aided in multiple intern cycles and networking events. <br><br> I am driven, hard-working, capable, and 
+                passionate. This allows me to visualize my path and take the steps needed to execute my future.
+                </p>
+            </div>
+        </div>
+    </div>
+    </section>
+
+    <!-- Lightbox root -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">
+    <div
+      class="lightbox-content" id="lbContent" tabindex="0" aria-live="polite">
+    </div>
+
+    <button class="close" id="lbClose" aria-label="Close (Esc)">×</button>
+    <button class="prev" id="lbPrev" aria-label="Previous"></button>
+    <button class="next" id="lbNext" aria-label="Next"></button>
+    <p class="caption" id="lbCaption"></p>
+  </div>
+  <!-- Lightbox script -->
+  <script src="lightbox.js" defer></script>
+
+</body>
+</html>

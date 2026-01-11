@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>HYROX — Connor Button</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+</head>
+
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon"></span>
+                <span class="logo-text">CONNOR BUTTON</span>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">HOME</a></li>
+                <li><a href="index.html#about" class="nav-link">ABOUT</a></li>
+                <li><a href="Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
+                <li><a href="homeport.html" class="nav-link active">PORTFOLIO</a></li>
+            </ul>
+
+            <div class="nav-right">
+                <a href="contact.html" class="contact-btn">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+
+
+    <!-- Lightbox root -->
+<div class="lightbox" id="lightbox">
+    <div class="lightbox-content" id="lbContent"></div>
+    <button class="close" id="lbClose">×</button>
+    <button class="prev" id="lbPrev">Prev</button>
+    <button class="next" id="lbNext">Next</button>
+    <p class="caption" id="lbCaption"></p>
+</div>
+  <!-- Lightbox script -->
+  <script src="lightbox.js" defer></script>
+
+</body>
+</html>
