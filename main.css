@@ -910,6 +910,8 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-bottom: 15px; /* Creates a 'bridge' of active hover area below the link */
+    margin-bottom: -15px; /* Offsets the padding so it doesn't push other elements down */
 }
 
 .dropdown-menu {
@@ -926,14 +928,15 @@ body {
     padding: var(--space-8) 0;
     list-style: none;
     z-index: 1001;
-    margin-top: 10px; /* Gap so it doesn't close immediately on move */
+    margin-top: 0; /* Remove the gap that breaks the hover */
+    padding-top: 15px; /* Add internal space instead so the mouse stays 'inside' the menu */
 }
 
 /* Arrow pointer for the dropdown */
 .dropdown-menu::before {
     content: '';
     position: absolute;
-    top: -6px;
+    top: 10px;
     left: 50%;
     transform: translateX(-50%) rotate(45deg);
     width: 10px;
