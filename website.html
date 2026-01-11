@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Website Build — Connor Button</title>
+  <link rel="stylesheet" href="main.css" />
+  <link rel="icon" type="image/png" href="images/favicon.png" />
+  <style>
+    /* Page-specific accents */
+    .page-subtitle { margin: 6px 0 18px; color: var(--color-text-secondary); }
+    .pill {
+      display:inline-block; padding:6px 10px; border-radius:var(--radius-full);
+      background:var(--color-secondary); color:var(--color-text); font-size:var(--font-size-xs); margin-right:8px;
+    }
+    .traits { margin: 12px 0 0; }
+
+    /* Gallery (uses your Lightbox pattern) */
+    .gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap:12px; }
+    .gallery figure { grid-column: span 6; position:relative; cursor:zoom-in; border-radius:var(--radius-base); overflow:hidden; }
+    .gallery figure.wide { grid-column: span 12; }
+    .gallery img { width:100%; height:auto; display:block; }
+
+    /* Folder structure */
+    .folder { border:1px solid var(--color-border); border-radius:var(--radius-lg); overflow:hidden; margin-top: 20px; }
+    .folder .bar {
+      display:flex; align-items:center; gap:8px; padding:10px 12px;
+      background:var(--color-surface); border-bottom:1px solid var(--color-border);
+    }
+    .dot { width:10px; height:10px; border-radius:50%; background:#ff5f56; }
+    .dot.yellow { background:#ffbd2e; } .dot.green { background:#27c93f; }
+    .folder table { width:100%; border-collapse:collapse; background: var(--color-background); }
+    .folder th, .folder td { text-align:left; padding:12px; border-bottom:1px dashed var(--color-border); font-size: var(--font-size-sm); }
+    .folder th { background: var(--color-surface); font-weight: 600; }
+
+    /* --- THE FIX: LIGHTBOX & CODE VIEWER SCREEN CONSTRAINTS --- */
+    .lightbox { 
+      position:fixed; 
+      inset:0; 
+      display:none; 
+      align-items:center; 
+      justify-content:center; 
+      background:rgba(0,0,0,.92); 
+      z-index:9999; 
+      padding: 20px; 
+    }
+    .lightbox.is-open { display:flex; } /* Match your lightbox.js logic */
+    
+    .lightbox-content { 
+      position: relative; 
+      max-width: 95vw; 
+      max-height: 90vh; 
+      width: min(1200px, 95vw); 
+      display: flex; 
+      flex-direction: column; /* Stacks elements vertically so nothing sits on the right */
+      align-items: center; 
+      justify-content: center;
+      background: #1e1e1e; 
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .lightbox pre {
+      margin: 0;
+      padding: 24px;
+      width: 100% !important; /* Forces the code block to fill the entire lightbox width */
+      max-height: 85vh;
+      overflow: auto; 
+      box-sizing: border-box; /* Keeps padding from pushing the box off-screen */
+      white-space: pre;
+    }
+
+    /* Hide the caption element entirely via CSS as a backup */
+    #lbCaption, .caption {
+      display: none !important;
+    }
+
+    /* Custom Scrollbar for Code blocks */
+    .lightbox pre::-webkit-scrollbar { height: 8px; width: 8px; }
+    .lightbox pre::-webkit-scrollbar-track { background: #121212; }
+    .lightbox pre::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
+    .lightbox pre::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
+
+    .lightbox img { max-width:100%; max-height:80vh; object-fit: contain; border-radius:12px; }
+
+    .lightbox .close {
+      position:absolute; top: -45px; right: 0;
+      border:0; background:none; color:#fff; font-size: 36px; cursor:pointer; 
+    }
+
+    .caption { margin-top: 12px; color: #ccc; font-size: 0.9rem; text-align: center; width: 100%; }
+
+    @media (max-width: 768px) {
+      .lightbox pre { font-size: 12px; padding: 16px; }
+      .lightbox .close { top: 10px; right: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display:flex; align-items:center; justify-content:center; }
+      .gallery figure { grid-column: span 12; }
+    }
+  </style>
+
+  <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism-okaidia.css">
+  <script defer src="https://unpkg.com/prismjs/prism.js"></script>
+  <script defer src="https://unpkg.com/prismjs/components/prism-markup.min.js"></script>
+  <script defer src="https://unpkg.com/prismjs/components/prism-css.min.js"></script>
+  <script defer src="https://unpkg.com/prismjs/components/prism-javascript.min.js"></script>
+  <link rel="stylesheet" href="https://unpkg.com/prismjs/plugins/line-numbers/prism-line-numbers.css">
+  <script defer src="https://unpkg.com/prismjs/plugins/line-numbers/prism-line-numbers.min.js"></script>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-text">CONNOR BUTTON</span>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="index.html" class="nav-link">HOME</a></li>
+                <li><a href="index.html#about" class="nav-link">ABOUT</a></li>
+                <li><a href="Connor Button Resume.pdf" class="nav-link" target="_blank">RESUME</a></li>
+                <li><a href="homeport.html" class="nav-link active">PORTFOLIO</a></li>
+            </ul>
+            <div class="nav-right">
+                <a href="contact.html" class="contact-btn">Contact Me</a>
+            </div>
+        </div>
+    </nav>
+
+  <section class="section">
+    <div class="container">
+      <h1 class="page-title">Website Build Portfolio [Page in Progress - Continuation following midterms]</h1>
+      <p class="page-subtitle">A living record of the work behind this site — decisions, dead-ends, and the wins that shipped.</p>
+
+      <div class="lede card">
+        <p>This project began simply as a project portfolio to highlight my professional progress on the web.
+          The critical choice to build it from scratch using HTML, CSS, and vanilla JavaScript came naturally as I enjoyed learning by doing.
+          Teaching myself lightbox, UX principles, and user led design through trial and error (more commits than I care to admit) has been incredibly rewarding.
+          This website is now a sandbox for all my ideas and a place to test the theory learned from my life experiences.
+        </p>
+        <div class="traits">
+          <span class="pill">Curiosity</span>
+          <span class="pill">Agency</span>
+          <span class="pill">Creativity</span>
+        </div>
+      </div>
+
+      <!-- Process timeline -->
+      <section class="card">
+        <h2 style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+          GitHub Contributions
+          <span class="gh-legend" style="display:inline-flex; align-items:center; gap:6px; font-size:0.85em; color:var(--muted);">
+            <span>Less</span>
+            <span class="gh-box" style="width:12px; height:12px; background:#ebedf0; border-radius:2px;"></span>
+            <span class="gh-box" style="width:12px; height:12px; background:#9be9a8; border-radius:2px;"></span>
+            <span class="gh-box" style="width:12px; height:12px; background:#40c463; border-radius:2px;"></span>
+            <span class="gh-box" style="width:12px; height:12px; background:#30a14e; border-radius:2px;"></span>
+            <span class="gh-box" style="width:12px; height:12px; background:#216e39; border-radius:2px;"></span>
+            <span>More</span>
+          </span>
+        </h2>
+          <a href="https://github.com/connorbuttonweb" target="_blank" rel="noopener">
+            <img
+            src="https://ghchart.rshah.org/30A14E/connorbuttonweb"
+            alt="GitHub contributions calendar for @connorbuttonweb"
+            style="max-width:100%; height:auto; display:block; border:1px solid #eaeaea; border-radius:12px;"/>
+          </a>
+      </section>
+
+      <!-- Screenshots gallery -->
+      <section class="snapshot-card">
+        <div class="card snapshot-card--cover">
+          <div class="gallery" data-gallery="mindmap">
+            <figure class="wide"
+              data-type="image"
+              data-src="images/website/mindmap.png">
+              <img src="images/website/mindmap.png">
+            </figure>
+          </div>
+        </div>
+      </section>
+
+      <!-- ChatGPT threads -->
+      <section class="card">
+        <h2>ChatGPT Threads</h2>
+        <p>It is funny how allowing people access to your AI chats has become a personal feeling, similar to that of a journal.
+          That said the following is the link to the entirety of my website folder with Chat-GPT.
+          While I am sure there have been many long forgotten chats in other folders, I want to highlight my conversations, because going back on them has made me realize how transformative this technology has been in allowing me to learn these new skills.
+          When I look back on my inital progress, it is comical how much I rely on the LLM to do the work for me, when I now know the ins and outs of HTML and am able to edit and create pages freely, with little assistance. 
+        </p>
+        <ul class="arrow-list">
+          
+        </ul>
+      </section>
+
+      <!-- Open-source folder -->
+      <section id="open-source">
+        <h2>Open-source Code Folder</h2>
+        <div class="folder">
+          <div class="bar"><span class="dot"></span><span class="dot yellow"></span><span class="dot green"></span><strong style="margin-left:8px;">/site</strong></div>
+          <table>
+            <thead>
+              <tr><th>File</th><th>Purpose</th><th class="file-actions">Actions</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>index.html</td>
+                <td>Home and global navigation entry</td>
+                <td>
+                  <a href="index.html" class="view-code" >View</a>
+                  &nbsp; <a href="index.html" download>Download</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>portfolio.html</td>
+                <td>Project gallery with Lightbox</td>
+                <td>
+                  <a href="portfolio.html" class="view-code" >View</a>
+                  &nbsp; <a href="portfolio.html" download>Download</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>experience.html</td>
+                <td>Experience timeline & roles</td>
+                <td>
+                  <a href="experience.html" class="view-code" >View</a>
+                  &nbsp; <a href="experience.html" download>Download</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>hyrox.html</td>
+                <td>Race narrative + gallery</td>
+                <td>
+                  <a href="hyrox.html" class="view-code" >View</a>
+                  &nbsp; <a href="hyrox.html" download>Download</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>contact.html</td>
+                <td>Contact card & links</td>
+                <td>
+                  <a href="contact.html" class="view-code" >View</a>
+                  &nbsp; <a href="contact.html" download>Download</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>main.css</td>
+                <td>Global styles, grid & components</td>
+                <td>
+                  <a href="main.css" class="view-code" >View</a>
+                  &nbsp; <a href="main.css" download>Download</a>
+                </td>
+              </tr>
+
+              <tr>
+                <td>website.html</td>
+                <td>Website Gallery timeline & Contributions</td>
+                <td>
+                  <a href="website.html" class="view-code" >View</a>
+                  &nbsp; <a href="website.html" download>Download</a>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+        </div>
+        <p class="small" style="margin-top:8px;">Public Repo: <a href="https://github.com/connorbuttonweb/connorbutton" target="_blank" rel="noopener">https://github.com/connorbuttonweb/connorbutton</a></p>
+      </section>
+    </div>
+  </section>
+
+  <!-- Lightbox root -->
+<div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">
+  <div
+    class="lightbox-content" id="lbContent" tabindex="0" aria-live="polite">
+  </div>
+
+  <button class="close" id="lbClose" aria-label="Close (Esc)">×</button>
+  <button class="prev" id="lbPrev" aria-label="Previous"></button>
+  <button class="next" id="lbNext" aria-label="Next"></button>
+  <p class="caption" id="lbCaption"></p>
+</div>
+
+<script>
+    (function () {
+      const lb = document.getElementById('lightbox');
+      const content = document.getElementById('lbContent');
+      const caption = document.getElementById('lbCaption');
+      const closeBtn = document.getElementById('lbClose');
+
+      function escapeHTML(s){
+        return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      async function openCode(file){
+        try {
+          const res = await fetch(file);
+          const text = await res.text();
+          const ext = file.split('.').pop();
+          const lang = ext === 'js' ? 'javascript' : (ext === 'css' ? 'css' : 'markup');
+
+          content.innerHTML = `<pre class="line-numbers"><code class="language-${lang}">${escapeHTML(text)}</code></pre>`;
+          
+          if (window.Prism) Prism.highlightAllUnder(content);
+
+          caption.textContent = file;
+          lb.classList.add('is-open'); // Using is-open to match your main logic
+          document.body.style.overflow = 'hidden';
+        } catch (e) {
+          console.error("Load error:", e);
+        }
+      }
+
+      document.addEventListener('click', (e) => {
+        const a = e.target.closest('a.view-code');
+        if (a) { e.preventDefault(); openCode(a.getAttribute('href')); return; }
+        
+        // Handle image clicks if they exist on this page
+        const fig = e.target.closest('.gallery figure');
+        if (fig) {
+            const src = fig.getAttribute('data-src');
+            content.innerHTML = `<img src="${src}" alt="Gallery image">`;
+            caption.textContent = fig.querySelector('img')?.alt || "";
+            lb.classList.add('is-open');
+            document.body.style.overflow = 'hidden';
+            return;
+        }
+
+        if (e.target === lb || e.target === closeBtn) { 
+            lb.classList.remove('is-open'); 
+            document.body.style.overflow = '';
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
