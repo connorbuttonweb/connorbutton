@@ -1572,6 +1572,91 @@ body {
     height: 120px;
   }
 }
+
+/* ==========================================
+   DOCUMENTS PAGE STYLING
+   ========================================== */
+
+.doc-category {
+    margin-bottom: var(--space-48);
+}
+
+.category-header {
+    font-size: var(--font-size-lg);
+    color: var(--color-primary);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin-bottom: var(--space-16);
+    padding-bottom: var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+}
+
+.doc-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--space-16);
+}
+
+.doc-card {
+    display: flex;
+    align-items: center;
+    gap: var(--space-16);
+    padding: var(--space-16);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    text-decoration: none;
+    transition: all var(--duration-normal) var(--ease-standard);
+}
+
+.doc-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--color-primary);
+}
+
+.doc-icon {
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: rgba(var(--color-slate-500-rgb), 0.05);
+    border-radius: var(--radius-sm);
+}
+
+.doc-meta {
+    overflow: hidden;
+}
+
+.doc-name {
+    margin: 0;
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    font-size: var(--font-size-base);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.doc-type {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+/* Specific color tweaks for icons based on JS classes */
+.doc-card.is-pdf .doc-icon { background: rgba(230, 86, 59, 0.1); }
+.doc-card.is-excel .doc-icon { background: rgba(16, 124, 65, 0.1); }
+
+@media (max-width: 640px) {
+    .doc-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* ==========================================
    HOMEPORT
    ========================================== */

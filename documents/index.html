@@ -8,72 +8,65 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
-    <nav class="navbar">
-        <div class="nav-container">
-            <div class="nav-logo">
-                <span class="logo-icon"></span>
-                <a href="/" class="logo-text">CONNOR BUTTON</a>
-            </div>
-            
-            <ul class="nav-menu">
-                <li><a href="/" class="nav-link">HOME</a></li>
-                <li><a href="/#about" class="nav-link">ABOUT</a></li>
-                <li><a href="/assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
-                <li class="dropdown">
-                    <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="/pines/">Pines Landscaping</a></li>
-                        <li><a href="/wallstreetprep/">Wall Street Prep</a></li>
-                        <li><a href="/website/">Website Build</a></li>
-                        <li><a href="/hyrox/">HYROX</a></li>
-                        <li><a href="/documents/">Documents</a></li>
-                    </ul>
-                </li>
-            </ul>
+  <nav class="navbar">
+      <div class="nav-container">
+          <div class="nav-logo">
+              <span class="logo-icon"></span>
+              <a href="/" class="logo-text">CONNOR BUTTON</a>
+          </div>
+          
+          <ul class="nav-menu">
+              <li><a href="/" class="nav-link">HOME</a></li>
+              <li><a href="/#about" class="nav-link">ABOUT</a></li>
+              <li><a href="/assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
+              <li class="dropdown">
+                  <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="/pines/">Pines Landscaping</a></li>
+                      <li><a href="/wallstreetprep/">Wall Street Prep</a></li>
+                      <li><a href="/website/">Website Build</a></li>
+                      <li><a href="/hyrox/">HYROX</a></li>
+                      <li><a href="/documents/">Documents</a></li>
+                  </ul>
+              </li>
+          </ul>
 
-            <div class="nav-right">
-                <a href="/contact/" class="contact-btn">Contact Me</a>
-            </div>
-        </div>
-    </nav>
+          <div class="nav-right">
+              <a href="/contact/" class="contact-btn">Contact Me</a>
+          </div>
+      </div>
+  </nav>
 
   <section class="section">
-    <div class="docs-wrap">
-      <div class="docs-header">
+    <div class="container"> <div class="page-title-group">
         <h2>Documents</h2>
-        <p class="small">Quick access | PDF's open in new tab, Excel Sheets download to computer (FYI)</p>
+        <p class="port-sub">Quick access | PDF's open in new tab, Excel Sheets download</p>
       </div>
 
-      <div class="doc-grid" id="docGrid">
-        <!-- ===== EXAMPLES (replace/extend these) ===== -->
-        <!-- Tip: point href to your actual files; keep target & rel so they open in a new tab. -->
+      <div class="doc-category">
+        <h3 class="category-header">Professional & Academic</h3>
+        <div class="doc-grid">
+          <a class="doc-card" href="/assets/documents/Connor Button Resume.pdf" target="_blank" rel="noopener" data-name="Connor Button Resume.pdf"></a>
+          <a class="doc-card" href="/assets/documents/MegThesis.pdf" target="_blank" rel="noopener" data-name="Meg Thesis.pdf"></a>
+        </div>
+      </div>
 
-        <!-- Existing resume in your repo -->
-        <a class="doc-card" href="/assets/documents/Connor Button Resume.pdf" target="_blank" rel="noopener" data-name="Connor Button Resume.pdf"></a>
+      <div class="doc-category">
+        <h3 class="category-header">Finance & Data Analysis</h3>
+        <div class="doc-grid">
+          <a class="doc-card" href="/assets/documents/Stats1.xlsx" target="_blank" rel="noopener" data-name="Financial Stats 1.xlsx"></a>
+          <a class="doc-card" href="/assets/documents/Stats2.xlsx" target="_blank" rel="noopener" data-name="Financial Stats 2.xlsx"></a>
+          <a class="doc-card" href="/assets/documents/InitialProposal.pdf" target="_blank" rel="noopener" data-name="Plastics Levy Proposal.pdf"></a>
+        </div>
+      </div>
 
-        <!-- Stats1 -->
-        <a class="doc-card" href="/assets/documents/Stats1.xlsx" target="_blank" rel="noopener" data-name="Stats1.xlsx"></a>
-       
-        <!-- Stats2 -->
-        <a class="doc-card" href="/assets/documents/Stats2.xlsx" target="_blank" rel="noopener" data-name="Stats2.xlsx"></a>
-    
-        <!-- ClubGear -->
-        <a class="doc-card" href="/assets/documents/ClubGear.xlsx" target="_blank" rel="noopener" data-name="ClubGear.xlsx"></a>
-
-        <!-- Meg Thesis -->
-        <a class="doc-card" href="/assets/documents/MegThesis.pdf" target="_blank" rel="noopener" data-name="MegThesis.pdf"></a>
-
-        <!-- Plastics-Levy -->
-        <a class="doc-card" href="/assets/documents/InitialProposal.pdf" target="_blank" rel="noopener" data-name="InitialProposal.pdf"></a>
-       
-        <!-- Twin Peaks Video-->
-        <a class="doc-card" href="/assets/images/pines/TwinPeaksVideo.mp4" target="_blank" rel="noopener" data-name="InstallVideo.mp4"></a>
-        
-        <!-- BBE -->
-        <a class="doc-card" href="https://www.britneybuttonevents.ca" target="_blank" rel="noopener" data-name="BritneyButtonEvents.ca"></a>
-
-
-        <!-- ========================================== -->
+      <div class="doc-category">
+        <h3 class="category-header">Project Resources</h3>
+        <div class="doc-grid">
+          <a class="doc-card" href="/assets/documents/ClubGear.xlsx" target="_blank" rel="noopener" data-name="Club Gear Inventory.xlsx"></a>
+          <a class="doc-card" href="/assets/images/pines/TwinPeaksVideo.mp4" target="_blank" rel="noopener" data-name="Install Video.mp4"></a>
+          <a class="doc-card" href="https://www.britneybuttonevents.ca" target="_blank" rel="noopener" data-name="Britney Button Events.ca"></a>
+        </div>
       </div>
     </div>
   </section>
