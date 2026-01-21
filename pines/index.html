@@ -143,24 +143,7 @@
     <p class="caption" id="lbCaption"></p>
   </div>
 
-  <script src="/assets/js/lightbox.js" defer>
-
-    const mobileBtn = document.querySelector('.mobile-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    mobileBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileBtn.classList.toggle('is-open');
-    });
-    
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            mobileBtn.classList.remove('is-open');
-        });
-    });
-
-  </script>
+  <script src="/assets/js/lightbox.js" defer></script>
+  <script src="/assets/js/nav.js"></script>
 </body>
 </html>
