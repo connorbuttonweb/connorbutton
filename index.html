@@ -172,36 +172,19 @@
     </section>
 
     <!-- Lightbox root -->
-  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">
-    <div
-      class="lightbox-content" id="lbContent" tabindex="0" aria-live="polite">
+    <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Media viewer">
+        <div
+            class="lightbox-content" id="lbContent" tabindex="0" aria-live="polite">
+        </div>
+
+        <button class="close" id="lbClose" aria-label="Close (Esc)">×</button>
+        <button class="prev" id="lbPrev" aria-label="Previous"></button>
+        <button class="next" id="lbNext" aria-label="Next"></button>
+        <p class="caption" id="lbCaption"></p>
     </div>
-
-    <button class="close" id="lbClose" aria-label="Close (Esc)">×</button>
-    <button class="prev" id="lbPrev" aria-label="Previous"></button>
-    <button class="next" id="lbNext" aria-label="Next"></button>
-    <p class="caption" id="lbCaption"></p>
-  </div>
   <!-- Lightbox script -->
-  <script src="assets/js/lightbox.js" defer>
-    
-    const mobileBtn = document.querySelector('.mobile-toggle');
-    const navMenu = document.querySelector('.nav-menu');
-
-    mobileBtn.addEventListener('click', () => {
-        navMenu.classList.toggle('active');
-        mobileBtn.classList.toggle('is-open');
-    });
-    
-    // Close menu when a link is clicked
-    document.querySelectorAll('.nav-link').forEach(link => {
-        link.addEventListener('click', () => {
-            navMenu.classList.remove('active');
-            mobileBtn.classList.remove('is-open');
-        });
-    });
-
-  </script>
+    <script src="assets/js/lightbox.js" defer></script>
+    <script src="/assets/js/nav.js"></script>
 
 </body>
 </html>
