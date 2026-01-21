@@ -2818,3 +2818,139 @@ body {
         margin-bottom: var(--space-20);
     }
 }
+
+/* ==========================================
+   MOBILE UPDATES (Add to bottom of main.css)
+   ========================================== */
+
+/* 1. Hamburger Menu Styles */
+.mobile-toggle {
+    display: none; /* Hidden on desktop */
+    flex-direction: column;
+    justify-content: space-between;
+    width: 30px;
+    height: 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    z-index: 1002;
+    padding: 0;
+    margin-left: auto; /* Pushes it to the right if needed */
+}
+
+.mobile-toggle .bar {
+    width: 100%;
+    height: 2px;
+    background-color: var(--color-text);
+    transition: all 0.3s ease;
+}
+
+/* Animate Hamburger to X */
+.mobile-toggle.is-open .bar:nth-child(1) {
+    transform: translateY(9px) rotate(45deg);
+}
+.mobile-toggle.is-open .bar:nth-child(2) {
+    opacity: 0;
+}
+.mobile-toggle.is-open .bar:nth-child(3) {
+    transform: translateY(-9px) rotate(-45deg);
+}
+
+/* 2. Mobile Layout Logic */
+@media (max-width: 768px) {
+    
+    /* FORCE FIXED NAVBAR ON MOBILE */
+    .navbar {
+        position: fixed !important; /* Override 'sticky' */
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        padding: 15px 0;
+    }
+
+    /* Push body content down so it doesn't hide behind fixed nav */
+    body {
+        padding-top: 70px; 
+    }
+
+    /* Show Hamburger, Hide standard menu */
+    .mobile-toggle {
+        display: flex;
+        margin-right: 15px; /* Spacing from edge */
+    }
+
+    /* If you want the Contact button visible on mobile, keep nav-right. 
+       If it crowds the header, add 'display: none' to .nav-right here. */
+    .nav-right {
+        margin-right: 10px;
+    }
+    
+    .contact-btn {
+        padding: 8px 12px;
+        font-size: 12px;
+    }
+
+    /* The Dropdown Menu */
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: #f6f6ed; /* Match your navbar color */
+        border-bottom: 1px solid var(--color-border);
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+        
+        display: none; /* Hidden by default */
+        flex-direction: column;
+        align-items: center;
+        padding: 20px 0;
+        gap: 20px;
+    }
+
+    .nav-menu.active {
+        display: flex;
+        animation: slideDown 0.3s ease forwards;
+    }
+
+    @keyframes slideDown {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* 3. ABOUT ME SECTION - STACKING FIX */
+    .about-me {
+        padding-top: 40px; /* Extra space for fixed header */
+        height: auto;
+        min-height: auto;
+    }
+
+    .about-grid {
+        display: flex;
+        flex-direction: column-reverse; /* THIS PUTS TEXT ON TOP */
+        padding: 0 var(--mobile-padding);
+        gap: 30px;
+    }
+
+    .about-text {
+        width: 100%;
+        margin-right: 0;
+    }
+    
+    .about-text h2 {
+        margin-top: 0;
+        font-size: 28px;
+    }
+
+    .about-photo {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    /* Ensure the photo grid inside looks good */
+    .about-photo-grid {
+        gap: 8px;
+        /* Keep 2 columns, or use 1fr for single column stack */
+        grid-template-columns: repeat(2, 1fr); 
+    }
+}
