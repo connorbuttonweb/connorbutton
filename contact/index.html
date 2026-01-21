@@ -19,7 +19,13 @@
                 <span class="logo-icon"></span>
                 <a href="/" class="logo-text">CONNOR BUTTON</a>
             </div>
-            
+
+              <button class="mobile-toggle" aria-label="Open navigation">
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+                  <span class="bar"></span>
+              </button>
+
             <ul class="nav-menu">
                 <li><a href="/" class="nav-link">HOME</a></li>
                 <li><a href="/#about" class="nav-link">ABOUT</a></li>
@@ -100,6 +106,23 @@
       statusEl.textContent = 'Network error. Please try again.';
     }
   });
+
+    const mobileBtn = document.querySelector('.mobile-toggle');
+    const navMenu = document.querySelector('.nav-menu');
+
+    mobileBtn.addEventListener('click', () => {
+        navMenu.classList.toggle('active');
+        mobileBtn.classList.toggle('is-open');
+    });
+    
+    // Close menu when a link is clicked
+    document.querySelectorAll('.nav-link').forEach(link => {
+        link.addEventListener('click', () => {
+            navMenu.classList.remove('active');
+            mobileBtn.classList.remove('is-open');
+        });
+    });
+
 </script>
 </body>
 </html>
