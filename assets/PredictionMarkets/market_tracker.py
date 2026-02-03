@@ -5,7 +5,7 @@ import os
 import json
 
 # --- SETTINGS ---
-EXCEL_FILE = "Prediction_Market_Master.xlsx"
+EXCEL_FILE = "assets/PredictionMarkets/Prediction_Market_Master.xlsx"
 SHEET_NAME = "Sheet1"  # Targeted sheet for this specific trade
 TARGET_MARKET_ID = "1325810" 
 

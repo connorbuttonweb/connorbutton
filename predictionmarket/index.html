@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Prediction Market Tracker — Connor Button</title>
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
+
+  <style>
+    /* Spreadsheet Container Styles */
+    .excel-container {
+        width: 100%;
+        overflow-x: auto;
+        background: #fff;
+        border: 1px solid var(--color-border);
+        border-radius: var(--radius-md);
+        margin-top: var(--space-32);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        font-size: 14px;
+    }
+
+    /* Header Styling (Excel-like) */
+    th {
+        background-color: #f8f9fa;
+        color: #5f6368;
+        font-weight: 600;
+        padding: 12px;
+        border: 1px solid #e2e3e5;
+        text-align: left;
+        position: sticky;
+        top: 0;
+    }
+
+    /* Cell Styling */
+    td {
+        padding: 10px 12px;
+        border: 1px solid #e2e3e5;
+        color: var(--color-text);
+        white-space: nowrap;
+    }
+
+    tr:hover {
+        background-color: rgba(var(--color-teal-500-rgb), 0.02);
+    }
+
+    .loading-spinner {
+        text-align: center;
+        padding: 40px;
+        color: var(--color-text-secondary);
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="navbar">
+      <div class="nav-container">
+          <div class="nav-logo">
+              <span class="logo-icon"></span>
+              <a href="/" class="logo-text">CONNOR BUTTON</a>
+          </div>
+          
+            <button class="mobile-toggle" aria-label="Open navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+          <ul class="nav-menu">
+              <li><a href="/" class="nav-link">HOME</a></li>
+              <li><a href="/#about" class="nav-link">ABOUT</a></li>
+              <li><a href="/assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
+              <li class="dropdown">
+                  <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                  <ul class="dropdown-menu">
+                      <li><a href="/pines/">Pines Landscaping</a></li>
+                      <li><a href="/wallstreetprep/">Wall Street Prep</a></li>
+                      <li><a href="/website/">Website Build</a></li>
+                      <li><a href="/hyrox/">HYROX</a></li>
+                      <li><a href="/documents/">Documents</a></li>
+                  </ul>
+              </li>
+          </ul>
+
+          <div class="nav-right">
+              <a href="/contact/" class="contact-btn">Contact Me</a>
+          </div>
+      </div>
+  </nav>
+
+
+    <section class="section">
+        <div class="page-title">
+            <h1>Prediction Market Tracker</h1>
+            <p class="status--info">Automated Data Fetching (Updated every 30 mins)</p>
+        </div>
+
+        <div class="excel-container" id="excel-data">
+            <div class="loading-spinner">
+                <i class="fas fa-circle-notch fa-spin"></i> Loading Market Data...
+            </div>
+        </div>
+        
+        <p style="margin-top: 20px; font-size: 12px; color: var(--color-text-secondary);">
+            <i class="fas fa-info-circle"></i> Source: /assets/PredictionMarkets/Prediction_Market_Master.xlsx
+        </p>
+    </section>
+
+    <script>
+        async function loadExcel() {
+            try {
+                // Path to your Excel file
+                const filePath = '/assets/PredictionMarkets/Prediction_Market_Master.xlsx';
+                const response = await fetch(filePath);
+                const arrayBuffer = await response.arrayBuffer();
+                
+                // Parse the file
+                const data = new Uint8Array(arrayBuffer);
+                const workbook = XLSX.read(data, { type: 'array' });
+                
+                // Get first sheet
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                
+                // Convert to HTML
+                const htmlTable = XLSX.utils.sheet_to_html(worksheet, { editable: false });
+                
+                // Inject into page
+                document.getElementById('excel-data').innerHTML = htmlTable;
+            } catch (error) {
+                console.error("Error loading Excel:", error);
+                document.getElementById('excel-data').innerHTML = "<p style='padding:20px;'>Error loading data. Ensure the file exists in the correct directory.</p>";
+            }
+        }
+
+        window.onload = loadExcel;
+    </script>
+</body>
+</html>
