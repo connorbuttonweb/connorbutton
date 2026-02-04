@@ -91,6 +91,11 @@
         vertical-align: middle;
     }
 
+    .live-badge.closed {
+        background-color: #f1f3f4;
+        color: #5f6368;
+    }
+
     .live-badge.error {
         background-color: #fce8e6;
         color: #c5221f;
@@ -150,8 +155,8 @@
 
     <section class="section">
         <div class="page-title">
-            <h1>S&P 500 Live Tracker</h1>
-            <p>Real-time Updates (2s interval)</p>
+            <h1>S&P 500 Daily Session</h1>
+            <p>9:30 AM — 4:00 PM EST</p>
         </div>
         
         <div class="chart-container">
@@ -178,7 +183,14 @@
         const SYMBOL = 'SPY'; 
         // ==========================================
 
-        let chart; // Global chart instance
+        let chart;
+        const DateTime = luxon.DateTime;
+
+        // Determine Market Hours for TODAY in America/New_York
+        // We use 'America/New_York' to handle EST/EDT automatically
+        const nowNY = DateTime.now().setZone('America/New_York');
+        const marketOpen = nowNY.set({ hour: 9, minute: 30, second: 0, millisecond: 0 });
+        const marketClose = nowNY.set({ hour: 16, minute: 0, second: 0, millisecond: 0 });
 
         // 1. Initialize the Chart
         function initChart() {
@@ -189,7 +201,7 @@
                 data: {
                     datasets: [{
                         label: 'SPY Price',
-                        data: [], // Will be filled with {x: timestamp, y: price}
+                        data: [], 
                         borderColor: '#2196F3',
                         backgroundColor: 'rgba(33, 150, 243, 0.1)',
                         borderWidth: 2,
@@ -214,13 +226,16 @@
                         x: {
                             type: 'time',
                             time: {
-                                unit: 'minute',
-                                tooltipFormat: 'h:mm:ss a',
+                                unit: 'hour',
+                                tooltipFormat: 'h:mm a',
                                 displayFormats: {
-                                    minute: 'h:mm a'
+                                    hour: 'h:mm a'
                                 }
                             },
-                            title: { display: true, text: 'Time' }
+                            // LOCK THE AXIS TO MARKET HOURS
+                            min: marketOpen.toMillis(),
+                            max: marketClose.toMillis(),
+                            title: { display: true, text: 'Time (ET)' }
                         },
                         y: {
                             type: 'linear',
@@ -233,28 +248,38 @@
             });
         }
 
-        // 2. Fetch Historical Data (Last 24h)
+        // 2. Fetch Historical Data (Today's Candles only)
         async function loadHistory() {
-            const now = Math.floor(Date.now() / 1000);
-            const startOfDay = now - (24 * 60 * 60); 
+            // Get Unix Timestamps for API (seconds)
+            const fromTime = Math.floor(marketOpen.toSeconds());
+            const toTime = Math.floor(nowNY.toSeconds());
+
+            // If it's before 9:30 AM, don't fetch anything yet
+            if (nowNY < marketOpen) {
+                console.log("Pre-market: No history to load yet.");
+                return;
+            }
             
-            const url = `https://finnhub.io/api/v1/stock/candle?symbol=${SYMBOL}&resolution=1&from=${startOfDay}&to=${now}&token=${API_KEY}`;
+            const url = `https://finnhub.io/api/v1/stock/candle?symbol=${SYMBOL}&resolution=1&from=${fromTime}&to=${toTime}&token=${API_KEY}`;
             
             try {
                 const response = await fetch(url);
                 const data = await response.json();
 
                 if (data.s === 'ok' && data.t) {
-                    const historicalPoints = data.t.map((timestamp, index) => ({
-                        x: timestamp * 1000,
-                        y: data.c[index]
-                    }));
+                    // Filter points to be strictly >= 9:30 AM
+                    const validPoints = [];
+                    for(let i=0; i<data.t.length; i++) {
+                        const tMillis = data.t[i] * 1000;
+                        // Only add if inside our window
+                        if (tMillis >= marketOpen.toMillis() && tMillis <= marketClose.toMillis()) {
+                            validPoints.push({ x: tMillis, y: data.c[i] });
+                        }
+                    }
                     
-                    chart.data.datasets[0].data = historicalPoints;
+                    chart.data.datasets[0].data = validPoints;
                     chart.update();
-                    console.log(`Loaded ${historicalPoints.length} historical candles.`);
-                } else {
-                    console.warn("Finnhub returned no history (Market might be closed/pre-market):", data);
+                    console.log(`Loaded ${validPoints.length} session candles.`);
                 }
             } catch (error) {
                 console.error("History fetch error:", error);
@@ -263,48 +288,54 @@
 
         // 3. Fetch Live Quote (The 2-second loop)
         async function fetchLiveQuote() {
+            const currentNow = DateTime.now().setZone('America/New_York');
+
+            // STOP conditions:
+            // 1. Before 9:30 AM
+            if (currentNow < marketOpen) {
+                document.getElementById('latest-price').innerHTML = `Market Closed <span class="live-badge closed">PRE-MARKET</span>`;
+                return;
+            }
+            // 2. After 4:00 PM
+            if (currentNow > marketClose) {
+                // Fetch one last time to ensure we have the close price, then stop updating chart
+                 const priceEl = document.getElementById('latest-price');
+                 if(!priceEl.innerHTML.includes("CLOSED")) {
+                     priceEl.innerHTML = `${priceEl.innerText.split(' ')[0]} <span class="live-badge closed">MARKET CLOSED</span>`;
+                 }
+                 return; 
+            }
+
             const url = `https://finnhub.io/api/v1/quote?symbol=${SYMBOL}&token=${API_KEY}`;
             
             try {
                 const response = await fetch(url);
                 const data = await response.json();
                 
-                // Finnhub Quote structure: { c: current_price, d: change, ... }
                 if (data.c) {
                     const price = data.c;
-                    const time = Date.now();
+                    const timeMillis = currentNow.toMillis();
                     
-                    // Update DOM Text
+                    // Update Text
                     const priceEl = document.getElementById('latest-price');
                     if (priceEl) {
                         priceEl.innerHTML = `$${price.toFixed(2)} <span class="live-badge">LIVE</span>`;
                     }
 
                     // Add to Chart
-                    chart.data.datasets[0].data.push({ x: time, y: price });
-                    
-                    // Performance optimization: Prevent array from growing infinitely
-                    if (chart.data.datasets[0].data.length > 2000) {
-                        chart.data.datasets[0].data.shift();
-                    }
-
-                    chart.update('none'); // 'none' mode for better performance
+                    chart.data.datasets[0].data.push({ x: timeMillis, y: price });
+                    chart.update('none'); 
                 }
             } catch (error) {
                 console.error("Live fetch error:", error);
-                const priceEl = document.getElementById('latest-price');
-                if (priceEl) {
-                     priceEl.innerHTML += ` <span class="live-badge error">ERROR</span>`;
-                }
             }
         }
 
-        // 4. Load Excel Table
+        // 4. Excel Loader
         async function loadExcel() {
             try {
                 const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
                 if (!response.ok) throw new Error("Excel file not found");
-                
                 const arrayBuffer = await response.arrayBuffer();
                 const data = new Uint8Array(arrayBuffer);
                 const workbook = XLSX.read(data, { type: 'array' });
