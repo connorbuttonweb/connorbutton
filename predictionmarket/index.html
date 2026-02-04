@@ -152,6 +152,137 @@
     </section>
 
     <script>
+        // ==========================================
+        // CONFIGURATION
+        // ==========================================
+        const API_KEY = 'd61qcv1r01qgcobqh8k0d61qcv1r01qgcobqh8kg'; // <--- PASTE KEY HERE
+        const SYMBOL = 'SPY'; 
+        // ==========================================
+
+        let chart; // Global chart instance
+
+        // 1. Initialize the Chart
+        function initChart() {
+            const ctx = document.getElementById('spyChart').getContext('2d');
+            
+            chart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [{
+                        label: 'SPY Price',
+                        data: [], // Will be filled with {x: timestamp, y: price}
+                        borderColor: '#2196F3',
+                        backgroundColor: 'rgba(33, 150, 243, 0.1)',
+                        borderWidth: 2,
+                        pointRadius: 0,
+                        tension: 0.1,
+                        fill: true
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: { mode: 'index', intersect: false },
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: {
+                            callbacks: {
+                                label: (ctx) => `$${ctx.parsed.y.toFixed(2)}`
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'minute',
+                                tooltipFormat: 'h:mm:ss a'
+                            },
+                            title: { display: true, text: 'Time' }
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Price ($)' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // 2. Fetch Historical Data (So the chart isn't empty on load)
+        async function loadHistory() {
+            const now = Math.floor(Date.now() / 1000);
+            const startOfDay = now - (24 * 60 * 60); // Last 24 hours (simplified)
+            
+            // Finnhub Candle Endpoint
+            const url = `https://finnhub.io/api/v1/stock/candle?symbol=${SYMBOL}&resolution=1&from=${startOfDay}&to=${now}&token=${API_KEY}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data.s === 'ok') {
+                    const historicalPoints = data.t.map((timestamp, index) => ({
+                        x: timestamp * 1000,
+                        y: data.c[index]
+                    }));
+                    
+                    chart.data.datasets[0].data = historicalPoints;
+                    chart.update();
+                    console.log(`Loaded ${historicalPoints.length} historical candles.`);
+                } else {
+                    console.warn("Finnhub returned no history:", data);
+                }
+            } catch (error) {
+                console.error("History fetch error:", error);
+            }
+        }
+
+        // 3. Fetch Live Quote (The 2-second loop)
+        async function fetchLiveQuote() {
+            const url = `https://finnhub.io/api/v1/quote?symbol=${SYMBOL}&token=${API_KEY}`;
+            
+            try {
+                const response = await fetch(url);
+                const data = await response.json();
+                
+                // Finnhub Quote structure: { c: current_price, d: change, ... }
+                if (data.c) {
+                    const price = data.c;
+                    const time = Date.now();
+                    
+                    // Update DOM Text
+                    document.getElementById('latest-price').innerHTML = 
+                        `$${price.toFixed(2)} <span class="live-badge">LIVE</span>`;
+
+                    // Add to Chart
+                    chart.data.datasets[0].data.push({ x: time, y: price });
+                    
+                    // Optional: Keep chart from getting too heavy by removing old points
+                    // if (chart.data.datasets[0].data.length > 500) {
+                    //     chart.data.datasets[0].data.shift();
+                    // }
+
+                    chart.update('none'); // 'none' mode for better performance on rapid updates
+                }
+            } catch (error) {
+                console.error("Live fetch error (CORS or Network):", error);
+                document.getElementById('latest-price').innerHTML += 
+                    ` <span class="live-badge error">ERROR</span>`;
+            }
+        }
+
+        // Main Execution
+        window.onload = function() {
+            initChart();
+            loadHistory();
+            
+            // Start the 2-second loop
+            setInterval(fetchLiveQuote, 2000);
+        };
+
         async function loadExcel() {
             try {
                 const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
