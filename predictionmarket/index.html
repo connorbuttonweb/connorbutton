@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
+
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
@@ -61,7 +61,7 @@
 
     .chart-container {
         width: 100%; 
-        height: 400px; 
+        height: 500px; 
         margin-bottom: 30px; 
         background: #fff; 
         padding: 20px; 
@@ -89,6 +89,12 @@
         color: #3c3;
         border: 1px solid #cfc;
     }
+
+    .status-message.warning {
+        background-color: #fff3cd;
+        color: #856404;
+        border: 1px solid #ffeaa7;
+    }
   </style>
 </head>
 
@@ -99,7 +105,7 @@
               <span class="logo-icon"></span>
               <a href="/" class="logo-text">CONNOR BUTTON</a>
           </div>
-          
+
             <button class="mobile-toggle" aria-label="Open navigation">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -133,303 +139,301 @@
             <h1>Prediction Market Tracker</h1>
             <p class="status--info">Automated Data Fetching (Updated every 30 mins)</p>
         </div>
-        
+
         <div id="status-container"></div>
-        
+
         <div class="chart-container">
-            <canvas id="liveMarketChart"></canvas>
+            <canvas id="overlayChart"></canvas>
         </div>
-        
+
         <div class="excel-container" id="excel-data">
             <div class="loading-spinner">
                 <i class="fas fa-circle-notch fa-spin"></i> Loading Market Data...
             </div>
         </div>
-        
+
         <p style="margin-top: 20px; font-size: 12px; color: var(--color-text-secondary);">
             <i class="fas fa-info-circle"></i> Source: /assets/PredictionMarkets/Prediction_Market_Master.xlsx
         </p>
     </section>
 
     <script>
-        // CORS Proxy to bypass browser restrictions
-        const CORS_PROXY = 'https://api.allorigins.win/raw?url=';
-        const SERIES_SLUG = 'spx-daily-up-or-down';
-        let currentPolyTokenId = null;
+        let overlayChart = null;
+        const CORS_PROXY = 'https://corsproxy.io/?';
 
-        function showStatus(message, type = 'success') {
-            const container = document.getElementById('status-container');
-            container.innerHTML = `<div class="status-message ${type}">${message}</div>`;
-            setTimeout(() => {
-                container.innerHTML = '';
-            }, 5000);
+        // Utility to convert UTC timestamp to EST and check if within market hours (9:30 AM - 4:00 PM EST)
+        function convertToEST(utcTimestamp) {
+            const date = new Date(utcTimestamp * 1000);
+            // Convert to EST (UTC-5)
+            const estDate = new Date(date.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+            return estDate;
         }
 
-        const ctx = document.getElementById('liveMarketChart').getContext('2d');
-        const chart = new Chart(ctx, {
-            type: 'line',
-            data: {
-                datasets: [
-                    {
-                        label: 'S&P 500 Price ($)',
-                        borderColor: '#3498db',
-                        backgroundColor: 'rgba(52, 152, 219, 0.05)',
-                        borderWidth: 2,
-                        yAxisID: 'y-spx',
-                        data: [],
-                        tension: 0.4,
-                        pointRadius: 0,
-                        fill: true
-                    },
-                    {
-                        label: 'Polymarket "UP" Prob',
-                        borderColor: '#e74c3c',
-                        backgroundColor: 'rgba(231, 76, 60, 0.05)',
-                        borderWidth: 2,
-                        yAxisID: 'y-poly',
-                        data: [],
-                        tension: 0.4,
-                        pointRadius: 0,
-                        fill: true
-                    }
-                ]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                interaction: { 
-                    mode: 'index', 
-                    intersect: false 
-                },
-                plugins: {
-                    legend: {
-                        display: true,
-                        position: 'top'
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: function(context) {
-                                let label = context.dataset.label || '';
-                                if (label) {
-                                    label += ': ';
-                                }
-                                if (context.parsed.y !== null) {
-                                    if (context.datasetIndex === 0) {
-                                        label += '$' + context.parsed.y.toFixed(2);
-                                    } else {
-                                        label += (context.parsed.y * 100).toFixed(1) + '%';
-                                    }
-                                }
-                                return label;
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: {
-                            unit: 'hour',
-                            displayFormats: { 
-                                hour: 'h:mm a' 
-                            }
-                        },
-                        title: { 
-                            display: true, 
-                            text: 'Time (Today)' 
-                        },
-                        ticks: {
-                            maxRotation: 0,
-                            autoSkipPadding: 15
-                        }
-                    },
-                    'y-spx': { 
-                        type: 'linear',
-                        position: 'left', 
-                        title: { 
-                            display: true, 
-                            text: 'S&P 500 ($)' 
-                        },
-                        ticks: { 
-                            callback: value => '$' + value.toFixed(0)
-                        },
-                        grid: {
-                            color: 'rgba(0, 0, 0, 0.05)'
-                        }
-                    },
-                    'y-poly': { 
-                        type: 'linear',
-                        position: 'right', 
-                        min: 0, 
-                        max: 1, 
-                        title: { 
-                            display: true, 
-                            text: 'Probability' 
-                        }, 
-                        ticks: {
-                            callback: value => (value * 100).toFixed(0) + '%'
-                        },
-                        grid: { 
-                            display: false 
-                        } 
-                    }
-                }
-            }
-        });
+        function isMarketHours(estDate) {
+            const hours = estDate.getHours();
+            const minutes = estDate.getMinutes();
+            const timeInMinutes = hours * 60 + minutes;
+            const marketOpen = 9 * 60 + 30; // 9:30 AM
+            const marketClose = 16 * 60; // 4:00 PM
 
-        async function fetchSPYData() {
-            try {
-                console.log('Fetching SPY data from Yahoo Finance...');
-                
-                const yahooUrl = `${CORS_PROXY}https://query1.finance.yahoo.com/v8/finance/chart/SPY?interval=5m&range=1d`;
-                
-                const response = await fetch(yahooUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`Yahoo Finance API returned ${response.status}`);
-                }
-                
-                const data = await response.json();
-                console.log('Yahoo Finance response:', data);
-                
-                const result = data.chart.result[0];
-                const timestamps = result.timestamp;
-                const quotes = result.indicators.quote[0];
-                
-                if (!timestamps || timestamps.length === 0) {
-                    console.warn('No SPY data available');
-                    showStatus('No S&P 500 data available for today', 'error');
-                    return;
-                }
-                
-                chart.data.datasets[0].data = timestamps.map((t, i) => ({
-                    x: t * 1000,
-                    y: quotes.close[i]
-                })).filter(point => point.y !== null);
-                
-                console.log(`Loaded ${chart.data.datasets[0].data.length} SPY data points`);
-                showStatus(`Loaded ${chart.data.datasets[0].data.length} S&P 500 data points`, 'success');
-                
-                chart.update();
-                
-            } catch (error) {
-                console.error('SPY fetch error:', error);
-                showStatus(`Error loading S&P 500 data: ${error.message}`, 'error');
-            }
+            // Only weekdays (Monday = 1, Friday = 5)
+            const dayOfWeek = estDate.getDay();
+            const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
+
+            return isWeekday && timeInMinutes >= marketOpen && timeInMinutes <= marketClose;
         }
 
-        async function fetchPolymarketData(tokenId) {
+        // Get today's date in YYYY-MM-DD format (EST)
+        function getTodayEST() {
+            const now = new Date();
+            const estNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+            const year = estNow.getFullYear();
+            const month = String(estNow.getMonth() + 1).padStart(2, '0');
+            const day = String(estNow.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+        }
+
+        // Dynamically generate slug for today's Polymarket trade
+        function generateTodaySlug() {
+            const today = getTodayEST();
+            const [year, month, day] = today.split('-');
+            const months = ['january', 'february', 'march', 'april', 'may', 'june', 
+                          'july', 'august', 'september', 'october', 'november', 'december'];
+            const monthName = months[parseInt(month) - 1];
+            return `spx-up-or-down-on-${monthName}-${parseInt(day)}-${year}`;
+        }
+
+        async function fetchPolymarketData() {
             try {
-                console.log('Fetching Polymarket data...');
-                
-                const startOfDay = Math.floor(new Date().setHours(0,0,0,0) / 1000);
-                const polyUrl = `${CORS_PROXY}https://clob.polymarket.com/prices-history?market=${tokenId}&interval=all&fidelity=1`;
-                
-                const response = await fetch(polyUrl);
-                
-                if (!response.ok) {
-                    throw new Error(`Polymarket API returned ${response.status}`);
+                const slug = generateTodaySlug();
+                const eventUrl = `https://gamma-api.polymarket.com/events/slug/${slug}`;
+
+                showStatus('Loading Polymarket data...', 'warning');
+                const eventResponse = await fetch(CORS_PROXY + encodeURIComponent(eventUrl));
+
+                if (!eventResponse.ok) {
+                    throw new Error(`Polymarket event not found: ${slug}`);
                 }
-                
-                const data = await response.json();
-                console.log('Polymarket response:', data);
-                
-                if (!data.history || data.history.length === 0) {
-                    console.warn('No Polymarket data available');
-                    showStatus('No Polymarket data available', 'error');
-                    return;
+
+                const eventData = await eventResponse.json();
+                const markets = eventData.markets || [];
+
+                if (markets.length === 0) {
+                    throw new Error('No markets found for this event');
                 }
-                
-                chart.data.datasets[1].data = data.history
-                    .filter(pt => pt.t >= startOfDay)
-                    .map(pt => ({ 
-                        x: pt.t * 1000, 
-                        y: parseFloat(pt.p) 
-                    }));
-                
-                console.log(`Loaded ${chart.data.datasets[1].data.length} Polymarket data points`);
-                showStatus(`Loaded ${chart.data.datasets[1].data.length} Polymarket data points`, 'success');
-                
-                chart.update();
-                
+
+                // Get the first market's condition ID for price history
+                const conditionId = markets[0].conditionId;
+
+                // Fetch price history
+                const priceUrl = `https://clob.polymarket.com/prices-history?market=${conditionId}&interval=1m&fidelity=1`;
+                const priceResponse = await fetch(CORS_PROXY + encodeURIComponent(priceUrl));
+
+                if (!priceResponse.ok) {
+                    throw new Error('Failed to fetch price history');
+                }
+
+                const priceData = await priceResponse.json();
+
+                // Filter for market hours only
+                const filteredData = priceData.history
+                    .map(point => ({
+                        timestamp: point.t,
+                        estDate: convertToEST(point.t),
+                        price: point.p * 100 // Convert to percentage
+                    }))
+                    .filter(point => isMarketHours(point.estDate));
+
+                showStatus('Polymarket data loaded successfully!', 'success');
+                return filteredData;
+
             } catch (error) {
                 console.error('Polymarket fetch error:', error);
-                showStatus(`Error loading Polymarket data: ${error.message}`, 'error');
+                showStatus(`Polymarket Error: ${error.message}`, 'error');
+                return [];
             }
         }
 
-        async function initPolymarket() {
+        async function fetchSP500Data() {
             try {
-                console.log('Finding active Polymarket event...');
-                
-                // Try WITHOUT CORS proxy for Gamma API
-                const gammaUrl = `https://gamma-api.polymarket.com/events?series_slug=${SERIES_SLUG}&active=true&closed=false&limit=1`;
-                const response = await fetch(gammaUrl, {
-                    mode: 'cors',
-                    headers: {
-                        'Accept': 'application/json',
-                    }
-                });
-                
-                if (!response.ok) {
-                    throw new Error(`Polymarket Gamma API returned ${response.status}`);
-                }
-                
-                const events = await response.json();
-                console.log('Polymarket events:', events);
+                showStatus('Loading S&P 500 data...', 'warning');
 
-                if (!events || events.length === 0) {
-                    throw new Error('No active Polymarket events found');
+                // Using Alpha Vantage as a free stock API option
+                // You'll need to get a free API key from https://www.alphavantage.co/support/#api-key
+                const apiKey = 'X7J25OJXKXLTRTCU'; // Replace with your actual API key
+                const symbol = 'SPY'; // S&P 500 ETF
+                const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}&outputsize=full`;
+
+                const response = await fetch(url);
+                const data = await response.json();
+
+                if (data['Error Message'] || data['Note']) {
+                    throw new Error('API limit reached or invalid request. Please use your own Alpha Vantage API key.');
                 }
 
-                const latestEvent = events[0];
-                const latestMarket = latestEvent.markets[0];
-                currentPolyTokenId = latestMarket.clobTokenIds[0];
+                const timeSeries = data['Time Series (1min)'] || {};
+                const today = getTodayEST();
 
-                console.log('Found Polymarket token ID:', currentPolyTokenId);
+                const sp500Data = Object.entries(timeSeries)
+                    .map(([timestamp, values]) => {
+                        const estDate = new Date(timestamp + ' EST');
+                        return {
+                            timestamp: timestamp,
+                            estDate: estDate,
+                            price: parseFloat(values['4. close'])
+                        };
+                    })
+                    .filter(point => {
+                        const pointDate = point.estDate.toISOString().split('T')[0];
+                        return pointDate === today && isMarketHours(point.estDate);
+                    })
+                    .reverse();
 
-                await Promise.all([
-                    fetchSPYData(),
-                    fetchPolymarketData(currentPolyTokenId)
-                ]);
-
-                if (isMarketOpen) {
-                    console.log('Market is open, connecting to WebSocket...');
-                    const polyWS = new WebSocket('wss://clob.polymarket.com/ws/market');
-                    
-                    polyWS.onopen = () => {
-                        console.log('WebSocket connected');
-                        polyWS.send(JSON.stringify({
-                            type: 'subscribe',
-                            assets_ids: [currentPolyTokenId],
-                            channels: ['market']
-                        }));
-                    };
-
-                    polyWS.onmessage = (event) => {
-                        const msg = JSON.parse(event.data);
-                        if (msg.price && msg.asset_id === currentPolyTokenId) {
-                            chart.data.datasets[1].data.push({ 
-                                x: Date.now(), 
-                                y: parseFloat(msg.price) 
-                            });
-                            chart.update('quiet');
-                        }
-                    };
-
-                    polyWS.onerror = (error) => {
-                        console.error('WebSocket error:', error);
-                    };
-                } else {
-                    console.log('Market is closed, showing historical data only');
-                }
+                showStatus('S&P 500 data loaded successfully!', 'success');
+                return sp500Data;
 
             } catch (error) {
-                console.error('Init error:', error);
-                showStatus(`Initialization error: ${error.message}`, 'error');
+                console.error('S&P 500 fetch error:', error);
+                showStatus(`S&P 500 Error: ${error.message}`, 'error');
+                return [];
             }
         }
 
+        function showStatus(message, type) {
+            const container = document.getElementById('status-container');
+            container.innerHTML = `<div class="status-message ${type}">${message}</div>`;
+
+            if (type === 'success') {
+                setTimeout(() => {
+                    container.innerHTML = '';
+                }, 5000);
+            }
+        }
+
+        async function createOverlayChart() {
+            const [polymarketData, sp500Data] = await Promise.all([
+                fetchPolymarketData(),
+                fetchSP500Data()
+            ]);
+
+            if (polymarketData.length === 0 && sp500Data.length === 0) {
+                showStatus('No data available to display chart', 'error');
+                return;
+            }
+
+            const ctx = document.getElementById('overlayChart').getContext('2d');
+
+            // Destroy existing chart if it exists
+            if (overlayChart) {
+                overlayChart.destroy();
+            }
+
+            overlayChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    datasets: [
+                        {
+                            label: 'Polymarket Probability (%)',
+                            data: polymarketData.map(d => ({
+                                x: d.estDate,
+                                y: d.price
+                            })),
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
+                            yAxisID: 'y',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'S&P 500 Price',
+                            data: sp500Data.map(d => ({
+                                x: d.estDate,
+                                y: d.price
+                            })),
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
+                            yAxisID: 'y1',
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    plugins: {
+                        title: {
+                            display: true,
+                            text: 'Polymarket Probability vs S&P 500 Price (Market Hours: 9:30 AM - 4:00 PM EST)'
+                        },
+                        legend: {
+                            display: true,
+                            position: 'top'
+                        },
+                        tooltip: {
+                            callbacks: {
+                                label: function(context) {
+                                    let label = context.dataset.label || '';
+                                    if (label) {
+                                        label += ': ';
+                                    }
+                                    label += context.parsed.y.toFixed(2);
+                                    if (context.datasetIndex === 0) {
+                                        label += '%';
+                                    }
+                                    return label;
+                                }
+                            }
+                        }
+                    },
+                    scales: {
+                        x: {
+                            type: 'time',
+                            time: {
+                                unit: 'hour',
+                                displayFormats: {
+                                    hour: 'h:mm a'
+                                },
+                                tooltipFormat: 'MMM d, h:mm a'
+                            },
+                            title: {
+                                display: true,
+                                text: 'Time (EST)'
+                            },
+                            min: new Date().setHours(9, 30, 0, 0), // 9:30 AM
+                            max: new Date().setHours(16, 0, 0, 0)  // 4:00 PM
+                        },
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: {
+                                display: true,
+                                text: 'Polymarket Probability (%)'
+                            },
+                            min: 0,
+                            max: 100
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: {
+                                display: true,
+                                text: 'S&P 500 Price ($)'
+                            },
+                            grid: {
+                                drawOnChartArea: false
+                            }
+                        }
+                    }
+                }
+            });
+
+            showStatus('Charts loaded successfully!', 'success');
+        }
 
         async function loadExcel() {
             try {
@@ -445,10 +449,41 @@
             }
         }
 
+        // Auto-refresh at 9:30 AM EST daily
+        function scheduleNextRefresh() {
+            const now = new Date();
+            const estNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+
+            const tomorrow930 = new Date(estNow);
+            tomorrow930.setDate(tomorrow930.getDate() + 1);
+            tomorrow930.setHours(9, 30, 0, 0);
+
+            const msUntil930 = tomorrow930 - estNow;
+
+            console.log(`Next refresh scheduled for: ${tomorrow930.toLocaleString()}`);
+
+            setTimeout(() => {
+                console.log('Refreshing for new trading day...');
+                createOverlayChart();
+                scheduleNextRefresh();
+            }, msUntil930);
+        }
+
         window.onload = function() {
             console.log('Page loaded, initializing...');
             loadExcel();
-            initPolymarket();
+            createOverlayChart();
+            scheduleNextRefresh();
+
+            // Refresh chart every 5 minutes during market hours
+            setInterval(() => {
+                const now = new Date();
+                const estNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
+                if (isMarketHours(estNow)) {
+                    console.log('Refreshing chart data...');
+                    createOverlayChart();
+                }
+            }, 5 * 60 * 1000); // 5 minutes
         };
     </script>
 </body>
