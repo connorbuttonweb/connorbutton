@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="/assets/css/main.css" />
     <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
@@ -61,7 +61,7 @@
 
     .chart-container {
         width: 100%; 
-        height: 500px; 
+        height: 400px; 
         margin-bottom: 30px; 
         background: #fff; 
         padding: 20px; 
@@ -89,12 +89,6 @@
         color: #3c3;
         border: 1px solid #cfc;
     }
-
-    .status-message.warning {
-        background-color: #fff3cd;
-        color: #856404;
-        border: 1px solid #ffeaa7;
-    }
   </style>
 </head>
 
@@ -105,7 +99,7 @@
               <span class="logo-icon"></span>
               <a href="/" class="logo-text">CONNOR BUTTON</a>
           </div>
-
+          
             <button class="mobile-toggle" aria-label="Open navigation">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -139,302 +133,25 @@
             <h1>Prediction Market Tracker</h1>
             <p class="status--info">Automated Data Fetching (Updated every 30 mins)</p>
         </div>
-
+        
         <div id="status-container"></div>
-
+        
         <div class="chart-container">
-            <canvas id="overlayChart"></canvas>
+            <canvas id="liveMarketChart"></canvas>
         </div>
-
+        
         <div class="excel-container" id="excel-data">
             <div class="loading-spinner">
                 <i class="fas fa-circle-notch fa-spin"></i> Loading Market Data...
             </div>
         </div>
-
+        
         <p style="margin-top: 20px; font-size: 12px; color: var(--color-text-secondary);">
             <i class="fas fa-info-circle"></i> Source: /assets/PredictionMarkets/Prediction_Market_Master.xlsx
         </p>
     </section>
 
     <script>
-        let overlayChart = null;
-        const CORS_PROXY = 'https://corsproxy.io/?';
-
-        // Utility to convert UTC timestamp to EST and check if within market hours (9:30 AM - 4:00 PM EST)
-        function convertToEST(utcTimestamp) {
-            const date = new Date(utcTimestamp * 1000);
-            // Convert to EST (UTC-5)
-            const estDate = new Date(date.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-            return estDate;
-        }
-
-        function isMarketHours(estDate) {
-            const hours = estDate.getHours();
-            const minutes = estDate.getMinutes();
-            const timeInMinutes = hours * 60 + minutes;
-            const marketOpen = 9 * 60 + 30; // 9:30 AM
-            const marketClose = 16 * 60; // 4:00 PM
-
-            // Only weekdays (Monday = 1, Friday = 5)
-            const dayOfWeek = estDate.getDay();
-            const isWeekday = dayOfWeek >= 1 && dayOfWeek <= 5;
-
-            return isWeekday && timeInMinutes >= marketOpen && timeInMinutes <= marketClose;
-        }
-
-        // Get today's date in YYYY-MM-DD format (EST)
-        function getTodayEST() {
-            const now = new Date();
-            const estNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-            const year = estNow.getFullYear();
-            const month = String(estNow.getMonth() + 1).padStart(2, '0');
-            const day = String(estNow.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-        }
-
-        // Dynamically generate slug for today's Polymarket trade
-        function generateTodaySlug() {
-            const today = getTodayEST();
-            const [year, month, day] = today.split('-');
-            const months = ['january', 'february', 'march', 'april', 'may', 'june', 
-                          'july', 'august', 'september', 'october', 'november', 'december'];
-            const monthName = months[parseInt(month) - 1];
-            return `spx-up-or-down-on-${monthName}-${parseInt(day)}-${year}`;
-        }
-
-        async function fetchPolymarketData() {
-            try {
-                const slug = generateTodaySlug();
-                const eventUrl = `https://gamma-api.polymarket.com/events/slug/${slug}`;
-
-                showStatus('Loading Polymarket data...', 'warning');
-                const eventResponse = await fetch(CORS_PROXY + encodeURIComponent(eventUrl));
-
-                if (!eventResponse.ok) {
-                    throw new Error(`Polymarket event not found: ${slug}`);
-                }
-
-                const eventData = await eventResponse.json();
-                const markets = eventData.markets || [];
-
-                if (markets.length === 0) {
-                    throw new Error('No markets found for this event');
-                }
-
-                // Get the first market's condition ID for price history
-                const conditionId = markets[0].conditionId;
-
-                // Fetch price history
-                const priceUrl = `https://clob.polymarket.com/prices-history?market=${conditionId}&interval=1m&fidelity=1`;
-                const priceResponse = await fetch(CORS_PROXY + encodeURIComponent(priceUrl));
-
-                if (!priceResponse.ok) {
-                    throw new Error('Failed to fetch price history');
-                }
-
-                const priceData = await priceResponse.json();
-
-                // Filter for market hours only
-                const filteredData = priceData.history
-                    .map(point => ({
-                        timestamp: point.t,
-                        estDate: convertToEST(point.t),
-                        price: point.p * 100 // Convert to percentage
-                    }))
-                    .filter(point => isMarketHours(point.estDate));
-
-                showStatus('Polymarket data loaded successfully!', 'success');
-                return filteredData;
-
-            } catch (error) {
-                console.error('Polymarket fetch error:', error);
-                showStatus(`Polymarket Error: ${error.message}`, 'error');
-                return [];
-            }
-        }
-
-        async function fetchSP500Data() {
-            try {
-                showStatus('Loading S&P 500 data...', 'warning');
-
-                // Using Alpha Vantage as a free stock API option
-                // You'll need to get a free API key from https://www.alphavantage.co/support/#api-key
-                const apiKey = 'X7J25OJXKXLTRTCU'; // Replace with your actual API key
-                const symbol = 'SPY'; // S&P 500 ETF
-                const url = `https://www.alphavantage.co/query?function=TIME_SERIES_INTRADAY&symbol=${symbol}&interval=1min&apikey=${apiKey}&outputsize=full`;
-
-                const response = await fetch(url);
-                const data = await response.json();
-
-                if (data['Error Message'] || data['Note']) {
-                    throw new Error('API limit reached or invalid request. Please use your own Alpha Vantage API key.');
-                }
-
-                const timeSeries = data['Time Series (1min)'] || {};
-                const today = getTodayEST();
-
-                const sp500Data = Object.entries(timeSeries)
-                    .map(([timestamp, values]) => {
-                        const estDate = new Date(timestamp + ' EST');
-                        return {
-                            timestamp: timestamp,
-                            estDate: estDate,
-                            price: parseFloat(values['4. close'])
-                        };
-                    })
-                    .filter(point => {
-                        const pointDate = point.estDate.toISOString().split('T')[0];
-                        return pointDate === today && isMarketHours(point.estDate);
-                    })
-                    .reverse();
-
-                showStatus('S&P 500 data loaded successfully!', 'success');
-                return sp500Data;
-
-            } catch (error) {
-                console.error('S&P 500 fetch error:', error);
-                showStatus(`S&P 500 Error: ${error.message}`, 'error');
-                return [];
-            }
-        }
-
-        function showStatus(message, type) {
-            const container = document.getElementById('status-container');
-            container.innerHTML = `<div class="status-message ${type}">${message}</div>`;
-
-            if (type === 'success') {
-                setTimeout(() => {
-                    container.innerHTML = '';
-                }, 5000);
-            }
-        }
-
-        async function createOverlayChart() {
-            const [polymarketData, sp500Data] = await Promise.all([
-                fetchPolymarketData(),
-                fetchSP500Data()
-            ]);
-
-            if (polymarketData.length === 0 && sp500Data.length === 0) {
-                showStatus('No data available to display chart', 'error');
-                return;
-            }
-
-            const ctx = document.getElementById('overlayChart').getContext('2d');
-
-            // Destroy existing chart if it exists
-            if (overlayChart) {
-                overlayChart.destroy();
-            }
-
-            overlayChart = new Chart(ctx, {
-                type: 'line',
-                data: {
-                    datasets: [
-                        {
-                            label: 'Polymarket Probability (%)',
-                            data: polymarketData.map(d => ({
-                                x: d.estDate,
-                                y: d.price
-                            })),
-                            borderColor: 'rgb(75, 192, 192)',
-                            backgroundColor: 'rgba(75, 192, 192, 0.1)',
-                            yAxisID: 'y',
-                            tension: 0.1
-                        },
-                        {
-                            label: 'S&P 500 Price',
-                            data: sp500Data.map(d => ({
-                                x: d.estDate,
-                                y: d.price
-                            })),
-                            borderColor: 'rgb(255, 99, 132)',
-                            backgroundColor: 'rgba(255, 99, 132, 0.1)',
-                            yAxisID: 'y1',
-                            tension: 0.1
-                        }
-                    ]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: {
-                        mode: 'index',
-                        intersect: false,
-                    },
-                    plugins: {
-                        title: {
-                            display: true,
-                            text: 'Polymarket Probability vs S&P 500 Price (Market Hours: 9:30 AM - 4:00 PM EST)'
-                        },
-                        legend: {
-                            display: true,
-                            position: 'top'
-                        },
-                        tooltip: {
-                            callbacks: {
-                                label: function(context) {
-                                    let label = context.dataset.label || '';
-                                    if (label) {
-                                        label += ': ';
-                                    }
-                                    label += context.parsed.y.toFixed(2);
-                                    if (context.datasetIndex === 0) {
-                                        label += '%';
-                                    }
-                                    return label;
-                                }
-                            }
-                        }
-                    },
-                    scales: {
-                        x: {
-                            type: 'time',
-                            time: {
-                                unit: 'hour',
-                                displayFormats: {
-                                    hour: 'h:mm a'
-                                },
-                                tooltipFormat: 'MMM d, h:mm a'
-                            },
-                            title: {
-                                display: true,
-                                text: 'Time (EST)'
-                            },
-                            min: new Date().setHours(9, 30, 0, 0), // 9:30 AM
-                            max: new Date().setHours(16, 0, 0, 0)  // 4:00 PM
-                        },
-                        y: {
-                            type: 'linear',
-                            display: true,
-                            position: 'left',
-                            title: {
-                                display: true,
-                                text: 'Polymarket Probability (%)'
-                            },
-                            min: 0,
-                            max: 100
-                        },
-                        y1: {
-                            type: 'linear',
-                            display: true,
-                            position: 'right',
-                            title: {
-                                display: true,
-                                text: 'S&P 500 Price ($)'
-                            },
-                            grid: {
-                                drawOnChartArea: false
-                            }
-                        }
-                    }
-                }
-            });
-
-            showStatus('Charts loaded successfully!', 'success');
-        }
-
         async function loadExcel() {
             try {
                 const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
@@ -449,41 +166,10 @@
             }
         }
 
-        // Auto-refresh at 9:30 AM EST daily
-        function scheduleNextRefresh() {
-            const now = new Date();
-            const estNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-
-            const tomorrow930 = new Date(estNow);
-            tomorrow930.setDate(tomorrow930.getDate() + 1);
-            tomorrow930.setHours(9, 30, 0, 0);
-
-            const msUntil930 = tomorrow930 - estNow;
-
-            console.log(`Next refresh scheduled for: ${tomorrow930.toLocaleString()}`);
-
-            setTimeout(() => {
-                console.log('Refreshing for new trading day...');
-                createOverlayChart();
-                scheduleNextRefresh();
-            }, msUntil930);
-        }
-
         window.onload = function() {
             console.log('Page loaded, initializing...');
             loadExcel();
-            createOverlayChart();
-            scheduleNextRefresh();
-
-            // Refresh chart every 5 minutes during market hours
-            setInterval(() => {
-                const now = new Date();
-                const estNow = new Date(now.toLocaleString('en-US', { timeZone: 'America/New_York' }));
-                if (isMarketHours(estNow)) {
-                    console.log('Refreshing chart data...');
-                    createOverlayChart();
-                }
-            }, 5 * 60 * 1000); // 5 minutes
+            initPolymarket();
         };
     </script>
 </body>
