@@ -2,7 +2,6 @@ name: Update Market Tracker
 
 on:
   schedule:
-    # Runs every 30 minutes
     - cron: '*/30 * * * *'
   workflow_dispatch:
 
@@ -10,7 +9,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     permissions:
-      contents: write
+     contents: write
 
     steps:
     - name: Checkout repository
