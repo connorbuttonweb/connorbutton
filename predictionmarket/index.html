@@ -393,7 +393,37 @@
                     fetchPolymarketData(currentPolyTokenId)
                 ]);
 
-                // ... rest of WebSocket code
+                if (isMarketOpen) {
+                    console.log('Market is open, connecting to WebSocket...');
+                    const polyWS = new WebSocket('wss://clob.polymarket.com/ws/market');
+                    
+                    polyWS.onopen = () => {
+                        console.log('WebSocket connected');
+                        polyWS.send(JSON.stringify({
+                            type: 'subscribe',
+                            assets_ids: [currentPolyTokenId],
+                            channels: ['market']
+                        }));
+                    };
+
+                    polyWS.onmessage = (event) => {
+                        const msg = JSON.parse(event.data);
+                        if (msg.price && msg.asset_id === currentPolyTokenId) {
+                            chart.data.datasets[1].data.push({ 
+                                x: Date.now(), 
+                                y: parseFloat(msg.price) 
+                            });
+                            chart.update('quiet');
+                        }
+                    };
+
+                    polyWS.onerror = (error) => {
+                        console.error('WebSocket error:', error);
+                    };
+                } else {
+                    console.log('Market is closed, showing historical data only');
+                }
+
             } catch (error) {
                 console.error('Init error:', error);
                 showStatus(`Initialization error: ${error.message}`, 'error');
