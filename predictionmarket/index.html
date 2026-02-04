@@ -241,7 +241,7 @@
         // ==========================================
         const FINNHUB_KEY = 'd61qcv1r01qgcobqh8k0d61qcv1r01qgcobqh8kg'; 
         const SYMBOL = 'SPY'; 
-        let POLY_TOKEN_ID = null; // Will be found dynamically based on today's date
+        let POLY_TOKEN_ID = null; 
         // ==========================================
 
         // Global Chart Instances
@@ -257,24 +257,35 @@
         // 1. CHART INITIALIZATION
         // -------------------------------------------------------
         function initCharts() {
+            // Option A: Fixed Session Scale (for SPY & Combo)
+            const sessionScales = {
+                x: {
+                    type: 'time',
+                    time: { unit: 'hour', displayFormats: { hour: 'h:mm a' } },
+                    min: marketOpen.toMillis(),
+                    max: marketClose.toMillis(),
+                    title: { display: true, text: 'Time (ET)' }
+                }
+            };
+
+            // Option B: Dynamic Scale (for Polymarket Top-Right)
+            // Removes min/max so it auto-scales to full market history
+            const dynamicScales = {
+                x: {
+                    type: 'time',
+                    time: { unit: 'hour', displayFormats: { hour: 'h:mm a' } },
+                    title: { display: true, text: 'Market Duration' }
+                }
+            };
+
             const commonOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
                 interaction: { mode: 'index', intersect: false },
-                plugins: { legend: { display: false } },
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: { unit: 'hour', displayFormats: { hour: 'h:mm a' } },
-                        // LOCK X-AXIS TO TRADING WINDOW
-                        min: marketOpen.toMillis(),
-                        max: marketClose.toMillis(),
-                        title: { display: true, text: 'Time (ET)' }
-                    }
-                }
+                plugins: { legend: { display: false } }
             };
 
-            // Chart 1: SPY (Equity)
+            // Chart 1: SPY (Equity) - LOCKED 9:30-4:00
             chartSpy = new Chart(document.getElementById('spyChart'), {
                 type: 'line',
                 data: { datasets: [{ 
@@ -285,10 +296,10 @@
                     tension: 0.1,
                     data: [] 
                 }]},
-                options: { ...commonOptions, scales: { ...commonOptions.scales, y: { title: {display:true, text:'Price ($)'} } } }
+                options: { ...commonOptions, scales: { x: sessionScales.x, y: { title: {display:true, text:'Price ($)'} } } }
             });
 
-            // Chart 2: Polymarket (Probability)
+            // Chart 2: Polymarket (Probability) - DYNAMIC (Full History)
             chartPoly = new Chart(document.getElementById('polyChart'), {
                 type: 'line',
                 data: { datasets: [{ 
@@ -299,10 +310,10 @@
                     tension: 0.1,
                     data: [] 
                 }]},
-                options: { ...commonOptions, scales: { ...commonOptions.scales, y: { min: 0, max: 100, title: {display:true, text:'Chance (%)'} } } }
+                options: { ...commonOptions, scales: { x: dynamicScales.x, y: { min: 0, max: 100, title: {display:true, text:'Chance (%)'} } } }
             });
 
-            // Chart 3: Combo (Dual Axis)
+            // Chart 3: Combo (Dual Axis) - LOCKED 9:30-4:00
             chartCombo = new Chart(document.getElementById('comboChart'), {
                 type: 'line',
                 data: { datasets: [
@@ -331,7 +342,7 @@
                     maintainAspectRatio: false,
                     interaction: { mode: 'index', intersect: false },
                     scales: {
-                        x: commonOptions.scales.x,
+                        x: sessionScales.x,
                         y: { type: 'linear', display: true, position: 'left', title: {display:true, text:'SPY Price ($)'} },
                         y1: { type: 'linear', display: true, position: 'right', min: 0, max: 100, grid: {drawOnChartArea: false}, title: {display:true, text:'Probability (%)'} }
                     }
@@ -343,7 +354,6 @@
         // 2. POLYMARKET DISCOVERY
         // -------------------------------------------------------
         async function findPolymarketToken() {
-            // Dynamically build slug: "spx-up-or-down-on-february-4-2026"
             const month = nowNY.toFormat('MMMM').toLowerCase();
             const day = nowNY.toFormat('d');
             const year = nowNY.toFormat('yyyy');
@@ -352,14 +362,12 @@
             console.log("Searching for market slug:", slug);
 
             try {
-                // Gamma API to find event
                 const response = await fetch(`https://gamma-api.polymarket.com/events?slug=${slug}`);
-                if (!response.ok) throw new Error("Gamma API Error (Check CORS)");
+                if (!response.ok) throw new Error("Gamma API Error");
                 const data = await response.json();
 
                 if (data.length > 0 && data[0].markets.length > 0) {
                     const market = data[0].markets[0];
-                    // Usually clobTokenIds[0] is the "Yes" outcome
                     POLY_TOKEN_ID = market.clobTokenIds[0]; 
                     
                     console.log("Found Token ID:", POLY_TOKEN_ID);
@@ -372,13 +380,13 @@
                 }
             } catch (e) {
                 console.error("Polymarket Discovery Error:", e);
-                document.getElementById('price-poly').innerText = "Connection Error (Enable CORS)";
+                document.getElementById('price-poly').innerText = "Connection Error";
                 return false;
             }
         }
 
         // -------------------------------------------------------
-        // 3. LOAD HISTORY (Candles)
+        // 3. LOAD HISTORY
         // -------------------------------------------------------
         async function loadHistory() {
             const fromTime = Math.floor(marketOpen.toSeconds());
@@ -395,7 +403,6 @@
                         .map((t, i) => ({ x: t * 1000, y: data.c[i] }))
                         .filter(p => p.x >= marketOpen.toMillis());
                     
-                    // Update Chart 1 & 3
                     chartSpy.data.datasets[0].data = points;
                     chartCombo.data.datasets[0].data = points;
                     chartSpy.update();
@@ -406,20 +413,21 @@
             // B. Polymarket History
             if (POLY_TOKEN_ID) {
                 try {
-                    // CLOB History: 1 minute interval
+                    // Fetch ALL history (do not filter by time initially)
                     const url = `https://clob.polymarket.com/prices-history?market=${POLY_TOKEN_ID}&interval=1m&fidelity=1`;
                     const res = await fetch(url);
                     const data = await res.json();
                     
                     if (data && data.history) {
-                        const points = data.history
-                            .map(p => ({ x: p.t * 1000, y: p.p * 100 })) // Convert 0.55 to 55%
-                            .filter(p => p.x >= marketOpen.toMillis());
+                        const allPoints = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
                         
-                        // Update Chart 2 & 3
-                        chartPoly.data.datasets[0].data = points;
-                        chartCombo.data.datasets[1].data = points;
+                        // 1. Top Right Chart: Show EVERYTHING (Full history)
+                        chartPoly.data.datasets[0].data = allPoints;
                         chartPoly.update();
+
+                        // 2. Combo Chart: Show ONLY 9:30-4:00 (Session)
+                        const sessionPoints = allPoints.filter(p => p.x >= marketOpen.toMillis());
+                        chartCombo.data.datasets[1].data = sessionPoints;
                         chartCombo.update();
                     }
                 } catch (e) { console.error("Poly History Error", e); }
@@ -439,7 +447,7 @@
                 if (!document.getElementById('price-spy').innerHTML.includes(status)) {
                     document.getElementById('price-spy').innerHTML += ` ${badge}`;
                 }
-                return; // Stop fetching
+                return; 
             }
 
             // A. Finnhub Live
@@ -448,14 +456,11 @@
                 const data = await res.json();
                 if (data.c) {
                     const pt = { x: now.toMillis(), y: data.c };
-                    
                     document.getElementById('price-spy').innerHTML = `$${data.c.toFixed(2)}`;
                     
-                    // Push to SPY Chart
                     chartSpy.data.datasets[0].data.push(pt);
                     chartSpy.update('none');
 
-                    // Push to Combo Chart (Dataset 0)
                     chartCombo.data.datasets[0].data.push(pt);
                     chartCombo.update('none');
                 }
@@ -464,20 +469,18 @@
             // B. Polymarket Live
             if (POLY_TOKEN_ID) {
                 try {
-                    // Get Midpoint Price
                     const res = await fetch(`https://clob.polymarket.com/midpoint?token_id=${POLY_TOKEN_ID}`);
                     const data = await res.json();
                     if (data.mid) {
-                        const priceVal = parseFloat(data.mid) * 100; // 0.99 -> 99
+                        const priceVal = parseFloat(data.mid) * 100; 
                         const pt = { x: now.toMillis(), y: priceVal };
 
                         document.getElementById('price-poly').innerHTML = `${priceVal.toFixed(1)}%`;
 
-                        // Push to Poly Chart
+                        // Push to Both Charts
                         chartPoly.data.datasets[0].data.push(pt);
                         chartPoly.update('none');
 
-                        // Push to Combo Chart (Dataset 1)
                         chartCombo.data.datasets[1].data.push(pt);
                         chartCombo.update('none');
                     }
@@ -510,17 +513,9 @@
         window.onload = async function() {
             console.log("Initializing Dashboard...");
             initCharts();
-            
-            // 1. Find the Polymarket ID first
             await findPolymarketToken();
-            
-            // 2. Load History
             await loadHistory();
-            
-            // 3. Load Excel
             loadExcel();
-
-            // 4. Start Loop
             setInterval(fetchLiveUpdates, 2000);
         };
     </script>
