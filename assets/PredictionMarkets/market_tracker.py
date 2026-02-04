@@ -51,7 +51,7 @@ def fetch_polymarket_data():
             "Best Ask": m.get("bestAsk", 0),
             "Spread": m.get("spread", 0),
             "Liquidity": m.get("liquidity", 0),
-            "24 Hour Volume": m.get("volume24hr", 0)
+            "Volume": m.get("volume", 0)
         }]
         return pd.DataFrame(data)
     except Exception as e:
