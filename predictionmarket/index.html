@@ -69,6 +69,26 @@
         border-radius: var(--radius-md); 
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
     }
+
+    .status-message {
+        text-align: center;
+        padding: 10px;
+        margin: 10px 0;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+
+    .status-message.error {
+        background-color: #fee;
+        color: #c33;
+        border: 1px solid #fcc;
+    }
+
+    .status-message.success {
+        background-color: #efe;
+        color: #3c3;
+        border: 1px solid #cfc;
+    }
   </style>
 </head>
 
@@ -114,6 +134,8 @@
             <p class="status--info">Automated Data Fetching (Updated every 30 mins)</p>
         </div>
         
+        <div id="status-container"></div>
+        
         <div class="chart-container">
             <canvas id="liveMarketChart"></canvas>
         </div>
@@ -130,9 +152,16 @@
     </section>
 
     <script>
-        const FINNHUB_API_KEY = 'd61qcv1r01qgcobqh8k0d61qcv1r01qgcobqh8kg';
         const SERIES_SLUG = 'spx-daily-up-or-down';
         let currentPolyTokenId = null;
+
+        function showStatus(message, type = 'success') {
+            const container = document.getElementById('status-container');
+            container.innerHTML = `<div class="status-message ${type}">${message}</div>`;
+            setTimeout(() => {
+                container.innerHTML = '';
+            }, 5000);
+        }
 
         const ctx = document.getElementById('liveMarketChart').getContext('2d');
         const chart = new Chart(ctx, {
@@ -246,88 +275,130 @@
             }
         });
 
-        async function fetchHistoricalData(tokenId) {
+        async function fetchSPYData() {
             try {
-                const now = Math.floor(Date.now() / 1000);
-                const startOfDay = Math.floor(new Date().setHours(0,0,0,0) / 1000);
-
-                const spxUrl = `https://finnhub.io/api/v1/stock/candle?symbol=SPY&resolution=5&from=${startOfDay}&to=${now}&token=${FINNHUB_API_KEY}`;
-                const polyUrl = `https://clob.polymarket.com/prices-history?market=${tokenId}&interval=all&fidelity=1`;
-
-                console.log('Fetching data...');
-                const [spxRes, polyRes] = await Promise.all([
-                    fetch(spxUrl).then(r => r.json()),
-                    fetch(polyUrl).then(r => r.json())
-                ]);
-
-                console.log('SPX Response:', spxRes);
-                console.log('Poly Response:', polyRes);
-
-                if (spxRes.s === 'ok' && spxRes.t && spxRes.t.length > 0) {
-                    chart.data.datasets[0].data = spxRes.t.map((t, i) => ({ 
-                        x: t * 1000, 
-                        y: spxRes.c[i] 
-                    }));
-                    console.log(`Loaded ${spxRes.t.length} S&P 500 data points`);
-                } else {
-                    console.warn('No S&P 500 data available');
+                console.log('Fetching SPY data from Yahoo Finance...');
+                
+                // Yahoo Finance API - gets today's 5-minute interval data
+                const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/SPY?interval=5m&range=1d';
+                
+                const response = await fetch(yahooUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Yahoo Finance API returned ${response.status}`);
                 }
-
-                if (polyRes.history && polyRes.history.length > 0) {
-                    chart.data.datasets[1].data = polyRes.history
-                        .filter(pt => pt.t >= startOfDay)
-                        .map(pt => ({ 
-                            x: pt.t * 1000, 
-                            y: parseFloat(pt.p) 
-                        }));
-                    console.log(`Loaded ${chart.data.datasets[1].data.length} Polymarket data points`);
-                } else {
-                    console.warn('No Polymarket data available');
+                
+                const data = await response.json();
+                console.log('Yahoo Finance response:', data);
+                
+                const result = data.chart.result[0];
+                const timestamps = result.timestamp;
+                const quotes = result.indicators.quote[0];
+                
+                if (!timestamps || timestamps.length === 0) {
+                    console.warn('No SPY data available');
+                    showStatus('No S&P 500 data available for today', 'error');
+                    return;
                 }
-
+                
+                // Map to chart format (close prices)
+                chart.data.datasets[0].data = timestamps.map((t, i) => ({
+                    x: t * 1000, // Convert to milliseconds
+                    y: quotes.close[i]
+                })).filter(point => point.y !== null); // Remove null values
+                
+                console.log(`Loaded ${chart.data.datasets[0].data.length} SPY data points`);
+                showStatus(`Loaded ${chart.data.datasets[0].data.length} S&P 500 data points`, 'success');
+                
                 chart.update();
                 
-                if (chart.data.datasets[0].data.length === 0 && chart.data.datasets[1].data.length === 0) {
-                    console.error('No data loaded for either dataset');
+            } catch (error) {
+                console.error('SPY fetch error:', error);
+                showStatus(`Error loading S&P 500 data: ${error.message}`, 'error');
+            }
+        }
+
+        async function fetchPolymarketData(tokenId) {
+            try {
+                console.log('Fetching Polymarket data...');
+                
+                const startOfDay = Math.floor(new Date().setHours(0,0,0,0) / 1000);
+                const polyUrl = `https://clob.polymarket.com/prices-history?market=${tokenId}&interval=all&fidelity=1`;
+                
+                const response = await fetch(polyUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Polymarket API returned ${response.status}`);
                 }
-            } catch (e) {
-                console.error("Historical fetch error:", e);
+                
+                const data = await response.json();
+                console.log('Polymarket response:', data);
+                
+                if (!data.history || data.history.length === 0) {
+                    console.warn('No Polymarket data available');
+                    showStatus('No Polymarket data available', 'error');
+                    return;
+                }
+                
+                // Filter for today's data only
+                chart.data.datasets[1].data = data.history
+                    .filter(pt => pt.t >= startOfDay)
+                    .map(pt => ({ 
+                        x: pt.t * 1000, 
+                        y: parseFloat(pt.p) 
+                    }));
+                
+                console.log(`Loaded ${chart.data.datasets[1].data.length} Polymarket data points`);
+                showStatus(`Loaded ${chart.data.datasets[1].data.length} Polymarket data points`, 'success');
+                
+                chart.update();
+                
+            } catch (error) {
+                console.error('Polymarket fetch error:', error);
+                showStatus(`Error loading Polymarket data: ${error.message}`, 'error');
             }
         }
 
         async function initPolymarket() {
-            const nyTime = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
-            const nyHours = nyTime.getHours();
-            const nyMinutes = nyTime.getMinutes();
-            const isAfterOpen = (nyHours > 9 || (nyHours === 9 && nyMinutes >= 30));
-
-            if (!isAfterOpen) {
-                console.log("Market not yet open in EST. Showing previous data.");
-            }
-            
             try {
+                console.log('Finding active Polymarket event...');
+                
                 const gammaUrl = `https://gamma-api.polymarket.com/events?series_slug=${SERIES_SLUG}&active=true&closed=false&limit=1`;
-                console.log('Fetching Polymarket event...');
                 const response = await fetch(gammaUrl);
+                
+                if (!response.ok) {
+                    throw new Error(`Polymarket Gamma API returned ${response.status}`);
+                }
+                
                 const events = await response.json();
-
-                console.log('Events response:', events);
+                console.log('Polymarket events:', events);
 
                 if (!events || events.length === 0) {
-                    console.error('No active events found');
-                    return;
+                    throw new Error('No active Polymarket events found');
                 }
 
                 const latestEvent = events[0];
                 const latestMarket = latestEvent.markets[0];
                 currentPolyTokenId = latestMarket.clobTokenIds[0];
 
-                console.log('Found token ID:', currentPolyTokenId);
+                console.log('Found Polymarket token ID:', currentPolyTokenId);
 
-                await fetchHistoricalData(currentPolyTokenId);
+                // Fetch both datasets
+                await Promise.all([
+                    fetchSPYData(),
+                    fetchPolymarketData(currentPolyTokenId)
+                ]);
 
-                if (isAfterOpen) {
+                // Set up WebSocket for live Polymarket updates
+                const nyTime = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
+                const nyHours = nyTime.getHours();
+                const nyMinutes = nyTime.getMinutes();
+                const isMarketOpen = (nyHours > 9 || (nyHours === 9 && nyMinutes >= 30)) && nyHours < 16;
+
+                if (isMarketOpen) {
+                    console.log('Market is open, connecting to WebSocket...');
                     const polyWS = new WebSocket('wss://clob.polymarket.com/ws/market');
+                    
                     polyWS.onopen = () => {
                         console.log('WebSocket connected');
                         polyWS.send(JSON.stringify({
@@ -351,9 +422,13 @@
                     polyWS.onerror = (error) => {
                         console.error('WebSocket error:', error);
                     };
+                } else {
+                    console.log('Market is closed, showing historical data only');
                 }
+                
             } catch (error) {
-                console.error("Init Error:", error);
+                console.error('Init error:', error);
+                showStatus(`Initialization error: ${error.message}`, 'error');
             }
         }
 
@@ -366,7 +441,8 @@
                 const htmlTable = XLSX.utils.sheet_to_html(workbook.Sheets[workbook.SheetNames[0]]);
                 document.getElementById('excel-data').innerHTML = htmlTable;
             } catch (error) {
-                console.error("Excel Error:", error);
+                console.error('Excel error:', error);
+                document.getElementById('excel-data').innerHTML = '<div class="loading-spinner" style="color: #c33;">Error loading Excel data</div>';
             }
         }
 
