@@ -220,6 +220,19 @@
 
         // --- 4. DYNAMIC TRADING DISCOVERY & LIVE UPDATES ---
         async function initPolymarket() {
+            // Get current time in New York (EST)
+            const nyTime = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
+            const nyHours = nyTime.getHours();
+            const nyMinutes = nyTime.getMinutes();
+
+            // Market Open check: 9:30 AM EST
+            const isAfterOpen = (nyHours > 9 || (nyHours === 9 && nyMinutes >= 30));
+
+            if (!isAfterOpen) {
+                console.log("Market is not yet open in EST. Showing previous data.");
+                // We still run the historical fetch so the graph isn't empty
+            }
+            
             try {
                 const gammaUrl = `https://gamma-api.polymarket.com/events?series_slug=${SERIES_SLUG}&active=true&closed=false&limit=1`;
                 const response = await fetch(gammaUrl);
@@ -231,26 +244,28 @@
                 const latestMarket = latestEvent.markets[0];
                 currentPolyTokenId = latestMarket.clobTokenIds[0];
 
-                // Load 1-day historical data first
+                // Fetch 1-day historical data
                 await fetchHistoricalData(currentPolyTokenId);
 
-                // Connect WebSocket for live tail-end updates
-                const polyWS = new WebSocket('wss://clob.polymarket.com/ws/market');
-                polyWS.onopen = () => {
-                    polyWS.send(JSON.stringify({
-                        type: 'subscribe',
-                        assets_ids: [currentPolyTokenId],
-                        channels: ['market']
-                    }));
-                };
+                // Only start live WebSocket updates if the market is actually open
+                if (isAfterOpen) {
+                    const polyWS = new WebSocket('wss://clob.polymarket.com/ws/market');
+                    polyWS.onopen = () => {
+                        polyWS.send(JSON.stringify({
+                            type: 'subscribe',
+                            assets_ids: [currentPolyTokenId],
+                            channels: ['market']
+                        }));
+                    };
 
-                polyWS.onmessage = (event) => {
-                    const msg = JSON.parse(event.data);
-                    if (msg.price && msg.asset_id === currentPolyTokenId) {
-                        chart.data.datasets[1].data.push({ x: Date.now(), y: parseFloat(msg.price) });
-                        chart.update('quiet');
-                    }
-                };
+                    polyWS.onmessage = (event) => {
+                        const msg = JSON.parse(event.data);
+                        if (msg.price && msg.asset_id === currentPolyTokenId) {
+                            chart.data.datasets[1].data.push({ x: Date.now(), y: parseFloat(msg.price) });
+                            chart.update('quiet');
+                        }
+                    };
+                }
             } catch (error) {
                 console.error("Init Error:", error);
             }
