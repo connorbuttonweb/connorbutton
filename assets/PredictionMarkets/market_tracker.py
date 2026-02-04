@@ -5,7 +5,7 @@ from datetime import datetime
 
 def fetch_polymarket_data():
     """Fetches data for a specific target market using its unique Market ID."""
-    target_id = "1325810" 
+    target_id = "1333010" 
     
     # Use the Gamma API direct Market ID endpoint
     url = f"https://gamma-api.polymarket.com/markets/{target_id}"
