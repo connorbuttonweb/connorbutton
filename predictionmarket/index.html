@@ -152,6 +152,8 @@
     </section>
 
     <script>
+        // CORS Proxy to bypass browser restrictions
+        const CORS_PROXY = 'https://corsproxy.io/?';
         const SERIES_SLUG = 'spx-daily-up-or-down';
         let currentPolyTokenId = null;
 
@@ -279,8 +281,7 @@
             try {
                 console.log('Fetching SPY data from Yahoo Finance...');
                 
-                // Yahoo Finance API - gets today's 5-minute interval data
-                const yahooUrl = 'https://query1.finance.yahoo.com/v8/finance/chart/SPY?interval=5m&range=1d';
+                const yahooUrl = `${CORS_PROXY}https://query1.finance.yahoo.com/v8/finance/chart/SPY?interval=5m&range=1d`;
                 
                 const response = await fetch(yahooUrl);
                 
@@ -301,11 +302,10 @@
                     return;
                 }
                 
-                // Map to chart format (close prices)
                 chart.data.datasets[0].data = timestamps.map((t, i) => ({
-                    x: t * 1000, // Convert to milliseconds
+                    x: t * 1000,
                     y: quotes.close[i]
-                })).filter(point => point.y !== null); // Remove null values
+                })).filter(point => point.y !== null);
                 
                 console.log(`Loaded ${chart.data.datasets[0].data.length} SPY data points`);
                 showStatus(`Loaded ${chart.data.datasets[0].data.length} S&P 500 data points`, 'success');
@@ -323,7 +323,7 @@
                 console.log('Fetching Polymarket data...');
                 
                 const startOfDay = Math.floor(new Date().setHours(0,0,0,0) / 1000);
-                const polyUrl = `https://clob.polymarket.com/prices-history?market=${tokenId}&interval=all&fidelity=1`;
+                const polyUrl = `${CORS_PROXY}https://clob.polymarket.com/prices-history?market=${tokenId}&interval=all&fidelity=1`;
                 
                 const response = await fetch(polyUrl);
                 
@@ -340,7 +340,6 @@
                     return;
                 }
                 
-                // Filter for today's data only
                 chart.data.datasets[1].data = data.history
                     .filter(pt => pt.t >= startOfDay)
                     .map(pt => ({ 
@@ -363,7 +362,7 @@
             try {
                 console.log('Finding active Polymarket event...');
                 
-                const gammaUrl = `https://gamma-api.polymarket.com/events?series_slug=${SERIES_SLUG}&active=true&closed=false&limit=1`;
+                const gammaUrl = `${CORS_PROXY}https://gamma-api.polymarket.com/events?series_slug=${SERIES_SLUG}&active=true&closed=false&limit=1`;
                 const response = await fetch(gammaUrl);
                 
                 if (!response.ok) {
@@ -383,13 +382,11 @@
 
                 console.log('Found Polymarket token ID:', currentPolyTokenId);
 
-                // Fetch both datasets
                 await Promise.all([
                     fetchSPYData(),
                     fetchPolymarketData(currentPolyTokenId)
                 ]);
 
-                // Set up WebSocket for live Polymarket updates
                 const nyTime = new Date(new Date().toLocaleString("en-US", {timeZone: "America/New_York"}));
                 const nyHours = nyTime.getHours();
                 const nyMinutes = nyTime.getMinutes();
