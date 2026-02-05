@@ -65,6 +65,7 @@
     .live-price {
         font-weight: 700;
         font-size: 18px;
+        transition: color 0.3s ease;
     }
 
     .canvas-wrapper {
@@ -96,6 +97,7 @@
         border-radius: 8px;
         margin-top: 30px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+        min-height: 100px;
     }
 
     table {
@@ -140,6 +142,7 @@
         color: #c33;
         border: 1px solid #fcc;
         border-radius: 4px;
+        margin: 10px;
     }
 
     /* Responsive adjustments */
@@ -195,22 +198,25 @@
             <div class="chart-card">
                 <div class="card-header">
                     <span class="card-title">S&P 500 (SPY) <span class="badge badge-spy">EQUITY</span></span>
-                    <span id="price-spy" class="live-price">Loading...</span>
+                    <span id="price-spy" class="live-price" style="font-size: 14px; color: #666;">Waiting...</span>
                 </div>
                 <div class="canvas-wrapper"><canvas id="spyChart"></canvas></div>
             </div>
 
             <div class="chart-card">
                 <div class="card-header">
-                    <span class="card-title">Market: "SPX Up or Down" <span class="badge badge-poly">PROBABILITY</span></span>
-                    <span id="price-poly" class="live-price">Loading...</span>
+                    <span class="card-title">Market Probability <span class="badge badge-poly">PROBABILITY</span></span>
+                    <span id="price-poly" class="live-price" style="font-size: 14px; color: #666;">Waiting...</span>
                 </div>
                 <div class="canvas-wrapper"><canvas id="polyChart"></canvas></div>
             </div>
 
             <div class="chart-card large dashboard-full-width">
                 <div class="card-header">
-                    <span class="card-title">Live Correlation Dashboard <span class="badge badge-live">LIVE</span></span>
+                    <div>
+                        <span class="card-title">Live Correlation Dashboard <span class="badge badge-live">LIVE</span></span>
+                        <span id="status-combo" style="font-size: 12px; color: #e67e22; margin-left: 10px; font-weight: 600;">Initializing...</span>
+                    </div>
                     <div style="font-size: 12px; color: #666;">
                         <i class="fas fa-chart-line"></i> Left Axis: SPY ($) &nbsp;|&nbsp; 
                         <i class="fas fa-percent"></i> Right Axis: Probability (%)
@@ -235,9 +241,7 @@
         // ==========================================
         // CONFIGURATION
         // ==========================================
-        // !!! PASTE YOUR CLOUDFLARE URL HERE !!!
         const WORKER_URL = 'https://market-proxy.buttonconnor12.workers.dev'; 
-        
         const SYMBOL = 'SPY'; 
         let POLY_TOKEN_ID = null; 
         // ==========================================
@@ -250,8 +254,20 @@
         const marketOpen = nowNY.set({ hour: 9, minute: 30, second: 0, millisecond: 0 });
         const marketClose = nowNY.set({ hour: 16, minute: 0, second: 0, millisecond: 0 });
 
+        // Helper to update status text safely for troubleshooting
+        function updateStatus(elementId, message, isError = false) {
+            const el = document.getElementById(elementId);
+            if (el) {
+                el.innerHTML = message; // Use innerHTML to support badges
+                el.style.color = isError ? 'red' : '#666'; // Red if error, gray if loading
+                el.style.fontSize = isError ? '12px' : '14px';
+            }
+            console.log(`[${elementId}] ${message}`);
+        }
+
         function initCharts() {
-            // Option A: Fixed Session Scale (for SPY & Combo)
+            updateStatus('status-combo', 'Building Charts...');
+            
             const sessionScales = {
                 x: {
                     type: 'time',
@@ -262,29 +278,16 @@
                 }
             };
 
-            // Option B: Dynamic Scale (for Polymarket Top-Right)
-            const dynamicScales = {
-                x: {
-                    type: 'time',
-                    time: { unit: 'hour', displayFormats: { hour: 'h:mm a' } },
-                    title: { display: true, text: 'Market Duration' }
-                }
-            };
-
             const commonOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
-                spanGaps: true, // Helps if there are nulls in your history
-                animation: false, // Turn off for live dashboards to prevent "ghosting"
+                spanGaps: true, 
+                animation: false, 
                 scales: {
                     x: {
                         type: 'time',
-                        // Change 'data' to 'ticks' if points are still missing
                         bounds: 'data', 
-                        time: {
-                            // Ensure unit is forced to help Chart.js calculate the scale
-                            unit: 'hour' 
-                        }
+                        time: { unit: 'hour' }
                     }
                 }
             };
@@ -300,7 +303,7 @@
             chartPoly = new Chart(document.getElementById('polyChart'), {
                 type: 'line',
                 data: { datasets: [{ label: 'Probability (Yes)', borderColor: '#E91E63', borderWidth: 2, pointRadius: 0, tension: 0.1, data: [] }]},
-                options: { ...commonOptions, scales: { x: dynamicScales.x, y: { min: 0, max: 100, title: {display:true, text:'Chance (%)'} } } }
+                options: { ...commonOptions, scales: { x: { type: 'time', time: { unit: 'hour' }, title: { display: true, text: 'Market Duration' } }, y: { min: 0, max: 100, title: {display:true, text:'Chance (%)'} } } }
             });
 
             // Chart 3: Combo
@@ -321,34 +324,36 @@
                     }
                 }
             });
+            
+            updateStatus('status-combo', 'Charts Ready. Waiting for Data...');
         }
 
         async function findPolymarketToken() {
+            updateStatus('price-poly', 'Generating Slug...');
             const month = nowNY.toFormat('MMMM').toLowerCase();
             const day = nowNY.toFormat('d');
             const year = nowNY.toFormat('yyyy');
             const slug = `spx-up-or-down-on-${month}-${day}-${year}`;
             
-            console.log("Searching slug:", slug);
+            updateStatus('price-poly', `Searching: ${slug}...`);
 
             try {
-                // Call the Worker, which now safely extracts the ID
+                // Call Worker
                 const response = await fetch(`${WORKER_URL}/poly-event?slug=${slug}`);
+                if (!response.ok) throw new Error("Worker Network Error");
+                
                 const data = await response.json();
 
                 if (data.id) {
                     POLY_TOKEN_ID = data.id;
-                    console.log("Worker found ID:", POLY_TOKEN_ID);
-                    document.getElementById('price-poly').innerText = "Market Found";
+                    updateStatus('price-poly', 'Token Found. Fetching History...');
                     return true;
                 } else {
-                    console.warn("Worker returned no ID:", data);
-                    document.getElementById('price-poly').innerText = "Market Not Found";
+                    updateStatus('price-poly', 'Error: Market Not Found', true);
                     return false;
                 }
             } catch (e) {
-                console.error("Discovery Error:", e);
-                document.getElementById('price-poly').innerText = "Connection Error";
+                updateStatus('price-poly', `Error: ${e.message}`, true);
                 return false;
             }
         }
@@ -359,44 +364,66 @@
 
             // A. SPY via Worker
             try {
+                updateStatus('price-spy', 'Fetching SPY History...');
                 const url = `${WORKER_URL}/spy-history?from=${fromTime}&to=${toTime}`;
                 const res = await fetch(url);
+                if(!res.ok) throw new Error("SPY Network Error");
+                
                 const data = await res.json();
                 
-                if (data.s === 'ok') {
+                if (data.s === 'ok' && data.t) {
                     const points = data.t
                         .map((t, i) => ({ x: t * 1000, y: data.c[i] }))
                         .filter(p => p.x >= marketOpen.toMillis());
                     
                     chartSpy.data.datasets[0].data = points;
                     chartCombo.data.datasets[0].data = points;
-                    console.log(points)
                     chartSpy.update();
                     chartCombo.update();
+                    
+                    // Show last price to confirm load
+                    const lastPrice = points[points.length-1]?.y || 0;
+                    const el = document.getElementById('price-spy');
+                    el.innerText = `$${lastPrice.toFixed(2)}`;
+                    el.style.color = '#333'; 
+                    el.style.fontSize = '18px';
+                } else {
+                    updateStatus('price-spy', 'Error: No Candle Data', true);
                 }
-            } catch (e) { console.error("SPY History Error", e); }
+            } catch (e) { 
+                updateStatus('price-spy', `SPY Error: ${e.message}`, true); 
+            }
 
             // B. Polymarket via Worker
             if (POLY_TOKEN_ID) {
                 try {
+                    updateStatus('price-poly', 'Fetching Poly History...');
                     const url = `${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}`;
                     const res = await fetch(url);
+                    if(!res.ok) throw new Error("Poly Network Error");
+
                     const data = await res.json();
                     
                     if (data && data.history) {
                         const allPoints = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
                         
-                        // Full History for Top Right
                         chartPoly.data.datasets[0].data = allPoints;
                         chartPoly.update();
 
-                        // Session Only for Combo
                         const sessionPoints = allPoints.filter(p => p.x >= marketOpen.toMillis());
                         chartCombo.data.datasets[1].data = sessionPoints;
                         chartCombo.update();
+                        
+                        updateStatus('price-poly', 'History Loaded');
+                    } else {
+                        updateStatus('price-poly', 'Error: No History Data', true);
                     }
-                } catch (e) { console.error("Poly History Error", e); }
+                } catch (e) { 
+                    updateStatus('price-poly', `Poly Error: ${e.message}`, true); 
+                }
             }
+            
+            updateStatus('status-combo', 'History Sync Complete. Starting Live...');
         }
 
         async function fetchLiveUpdates() {
@@ -404,10 +431,11 @@
             
             if (now < marketOpen || now > marketClose) {
                 const status = (now < marketOpen) ? "PRE-MARKET" : "CLOSED";
-                const badge = `<span class="badge badge-closed">${status}</span>`;
+                // Only update text if needed to avoid flickering
                 if (!document.getElementById('price-spy').innerHTML.includes(status)) {
-                    document.getElementById('price-spy').innerHTML += ` ${badge}`;
+                    document.getElementById('price-spy').innerHTML += ` <span class="badge badge-closed">${status}</span>`;
                 }
+                updateStatus('status-combo', `Market ${status}`);
                 return; 
             }
 
@@ -417,14 +445,21 @@
                 const data = await res.json();
                 if (data.c) {
                     const pt = { x: now.toMillis(), y: data.c };
-                    document.getElementById('price-spy').innerHTML = `$${data.c.toFixed(2)}`;
                     
+                    // Update UI
+                    const el = document.getElementById('price-spy');
+                    el.innerText = `$${data.c.toFixed(2)}`;
+                    el.style.color = '#333';
+                    el.style.fontSize = '18px';
+
                     chartSpy.data.datasets[0].data.push(pt);
                     chartSpy.update('none');
                     chartCombo.data.datasets[0].data.push(pt);
                     chartCombo.update('none');
                 }
-            } catch(e) {}
+            } catch(e) {
+                console.log("SPY Live fetch error (ignoring for UI stability)");
+            }
 
             // B. Polymarket Live via Worker
             if (POLY_TOKEN_ID) {
@@ -435,34 +470,58 @@
                         const priceVal = parseFloat(data.mid) * 100; 
                         const pt = { x: now.toMillis(), y: priceVal };
 
-                        document.getElementById('price-poly').innerHTML = `${priceVal.toFixed(1)}%`;
+                        // Update UI
+                        const el = document.getElementById('price-poly');
+                        el.innerText = `${priceVal.toFixed(1)}%`;
+                        el.style.color = '#333';
+                        el.style.fontSize = '18px';
                         
                         chartPoly.data.datasets[0].data.push(pt);
                         chartPoly.update('none');
                         chartCombo.data.datasets[1].data.push(pt);
                         chartCombo.update('none');
                     }
-                } catch(e) {}
+                } catch(e) {
+                    console.log("Poly Live fetch error (ignoring for UI stability)");
+                }
             }
+            
+            // Pulse the combo status so we know it's alive
+            const timeStr = now.toFormat('h:mm:ss a');
+            updateStatus('status-combo', `Live Data Active (Last: ${timeStr})`);
+            document.getElementById('status-combo').style.color = '#1e8e3e';
         }
 
         async function loadExcel() {
              try {
+                updateStatus('excel-data', '<div class="loading-spinner"><i class="fas fa-circle-notch fa-spin"></i> Downloading Excel...</div>');
                 const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
                 if(response.ok) {
                     const ab = await response.arrayBuffer();
                     const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
                     document.getElementById('excel-data').innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
+                } else {
+                    updateStatus('excel-data', '<div class="status-message error">Excel file not found</div>');
                 }
-             } catch(e) {}
+             } catch(e) {
+                 updateStatus('excel-data', '<div class="status-message error">Failed to parse Excel</div>');
+             }
         }
 
         window.onload = async function() {
             console.log("Initializing Dashboard...");
             initCharts();
+            
+            // 1. Find Token
+            await findPolymarketToken();
+            
+            // 2. Load History
             await loadHistory();
-            findPolymarketToken();
+            
+            // 3. Load Excel
             loadExcel();
+            
+            // 4. Loop
             setInterval(fetchLiveUpdates, 2000);
         };
     </script>
