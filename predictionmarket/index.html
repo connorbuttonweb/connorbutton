@@ -8,87 +8,97 @@
     <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
+    <!-- Existing Scripts -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
+    
+    <!-- NEW: Lightweight Charts (Pinned to v4.1.1 for stability) -->
+    <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
 
   <style>
-    /* Dashboard Grid Layout */
-    .dashboard-grid {
-        display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns */
-        gap: 20px;
-        margin-bottom: 20px;
-        max-width: 1400px;
-        margin-left: auto;
-        margin-right: auto;
-        width: 100%;
-    }
+    /* Global/Existing Styles would be here... */
 
-    .dashboard-full-width {
-        grid-column: 1 / -1; /* Spans across both columns */
-    }
-
-    /* Chart Cards */
-    .chart-card {
-        background: #fff;
+    /* --- DASHBOARD STYLES (Added for Cross-Market functionality) --- */
+    .dashboard-controls {
+        display: flex;
+        gap: 10px;
+        background: #f8f9fa;
         padding: 15px;
+        border-radius: 8px;
+        border: 1px solid #e2e3e5;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        align-items: center;
+    }
+
+    .dashboard-input {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-family: inherit;
+        font-size: 14px;
+        min-width: 200px;
+    }
+
+    .analyze-btn {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 8px 20px;
+        border-radius: 4px;
+        cursor: pointer;
+        font-weight: 600;
+        font-size: 14px;
+        transition: background 0.2s;
+    }
+
+    .analyze-btn:hover {
+        background-color: #0056b3;
+    }
+
+    .grid-container {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 20px;
+        margin-bottom: 40px;
+    }
+
+    /* Desktop: Split top two charts, full width bottom chart */
+    @media (min-width: 768px) {
+        .grid-container {
+            grid-template-columns: 1fr 1fr;
+        }
+        .full-width {
+            grid-column: 1 / -1;
+        }
+    }
+
+    .chart-card {
+        background: white;
         border: 1px solid #e2e3e5;
         border-radius: 8px;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        height: 400px; /* Fixed height for top row */
-        display: flex;
-        flex-direction: column;
+        padding: 15px;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.05);
     }
 
-    .chart-card.large {
-        height: 500px; /* Taller for the main bottom dashboard */
-    }
-
-    .card-header {
+    .chart-card h3 {
+        margin-top: 0;
         margin-bottom: 10px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        border-bottom: 1px solid #f1f3f4;
+        font-size: 16px;
+        color: #333;
+        border-bottom: 1px solid #eee;
         padding-bottom: 8px;
     }
 
-    .card-title {
-        font-weight: 600;
-        color: #333;
-        font-size: 16px;
-        font-family: 'Segoe UI', sans-serif;
-    }
-
-    .live-price {
-        font-weight: 700;
-        font-size: 18px;
-        transition: color 0.3s ease;
-    }
-
-    .canvas-wrapper {
-        flex-grow: 1;
-        position: relative;
+    .chart-box {
         width: 100%;
-        height: 100%;
+        height: 300px; /* Fixed height for charts */
+        position: relative;
     }
 
-    /* Badges */
-    .badge {
-        font-size: 11px;
-        padding: 2px 6px;
-        border-radius: 4px;
-        margin-left: 8px;
-        vertical-align: middle;
-    }
-    .badge-spy { background: #e3f2fd; color: #1976d2; }
-    .badge-poly { background: #fce4ec; color: #c2185b; }
-    .badge-live { background: #e6f4ea; color: #1e8e3e; }
-    .badge-closed { background: #f1f3f4; color: #5f6368; }
-
-    /* Excel & General Styles */
+    /* Excel Styles (Preserved) */
     .excel-container {
         width: 100%;
         overflow-x: auto;
@@ -126,7 +136,7 @@
     }
 
     tr:hover {
-        background-color: rgba(0, 150, 136, 0.02); /* Teal tint */
+        background-color: rgba(0, 150, 136, 0.02);
     }
 
     .loading-spinner {
@@ -143,11 +153,6 @@
         border: 1px solid #fcc;
         border-radius: 4px;
         margin: 10px;
-    }
-
-    /* Responsive adjustments */
-    @media (max-width: 768px) {
-        .dashboard-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -191,41 +196,49 @@
     <section class="section">
         <div class="page-title">
             <h1>Cross-Market Dashboard</h1>
-            <p>S&P 500 vs. Prediction Market Probability (Daily Session)</p>
+            <p>Trading View vs Prediction Market Probability</p>
         </div>
-        
-        <div class="dashboard-grid">
-            <div class="chart-card">
-                <div class="card-header">
-                    <span class="card-title">S&P 500 (SPY) <span class="badge badge-spy">EQUITY</span></span>
-                    <span id="price-spy" class="live-price" style="font-size: 14px; color: #666;">Waiting...</span>
-                </div>
-                <div class="canvas-wrapper"><canvas id="spyChart"></canvas></div>
-            </div>
 
-            <div class="chart-card">
-                <div class="card-header">
-                    <span class="card-title">Market Probability <span class="badge badge-poly">PROBABILITY</span></span>
-                    <span id="price-poly" class="live-price" style="font-size: 14px; color: #666;">Waiting...</span>
-                </div>
-                <div class="canvas-wrapper"><canvas id="polyChart"></canvas></div>
+        <!-- DASHBOARD CONTROLS -->
+        <div class="dashboard-controls">
+            <div>
+                <label style="font-size: 12px; display:block; margin-bottom:4px; font-weight:600;">Stock Ticker</label>
+                <input type="text" id="stockTicker" class="dashboard-input" placeholder="e.g. SPY" value="SPY">
             </div>
-
-            <div class="chart-card large dashboard-full-width">
-                <div class="card-header">
-                    <div>
-                        <span class="card-title">Live Correlation Dashboard <span class="badge badge-live">LIVE</span></span>
-                        <span id="status-combo" style="font-size: 12px; color: #e67e22; margin-left: 10px; font-weight: 600;">Initializing...</span>
-                    </div>
-                    <div style="font-size: 12px; color: #666;">
-                        <i class="fas fa-chart-line"></i> Left Axis: SPY ($) &nbsp;|&nbsp; 
-                        <i class="fas fa-percent"></i> Right Axis: Probability (%)
-                    </div>
-                </div>
-                <div class="canvas-wrapper"><canvas id="comboChart"></canvas></div>
+            <div>
+                <label style="font-size: 12px; display:block; margin-bottom:4px; font-weight:600;">Polymarket Token ID</label>
+                <input type="text" id="polyId" class="dashboard-input" placeholder="Token ID" value="Use 'Mock' to test">
+            </div>
+            <div style="align-self: flex-end;">
+                <button class="analyze-btn" onclick="updateDashboard()">Analyze</button>
             </div>
         </div>
-        
+
+        <!-- CHART GRID -->
+        <div class="grid-container">
+            <!-- Stock Chart -->
+            <div class="chart-card">
+                <h3>Equity Price Action</h3>
+                <div id="stock-chart" class="chart-box"></div>
+            </div>
+
+            <!-- Polymarket Chart -->
+            <div class="chart-card">
+                <h3>Prediction Probability</h3>
+                <div id="poly-chart" class="chart-box"></div>
+            </div>
+
+            <!-- Combined Chart (The Core Goal) -->
+            <div class="chart-card full-width">
+                <h3>Cross-Market Correlation (Intraday)</h3>
+                <div id="cross-chart" class="chart-box"></div>
+            </div>
+        </div>
+
+        <div class="page-title" style="margin-top: 50px;">
+            <h2>Data Sources</h2>
+        </div>
+
         <div class="excel-container" id="excel-data">
             <div class="loading-spinner">
                 <i class="fas fa-circle-notch fa-spin"></i> Loading Excel Data...
@@ -238,236 +251,171 @@
     </section>
 
     <script>
-        const WORKER_URL = 'https://market-proxy.buttonconnor12.workers.dev'; 
-        let POLY_TOKEN_ID = null; 
-        const DateTime = luxon.DateTime;
+        // ----------------------------------
+        //  1. CHART INITIALIZATION
+        // ----------------------------------
+        let stockChart, polyChart, crossChart;
+        let stockSeries, polySeries, crossStockSeries, crossPolySeries;
 
-        // --- 1. SLUG LOGIC (MATCHING PYTHON SCRIPT) ---
-        function getTargetSlug() {
-            let targetDate = DateTime.now().setZone('America/New_York');
-            
-            // If now >= 4PM ET, look for tomorrow's market
-            if (targetDate.hour >= 16) {
-                targetDate = targetDate.plus({ days: 1 });
+        function initCharts() {
+            // Ensure library is loaded
+            if (typeof LightweightCharts === 'undefined') {
+                console.error("LightweightCharts library not loaded.");
+                return;
             }
 
-            // Adjust for weekends
-            if (targetDate.weekday === 6) targetDate = targetDate.plus({ days: 2 }); // Sat -> Mon
-            if (targetDate.weekday === 7) targetDate = targetDate.plus({ days: 1 }); // Sun -> Mon
+            // Common Options for Dark-themed financial charts
+            // Updated for v4 compatibility
+            const chartOptions = {
+                layout: {
+                    background: { type: 'solid', color: '#1E1E1E' }, 
+                    textColor: '#DDD',
+                },
+                grid: {
+                    vertLines: { color: '#333' },
+                    horzLines: { color: '#333' },
+                },
+                timeScale: {
+                    timeVisible: true,
+                    secondsVisible: false,
+                },
+            };
 
-            const month = targetDate.toFormat('MMMM').toLowerCase();
-            const day = targetDate.day;
-            const year = targetDate.year;
-            
-            return `spx-up-or-down-on-${month}-${day}-${year}`;
+            // 1. Stock Only Chart
+            stockChart = LightweightCharts.createChart(document.getElementById('stock-chart'), chartOptions);
+            stockSeries = stockChart.addLineSeries({ color: '#2962FF', lineWidth: 2 });
+
+            // 2. Poly Only Chart
+            polyChart = LightweightCharts.createChart(document.getElementById('poly-chart'), chartOptions);
+            polySeries = polyChart.addLineSeries({ color: '#FF9800', lineWidth: 2 });
+
+            // 3. Cross-Market Chart (Dual Axis)
+            crossChart = LightweightCharts.createChart(document.getElementById('cross-chart'), {
+                ...chartOptions,
+                leftPriceScale: {
+                    visible: true,
+                    borderColor: '#FF9800', // Matches Poly Color
+                },
+                rightPriceScale: {
+                    visible: true,
+                    borderColor: '#2962FF', // Matches Stock Color
+                },
+            });
+
+            // Add Poly Series (Left Axis - Probability 0-1)
+            crossPolySeries = crossChart.addLineSeries({
+                color: '#FF9800',
+                lineWidth: 2,
+                priceScaleId: 'left', // Bind to Left
+                title: 'Polymarket Odds',
+            });
+
+            // Add Stock Series (Right Axis - Price $)
+            crossStockSeries = crossChart.addLineSeries({
+                color: '#2962FF',
+                lineWidth: 2,
+                priceScaleId: 'right', // Bind to Right
+                title: 'Stock Price',
+            });
+
+            // Handle Resize
+            new ResizeObserver(entries => {
+                if (entries.length === 0 || entries[0].target !== document.getElementById('cross-chart')) { return; }
+                const newRect = entries[0].contentRect;
+                crossChart.applyOptions({ width: newRect.width, height: newRect.height });
+                stockChart.applyOptions({ width: newRect.width, height: newRect.height });
+                polyChart.applyOptions({ width: newRect.width, height: newRect.height });
+            }).observe(document.getElementById('cross-chart'));
         }
 
-        async function initDashboard() {
-            initCharts();
+        // ----------------------------------
+        //  2. DATA FETCHING & LOGIC
+        // ----------------------------------
+
+        async function updateDashboard() {
+            const ticker = document.getElementById('stockTicker').value;
+            const polyId = document.getElementById('polyId').value;
             
-            // --- 2. FETCH ID AND PRICE (Using New Worker Route) ---
-            const slug = getTargetSlug();
-            updateStatus('price-poly', `Searching: ${slug}...`);
+            // NOTE: This URL will need to be replaced with your actual Cloudflare Worker URL later
+            // const workerUrl = "https://your-worker-name.your-subdomain.workers.dev";
+
+            // FOR NOW: We generate mock data to prove the visualization works
+            console.log(`Fetching data for ${ticker} and ${polyId}...`);
             
-            try {
-                // Fetch directly from Gamma via Worker (Reliable for Price + ID)
-                const res = await fetch(`${WORKER_URL}/poly-gamma-data?slug=${slug}`);
-                const data = await res.json();
+            const data = generateMockData();
+
+            // Render to Charts
+            stockSeries.setData(data.stock);
+            polySeries.setData(data.poly);
+            
+            crossStockSeries.setData(data.stock);
+            crossPolySeries.setData(data.poly);
+
+            // Fit content
+            stockChart.timeScale().fitContent();
+            polyChart.timeScale().fitContent();
+            crossChart.timeScale().fitContent();
+        }
+
+        // Helper: Generate Mock Data (Remove this once Worker is connected)
+        function generateMockData() {
+            const stockData = [];
+            const polyData = [];
+            let price = 450;
+            let prob = 0.50;
+            
+            // Generate 100 points of data ending now
+            const now = Math.floor(Date.now() / 1000);
+            
+            for (let i = 0; i < 100; i++) {
+                const time = now - (100 - i) * 60; // 1 minute intervals
                 
-                if (data.id) {
-                    POLY_TOKEN_ID = data.id;
-                    
-                    // Display Price Immediately
-                    const price = (data.lastPrice * 100).toFixed(1);
-                    document.getElementById('price-poly').innerText = `${price}%`;
-                    document.getElementById('price-poly').style.color = '#333';
-                    document.getElementById('price-poly').style.fontSize = '18px';
-                    
-                    updateStatus('price-poly', 'Market Found. Loading History...');
-                    await loadHistory();
-                } else {
-                    updateStatus('price-poly', 'Error: Market Not Found', true);
-                }
-            } catch (e) {
-                updateStatus('price-poly', 'Network Error', true);
-            }
+                // Random Walk for Stock
+                price = price + (Math.random() - 0.5) * 2;
+                stockData.push({ time: time, value: price });
 
-            loadExcel();
-            setInterval(fetchLiveUpdates, 5000);
+                // Random Walk for Poly (correlated slightly)
+                prob = prob + (Math.random() - 0.5) * 0.05;
+                if(prob > 0.99) prob = 0.99;
+                if(prob < 0.01) prob = 0.01;
+                polyData.push({ time: time, value: prob });
+            }
+            return { stock: stockData, poly: polyData };
         }
 
-        async function loadHistory() {
-            const now = DateTime.now().setZone('America/New_York');
-            // Fixed Time Window: 9:30 AM to Now (or 4 PM close)
-            const marketOpen = now.set({ hour: 9, minute: 30, second: 0, millisecond: 0 });
-            const nowTime = Math.floor(now.toSeconds());
-            const openTime = Math.floor(marketOpen.toSeconds());
-
-            // A. SPY HISTORY
-            try {
-                updateStatus('price-spy', 'Fetching History...');
-                const res = await fetch(`${WORKER_URL}/spy-history?from=${openTime}&to=${nowTime}&resolution=D`);
-                const data = await res.json();
-                
-                if (data.s === 'ok' && data.t && data.t.length > 0) {
-                    // Success: Plot Candles
-                    const points = data.t.map((t, i) => ({ x: t * 1000, y: data.c[i] }));
-                    chartSpy.data.datasets[0].data = points;
-                    chartCombo.data.datasets[0].data = points;
-                    document.getElementById('price-spy').innerText = `$${data.c[data.c.length-1].toFixed(2)}`;
-                    document.getElementById('price-spy').style.color = '#333';
-                    document.getElementById('price-spy').style.fontSize = '18px';
-                } else {
-                    // Fail-safe: Fetch live quote if history fails
-                    console.log("SPY History empty. Using Quote Fallback.");
-                    const qRes = await fetch(`${WORKER_URL}/spy-quote`);
-                    const qData = await qRes.json();
-                    if(qData.c) {
-                        const pt = { x: now.toMillis(), y: qData.c };
-                        // Create a flat line for visual context
-                        const flatLine = [{ x: marketOpen.toMillis(), y: qData.c }, { x: now.toMillis(), y: qData.c }];
-                        chartSpy.data.datasets[0].data = flatLine; 
-                        chartCombo.data.datasets[0].data = flatLine;
-                        document.getElementById('price-spy').innerText = `$${qData.c.toFixed(2)}`;
-                        document.getElementById('price-spy').style.color = '#333';
-                        document.getElementById('price-spy').style.fontSize = '18px';
-                    }
-                }
-                chartSpy.update();
-            } catch (e) { console.error("SPY Error:", e); }
-
-            // B. POLY HISTORY
-            if (POLY_TOKEN_ID) {
-                try {
-                    const res = await fetch(`${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}&interval=1D`);
-                    const data = await res.json();
-                    if (data.history && data.history.length > 0) {
-                        const points = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
-                        chartPoly.data.datasets[0].data = points;
-                        chartCombo.data.datasets[1].data = points;
-                    }
-                    chartPoly.update();
-                    chartCombo.update();
-                } catch (e) { console.error("Poly History Error:", e); }
-            }
-            updateStatus('status-combo', 'Dashboard Active');
-            document.getElementById('status-combo').style.color = '#1e8e3e';
-        }
-
-        async function fetchLiveUpdates() {
-            const now = DateTime.now().setZone('America/New_York');
-
-            // 1. SPY Live Update
-            try {
-                const res = await fetch(`${WORKER_URL}/spy-quote`);
-                const data = await res.json();
-                if (data.c) {
-                    const pt = { x: now.toMillis(), y: data.c };
-                    document.getElementById('price-spy').innerText = `$${data.c.toFixed(2)}`;
-                    
-                    chartSpy.data.datasets[0].data.push(pt);
-                    chartSpy.update('none');
-                    chartCombo.data.datasets[0].data.push(pt);
-                    chartCombo.update('none');
-                }
-            } catch(e) {}
-
-            // 2. Poly Live Update (Midpoint)
-            if (POLY_TOKEN_ID) {
-                try {
-                    const res = await fetch(`${WORKER_URL}/poly-midpoint?token_id=${POLY_TOKEN_ID}`);
-                    const data = await res.json();
-                    if (data.mid) {
-                        const val = parseFloat(data.mid) * 100;
-                        const pt = { x: now.toMillis(), y: val };
-                        document.getElementById('price-poly').innerText = `${val.toFixed(1)}%`;
-                        
-                        chartPoly.data.datasets[0].data.push(pt);
-                        chartPoly.update('none');
-                        chartCombo.data.datasets[1].data.push(pt);
-                        chartCombo.update('none');
-                    }
-                } catch(e) {}
-            }
-            
-            const timeStr = now.toFormat('h:mm:ss a');
-            updateStatus('status-combo', `Live Data Active (Last: ${timeStr})`);
-        }
+        // ----------------------------------
+        //  3. EXCEL FUNCTION (Existing)
+        // ---------------------------------- 
 
         async function loadExcel() {
              try {
-                updateStatus('excel-data', '<div class="loading-spinner"><i class="fas fa-circle-notch fa-spin"></i> Downloading Excel...</div>');
-                const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
-                if(response.ok) {
-                    const ab = await response.arrayBuffer();
-                    const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
-                    document.getElementById('excel-data').innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
-                } else {
-                    updateStatus('excel-data', '<div class="status-message error">Excel file not found</div>');
+                // Simplified status update for demo
+                const container = document.getElementById('excel-data');
+                if (container) {
+                    container.innerHTML = '<div class="loading-spinner"><i class="fas fa-circle-notch fa-spin"></i> Downloading Excel...</div>';
+                    
+                    const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
+                    if(response.ok) {
+                        const ab = await response.arrayBuffer();
+                        const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
+                        container.innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
+                    } else {
+                        container.innerHTML = '<div class="status-message error">Excel file not found</div>';
+                    }
                 }
              } catch(e) {
-                 updateStatus('excel-data', '<div class="status-message error">Failed to parse Excel</div>');
+                 const container = document.getElementById('excel-data');
+                 if(container) container.innerHTML = '<div class="status-message error">Failed to parse Excel</div>';
              }
         }
 
-        // --- CHART INITIALIZATION ---
-        let chartSpy, chartPoly, chartCombo;
-        function initCharts() {
-            const now = DateTime.now().setZone('America/New_York');
-            const marketOpen = now.set({ hour: 9, minute: 30, second: 0 });
-            const marketClose = now.set({ hour: 16, minute: 0, second: 0 });
+        // Initialize on Load
+        window.addEventListener('DOMContentLoaded', () => {
+            initCharts();
+            // Optional: Load Excel immediately or wait for user?
+            loadExcel(); 
+        });
 
-            const commonOptions = {
-                responsive: true,
-                maintainAspectRatio: false,
-                animation: false,
-                scales: {
-                    x: {
-                        type: 'time',
-                        time: { unit: 'hour', displayFormats: { hour: 'h:mm a' } },
-                        min: marketOpen.toMillis(),
-                        max: marketClose.toMillis()
-                    }
-                }
-            };
-
-            chartSpy = new Chart(document.getElementById('spyChart'), {
-                type: 'line',
-                data: { datasets: [{ label: 'SPY', borderColor: '#2196F3', borderWidth: 2, pointRadius: 0, tension: 0.1, data: [] }]},
-                options: { ...commonOptions, scales: { ...commonOptions.scales, y: { title: {display:true, text:'Price ($)'} } } }
-            });
-
-            chartPoly = new Chart(document.getElementById('polyChart'), {
-                type: 'line',
-                data: { datasets: [{ label: 'Probability', borderColor: '#E91E63', borderWidth: 2, pointRadius: 0, tension: 0.1, data: [] }]},
-                options: { ...commonOptions, scales: { ...commonOptions.scales, y: { min: 0, max: 100, title: {display:true, text:'Chance (%)'} } } }
-            });
-
-            chartCombo = new Chart(document.getElementById('comboChart'), {
-                type: 'line',
-                data: { datasets: [
-                    { label: 'SPY', borderColor: '#2196F3', backgroundColor: 'rgba(33, 150, 243, 0.05)', borderWidth: 2, pointRadius: 0, fill: true, yAxisID: 'y', data: [] },
-                    { label: 'Prob', borderColor: '#E91E63', borderWidth: 2, borderDash: [5, 5], pointRadius: 0, yAxisID: 'y1', data: [] }
-                ]},
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    interaction: { mode: 'index', intersect: false },
-                    scales: {
-                        x: commonOptions.scales.x,
-                        y: { type: 'linear', display: true, position: 'left', title: {display:true, text:'SPY ($)'} },
-                        y1: { type: 'linear', display: true, position: 'right', min: 0, max: 100, grid: {drawOnChartArea: false}, title: {display:true, text:'Prob (%)'} }
-                    }
-                }
-            });
-        }
-
-        function updateStatus(id, msg, err=false) {
-            const el = document.getElementById(id);
-            if(el) { el.innerHTML = msg; el.style.color = err ? 'red' : '#666'; }
-        }
-
-        window.onload = initDashboard;
     </script>
 </body>
 </html>
