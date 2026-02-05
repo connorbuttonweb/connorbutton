@@ -274,8 +274,19 @@
             const commonOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: { legend: { display: false } }
+                spanGaps: true, // Helps if there are nulls in your history
+                animation: false, // Turn off for live dashboards to prevent "ghosting"
+                scales: {
+                    x: {
+                        type: 'time',
+                        // Change 'data' to 'ticks' if points are still missing
+                        bounds: 'data', 
+                        time: {
+                            // Ensure unit is forced to help Chart.js calculate the scale
+                            unit: 'hour' 
+                        }
+                    }
+                }
             };
 
             // Chart 1: SPY
@@ -359,6 +370,7 @@
                     
                     chartSpy.data.datasets[0].data = points;
                     chartCombo.data.datasets[0].data = points;
+                    console.log(points)
                     chartSpy.update();
                     chartCombo.update();
                 }
