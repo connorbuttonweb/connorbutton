@@ -293,11 +293,19 @@
                 return;
             }
 
-            // Common Options (Dark Theme)
+            // Common Options (Dark Theme) + Timezone Fix
             const commonOptions = {
                 layout: { background: { type: 'solid', color: '#1E1E1E' }, textColor: '#DDD' },
                 grid: { vertLines: { color: '#2B2B43' }, horzLines: { color: '#2B2B43' } },
-                timeScale: { timeVisible: true, secondsVisible: false, borderColor: '#555' },
+                // Important: Set timezone to NY to fix the 14:30 vs 9:30 issue
+                localization: {
+                    timezone: 'America/New_York', 
+                },
+                timeScale: { 
+                    timeVisible: true, 
+                    secondsVisible: false, 
+                    borderColor: '#555' 
+                },
                 rightPriceScale: { borderColor: '#555' },
             };
 
@@ -359,7 +367,6 @@
                     
                     if (data.id) {
                         polyId = data.id;
-                        // Update Header Title
                         if(data.question) document.getElementById('poly-header-title').querySelector('span').innerText = data.question;
                     }
                 } catch (e) { console.log("Resolver skipped"); }
@@ -372,44 +379,62 @@
                     polyId ? fetch(`${PROXY_URL}/polymarket?id=${polyId}`) : Promise.reject("No ID")
                 ]);
 
-                // 3. Process Stock Data
                 let stockData = [];
+                let polyData = [];
+
+                // 3. Process Stock Data
                 if(stockRes.status === 'fulfilled') {
                     const data = await stockRes.value.json();
                     if(Array.isArray(data) && data.length > 0) {
                         stockData = data;
-                        crossStockSeries.setData(stockData);
                     }
                 }
 
                 // 4. Process Poly Data
-                let polyData = [];
                 if(polyRes.status === 'fulfilled') {
                     const data = await polyRes.value.json();
                     if(Array.isArray(data) && data.length > 0) {
                         polyData = data;
                         
                         // A. Render Full Chart (Top Right)
-                        polyMainSeries.setData(polyData);
+                        // If we have stock data, let's auto-zoom the Poly chart to the relevant trading day
+                        // This fixes the "hiding half the chart" issue by focusing on the active session
+                        if (stockData.length > 0) {
+                            const startTime = stockData[0].time;
+                            const endTime = stockData[stockData.length - 1].time;
+                            // Clip the visualization of the top-right chart to match the stock day
+                            const clippedTop = polyData.filter(d => d.time >= startTime && d.time <= endTime);
+                            polyMainSeries.setData(clippedTop.length > 0 ? clippedTop : polyData);
+                        } else {
+                            polyMainSeries.setData(polyData);
+                        }
+                        
                         polyMainChart.timeScale().fitContent();
 
                         // Update Current Probability in Header
                         const lastVal = polyData[polyData.length - 1].value;
                         const probPercent = (lastVal * 100).toFixed(1) + '%';
                         document.getElementById('poly-header-price').innerText = probPercent;
-                        
-                        // B. Render Correlation Chart (Bottom) - Sync Window
-                        if (stockData.length > 0) {
-                             const startTime = stockData[0].time;
-                             const endTime = stockData[stockData.length-1].time;
-                             const clipped = polyData.filter(d => d.time >= startTime && d.time <= endTime);
-                             crossPolySeries.setData(clipped.length > 0 ? clipped : polyData);
-                        } else {
-                            crossPolySeries.setData(polyData);
-                        }
-                        crossChart.timeScale().fitContent();
                     }
                 }
+
+                // 5. Render Correlation Chart (Bottom)
+                if (stockData.length > 0 && polyData.length > 0) {
+                     crossStockSeries.setData(stockData);
+                     
+                     const startTime = stockData[0].time;
+                     const endTime = stockData[stockData.length-1].time;
+                     
+                     // Clip Poly data to match stock window exactly
+                     const clipped = polyData.filter(d => d.time >= startTime && d.time <= endTime);
+                     crossPolySeries.setData(clipped.length > 0 ? clipped : polyData);
+                } else {
+                    if (stockData.length > 0) crossStockSeries.setData(stockData);
+                    if (polyData.length > 0) crossPolySeries.setData(polyData);
+                }
+                
+                // Force Zoom Out
+                crossChart.timeScale().fitContent();
                 
                 document.getElementById('cross-status').innerText = "(Updated)";
 
@@ -446,7 +471,6 @@
         window.addEventListener('DOMContentLoaded', () => {
             initCharts();
             loadExcel();
-            // Auto-load the default data
             setTimeout(updateDashboard, 500);
         });
     </script>
