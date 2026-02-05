@@ -14,48 +14,68 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
     
-    <!-- NEW: Lightweight Charts (Pinned to v4.1.1 for stability) -->
+    <!-- Lightweight Charts (Pinned to v4.1.1) -->
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
 
   <style>
-    /* Global/Existing Styles would be here... */
-
-    /* --- DASHBOARD STYLES (Added for Cross-Market functionality) --- */
+    /* Global/Existing Styles */
+    
+    /* --- DASHBOARD STYLES --- */
     .dashboard-controls {
         display: flex;
-        gap: 10px;
+        gap: 15px;
         background: #f8f9fa;
-        padding: 15px;
+        padding: 20px;
         border-radius: 8px;
         border: 1px solid #e2e3e5;
         margin-bottom: 20px;
         flex-wrap: wrap;
-        align-items: center;
+        align-items: flex-end;
+    }
+
+    .input-group {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    .input-group label {
+        font-size: 12px;
+        font-weight: 600;
+        color: #555;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
     }
 
     .dashboard-input {
-        padding: 8px 12px;
+        padding: 10px 12px;
         border: 1px solid #ccc;
         border-radius: 4px;
         font-family: inherit;
         font-size: 14px;
-        min-width: 200px;
+        min-width: 220px;
     }
 
     .analyze-btn {
         background-color: #007bff;
         color: white;
         border: none;
-        padding: 8px 20px;
+        padding: 11px 24px;
         border-radius: 4px;
         cursor: pointer;
         font-weight: 600;
         font-size: 14px;
         transition: background 0.2s;
+        height: 40px; /* Match input height */
     }
 
     .analyze-btn:hover {
         background-color: #0056b3;
+    }
+
+    .analyze-btn:disabled {
+        background-color: #ccc;
+        cursor: not-allowed;
     }
 
     .grid-container {
@@ -65,7 +85,6 @@
         margin-bottom: 40px;
     }
 
-    /* Desktop: Split top two charts, full width bottom chart */
     @media (min-width: 768px) {
         .grid-container {
             grid-template-columns: 1fr 1fr;
@@ -90,15 +109,23 @@
         color: #333;
         border-bottom: 1px solid #eee;
         padding-bottom: 8px;
+        display: flex;
+        justify-content: space-between;
     }
 
     .chart-box {
         width: 100%;
-        height: 300px; /* Fixed height for charts */
+        height: 350px;
         position: relative;
     }
 
-    /* Excel Styles (Preserved) */
+    .status-text {
+        font-size: 12px;
+        font-weight: normal;
+        color: #666;
+    }
+
+    /* Excel Styles */
     .excel-container {
         width: 100%;
         overflow-x: auto;
@@ -144,16 +171,6 @@
         padding: 40px;
         color: #666;
     }
-    
-    .status-message.error {
-        text-align: center;
-        padding: 10px;
-        background-color: #fee;
-        color: #c33;
-        border: 1px solid #fcc;
-        border-radius: 4px;
-        margin: 10px;
-    }
   </style>
 </head>
 
@@ -164,13 +181,7 @@
               <span class="logo-icon"></span>
               <a href="/" class="logo-text">CONNOR BUTTON</a>
           </div>
-          
-            <button class="mobile-toggle" aria-label="Open navigation">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-
+          <button class="mobile-toggle" aria-label="Open navigation"><span class="bar"></span><span class="bar"></span><span class="bar"></span></button>
           <ul class="nav-menu">
               <li><a href="/" class="nav-link">HOME</a></li>
               <li><a href="/#about" class="nav-link">ABOUT</a></li>
@@ -186,7 +197,6 @@
                   </ul>
               </li>
           </ul>
-
           <div class="nav-right">
               <a href="/contact/" class="contact-btn">Contact Me</a>
           </div>
@@ -201,37 +211,35 @@
 
         <!-- DASHBOARD CONTROLS -->
         <div class="dashboard-controls">
-            <div>
-                <label style="font-size: 12px; display:block; margin-bottom:4px; font-weight:600;">Stock Ticker</label>
+            <div class="input-group">
+                <label for="stockTicker">Stock Ticker</label>
                 <input type="text" id="stockTicker" class="dashboard-input" placeholder="e.g. SPY" value="SPY">
             </div>
-            <div>
-                <label style="font-size: 12px; display:block; margin-bottom:4px; font-weight:600;">Polymarket Token ID</label>
-                <input type="text" id="polyId" class="dashboard-input" placeholder="Token ID" value="Use 'Mock' to test">
+            <div class="input-group">
+                <label for="polyId">Polymarket Token ID</label>
+                <input type="text" id="polyId" class="dashboard-input" placeholder="Paste Token ID from Excel" value="">
             </div>
-            <div style="align-self: flex-end;">
-                <button class="analyze-btn" onclick="updateDashboard()">Analyze</button>
-            </div>
+            <button class="analyze-btn" id="analyzeBtn" onclick="updateDashboard()">Analyze Correlation</button>
         </div>
 
         <!-- CHART GRID -->
         <div class="grid-container">
+            <!-- Combined Chart (The Core Goal) -->
+            <div class="chart-card full-width">
+                <h3>Cross-Market Correlation <span class="status-text" id="cross-status"></span></h3>
+                <div id="cross-chart" class="chart-box"></div>
+            </div>
+
             <!-- Stock Chart -->
             <div class="chart-card">
-                <h3>Equity Price Action</h3>
+                <h3>Equity Price Action <span class="status-text" id="stock-status"></span></h3>
                 <div id="stock-chart" class="chart-box"></div>
             </div>
 
             <!-- Polymarket Chart -->
             <div class="chart-card">
-                <h3>Prediction Probability</h3>
+                <h3>Prediction Probability <span class="status-text" id="poly-status"></span></h3>
                 <div id="poly-chart" class="chart-box"></div>
-            </div>
-
-            <!-- Combined Chart (The Core Goal) -->
-            <div class="chart-card full-width">
-                <h3>Cross-Market Correlation (Intraday)</h3>
-                <div id="cross-chart" class="chart-box"></div>
             </div>
         </div>
 
@@ -251,171 +259,168 @@
     </section>
 
     <script>
-        // ----------------------------------
-        //  1. CHART INITIALIZATION
-        // ----------------------------------
+        // =========================================================
+        //  CONFIGURATION - USER MUST UPDATE THIS
+        // =========================================================
+        
+        // PASTE YOUR CLOUDFLARE WORKER URL HERE:
+        // Example: "https://market-proxy.connorbutton.workers.dev"
+        const PROXY_URL = "https://market-proxy.YOUR-SUBDOMAIN.workers.dev"; 
+
+        // =========================================================
+
         let stockChart, polyChart, crossChart;
         let stockSeries, polySeries, crossStockSeries, crossPolySeries;
 
+        // 1. CHART INITIALIZATION
         function initCharts() {
-            // Ensure library is loaded
-            if (typeof LightweightCharts === 'undefined') {
-                console.error("LightweightCharts library not loaded.");
-                return;
-            }
+            if (typeof LightweightCharts === 'undefined') return console.error("Charts lib missing");
 
-            // Common Options for Dark-themed financial charts
-            // Updated for v4 compatibility
             const chartOptions = {
-                layout: {
-                    background: { type: 'solid', color: '#1E1E1E' }, 
-                    textColor: '#DDD',
-                },
-                grid: {
-                    vertLines: { color: '#333' },
-                    horzLines: { color: '#333' },
-                },
-                timeScale: {
-                    timeVisible: true,
-                    secondsVisible: false,
-                },
+                layout: { background: { type: 'solid', color: '#1E1E1E' }, textColor: '#DDD' },
+                grid: { vertLines: { color: '#333' }, horzLines: { color: '#333' } },
+                timeScale: { timeVisible: true, secondsVisible: false, borderColor: '#555' },
             };
 
-            // 1. Stock Only Chart
+            // Stock Only
             stockChart = LightweightCharts.createChart(document.getElementById('stock-chart'), chartOptions);
             stockSeries = stockChart.addLineSeries({ color: '#2962FF', lineWidth: 2 });
 
-            // 2. Poly Only Chart
+            // Poly Only
             polyChart = LightweightCharts.createChart(document.getElementById('poly-chart'), chartOptions);
             polySeries = polyChart.addLineSeries({ color: '#FF9800', lineWidth: 2 });
 
-            // 3. Cross-Market Chart (Dual Axis)
+            // Cross Market (Dual Axis)
             crossChart = LightweightCharts.createChart(document.getElementById('cross-chart'), {
                 ...chartOptions,
-                leftPriceScale: {
-                    visible: true,
-                    borderColor: '#FF9800', // Matches Poly Color
-                },
-                rightPriceScale: {
-                    visible: true,
-                    borderColor: '#2962FF', // Matches Stock Color
-                },
+                leftPriceScale: { visible: true, borderColor: '#FF9800' },
+                rightPriceScale: { visible: true, borderColor: '#2962FF' },
             });
 
-            // Add Poly Series (Left Axis - Probability 0-1)
             crossPolySeries = crossChart.addLineSeries({
-                color: '#FF9800',
-                lineWidth: 2,
-                priceScaleId: 'left', // Bind to Left
-                title: 'Polymarket Odds',
+                color: '#FF9800', lineWidth: 2, priceScaleId: 'left', title: 'Probability'
             });
 
-            // Add Stock Series (Right Axis - Price $)
             crossStockSeries = crossChart.addLineSeries({
-                color: '#2962FF',
-                lineWidth: 2,
-                priceScaleId: 'right', // Bind to Right
-                title: 'Stock Price',
+                color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'Price'
             });
 
-            // Handle Resize
-            new ResizeObserver(entries => {
-                if (entries.length === 0 || entries[0].target !== document.getElementById('cross-chart')) { return; }
-                const newRect = entries[0].contentRect;
-                crossChart.applyOptions({ width: newRect.width, height: newRect.height });
-                stockChart.applyOptions({ width: newRect.width, height: newRect.height });
-                polyChart.applyOptions({ width: newRect.width, height: newRect.height });
-            }).observe(document.getElementById('cross-chart'));
+            // Responsive Resizing
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const { width, height } = entry.contentRect;
+                    // Apply to specific chart based on ID
+                    if (entry.target.id === 'cross-chart') crossChart.applyOptions({ width, height });
+                    if (entry.target.id === 'stock-chart') stockChart.applyOptions({ width, height });
+                    if (entry.target.id === 'poly-chart') polyChart.applyOptions({ width, height });
+                }
+            });
+
+            resizeObserver.observe(document.getElementById('cross-chart'));
+            resizeObserver.observe(document.getElementById('stock-chart'));
+            resizeObserver.observe(document.getElementById('poly-chart'));
         }
 
-        // ----------------------------------
-        //  2. DATA FETCHING & LOGIC
-        // ----------------------------------
-
+        // 2. DATA FETCHING & SYNCHRONIZATION
         async function updateDashboard() {
-            const ticker = document.getElementById('stockTicker').value;
-            const polyId = document.getElementById('polyId').value;
-            
-            // NOTE: This URL will need to be replaced with your actual Cloudflare Worker URL later
-            // const workerUrl = "https://your-worker-name.your-subdomain.workers.dev";
+            const ticker = document.getElementById('stockTicker').value.trim();
+            const polyId = document.getElementById('polyId').value.trim();
+            const btn = document.getElementById('analyzeBtn');
 
-            // FOR NOW: We generate mock data to prove the visualization works
-            console.log(`Fetching data for ${ticker} and ${polyId}...`);
-            
-            const data = generateMockData();
-
-            // Render to Charts
-            stockSeries.setData(data.stock);
-            polySeries.setData(data.poly);
-            
-            crossStockSeries.setData(data.stock);
-            crossPolySeries.setData(data.poly);
-
-            // Fit content
-            stockChart.timeScale().fitContent();
-            polyChart.timeScale().fitContent();
-            crossChart.timeScale().fitContent();
-        }
-
-        // Helper: Generate Mock Data (Remove this once Worker is connected)
-        function generateMockData() {
-            const stockData = [];
-            const polyData = [];
-            let price = 450;
-            let prob = 0.50;
-            
-            // Generate 100 points of data ending now
-            const now = Math.floor(Date.now() / 1000);
-            
-            for (let i = 0; i < 100; i++) {
-                const time = now - (100 - i) * 60; // 1 minute intervals
-                
-                // Random Walk for Stock
-                price = price + (Math.random() - 0.5) * 2;
-                stockData.push({ time: time, value: price });
-
-                // Random Walk for Poly (correlated slightly)
-                prob = prob + (Math.random() - 0.5) * 0.05;
-                if(prob > 0.99) prob = 0.99;
-                if(prob < 0.01) prob = 0.01;
-                polyData.push({ time: time, value: prob });
+            if (!ticker || !polyId) {
+                alert("Please enter both a Stock Ticker and a Polymarket Token ID.");
+                return;
             }
-            return { stock: stockData, poly: polyData };
+
+            if (PROXY_URL.includes("YOUR-SUBDOMAIN")) {
+                alert("CONFIGURATION ERROR: You must update the PROXY_URL variable in the code with your actual Cloudflare Worker URL.");
+                return;
+            }
+
+            // UI Loading State
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching Data...';
+            document.getElementById('cross-status').innerText = "(Loading...)";
+
+            try {
+                // Parallel Fetch
+                const [stockRes, polyRes] = await Promise.all([
+                    fetch(`${PROXY_URL}/stock?ticker=${ticker}`),
+                    fetch(`${PROXY_URL}/polymarket?id=${polyId}`)
+                ]);
+
+                if (!stockRes.ok) throw new Error("Stock Data Failed");
+                if (!polyRes.ok) throw new Error("Polymarket Data Failed");
+
+                const stockData = await stockRes.json();
+                const polyData = await polyRes.json();
+
+                if (stockData.error) throw new Error("Stock API: " + stockData.error);
+                if (polyData.error) throw new Error("Polymarket API: " + polyData.error);
+                if (stockData.length === 0) throw new Error("No stock data returned.");
+
+                // --- SYNCHRONIZATION LOGIC ---
+                // Problem: Crypto is 24/7, Stock is 9:30-4:00.
+                // Solution: Find the start/end time of the stock data, and clip the Poly data to match.
+                
+                // 1. Get Stock Window
+                const startTime = stockData[0].time;
+                const endTime = stockData[stockData.length - 1].time;
+
+                // 2. Clip Poly Data
+                const clippedPolyData = polyData.filter(d => d.time >= startTime && d.time <= endTime);
+
+                if (clippedPolyData.length === 0) {
+                    alert("Warning: No overlapping time data found. (Are the markets open today?)");
+                }
+
+                // 3. Update Charts
+                stockSeries.setData(stockData);
+                polySeries.setData(polyData); // Show full 24h data on the individual chart
+                
+                crossStockSeries.setData(stockData);
+                crossPolySeries.setData(clippedPolyData); // Show clipped data on comparison chart
+
+                // 4. Fit Charts
+                stockChart.timeScale().fitContent();
+                polyChart.timeScale().fitContent();
+                crossChart.timeScale().fitContent();
+
+                document.getElementById('cross-status').innerText = "(Live)";
+
+            } catch (err) {
+                console.error(err);
+                alert(`Error: ${err.message}`);
+                document.getElementById('cross-status').innerText = "(Error)";
+            } finally {
+                btn.disabled = false;
+                btn.innerText = "Analyze Correlation";
+            }
         }
 
-        // ----------------------------------
-        //  3. EXCEL FUNCTION (Existing)
-        // ---------------------------------- 
-
+        // 3. EXCEL LOADER (For finding IDs)
         async function loadExcel() {
              try {
-                // Simplified status update for demo
                 const container = document.getElementById('excel-data');
                 if (container) {
-                    container.innerHTML = '<div class="loading-spinner"><i class="fas fa-circle-notch fa-spin"></i> Downloading Excel...</div>';
-                    
                     const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
                     if(response.ok) {
                         const ab = await response.arrayBuffer();
                         const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
                         container.innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
                     } else {
-                        container.innerHTML = '<div class="status-message error">Excel file not found</div>';
+                        container.innerHTML = '<div class="status-message error">Excel file not found. Please upload to /assets/PredictionMarkets/</div>';
                     }
                 }
              } catch(e) {
-                 const container = document.getElementById('excel-data');
-                 if(container) container.innerHTML = '<div class="status-message error">Failed to parse Excel</div>';
+                 console.log("Excel Load Error", e);
              }
         }
 
-        // Initialize on Load
         window.addEventListener('DOMContentLoaded', () => {
             initCharts();
-            // Optional: Load Excel immediately or wait for user?
-            loadExcel(); 
+            loadExcel();
         });
-
     </script>
 </body>
 </html>
