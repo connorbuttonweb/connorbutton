@@ -17,13 +17,17 @@
     /* Dashboard Grid Layout */
     .dashboard-grid {
         display: grid;
-        grid-template-columns: 1fr 1fr; /* Two columns */
+        grid-template-columns: 1fr 1fr; 
         gap: 20px;
         margin-bottom: 20px;
+        max-width: 1400px;
+        margin-left: auto;
+        margin-right: auto;
+        width: 100%;
     }
 
     .dashboard-full-width {
-        grid-column: 1 / -1; /* Spans across both columns */
+        grid-column: 1 / -1; 
     }
 
     /* Chart Cards */
@@ -33,13 +37,13 @@
         border: 1px solid #e2e3e5;
         border-radius: 8px;
         box-shadow: 0 4px 12px rgba(0,0,0,0.05);
-        height: 400px; /* Fixed height for top row */
+        height: 400px; 
         display: flex;
         flex-direction: column;
     }
 
     .chart-card.large {
-        height: 500px; /* Taller for the main bottom dashboard */
+        height: 500px; 
     }
 
     .card-header {
@@ -120,7 +124,7 @@
     }
 
     tr:hover {
-        background-color: rgba(0, 150, 136, 0.02); /* Teal tint */
+        background-color: rgba(0, 150, 136, 0.02); 
     }
 
     .loading-spinner {
@@ -138,7 +142,6 @@
         border-radius: 4px;
     }
 
-    /* Responsive adjustments */
     @media (max-width: 768px) {
         .dashboard-grid { grid-template-columns: 1fr; }
     }
@@ -232,7 +235,7 @@
         // CONFIGURATION
         // ==========================================
         // !!! PASTE YOUR CLOUDFLARE URL HERE !!!
-        const WORKER_URL = 'https://market-proxy.buttonconnor12.workers.dev'; 
+        const WORKER_URL = 'https://market-proxy.connorbutton.workers.dev'; 
         
         const SYMBOL = 'SPY'; 
         let POLY_TOKEN_ID = null; 
@@ -247,7 +250,6 @@
         const marketClose = nowNY.set({ hour: 16, minute: 0, second: 0, millisecond: 0 });
 
         function initCharts() {
-            // Option A: Fixed Session Scale (for SPY & Combo)
             const sessionScales = {
                 x: {
                     type: 'time',
@@ -258,7 +260,6 @@
                 }
             };
 
-            // Option B: Dynamic Scale (for Polymarket Top-Right)
             const dynamicScales = {
                 x: {
                     type: 'time',
@@ -317,13 +318,22 @@
             console.log("Searching slug:", slug);
 
             try {
-                // Call the Worker, which now safely extracts the ID
                 const response = await fetch(`${WORKER_URL}/poly-event?slug=${slug}`);
                 const data = await response.json();
-
+                
+                // FIXED: Handle both Single String AND Array of Strings
+                let extractedId = null;
                 if (data.id) {
-                    POLY_TOKEN_ID = data.id;
-                    console.log("Worker found ID:", POLY_TOKEN_ID);
+                    if (Array.isArray(data.id)) {
+                        extractedId = data.id[0]; // Take the first one if it's a list
+                    } else {
+                        extractedId = data.id;    // Use directly if it's a string
+                    }
+                }
+
+                if (extractedId) {
+                    POLY_TOKEN_ID = extractedId;
+                    console.log("Final Token ID Used:", POLY_TOKEN_ID);
                     document.getElementById('price-poly').innerText = "Market Found";
                     return true;
                 } else {
@@ -357,6 +367,8 @@
                     chartCombo.data.datasets[0].data = points;
                     chartSpy.update();
                     chartCombo.update();
+                } else {
+                    console.log("Finnhub History Status:", data.s); // Debugging log
                 }
             } catch (e) { console.error("SPY History Error", e); }
 
@@ -370,11 +382,9 @@
                     if (data && data.history) {
                         const allPoints = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
                         
-                        // Full History for Top Right
                         chartPoly.data.datasets[0].data = allPoints;
                         chartPoly.update();
 
-                        // Session Only for Combo
                         const sessionPoints = allPoints.filter(p => p.x >= marketOpen.toMillis());
                         chartCombo.data.datasets[1].data = sessionPoints;
                         chartCombo.update();
@@ -386,11 +396,14 @@
         async function fetchLiveUpdates() {
             const now = DateTime.now().setZone('America/New_York');
             
+            // Check if market is closed
             if (now < marketOpen || now > marketClose) {
                 const status = (now < marketOpen) ? "PRE-MARKET" : "CLOSED";
                 const badge = `<span class="badge badge-closed">${status}</span>`;
-                if (!document.getElementById('price-spy').innerHTML.includes(status)) {
-                    document.getElementById('price-spy').innerHTML += ` ${badge}`;
+                // Only append badge if not already there
+                const priceSpy = document.getElementById('price-spy');
+                if (priceSpy && !priceSpy.innerHTML.includes("CLOSED") && !priceSpy.innerHTML.includes("PRE-MARKET")) {
+                     priceSpy.innerHTML += ` ${badge}`;
                 }
                 return; 
             }
