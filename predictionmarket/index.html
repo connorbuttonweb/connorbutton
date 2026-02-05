@@ -33,6 +33,8 @@
             display: flex; 
             flex-direction: column; 
             gap: 5px; 
+            flex: 1;
+            min-width: 200px;
         }
 
         .input-group label { 
@@ -46,7 +48,7 @@
             padding: 10px 12px; 
             border: 1px solid #ccc; 
             border-radius: 4px; 
-            min-width: 250px; 
+            width: 100%; 
         }
         
         .analyze-btn { 
@@ -59,6 +61,7 @@
             font-weight: 600; 
             height: 40px; 
             transition: background 0.2s;
+            min-width: 120px;
         }
 
         .analyze-btn:hover { background-color: #0056b3; }
@@ -70,7 +73,7 @@
             grid-template-columns: 1fr; 
             gap: 20px; 
             margin-bottom: 40px; 
-            align-items: stretch; /* Ensure both columns are equal height */
+            align-items: stretch; 
         }
 
         @media (min-width: 768px) { 
@@ -86,42 +89,57 @@
             display: flex; 
             flex-direction: column; 
             overflow: hidden;
-            height: 100%; /* Fill the grid cell */
-            min-height: 550px; /* Minimum height for consistency */
+            height: 100%; 
+            min-height: 550px; 
         }
 
-        /* Removes padding for widget cards to let charts fill the space */
         .chart-card.no-padding {
             padding: 0;
-            background: #131722; /* Dark background to match widgets */
+            background: #131722; 
         }
         
+        /* Card Headers */
         .chart-card h3 {
-            margin-top: 0; 
-            margin-bottom: 10px; 
+            margin: 0 0 10px 0;
             font-size: 16px; 
             color: #333; 
             border-bottom: 1px solid #eee; 
             padding-bottom: 8px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
         }
 
-        /* Header for no-padding cards */
         .chart-card.no-padding h3 {
             margin: 0;
             padding: 15px;
             background: #fff;
             color: #333;
             border-bottom: 1px solid #e2e3e5;
-            flex-shrink: 0; /* Prevent header from shrinking */
+            flex-shrink: 0; 
+        }
+
+        /* Live Probability Indicator */
+        .prob-indicator {
+            font-weight: 700;
+            font-size: 18px;
+            color: #00b894; /* Green */
+        }
+        .prob-label {
+            font-size: 12px;
+            color: #666;
+            margin-right: 5px;
+            font-weight: 400;
         }
 
         /* Widget Containers */
         .widget-container {
             width: 100%;
-            height: 100%; /* Fill remaining flex space */
-            flex-grow: 1; /* Ensure it expands */
+            height: 100%; 
+            flex-grow: 1; 
             border: none;
             display: block;
+            position: relative;
         }
         
         .chart-box { 
@@ -215,35 +233,35 @@
                 </div>
             </div>
 
-            <!-- RIGHT: POLYMARKET EMBED -->
+            <!-- RIGHT: POLYMARKET API CHART -->
             <div class="chart-card no-padding">
-                <h3>Prediction Market Probability</h3>
-                <iframe
-                    title="polymarket-market-iframe"
-                    src="https://embed.polymarket.com/market.html?market=spx-up-or-down-on-february-5-2026&features=chart,filters&theme=dark&creator=connormcguire"
-                    class="widget-container"
-                    style="background: #1A1D27; border: none;"
-                    width="100%"
-                    height="100%">
-                </iframe>
+                <h3 id="poly-header-title">
+                    <span>Prediction Market</span>
+                    <span><span class="prob-label">Probability:</span><span id="poly-header-price" class="prob-indicator">--%</span></span>
+                </h3>
+                <!-- Custom Lightweight Chart Container -->
+                <div id="poly-main-chart" class="widget-container"></div>
             </div>
         </div>
 
-        <!-- BOTTOM: CUSTOM CORRELATION TOOL (Optional) -->
+        <!-- BOTTOM: CONTROLS & CORRELATION -->
         <div class="dashboard-controls">
              <div style="flex: 1; min-width: 200px;">
-                <strong>Custom Correlation Tool</strong><br>
-                <span style="font-size: 12px; color: #666;">Use this to overlay data on a single chart (Requires API Worker)</span>
+                <strong>Market Controls</strong><br>
+                <span style="font-size: 12px; color: #666;">Enter a Ticker and a Polymarket Link to analyze relationships.</span>
              </div>
             <div class="input-group">
                 <label for="stockTicker">Stock Ticker</label>
                 <input type="text" id="stockTicker" class="dashboard-input" placeholder="e.g. SPY" value="SPY">
             </div>
             <div class="input-group">
-                <label for="polyInput">Polymarket Link</label>
-                <input type="text" id="polyInput" class="dashboard-input" placeholder="Paste URL or ID here..." value="">
+                <label for="polyInput">Polymarket Link / ID</label>
+                <!-- Defaulted to the SPX market you requested -->
+                <input type="text" id="polyInput" class="dashboard-input" 
+                       placeholder="Paste URL..." 
+                       value="https://polymarket.com/event/spx-up-or-down-on-february-5-2026">
             </div>
-            <button class="analyze-btn" id="analyzeBtn" onclick="updateDashboard()">Analyze</button>
+            <button class="analyze-btn" id="analyzeBtn" onclick="updateDashboard()">Update Charts</button>
         </div>
 
         <div class="chart-card full-width">
@@ -260,7 +278,8 @@
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
         // ---------------------
 
-        let crossChart, crossStockSeries, crossPolySeries;
+        let crossChart, polyMainChart;
+        let crossStockSeries, crossPolySeries, polyMainSeries;
 
         function getDimensions(elementId) {
             const el = document.getElementById(elementId);
@@ -270,42 +289,53 @@
 
         function initCharts() {
             if (typeof LightweightCharts === 'undefined') {
-                console.warn("Lightweight Charts library not loaded.");
+                console.warn("Charts lib missing");
                 return;
             }
 
-            const chartContainer = document.getElementById('cross-chart');
-            if (!chartContainer) return;
-
-            const chartOptions = {
+            // Common Options (Dark Theme)
+            const commonOptions = {
                 layout: { background: { type: 'solid', color: '#1E1E1E' }, textColor: '#DDD' },
-                grid: { vertLines: { color: '#404040' }, horzLines: { color: '#404040' } },
+                grid: { vertLines: { color: '#2B2B43' }, horzLines: { color: '#2B2B43' } },
                 timeScale: { timeVisible: true, secondsVisible: false, borderColor: '#555' },
                 rightPriceScale: { borderColor: '#555' },
             };
 
+            // 1. TOP RIGHT: Main Polymarket Chart
+            const polyContainer = document.getElementById('poly-main-chart');
+            const dimPoly = getDimensions('poly-main-chart');
+            polyMainChart = LightweightCharts.createChart(polyContainer, {
+                ...commonOptions,
+                width: dimPoly.width,
+                height: dimPoly.height,
+            });
+            polyMainSeries = polyMainChart.addLineSeries({
+                color: '#00b894', // Polymarket Green
+                lineWidth: 2,
+                title: 'Probability',
+                priceFormat: { type: 'percent', precision: 1, minMove: 0.1 },
+            });
+
+            // 2. BOTTOM: Correlation Chart (Dual Axis)
+            const crossContainer = document.getElementById('cross-chart');
             const dimCross = getDimensions('cross-chart');
-            crossChart = LightweightCharts.createChart(chartContainer, {
-                ...chartOptions, 
-                width: dimCross.width, 
+            crossChart = LightweightCharts.createChart(crossContainer, {
+                ...commonOptions,
+                width: dimCross.width,
                 height: dimCross.height,
                 leftPriceScale: { visible: true, borderColor: '#FF9800' },
                 rightPriceScale: { visible: true, borderColor: '#2962FF' },
             });
-            
-            crossPolySeries = crossChart.addLineSeries({ 
-                color: '#FF9800', lineWidth: 2, priceScaleId: 'left', title: 'Probability' 
-            });
-            
-            crossStockSeries = crossChart.addLineSeries({ 
-                color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'Price' 
-            });
-            
+            crossPolySeries = crossChart.addLineSeries({ color: '#FF9800', lineWidth: 2, priceScaleId: 'left', title: 'Probability' });
+            crossStockSeries = crossChart.addLineSeries({ color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'Price' });
+
+            // Resize Handler
             window.addEventListener('resize', () => {
-                if(crossChart) {
-                    const d = getDimensions('cross-chart');
-                    crossChart.applyOptions({ width: d.width, height: d.height });
-                }
+                const dp = getDimensions('poly-main-chart');
+                if(polyMainChart) polyMainChart.applyOptions({ width: dp.width, height: dp.height });
+                
+                const dc = getDimensions('cross-chart');
+                if(crossChart) crossChart.applyOptions({ width: dc.width, height: dc.height });
             });
         }
 
@@ -315,113 +345,109 @@
             const btn = document.getElementById('analyzeBtn');
             let polyId = polyInput;
 
+            // UI State
             btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
-            document.getElementById('cross-status').innerText = "(Loading...)";
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
+            document.getElementById('cross-status').innerText = "(Fetching...)";
 
+            // 1. Resolve Polymarket Link
             if (polyInput.includes('polymarket.com/event/')) {
                 try {
                     const slug = polyInput.split('event/')[1].split('/')[0].split('?')[0];
                     const res = await fetch(`${PROXY_URL}/resolve?slug=${slug}`);
                     const data = await res.json();
-                    if (data.id) polyId = data.id;
-                } catch (e) {
-                    console.log("Link resolve failed, trying raw ID if present");
-                }
+                    
+                    if (data.id) {
+                        polyId = data.id;
+                        // Update Header Title
+                        if(data.question) document.getElementById('poly-header-title').querySelector('span').innerText = data.question;
+                    }
+                } catch (e) { console.log("Resolver skipped"); }
             }
 
+            // 2. Fetch Data (Parallel)
             try {
                 const [stockRes, polyRes] = await Promise.allSettled([
                     fetch(`${PROXY_URL}/stock?ticker=${ticker}`),
-                    polyId ? fetch(`${PROXY_URL}/polymarket?id=${polyId}`) : Promise.reject("No Poly ID")
+                    polyId ? fetch(`${PROXY_URL}/polymarket?id=${polyId}`) : Promise.reject("No ID")
                 ]);
 
+                // 3. Process Stock Data
+                let stockData = [];
                 if(stockRes.status === 'fulfilled') {
                     const data = await stockRes.value.json();
                     if(Array.isArray(data) && data.length > 0) {
-                        crossStockSeries.setData(data);
-                        crossChart.timeScale().fitContent();
-                    } else {
-                        console.warn("Stock data empty");
+                        stockData = data;
+                        crossStockSeries.setData(stockData);
                     }
                 }
 
+                // 4. Process Poly Data
+                let polyData = [];
                 if(polyRes.status === 'fulfilled') {
                     const data = await polyRes.value.json();
                     if(Array.isArray(data) && data.length > 0) {
-                        if (stockRes.status === 'fulfilled') {
-                             const stockJson = await stockRes.value.clone().json();
-                             if(stockJson.length > 0) {
-                                 const startTime = stockJson[0].time;
-                                 const endTime = stockJson[stockJson.length-1].time;
-                                 const clippedData = data.filter(d => d.time >= startTime && d.time <= endTime);
-                                 crossPolySeries.setData(clippedData.length > 0 ? clippedData : data);
-                             } else {
-                                 crossPolySeries.setData(data);
-                             }
+                        polyData = data;
+                        
+                        // A. Render Full Chart (Top Right)
+                        polyMainSeries.setData(polyData);
+                        polyMainChart.timeScale().fitContent();
+
+                        // Update Current Probability in Header
+                        const lastVal = polyData[polyData.length - 1].value;
+                        const probPercent = (lastVal * 100).toFixed(1) + '%';
+                        document.getElementById('poly-header-price').innerText = probPercent;
+                        
+                        // B. Render Correlation Chart (Bottom) - Sync Window
+                        if (stockData.length > 0) {
+                             const startTime = stockData[0].time;
+                             const endTime = stockData[stockData.length-1].time;
+                             const clipped = polyData.filter(d => d.time >= startTime && d.time <= endTime);
+                             crossPolySeries.setData(clipped.length > 0 ? clipped : polyData);
                         } else {
-                            crossPolySeries.setData(data);
+                            crossPolySeries.setData(polyData);
                         }
+                        crossChart.timeScale().fitContent();
                     }
                 }
                 
                 document.getElementById('cross-status').innerText = "(Updated)";
 
-            } catch(e) { 
+            } catch(e) {
                 console.error(e);
                 document.getElementById('cross-status').innerText = "(Error)";
             } finally {
                 btn.disabled = false;
-                btn.innerText = "Analyze";
+                btn.innerText = "Update Charts";
             }
         }
         
         async function loadExcel() {
              const container = document.getElementById('excel-data');
              if(!container) return;
-
-             // Guard: Check if running in a Blob environment (Editor Preview)
-             // This prevents the "Failed to parse URL" error in the editor.
              if (window.location.protocol === 'blob:' || window.location.href.includes('blob:')) {
-                 container.innerHTML = '<div class="error-msg" style="color:#666; font-size:12px;">Excel preview is unavailable in the code editor (Blob URL). Please deploy to GitHub Pages to view the Excel file.</div>';
+                 container.innerHTML = '<div class="error-msg" style="color:#666; font-size:12px;">Excel preview unavailable in editor. Deploy to view.</div>';
                  return;
              }
-
              try {
                 container.innerHTML = '<div class="loading-spinner"><i class="fas fa-circle-notch fa-spin"></i> Loading Excel...</div>';
-                
-                if (typeof XLSX === 'undefined') {
-                    container.innerHTML = '<div class="error-msg">XLSX Library not loaded. Check internet connection.</div>';
-                    return;
+                if (typeof XLSX === 'undefined') return;
+                const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
+                if(response.ok) {
+                    const ab = await response.arrayBuffer();
+                    const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
+                    if (wb.SheetNames.length > 0) container.innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
+                } else {
+                    container.innerHTML = '<div class="error-msg">Excel file not found.</div>';
                 }
-
-                try {
-                    const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
-                    if(response.ok) {
-                        const ab = await response.arrayBuffer();
-                        const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
-                        if (wb.SheetNames.length > 0) {
-                            const html = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
-                            container.innerHTML = html;
-                        } else {
-                            container.innerHTML = '<div class="error-msg">Excel file is empty.</div>';
-                        }
-                    } else {
-                        container.innerHTML = '<div class="error-msg">Excel file not found at /assets/PredictionMarkets/</div>';
-                    }
-                } catch (fetchErr) {
-                    console.warn("Fetch failed:", fetchErr);
-                    container.innerHTML = '<div class="error-msg">Excel file not found (Path Error).</div>';
-                }
-             } catch(e) {
-                 console.error(e);
-                 container.innerHTML = '<div class="error-msg">Failed to parse Excel file.</div>';
-             }
+             } catch(e) { container.innerHTML = '<div class="error-msg">Failed to parse Excel.</div>'; }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
             initCharts();
             loadExcel();
+            // Auto-load the default data
+            setTimeout(updateDashboard, 500);
         });
     </script>
 </body>
