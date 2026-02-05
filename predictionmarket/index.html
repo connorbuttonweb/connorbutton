@@ -237,12 +237,11 @@
         </p>
     </section>
 
-    <script>
+<script>
         // ==========================================
         // CONFIGURATION
         // ==========================================
         const WORKER_URL = 'https://market-proxy.buttonconnor12.workers.dev'; 
-        const SYMBOL = 'SPY'; 
         let POLY_TOKEN_ID = null; 
         // ==========================================
 
@@ -254,13 +253,11 @@
         const marketOpen = nowNY.set({ hour: 9, minute: 30, second: 0, millisecond: 0 });
         const marketClose = nowNY.set({ hour: 16, minute: 0, second: 0, millisecond: 0 });
 
-        // Helper to update status text safely for troubleshooting
         function updateStatus(elementId, message, isError = false) {
             const el = document.getElementById(elementId);
             if (el) {
-                el.innerHTML = message; // Use innerHTML to support badges
-                el.style.color = isError ? 'red' : '#666'; // Red if error, gray if loading
-                el.style.fontSize = isError ? '12px' : '14px';
+                el.innerHTML = message; 
+                el.style.color = isError ? '#d32f2f' : '#666'; 
             }
             console.log(`[${elementId}] ${message}`);
         }
@@ -281,15 +278,8 @@
             const commonOptions = {
                 responsive: true,
                 maintainAspectRatio: false,
-                spanGaps: true, 
                 animation: false, 
-                scales: {
-                    x: {
-                        type: 'time',
-                        bounds: 'data', 
-                        time: { unit: 'hour' }
-                    }
-                }
+                scales: { x: { type: 'time', bounds: 'data' } }
             };
 
             // Chart 1: SPY
@@ -324,7 +314,6 @@
                     }
                 }
             });
-            
             updateStatus('status-combo', 'Charts Ready. Waiting for Data...');
         }
 
@@ -333,15 +322,14 @@
             const month = nowNY.toFormat('MMMM').toLowerCase();
             const day = nowNY.toFormat('d');
             const year = nowNY.toFormat('yyyy');
+            
+            // NOTE: If you are testing this at 1 AM on Feb 5th, ensure this matches the market you want!
             const slug = `spx-up-or-down-on-${month}-${day}-${year}`;
             
             updateStatus('price-poly', `Searching: ${slug}...`);
 
             try {
-                // Call Worker
                 const response = await fetch(`${WORKER_URL}/poly-event?slug=${slug}`);
-                if (!response.ok) throw new Error("Worker Network Error");
-                
                 const data = await response.json();
 
                 if (data.id) {
@@ -362,123 +350,106 @@
             const fromTime = Math.floor(marketOpen.toSeconds());
             const toTime = Math.floor(nowNY.toSeconds());
 
-            // A. SPY via Worker
+            // --- 1. SPY DATA (WITH FAIL-SAFE) ---
+            updateStatus('price-spy', 'Fetching SPY...');
             try {
-                updateStatus('price-spy', 'Fetching SPY History...');
-                const url = `${WORKER_URL}/spy-history?from=${fromTime}&to=${toTime}`;
-                const res = await fetch(url);
-                if(!res.ok) throw new Error("SPY Network Error");
+                // Try to get candles first
+                const histRes = await fetch(`${WORKER_URL}/spy-history?from=${fromTime}&to=${toTime}`);
+                const histData = await histRes.json();
                 
-                const data = await res.json();
-                
-                if (data.s === 'ok' && data.t) {
-                    const points = data.t
-                        .map((t, i) => ({ x: t * 1000, y: data.c[i] }))
-                        .filter(p => p.x >= marketOpen.toMillis());
-                    
+                if (histData.s === 'ok' && histData.t && histData.t.length > 0) {
+                    const points = histData.t.map((t, i) => ({ x: t * 1000, y: histData.c[i] }));
                     chartSpy.data.datasets[0].data = points;
                     chartCombo.data.datasets[0].data = points;
-                    chartSpy.update();
-                    chartCombo.update();
-                    
-                    // Show last price to confirm load
-                    const lastPrice = points[points.length-1]?.y || 0;
-                    const el = document.getElementById('price-spy');
-                    el.innerText = `$${lastPrice.toFixed(2)}`;
-                    el.style.color = '#333'; 
-                    el.style.fontSize = '18px';
+                    document.getElementById('price-spy').innerText = `$${histData.c[histData.c.length-1].toFixed(2)}`;
                 } else {
-                    updateStatus('price-spy', 'Error: No Candle Data', true);
+                    // FAIL-SAFE: If history is empty, fetch live quote and draw a flat line
+                    console.log("SPY History empty. Using Quote fallback.");
+                    const quoteRes = await fetch(`${WORKER_URL}/spy-quote`);
+                    const quote = await quoteRes.json();
+                    
+                    if (quote.c) {
+                        const flatLine = [{ x: marketOpen.toMillis(), y: quote.c }, { x: nowNY.toMillis(), y: quote.c }];
+                        chartSpy.data.datasets[0].data = flatLine;
+                        chartCombo.data.datasets[0].data = flatLine;
+                        document.getElementById('price-spy').innerText = `$${quote.c.toFixed(2)}`;
+                    }
                 }
-            } catch (e) { 
-                updateStatus('price-spy', `SPY Error: ${e.message}`, true); 
-            }
+                chartSpy.update();
+            } catch (e) { console.error(e); }
 
-            // B. Polymarket via Worker
+            // --- 2. POLYMARKET DATA (WITH FAIL-SAFE) ---
             if (POLY_TOKEN_ID) {
                 try {
-                    updateStatus('price-poly', 'Fetching Poly History...');
-                    const url = `${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}`;
-                    const res = await fetch(url);
-                    if(!res.ok) throw new Error("Poly Network Error");
+                    updateStatus('price-poly', 'Fetching Poly...');
+                    const histRes = await fetch(`${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}`);
+                    const histData = await histRes.json();
 
-                    const data = await res.json();
-                    
-                    if (data && data.history) {
-                        const allPoints = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
-                        
-                        chartPoly.data.datasets[0].data = allPoints;
-                        chartPoly.update();
-
-                        const sessionPoints = allPoints.filter(p => p.x >= marketOpen.toMillis());
-                        chartCombo.data.datasets[1].data = sessionPoints;
-                        chartCombo.update();
-                        
-                        updateStatus('price-poly', 'History Loaded');
+                    if (histData.history && histData.history.length > 0) {
+                        const points = histData.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
+                        chartPoly.data.datasets[0].data = points;
+                        chartCombo.data.datasets[1].data = points;
+                        document.getElementById('price-poly').innerText = `${points[points.length-1].y.toFixed(1)}%`;
                     } else {
-                        updateStatus('price-poly', 'Error: No History Data', true);
+                        // FAIL-SAFE: Use midpoint
+                        console.log("Poly History empty. Using Midpoint fallback.");
+                        const midRes = await fetch(`${WORKER_URL}/poly-midpoint?token_id=${POLY_TOKEN_ID}`);
+                        const midData = await midRes.json();
+                        if (midData.mid) {
+                            const val = parseFloat(midData.mid) * 100;
+                            const flatLine = [{ x: marketOpen.toMillis(), y: val }, { x: nowNY.toMillis(), y: val }];
+                            chartPoly.data.datasets[0].data = flatLine;
+                            chartCombo.data.datasets[1].data = flatLine;
+                            document.getElementById('price-poly').innerText = `${val.toFixed(1)}%`;
+                        }
                     }
-                } catch (e) { 
-                    updateStatus('price-poly', `Poly Error: ${e.message}`, true); 
-                }
+                    chartPoly.update();
+                    chartCombo.update();
+                } catch (e) { console.error(e); }
             }
-            
-            updateStatus('status-combo', 'History Sync Complete. Starting Live...');
+            updateStatus('status-combo', 'Data Loaded.');
         }
 
         async function fetchLiveUpdates() {
             const now = DateTime.now().setZone('America/New_York');
 
-            // A. SPY Live via Worker
+            // 1. SPY Live
             try {
                 const res = await fetch(`${WORKER_URL}/spy-quote`);
                 const data = await res.json();
                 if (data.c) {
                     const pt = { x: now.toMillis(), y: data.c };
+                    document.getElementById('price-spy').innerText = `$${data.c.toFixed(2)}`;
                     
-                    // Update UI
-                    const el = document.getElementById('price-spy');
-                    el.innerText = `$${data.c.toFixed(2)}`;
-                    el.style.color = '#333';
-                    el.style.fontSize = '18px';
-
+                    // Add point to chart
                     chartSpy.data.datasets[0].data.push(pt);
                     chartSpy.update('none');
                     chartCombo.data.datasets[0].data.push(pt);
                     chartCombo.update('none');
                 }
-            } catch(e) {
-                console.log("SPY Live fetch error (ignoring for UI stability)");
-            }
+            } catch(e) {}
 
-            // B. Polymarket Live via Worker
+            // 2. Poly Live
             if (POLY_TOKEN_ID) {
                 try {
                     const res = await fetch(`${WORKER_URL}/poly-midpoint?token_id=${POLY_TOKEN_ID}`);
                     const data = await res.json();
                     if (data.mid) {
-                        const priceVal = parseFloat(data.mid) * 100; 
-                        const pt = { x: now.toMillis(), y: priceVal };
-
-                        // Update UI
-                        const el = document.getElementById('price-poly');
-                        el.innerText = `${priceVal.toFixed(1)}%`;
-                        el.style.color = '#333';
-                        el.style.fontSize = '18px';
+                        const val = parseFloat(data.mid) * 100;
+                        const pt = { x: now.toMillis(), y: val };
+                        document.getElementById('price-poly').innerText = `${val.toFixed(1)}%`;
                         
+                        // Add point to chart
                         chartPoly.data.datasets[0].data.push(pt);
                         chartPoly.update('none');
                         chartCombo.data.datasets[1].data.push(pt);
                         chartCombo.update('none');
                     }
-                } catch(e) {
-                    console.log("Poly Live fetch error (ignoring for UI stability)");
-                }
+                } catch(e) {}
             }
             
-            // Pulse the combo status so we know it's alive
             const timeStr = now.toFormat('h:mm:ss a');
-            updateStatus('status-combo', `Dashboard Active (Last: ${timeStr})`);
+            updateStatus('status-combo', `Live Data Active (Last: ${timeStr})`);
             document.getElementById('status-combo').style.color = '#1e8e3e';
         }
 
@@ -499,20 +470,11 @@
         }
 
         window.onload = async function() {
-            console.log("Initializing Dashboard...");
             initCharts();
-            
-            // 1. Find Token
             await findPolymarketToken();
-            
-            // 2. Load History
-            await loadHistory();
-            
-            // 3. Load Excel
+            await loadHistory(); // This now includes the critical fallbacks!
             loadExcel();
-            
-            // 4. Loop
-            setInterval(fetchLiveUpdates, 2000);
+            setInterval(fetchLiveUpdates, 5000); // Slower interval (5s) avoids rate limits
         };
     </script>
 </body>
