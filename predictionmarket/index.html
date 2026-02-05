@@ -53,7 +53,7 @@
         border-radius: 4px;
         font-family: inherit;
         font-size: 14px;
-        min-width: 220px;
+        min-width: 250px; 
     }
 
     .analyze-btn {
@@ -66,7 +66,7 @@
         font-weight: 600;
         font-size: 14px;
         transition: background 0.2s;
-        height: 40px; /* Match input height */
+        height: 40px; 
     }
 
     .analyze-btn:hover {
@@ -113,10 +113,12 @@
         justify-content: space-between;
     }
 
+    /* Fixed height is CRITICAL for Lightweight Charts */
     .chart-box {
         width: 100%;
         height: 350px;
         position: relative;
+        overflow: hidden; /* Prevents scrollbars if chart mis-sizes */
     }
 
     .status-text {
@@ -216,8 +218,8 @@
                 <input type="text" id="stockTicker" class="dashboard-input" placeholder="e.g. SPY" value="SPY">
             </div>
             <div class="input-group">
-                <label for="polyId">Polymarket Token ID</label>
-                <input type="text" id="polyId" class="dashboard-input" placeholder="Paste Token ID from Excel" value="">
+                <label for="polyId">CLOB Token ID (Outcome Specific)</label>
+                <input type="text" id="polyId" class="dashboard-input" placeholder="Paste ID (e.g., 'Yes' Token)" value="">
             </div>
             <button class="analyze-btn" id="analyzeBtn" onclick="updateDashboard()">Analyze Correlation</button>
         </div>
@@ -272,27 +274,51 @@
         let stockChart, polyChart, crossChart;
         let stockSeries, polySeries, crossStockSeries, crossPolySeries;
 
+        // Helper to get safe dimensions
+        function getDimensions(elementId) {
+            const el = document.getElementById(elementId);
+            return {
+                width: el.clientWidth || 600,
+                height: el.clientHeight || 350
+            };
+        }
+
         // 1. CHART INITIALIZATION
         function initCharts() {
             if (typeof LightweightCharts === 'undefined') return console.error("Charts lib missing");
 
+            // Slightly brighter grid lines to be visible against dark background
             const chartOptions = {
                 layout: { background: { type: 'solid', color: '#1E1E1E' }, textColor: '#DDD' },
-                grid: { vertLines: { color: '#333' }, horzLines: { color: '#333' } },
+                grid: { vertLines: { color: '#404040' }, horzLines: { color: '#404040' } },
                 timeScale: { timeVisible: true, secondsVisible: false, borderColor: '#555' },
+                rightPriceScale: { borderColor: '#555' },
             };
 
-            // Stock Only
-            stockChart = LightweightCharts.createChart(document.getElementById('stock-chart'), chartOptions);
+            // 1. Stock Only
+            const dimStock = getDimensions('stock-chart');
+            stockChart = LightweightCharts.createChart(document.getElementById('stock-chart'), {
+                ...chartOptions,
+                width: dimStock.width,
+                height: dimStock.height
+            });
             stockSeries = stockChart.addLineSeries({ color: '#2962FF', lineWidth: 2 });
 
-            // Poly Only
-            polyChart = LightweightCharts.createChart(document.getElementById('poly-chart'), chartOptions);
+            // 2. Poly Only
+            const dimPoly = getDimensions('poly-chart');
+            polyChart = LightweightCharts.createChart(document.getElementById('poly-chart'), {
+                ...chartOptions,
+                width: dimPoly.width,
+                height: dimPoly.height
+            });
             polySeries = polyChart.addLineSeries({ color: '#FF9800', lineWidth: 2 });
 
-            // Cross Market (Dual Axis)
+            // 3. Cross Market (Dual Axis)
+            const dimCross = getDimensions('cross-chart');
             crossChart = LightweightCharts.createChart(document.getElementById('cross-chart'), {
                 ...chartOptions,
+                width: dimCross.width,
+                height: dimCross.height,
                 leftPriceScale: { visible: true, borderColor: '#FF9800' },
                 rightPriceScale: { visible: true, borderColor: '#2962FF' },
             });
@@ -305,20 +331,18 @@
                 color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'Price'
             });
 
-            // Responsive Resizing
-            const resizeObserver = new ResizeObserver(entries => {
-                for (let entry of entries) {
-                    const { width, height } = entry.contentRect;
-                    // Apply to specific chart based on ID
-                    if (entry.target.id === 'cross-chart') crossChart.applyOptions({ width, height });
-                    if (entry.target.id === 'stock-chart') stockChart.applyOptions({ width, height });
-                    if (entry.target.id === 'poly-chart') polyChart.applyOptions({ width, height });
-                }
+            // Handle Resize - Explicitly
+            window.addEventListener('resize', () => {
+                resizeChart(stockChart, 'stock-chart');
+                resizeChart(polyChart, 'poly-chart');
+                resizeChart(crossChart, 'cross-chart');
             });
+        }
 
-            resizeObserver.observe(document.getElementById('cross-chart'));
-            resizeObserver.observe(document.getElementById('stock-chart'));
-            resizeObserver.observe(document.getElementById('poly-chart'));
+        function resizeChart(chart, containerId) {
+            if(!chart) return;
+            const dims = getDimensions(containerId);
+            chart.applyOptions({ width: dims.width, height: dims.height });
         }
 
         // 2. DATA FETCHING & SYNCHRONIZATION
@@ -409,7 +433,9 @@
                         const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
                         container.innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
                     } else {
-                        container.innerHTML = '<div class="status-message error">Excel file not found. Please upload to /assets/PredictionMarkets/</div>';
+                        // Keep subtle
+                        console.warn("Excel file not found at path.");
+                        container.innerHTML = '<div class="status-message error">Excel not found. Upload "Prediction_Market_Master.xlsx" to assets/PredictionMarkets/</div>';
                     }
                 }
              } catch(e) {
