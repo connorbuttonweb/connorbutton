@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-    <!-- Existing Scripts -->
+    <!-- Libraries -->
     <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
@@ -18,8 +18,6 @@
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
 
   <style>
-    /* Global/Existing Styles */
-    
     /* --- DASHBOARD STYLES --- */
     .dashboard-controls {
         display: flex;
@@ -113,18 +111,21 @@
         justify-content: space-between;
     }
 
-    /* Fixed height is CRITICAL for Lightweight Charts */
     .chart-box {
         width: 100%;
         height: 350px;
         position: relative;
-        overflow: hidden; /* Prevents scrollbars if chart mis-sizes */
+        overflow: hidden;
     }
 
     .status-text {
         font-size: 12px;
         font-weight: normal;
         color: #666;
+    }
+
+    .status-text.error {
+        color: #d32f2f;
     }
 
     /* Excel Styles */
@@ -262,11 +263,9 @@
 
     <script>
         // =========================================================
-        //  CONFIGURATION - USER MUST UPDATE THIS
+        //  CONFIGURATION
         // =========================================================
         
-        // PASTE YOUR CLOUDFLARE WORKER URL HERE:
-        // Example: "https://market-proxy.connorbutton.workers.dev"
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
 
         // =========================================================
@@ -274,7 +273,6 @@
         let stockChart, polyChart, crossChart;
         let stockSeries, polySeries, crossStockSeries, crossPolySeries;
 
-        // Helper to get safe dimensions
         function getDimensions(elementId) {
             const el = document.getElementById(elementId);
             return {
@@ -283,11 +281,9 @@
             };
         }
 
-        // 1. CHART INITIALIZATION
         function initCharts() {
             if (typeof LightweightCharts === 'undefined') return console.error("Charts lib missing");
 
-            // Slightly brighter grid lines to be visible against dark background
             const chartOptions = {
                 layout: { background: { type: 'solid', color: '#1E1E1E' }, textColor: '#DDD' },
                 grid: { vertLines: { color: '#404040' }, horzLines: { color: '#404040' } },
@@ -331,7 +327,6 @@
                 color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'Price'
             });
 
-            // Handle Resize - Explicitly
             window.addEventListener('resize', () => {
                 resizeChart(stockChart, 'stock-chart');
                 resizeChart(polyChart, 'poly-chart');
@@ -345,84 +340,89 @@
             chart.applyOptions({ width: dims.width, height: dims.height });
         }
 
-        // 2. DATA FETCHING & SYNCHRONIZATION
+        // =========================================================
+        //  RESILIENT DATA FETCHING
+        // =========================================================
         async function updateDashboard() {
             const ticker = document.getElementById('stockTicker').value.trim();
             const polyId = document.getElementById('polyId').value.trim();
             const btn = document.getElementById('analyzeBtn');
 
-            if (!ticker || !polyId) {
-                alert("Please enter both a Stock Ticker and a Polymarket Token ID.");
-                return;
-            }
-
-            if (PROXY_URL.includes("YOUR-SUBDOMAIN")) {
-                alert("CONFIGURATION ERROR: You must update the PROXY_URL variable in the code with your actual Cloudflare Worker URL.");
-                return;
-            }
-
-            // UI Loading State
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching Data...';
+            // Reset Status
+            document.getElementById('stock-status').innerText = "";
+            document.getElementById('stock-status').className = "status-text";
+            document.getElementById('poly-status').innerText = "";
+            document.getElementById('poly-status').className = "status-text";
             document.getElementById('cross-status').innerText = "(Loading...)";
 
+            btn.disabled = true;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Fetching Data...';
+
+            let stockData = [];
+            let polyData = [];
+
+            // 1. Fetch Stock Data (Independent Try/Catch)
             try {
-                // Parallel Fetch
-                const [stockRes, polyRes] = await Promise.all([
-                    fetch(`${PROXY_URL}/stock?ticker=${ticker}`),
-                    fetch(`${PROXY_URL}/polymarket?id=${polyId}`)
-                ]);
-
-                if (!stockRes.ok) throw new Error("Stock Data Failed");
-                if (!polyRes.ok) throw new Error("Polymarket Data Failed");
-
-                const stockData = await stockRes.json();
-                const polyData = await polyRes.json();
-
-                if (stockData.error) throw new Error("Stock API: " + stockData.error);
-                if (polyData.error) throw new Error("Polymarket API: " + polyData.error);
-                if (stockData.length === 0) throw new Error("No stock data returned.");
-
-                // --- SYNCHRONIZATION LOGIC ---
-                // Problem: Crypto is 24/7, Stock is 9:30-4:00.
-                // Solution: Find the start/end time of the stock data, and clip the Poly data to match.
+                const res = await fetch(`${PROXY_URL}/stock?ticker=${ticker}`);
+                if(!res.ok) throw new Error(res.statusText);
+                const json = await res.json();
                 
-                // 1. Get Stock Window
+                if(json.error) throw new Error(json.error);
+                if(Array.isArray(json)) stockData = json;
+                
+                stockSeries.setData(stockData);
+                crossStockSeries.setData(stockData);
+                stockChart.timeScale().fitContent();
+                
+                document.getElementById('stock-status').innerText = `(${stockData.length} pts)`;
+            } catch(e) {
+                console.error("Stock Error:", e);
+                document.getElementById('stock-status').innerText = `Error: ${e.message}`;
+                document.getElementById('stock-status').className = "status-text error";
+            }
+
+            // 2. Fetch Poly Data (Independent Try/Catch)
+            try {
+                if(polyId) {
+                    const res = await fetch(`${PROXY_URL}/polymarket?id=${polyId}`);
+                    // Note: 404/500 errors handled by worker returning JSON error now
+                    const json = await res.json();
+
+                    if(json.error) throw new Error(json.error);
+                    if(Array.isArray(json)) polyData = json;
+                    
+                    polySeries.setData(polyData);
+                    polyChart.timeScale().fitContent();
+                    
+                    document.getElementById('poly-status').innerText = `(${polyData.length} pts)`;
+                }
+            } catch(e) {
+                console.error("Poly Error:", e);
+                document.getElementById('poly-status').innerText = `Error: ${e.message}`;
+                document.getElementById('poly-status').className = "status-text error";
+            }
+
+            // 3. Sync Cross Chart (Only if both exist)
+            if (stockData.length > 0 && polyData.length > 0) {
                 const startTime = stockData[0].time;
                 const endTime = stockData[stockData.length - 1].time;
-
-                // 2. Clip Poly Data
-                const clippedPolyData = polyData.filter(d => d.time >= startTime && d.time <= endTime);
-
-                if (clippedPolyData.length === 0) {
-                    alert("Warning: No overlapping time data found. (Are the markets open today?)");
-                }
-
-                // 3. Update Charts
-                stockSeries.setData(stockData);
-                polySeries.setData(polyData); // Show full 24h data on the individual chart
                 
-                crossStockSeries.setData(stockData);
-                crossPolySeries.setData(clippedPolyData); // Show clipped data on comparison chart
-
-                // 4. Fit Charts
-                stockChart.timeScale().fitContent();
-                polyChart.timeScale().fitContent();
+                // Clip Poly to Stock Window
+                const clippedPoly = polyData.filter(d => d.time >= startTime && d.time <= endTime);
+                
+                crossPolySeries.setData(clippedPoly);
                 crossChart.timeScale().fitContent();
-
-                document.getElementById('cross-status').innerText = "(Live)";
-
-            } catch (err) {
-                console.error(err);
-                alert(`Error: ${err.message}`);
-                document.getElementById('cross-status').innerText = "(Error)";
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Analyze Correlation";
+                document.getElementById('cross-status').innerText = "(Live Correlation)";
+            } else if (stockData.length > 0) {
+                 document.getElementById('cross-status').innerText = "(Stock Only)";
+            } else {
+                 document.getElementById('cross-status').innerText = "(No Data)";
             }
+
+            btn.disabled = false;
+            btn.innerText = "Analyze Correlation";
         }
 
-        // 3. EXCEL LOADER (For finding IDs)
         async function loadExcel() {
              try {
                 const container = document.getElementById('excel-data');
@@ -433,8 +433,6 @@
                         const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
                         container.innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
                     } else {
-                        // Keep subtle
-                        console.warn("Excel file not found at path.");
                         container.innerHTML = '<div class="status-message error">Excel not found. Upload "Prediction_Market_Master.xlsx" to assets/PredictionMarkets/</div>';
                     }
                 }
