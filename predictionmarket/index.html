@@ -448,8 +448,8 @@
         window.onload = async function() {
             console.log("Initializing Dashboard...");
             initCharts();
-            await findPolymarketToken();
             await loadHistory();
+            findPolymarketToken();
             loadExcel();
             setInterval(fetchLiveUpdates, 2000);
         };
