@@ -188,15 +188,12 @@
         </div>
         
         <div class="dashboard-grid">
-            
             <div class="chart-card">
                 <div class="card-header">
                     <span class="card-title">S&P 500 (SPY) <span class="badge badge-spy">EQUITY</span></span>
                     <span id="price-spy" class="live-price">Loading...</span>
                 </div>
-                <div class="canvas-wrapper">
-                    <canvas id="spyChart"></canvas>
-                </div>
+                <div class="canvas-wrapper"><canvas id="spyChart"></canvas></div>
             </div>
 
             <div class="chart-card">
@@ -204,9 +201,7 @@
                     <span class="card-title">Market: "SPX Up or Down" <span class="badge badge-poly">PROBABILITY</span></span>
                     <span id="price-poly" class="live-price">Loading...</span>
                 </div>
-                <div class="canvas-wrapper">
-                    <canvas id="polyChart"></canvas>
-                </div>
+                <div class="canvas-wrapper"><canvas id="polyChart"></canvas></div>
             </div>
 
             <div class="chart-card large dashboard-full-width">
@@ -217,11 +212,8 @@
                         <i class="fas fa-percent"></i> Right Axis: Probability (%)
                     </div>
                 </div>
-                <div class="canvas-wrapper">
-                    <canvas id="comboChart"></canvas>
-                </div>
+                <div class="canvas-wrapper"><canvas id="comboChart"></canvas></div>
             </div>
-
         </div>
         
         <div class="excel-container" id="excel-data">
@@ -239,12 +231,13 @@
         // ==========================================
         // CONFIGURATION
         // ==========================================
-        const FINNHUB_KEY = 'd61qcv1r01qgcobqh8k0d61qcv1r01qgcobqh8kg'; 
+        // !!! PASTE YOUR CLOUDFLARE URL HERE !!!
+        const WORKER_URL = 'market-proxy.buttonconnor12.workers.dev'; 
+        
         const SYMBOL = 'SPY'; 
         let POLY_TOKEN_ID = null; 
         // ==========================================
 
-        // Global Chart Instances
         let chartSpy, chartPoly, chartCombo;
         const DateTime = luxon.DateTime;
 
@@ -253,9 +246,6 @@
         const marketOpen = nowNY.set({ hour: 9, minute: 30, second: 0, millisecond: 0 });
         const marketClose = nowNY.set({ hour: 16, minute: 0, second: 0, millisecond: 0 });
 
-        // -------------------------------------------------------
-        // 1. CHART INITIALIZATION
-        // -------------------------------------------------------
         function initCharts() {
             // Option A: Fixed Session Scale (for SPY & Combo)
             const sessionScales = {
@@ -269,7 +259,6 @@
             };
 
             // Option B: Dynamic Scale (for Polymarket Top-Right)
-            // Removes min/max so it auto-scales to full market history
             const dynamicScales = {
                 x: {
                     type: 'time',
@@ -285,57 +274,26 @@
                 plugins: { legend: { display: false } }
             };
 
-            // Chart 1: SPY (Equity) - LOCKED 9:30-4:00
+            // Chart 1: SPY
             chartSpy = new Chart(document.getElementById('spyChart'), {
                 type: 'line',
-                data: { datasets: [{ 
-                    label: 'SPY', 
-                    borderColor: '#2196F3', 
-                    borderWidth: 2, 
-                    pointRadius: 0, 
-                    tension: 0.1,
-                    data: [] 
-                }]},
+                data: { datasets: [{ label: 'SPY', borderColor: '#2196F3', borderWidth: 2, pointRadius: 0, tension: 0.1, data: [] }]},
                 options: { ...commonOptions, scales: { x: sessionScales.x, y: { title: {display:true, text:'Price ($)'} } } }
             });
 
-            // Chart 2: Polymarket (Probability) - DYNAMIC (Full History)
+            // Chart 2: Polymarket
             chartPoly = new Chart(document.getElementById('polyChart'), {
                 type: 'line',
-                data: { datasets: [{ 
-                    label: 'Probability (Yes)', 
-                    borderColor: '#E91E63', 
-                    borderWidth: 2, 
-                    pointRadius: 0, 
-                    tension: 0.1,
-                    data: [] 
-                }]},
+                data: { datasets: [{ label: 'Probability (Yes)', borderColor: '#E91E63', borderWidth: 2, pointRadius: 0, tension: 0.1, data: [] }]},
                 options: { ...commonOptions, scales: { x: dynamicScales.x, y: { min: 0, max: 100, title: {display:true, text:'Chance (%)'} } } }
             });
 
-            // Chart 3: Combo (Dual Axis) - LOCKED 9:30-4:00
+            // Chart 3: Combo
             chartCombo = new Chart(document.getElementById('comboChart'), {
                 type: 'line',
                 data: { datasets: [
-                    { 
-                        label: 'SPY Price', 
-                        borderColor: '#2196F3', 
-                        backgroundColor: 'rgba(33, 150, 243, 0.05)',
-                        borderWidth: 2, 
-                        pointRadius: 0, 
-                        fill: true,
-                        yAxisID: 'y',
-                        data: [] 
-                    },
-                    { 
-                        label: 'Probability', 
-                        borderColor: '#E91E63', 
-                        borderWidth: 2, 
-                        borderDash: [5, 5], 
-                        pointRadius: 0, 
-                        yAxisID: 'y1',
-                        data: [] 
-                    }
+                    { label: 'SPY Price', borderColor: '#2196F3', backgroundColor: 'rgba(33, 150, 243, 0.05)', borderWidth: 2, pointRadius: 0, fill: true, yAxisID: 'y', data: [] },
+                    { label: 'Probability', borderColor: '#E91E63', borderWidth: 2, borderDash: [5, 5], pointRadius: 0, yAxisID: 'y1', data: [] }
                 ]},
                 options: {
                     responsive: true,
@@ -350,51 +308,43 @@
             });
         }
 
-        // -------------------------------------------------------
-        // 2. POLYMARKET DISCOVERY
-        // -------------------------------------------------------
         async function findPolymarketToken() {
             const month = nowNY.toFormat('MMMM').toLowerCase();
             const day = nowNY.toFormat('d');
             const year = nowNY.toFormat('yyyy');
             const slug = `spx-up-or-down-on-${month}-${day}-${year}`;
             
-            console.log("Searching for market slug:", slug);
+            console.log("Searching slug:", slug);
 
             try {
-                const response = await fetch(`https://gamma-api.polymarket.com/events?slug=${slug}`);
-                if (!response.ok) throw new Error("Gamma API Error");
+                // Call the Worker, which now safely extracts the ID
+                const response = await fetch(`${WORKER_URL}/poly-event?slug=${slug}`);
                 const data = await response.json();
 
-                if (data.length > 0 && data[0].markets.length > 0) {
-                    const market = data[0].markets[0];
-                    POLY_TOKEN_ID = market.clobTokenIds[0]; 
-                    
-                    console.log("Found Token ID:", POLY_TOKEN_ID);
+                if (data.id) {
+                    POLY_TOKEN_ID = data.id;
+                    console.log("Worker found ID:", POLY_TOKEN_ID);
                     document.getElementById('price-poly').innerText = "Market Found";
                     return true;
                 } else {
-                    console.warn("No market found for slug:", slug);
+                    console.warn("Worker returned no ID:", data);
                     document.getElementById('price-poly').innerText = "Market Not Found";
                     return false;
                 }
             } catch (e) {
-                console.error("Polymarket Discovery Error:", e);
+                console.error("Discovery Error:", e);
                 document.getElementById('price-poly').innerText = "Connection Error";
                 return false;
             }
         }
 
-        // -------------------------------------------------------
-        // 3. LOAD HISTORY
-        // -------------------------------------------------------
         async function loadHistory() {
             const fromTime = Math.floor(marketOpen.toSeconds());
             const toTime = Math.floor(nowNY.toSeconds());
 
-            // A. Finnhub (SPY)
+            // A. SPY via Worker
             try {
-                const url = `https://finnhub.io/api/v1/stock/candle?symbol=${SYMBOL}&resolution=1&from=${fromTime}&to=${toTime}&token=${FINNHUB_KEY}`;
+                const url = `${WORKER_URL}/spy-history?from=${fromTime}&to=${toTime}`;
                 const res = await fetch(url);
                 const data = await res.json();
                 
@@ -408,24 +358,23 @@
                     chartSpy.update();
                     chartCombo.update();
                 }
-            } catch (e) { console.error("Finnhub History Error", e); }
+            } catch (e) { console.error("SPY History Error", e); }
 
-            // B. Polymarket History
+            // B. Polymarket via Worker
             if (POLY_TOKEN_ID) {
                 try {
-                    // Fetch ALL history (do not filter by time initially)
-                    const url = `https://clob.polymarket.com/prices-history?market=${POLY_TOKEN_ID}&interval=1m&fidelity=1`;
+                    const url = `${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}`;
                     const res = await fetch(url);
                     const data = await res.json();
                     
                     if (data && data.history) {
                         const allPoints = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
                         
-                        // 1. Top Right Chart: Show EVERYTHING (Full history)
+                        // Full History for Top Right
                         chartPoly.data.datasets[0].data = allPoints;
                         chartPoly.update();
 
-                        // 2. Combo Chart: Show ONLY 9:30-4:00 (Session)
+                        // Session Only for Combo
                         const sessionPoints = allPoints.filter(p => p.x >= marketOpen.toMillis());
                         chartCombo.data.datasets[1].data = sessionPoints;
                         chartCombo.update();
@@ -434,13 +383,9 @@
             }
         }
 
-        // -------------------------------------------------------
-        // 4. LIVE UPDATE LOOP (Every 2s)
-        // -------------------------------------------------------
         async function fetchLiveUpdates() {
             const now = DateTime.now().setZone('America/New_York');
             
-            // Market Closed Logic
             if (now < marketOpen || now > marketClose) {
                 const status = (now < marketOpen) ? "PRE-MARKET" : "CLOSED";
                 const badge = `<span class="badge badge-closed">${status}</span>`;
@@ -450,9 +395,9 @@
                 return; 
             }
 
-            // A. Finnhub Live
+            // A. SPY Live via Worker
             try {
-                const res = await fetch(`https://finnhub.io/api/v1/quote?symbol=${SYMBOL}&token=${FINNHUB_KEY}`);
+                const res = await fetch(`${WORKER_URL}/spy-quote`);
                 const data = await res.json();
                 if (data.c) {
                     const pt = { x: now.toMillis(), y: data.c };
@@ -460,27 +405,24 @@
                     
                     chartSpy.data.datasets[0].data.push(pt);
                     chartSpy.update('none');
-
                     chartCombo.data.datasets[0].data.push(pt);
                     chartCombo.update('none');
                 }
             } catch(e) {}
 
-            // B. Polymarket Live
+            // B. Polymarket Live via Worker
             if (POLY_TOKEN_ID) {
                 try {
-                    const res = await fetch(`https://clob.polymarket.com/midpoint?token_id=${POLY_TOKEN_ID}`);
+                    const res = await fetch(`${WORKER_URL}/poly-midpoint?token_id=${POLY_TOKEN_ID}`);
                     const data = await res.json();
                     if (data.mid) {
                         const priceVal = parseFloat(data.mid) * 100; 
                         const pt = { x: now.toMillis(), y: priceVal };
 
                         document.getElementById('price-poly').innerHTML = `${priceVal.toFixed(1)}%`;
-
-                        // Push to Both Charts
+                        
                         chartPoly.data.datasets[0].data.push(pt);
                         chartPoly.update('none');
-
                         chartCombo.data.datasets[1].data.push(pt);
                         chartCombo.update('none');
                     }
@@ -488,9 +430,6 @@
             }
         }
 
-        // -------------------------------------------------------
-        // 5. EXCEL LOADER
-        // -------------------------------------------------------
         async function loadExcel() {
              try {
                 const response = await fetch('/assets/PredictionMarkets/Prediction_Market_Master.xlsx');
@@ -498,18 +437,10 @@
                     const ab = await response.arrayBuffer();
                     const wb = XLSX.read(new Uint8Array(ab), {type:'array'});
                     document.getElementById('excel-data').innerHTML = XLSX.utils.sheet_to_html(wb.Sheets[wb.SheetNames[0]]);
-                } else {
-                    document.getElementById('excel-data').innerHTML = '<div class="status-message error">Excel file not found</div>';
                 }
-             } catch(e) {
-                 console.error("Excel Error:", e);
-                 document.getElementById('excel-data').innerHTML = '<div class="status-message error">Could not load Excel file.</div>';
-             }
+             } catch(e) {}
         }
 
-        // -------------------------------------------------------
-        // MAIN EXECUTION
-        // -------------------------------------------------------
         window.onload = async function() {
             console.log("Initializing Dashboard...");
             initCharts();
