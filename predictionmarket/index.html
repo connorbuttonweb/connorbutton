@@ -306,7 +306,7 @@
             // A. SPY HISTORY
             try {
                 updateStatus('price-spy', 'Fetching History...');
-                const res = await fetch(`${WORKER_URL}/spy-history?from=${openTime}&to=${nowTime}`);
+                const res = await fetch(`${WORKER_URL}/spy-history?from=${openTime}&to=${nowTime}&resolution=D`);
                 const data = await res.json();
                 
                 if (data.s === 'ok' && data.t && data.t.length > 0) {
@@ -339,7 +339,7 @@
             // B. POLY HISTORY
             if (POLY_TOKEN_ID) {
                 try {
-                    const res = await fetch(`${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}`);
+                    const res = await fetch(`${WORKER_URL}/poly-history?market=${POLY_TOKEN_ID}&interval=1D`);
                     const data = await res.json();
                     if (data.history && data.history.length > 0) {
                         const points = data.history.map(p => ({ x: p.t * 1000, y: p.p * 100 }));
