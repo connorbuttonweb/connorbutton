@@ -181,6 +181,25 @@
             </div>
         </div>
 
+        <!-- CONTROLS -->
+        <div class="dashboard-controls">
+             <div style="flex: 1; min-width: 200px;">
+                <strong>Market Controls</strong><br>
+                <div id="debug-info" style="font-size:11px; color:#666;">Ready.</div>
+             </div>
+            <div class="input-group">
+                <label for="stockTicker">Stock Ticker</label>
+                <input type="text" id="stockTicker" class="dashboard-input" placeholder="e.g. SPY" value="SPY">
+            </div>
+            <div class="input-group">
+                <label for="polyInput">Polymarket Link</label>
+                <input type="text" id="polyInput" class="dashboard-input" 
+                       placeholder="Paste URL..." 
+                       value="https://polymarket.com/event/trump-inauguration-attendance-vs-biden">
+            </div>
+            <button class="analyze-btn" id="analyzeBtn" onclick="updateDashboard()">Update Charts</button>
+        </div>
+
         <div class="chart-card full-width">
             <h3>Calculated Correlation <span class="status-text" id="cross-status"></span></h3>
             <div id="cross-chart" class="chart-box"></div>
