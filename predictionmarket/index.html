@@ -66,9 +66,58 @@
         .widget-container { width: 100%; height: 100%; flex-grow: 1; border: none; display: block; position: relative; }
         .chart-box { width: 100%; height: 350px; position: relative; }
         .status-text { font-size: 12px; font-weight: normal; color: #666; }
-        .excel-container { width: 100%; overflow-x: auto; background: #fff; border: 1px solid #e2e3e5; border-radius: 8px; margin-top: 30px; min-height: 100px; }
+        
         .loading-spinner { text-align: center; padding: 40px; color: #666; }
         .error-msg { color: #d32f2f; padding: 20px; text-align: center; font-size: 13px; background: #fff5f5; border: 1px solid #fed7d7; border-radius: 4px; margin: 10px; }
+
+        /* EXCEL SHEET STYLING */
+        .excel-container { 
+            width: 100%; 
+            overflow-x: auto; 
+            background: #fff; 
+            border: 1px solid #d1d5db; 
+            border-radius: 8px; 
+            margin-top: 30px; 
+            min-height: 100px;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        .excel-container table {
+            width: 100%;
+            border-collapse: collapse;
+            font-family: 'Segoe UI', Calibri, Arial, sans-serif;
+            font-size: 13px;
+            color: #333;
+            min-width: 800px; /* Ensure table doesn't squish */
+        }
+
+        .excel-container td, .excel-container th {
+            border: 1px solid #e2e3e5;
+            padding: 8px 12px;
+            white-space: nowrap;
+        }
+
+        /* Header Row Styles */
+        .excel-container tr:first-child td, 
+        .excel-container th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+            color: #4b5563;
+            border-bottom: 2px solid #d1d5db;
+            text-transform: uppercase;
+            font-size: 11px;
+            letter-spacing: 0.05em;
+        }
+
+        /* Zebra Striping */
+        .excel-container tr:nth-child(even) {
+            background-color: #fcfcfc;
+        }
+
+        /* Hover Effect */
+        .excel-container tr:hover {
+            background-color: #f0fdf4; /* Very light green hint on hover */
+        }
     </style>
 </head>
 
