@@ -16,17 +16,6 @@
 
     <style>
         /* DASHBOARD LAYOUT */
-        .dashboard-controls {
-            display: flex; gap: 15px; background: #f8f9fa; padding: 20px;
-            border-radius: 8px; border: 1px solid #e2e3e5; margin-bottom: 20px;
-            flex-wrap: wrap; align-items: flex-end;
-        }
-        .input-group { display: flex; flex-direction: column; gap: 5px; flex: 1; min-width: 200px; }
-        .input-group label { font-size: 12px; font-weight: 600; color: #555; text-transform: uppercase; }
-        .dashboard-input { padding: 10px 12px; border: 1px solid #ccc; border-radius: 4px; width: 100%; }
-        .analyze-btn { background-color: #007bff; color: white; border: none; padding: 11px 24px; border-radius: 4px; cursor: pointer; font-weight: 600; height: 40px; }
-        .analyze-btn:disabled { background-color: #ccc; cursor: not-allowed; }
-        
         .grid-container { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; align-items: stretch; }
         @media (min-width: 768px) { .grid-container { grid-template-columns: 1fr 1fr; } .full-width { grid-column: 1 / -1; } }
         
@@ -181,25 +170,6 @@
             </div>
         </div>
 
-        <!-- CONTROLS -->
-        <div class="dashboard-controls">
-             <div style="flex: 1; min-width: 200px;">
-                <strong>Market Controls</strong><br>
-                <div id="debug-info" style="font-size:11px; color:#666;">Ready.</div>
-             </div>
-            <div class="input-group">
-                <label for="stockTicker">Stock Ticker</label>
-                <input type="text" id="stockTicker" class="dashboard-input" placeholder="e.g. SPY" value="SPY">
-            </div>
-            <div class="input-group">
-                <label for="polyInput">Polymarket Link</label>
-                <input type="text" id="polyInput" class="dashboard-input" 
-                       placeholder="Paste URL..." 
-                       value="https://polymarket.com/event/trump-inauguration-attendance-vs-biden">
-            </div>
-            <button class="analyze-btn" id="analyzeBtn" onclick="updateDashboard()">Update Charts</button>
-        </div>
-
         <div class="chart-card full-width">
             <h3>Calculated Correlation <span class="status-text" id="cross-status"></span></h3>
             <div id="cross-chart" class="chart-box"></div>
@@ -210,6 +180,11 @@
 
     <script>
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
+        
+        // DEFAULTS (Controls removed, set here)
+        const DEFAULT_TICKER = "SPY";
+        const DEFAULT_POLY_LINK = "https://polymarket.com/event/trump-inauguration-attendance-vs-biden";
+
         let crossChart, polyMainChart;
         let crossStockSeries, crossPolySeries, polyMainSeries;
         let globalPolyData = []; // Store full data for filtering
@@ -293,14 +268,12 @@
         }
 
         async function updateDashboard() {
-            const ticker = document.getElementById('stockTicker').value.trim();
-            const polyInput = document.getElementById('polyInput').value.trim();
-            const btn = document.getElementById('analyzeBtn');
+            // Use Constants since UI controls are gone
+            const ticker = DEFAULT_TICKER;
+            const polyInput = DEFAULT_POLY_LINK;
             let polyId = polyInput;
 
-            btn.disabled = true;
-            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Loading...';
-            document.getElementById('debug-info').innerText = "Resolving...";
+            console.log("Resolving market data...");
 
             // 1. Resolve Link & Metadata
             if (polyInput.includes('polymarket.com/event/')) {
@@ -320,9 +293,9 @@
                         const liq = data.liquidity ? `$${Math.floor(data.liquidity).toLocaleString()}` : "$0";
                         document.getElementById('poly-meta').innerText = `Vol: ${vol} • Liq: ${liq}`;
                         
-                        document.getElementById('debug-info').innerText = `ID: ${polyId}`;
+                        console.log(`ID Resolved: ${polyId}`);
                     }
-                } catch (e) { console.log("Resolver skipped"); }
+                } catch (e) { console.log("Resolver skipped or failed"); }
             }
 
             try {
@@ -356,9 +329,6 @@
                     // Header Price
                     const lastVal = polyData[polyData.length - 1].value;
                     document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
-                    
-                    // Color Logic: Green if > 50%, Red if < 50%? Or just Green for Yes.
-                    // Keeping Green for now as standard Polymarket style.
                 }
 
                 // Render Correlation
@@ -368,9 +338,6 @@
 
             } catch(e) {
                 console.error(e);
-            } finally {
-                btn.disabled = false;
-                btn.innerText = "Update Charts";
             }
         }
         
