@@ -188,6 +188,7 @@
         let crossChart, polyMainChart;
         let crossStockSeries, crossPolySeries, polyMainSeries;
         let globalPolyData = []; // Store full data for filtering
+        let openPriceLine = null; // Store reference to price line to remove it if needed
 
         function getDimensions(elementId) {
             const el = document.getElementById(elementId);
@@ -332,7 +333,24 @@
                 }
 
                 // Render Correlation
-                if(stockData.length > 0) crossStockSeries.setData(stockData);
+                if(stockData.length > 0) {
+                    crossStockSeries.setData(stockData);
+                    
+                    // --- NEW: Add Market Open Dotted Line ---
+                    if (openPriceLine) {
+                        crossStockSeries.removePriceLine(openPriceLine);
+                    }
+                    const openPrice = stockData[0].value;
+                    openPriceLine = crossStockSeries.createPriceLine({
+                        price: openPrice,
+                        color: 'rgba(41, 98, 255, 0.6)', // Matches the stock line color
+                        lineWidth: 1,
+                        lineStyle: LightweightCharts.LineStyle.Dotted,
+                        axisLabelVisible: true,
+                        title: 'OPEN',
+                    });
+                }
+
                 if(polyData.length > 0) crossPolySeries.setData(polyData);
                 crossChart.timeScale().fitContent();
 
