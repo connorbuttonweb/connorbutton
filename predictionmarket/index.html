@@ -296,14 +296,21 @@
             });
         }
 
-        // Timeframe Logic
+        // Timeframe Logic (Fixed: Handles both Clicks and Auto-Load)
         window.setPolyTimeframe = function(period) {
             if (globalPolyData.length === 0) return;
             
-            // Update Active Button
-            document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-            event.target.classList.add('active');
+            // 1. Update UI Buttons (Safe Method)
+            // We loop through buttons and activate the one matching 'period'
+            const buttons = document.querySelectorAll('.time-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.innerText === period) {
+                    btn.classList.add('active');
+                }
+            });
 
+            // 2. Filter Data
             const now = Math.floor(Date.now() / 1000);
             let startTime = 0;
 
@@ -313,8 +320,12 @@
             else startTime = 0; // ALL
 
             const filtered = globalPolyData.filter(d => d.time >= startTime);
-            polyMainSeries.setData(filtered);
-            polyMainChart.timeScale().fitContent();
+            
+            // 3. Update Chart
+            if (polyMainSeries) {
+                polyMainSeries.setData(filtered);
+                polyMainChart.timeScale().fitContent();
+            }
         }
 
         async function updateDashboard() {
