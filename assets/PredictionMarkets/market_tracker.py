@@ -39,78 +39,132 @@ def get_todays_slug():
     print(f"DEBUG: Generated Target Slug: {slug}")
     return slug
 
-def get_market_question_from_gamma(slug):
+def get_gamma_details(slug):
     """
-    Uses Gamma ONLY to get the exact Question String.
+    Uses Gamma to get the Condition ID (The Key link to CLOB) and Question.
     """
     gamma_url = f"https://gamma-api.polymarket.com/markets?slug={slug}"
     try:
-        print(f"DEBUG: Querying Gamma API for Question String: {slug}")
+        print(f"DEBUG: Querying Gamma API for: {slug}")
         resp = requests.get(gamma_url)
         resp.raise_for_status()
         data = resp.json()
         
         if not data:
             print(f"DEBUG: ERROR -> Slug not found in Gamma API: {slug}")
-            return None
+            return None, None
             
         market = data[0] if isinstance(data, list) else data
         question = market.get("question")
+        condition_id = market.get("conditionId")
+        
         print(f"DEBUG: Found Question: '{question}'")
-        return question
+        print(f"DEBUG: Found Condition ID: '{condition_id}'")
+        return condition_id, question
             
     except Exception as e:
         print(f"DEBUG: Gamma Lookup Exception: {e}")
-        return None
+        return None, None
 
-def get_token_id_via_clob(target_question):
+def get_token_id_via_clob(condition_id, target_question):
     """
-    Uses the CLOB Client (Synchronous) to fetch ALL markets and find the real Token ID.
+    Finds the 'Yes'/'Up' Token ID by querying CLOB.
+    Strategy: 
+    1. Try getting specific market by Condition ID (Fast).
+    2. If that fails, paginate through ALL markets (Slow but thorough).
     """
-    if ClobClient is None: return None
-    print("DEBUG: Fetching ALL markets from CLOB to find the correct Token ID...")
+    if not condition_id: return None
     
-    client = ClobClient(host=CLOB_HOST, chain_id=CHAIN_ID)
-    
+    # --- STRATEGY 1: Direct Lookup (Fast) ---
+    print(f"DEBUG: Attempting Direct CLOB Lookup for Condition ID: {condition_id}...")
     try:
-        # REMOVED 'await' here
-        markets_resp = client.get_markets()
+        # Some versions of CLOB API support /markets/{condition_id}
+        direct_url = f"{CLOB_HOST}/markets/{condition_id}"
+        resp = requests.get(direct_url)
         
-        # Handle response structure (list or dict with 'data')
-        if isinstance(markets_resp, dict):
-            markets = markets_resp.get('data', [])
-            if not markets and 'markets' in markets_resp:
-                markets = markets_resp['markets']
-        elif isinstance(markets_resp, list):
-            markets = markets_resp
-        else:
+        if resp.status_code == 200:
+            market = resp.json()
+            token_id = extract_token_from_market(market, target_question)
+            if token_id: 
+                print("DEBUG: Direct Lookup Successful!")
+                return token_id
+    except Exception as e:
+        print(f"DEBUG: Direct lookup failed ({e}). Switching to scan...")
+
+    # --- STRATEGY 2: Pagination Scan (Thorough) ---
+    print("DEBUG: Direct lookup failed. Starting full pagination scan of CLOB...")
+    
+    next_cursor = ""
+    page_count = 0
+    found_token_id = None
+    
+    while True:
+        page_count += 1
+        print(f"DEBUG: Scanning Page {page_count}...")
+        
+        try:
+            params = {}
+            if next_cursor: params["next_cursor"] = next_cursor
+            
+            resp = requests.get(f"{CLOB_HOST}/markets", params=params)
+            resp.raise_for_status()
+            data = resp.json()
+            
+            # Handle different API response structures
             markets = []
+            if isinstance(data, list):
+                markets = data
+                next_cursor = None # List usually implies no pagination or end
+            elif isinstance(data, dict):
+                markets = data.get("data", []) or data.get("markets", [])
+                next_cursor = data.get("next_cursor", "")
+            
+            # Scan the current page
+            for market in markets:
+                # Match by Condition ID (Best) or Question (Backup)
+                m_cond_id = market.get("condition_id") or market.get("conditionId")
+                m_question = market.get("question")
+                
+                if m_cond_id == condition_id or m_question == target_question:
+                    token_id = extract_token_from_market(market, target_question)
+                    if token_id:
+                        print(f"DEBUG: MATCH FOUND on Page {page_count}!")
+                        return token_id
+            
+            # Stop if no next page
+            if not next_cursor or next_cursor == "null":
+                print("DEBUG: Reached end of market list. Market not found.")
+                break
+                
+        except Exception as e:
+            print(f"DEBUG: Pagination Error on page {page_count}: {e}")
+            break
+            
+    return None
 
-        if not markets:
-            print("DEBUG: ERROR -> CLOB get_markets() returned nothing.")
-            return None
-
-        print(f"DEBUG: Scanned {len(markets)} markets from CLOB.")
+def extract_token_from_market(market, target_question):
+    """Helper to parse a market object and find the 'Yes'/'Up' token."""
+    try:
+        # Check outcome labels
+        # CLOB markets usually have 'tokens' array: [{token_id: '...', outcome: 'Yes', ...}]
+        tokens = market.get("tokens", [])
         
-        found_token_id = None
-        
-        for market in markets:
-            if market.get("question") == target_question:
-                outcome = market.get("outcome", "")
-                if outcome in ["Yes", "Up"]:
-                    found_token_id = market.get("asset_id") # Usually 'asset_id' or 'token_id' in CLOB
-                    if not found_token_id:
-                        found_token_id = market.get("condition_id") # Fallback
-                        
-                    print(f"DEBUG: MATCH FOUND! Token ID: {found_token_id} (Outcome: {outcome})")
-                    return found_token_id
-        
-        print(f"DEBUG: ERROR -> Could not find 'Yes'/'Up' token for question: {target_question}")
-        return None
+        for token in tokens:
+            outcome = token.get("outcome", "")
+            if outcome in ["Yes", "Up"]:
+                t_id = token.get("token_id")
+                print(f"DEBUG: Found Token ID: {t_id} (Outcome: {outcome})")
+                return t_id
+                
+        # Fallback: Check top-level fields if 'tokens' array is missing
+        # Some endpoints return 'asset_id' directly if it's a simple market view
+        outcome = market.get("outcome")
+        if outcome in ["Yes", "Up"]:
+            return market.get("asset_id") or market.get("token_id")
 
     except Exception as e:
-        print(f"DEBUG: CLOB ID Lookup Exception: {e}")
-        return None
+        print(f"DEBUG: Error extracting token: {e}")
+    return None
 
 def fetch_clob_history(token_id, start_ts, end_ts):
     """
@@ -123,7 +177,7 @@ def fetch_clob_history(token_id, start_ts, end_ts):
     client = ClobClient(host=CLOB_HOST, chain_id=CHAIN_ID)
     
     try:
-        # REMOVED 'await' here
+        # REMOVED 'await'
         resp = client.get_candles(
             token_id=str(token_id), 
             interval="1m",
@@ -200,18 +254,17 @@ def save_data(df):
     except Exception as e:
         print(f"DEBUG: File Save Error: {e}")
 
-# MAIN is still async because yfinance *can* be async, but here we run sync logic wrapped in it.
 async def main():
     print("--- STARTING MARKET TRACKER ---")
     slug = get_todays_slug()
     if not slug: return
 
-    # 1. Get Question String
-    question = get_market_question_from_gamma(slug)
-    if not question: return
+    # 1. Get Condition ID from Gamma
+    condition_id, question = get_gamma_details(slug)
+    if not condition_id: return
 
-    # 2. Get Real Token ID (Removed await)
-    token_id = get_token_id_via_clob(question)
+    # 2. Get Real Token ID via CLOB (With Pagination Support)
+    token_id = get_token_id_via_clob(condition_id, question)
     if not token_id: return
 
     # 3. Get S&P Data
@@ -221,7 +274,7 @@ async def main():
     start_ts = spx_df['Timestamp'].min().timestamp()
     end_ts = spx_df['Timestamp'].max().timestamp()
 
-    # 4. Get CLOB History (Removed await)
+    # 4. Get CLOB History
     poly_df = fetch_clob_history(token_id, start_ts, end_ts)
     if poly_df.empty: return
 
