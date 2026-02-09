@@ -318,42 +318,49 @@
         }
 
         async function updateDashboard() {
-            // Use Constants since UI controls are gone
             const ticker = DEFAULT_TICKER;
-            const polyInput = DEFAULT_POLY_LINK;
-            let polyId = polyInput;
+            let polyId = null;
 
-            console.log("Resolving market data...");
+            console.log("Auto-resolving daily S&P 500 market...");
 
-            // 1. Resolve Link & Metadata
-            if (polyInput.includes('polymarket.com/event/')) {
-                try {
-                    const slug = polyInput.split('event/')[1].split('/')[0].split('?')[0];
-                    const res = await fetch(`${PROXY_URL}/resolve?slug=${slug}`);
-                    const data = await res.json();
+            // 1. CALL WORKER TO FIND TODAY'S MARKET
+            try {
+                // Call the new endpoint we just made
+                const resolveRes = await fetch(`${PROXY_URL}/daily-spx`);
+                const data = await resolveRes.json();
+                
+                if (data.id) {
+                    polyId = data.id;
                     
-                    if (data.id) {
-                        polyId = data.id;
-                        // Update UI Header
-                        document.getElementById('poly-question').innerText = data.question;
-                        document.getElementById('poly-icon').src = data.icon || "https://polymarket.com/favicon.ico";
-                        
-                        // Format Volume
-                        const vol = data.volume ? `$${Math.floor(data.volume).toLocaleString()}` : "$0";
-                        const liq = data.liquidity ? `$${Math.floor(data.liquidity).toLocaleString()}` : "$0";
-                        document.getElementById('poly-meta').innerText = `Vol: ${vol} • Liq: ${liq}`;
-                        
-                        console.log(`ID Resolved: ${polyId}`);
-                    }
-                } catch (e) { console.log("Resolver skipped or failed"); }
+                    // Update UI Metadata
+                    document.getElementById('poly-question').innerText = data.question;
+                    
+                    if(data.icon) document.getElementById('poly-icon').src = data.icon;
+                    
+                    const vol = data.volume ? `$${Math.floor(data.volume).toLocaleString()}` : "$0";
+                    const liq = data.liquidity ? `$${Math.floor(data.liquidity).toLocaleString()}` : "$0";
+                    document.getElementById('poly-meta').innerText = `Vol: ${vol} • Liq: ${liq}`;
+                    
+                    console.log(`Daily Market Resolved: ${polyId}`);
+                } else {
+                    console.error("Worker Error:", data.error);
+                    document.getElementById('poly-question').innerText = "Market Not Found (Weekend?)";
+                }
+            } catch (e) { 
+                console.log("Auto-resolve failed", e); 
+                document.getElementById('poly-question').innerText = "Connection Error";
             }
 
+            if (!polyId) return; // Stop if we couldn't find the market
+
+            // 2. FETCH HISTORY DATA (Stock & Poly)
             try {
                 const [stockRes, polyRes] = await Promise.allSettled([
                     fetch(`${PROXY_URL}/stock?ticker=${ticker}`),
-                    fetch(`${PROXY_URL}/polymarket?id=${polyId}`)
+                    fetch(`${PROXY_URL}/polymarket?id=${polyId}`) // Use the resolved Daily ID
                 ]);
 
+                // ... (Rest of your existing chart rendering logic remains exactly the same) ...
                 let stockData = [], polyData = [];
 
                 if(stockRes.status === 'fulfilled') {
@@ -368,11 +375,10 @@
 
                 // Render Poly Chart
                 if(polyData.length > 0) {
-                    globalPolyData = polyData; // Save for timeframe switching
+                    globalPolyData = polyData; 
+                    setPolyTimeframe('1D'); 
                     
-                    // Default to 1D view on load (matches "Live" feel)
-                    setPolyTimeframe('1D');
-                    // Ensure the '1D' button is visually active
+                    // Reset Active Button
                     document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
                     document.querySelector('.time-controls button:first-child').classList.add('active');
 
@@ -384,15 +390,11 @@
                 // Render Correlation
                 if(stockData.length > 0) {
                     crossStockSeries.setData(stockData);
-                    
-                    // --- NEW: Add Market Open Dotted Line ---
-                    if (openPriceLine) {
-                        crossStockSeries.removePriceLine(openPriceLine);
-                    }
+                    if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
                     const openPrice = stockData[0].value;
                     openPriceLine = crossStockSeries.createPriceLine({
                         price: openPrice,
-                        color: 'rgba(41, 98, 255, 0.6)', // Matches the stock line color
+                        color: 'rgba(41, 98, 255, 0.6)',
                         lineWidth: 1,
                         lineStyle: LightweightCharts.LineStyle.Dotted,
                         axisLabelVisible: true,
