@@ -41,8 +41,7 @@ def get_todays_slug():
 
 def get_market_question_from_gamma(slug):
     """
-    Uses Gamma ONLY to get the exact Question String (e.g., 'Will S&P 500...').
-    We do NOT trust the IDs from Gamma anymore.
+    Uses Gamma ONLY to get the exact Question String.
     """
     gamma_url = f"https://gamma-api.polymarket.com/markets?slug={slug}"
     try:
@@ -64,10 +63,9 @@ def get_market_question_from_gamma(slug):
         print(f"DEBUG: Gamma Lookup Exception: {e}")
         return None
 
-async def get_token_id_via_clob(target_question):
+def get_token_id_via_clob(target_question):
     """
-    Uses the CLOB Client to fetch ALL markets and find the real Token ID 
-    by matching the Question string. This bypasses the '6' error.
+    Uses the CLOB Client (Synchronous) to fetch ALL markets and find the real Token ID.
     """
     if ClobClient is None: return None
     print("DEBUG: Fetching ALL markets from CLOB to find the correct Token ID...")
@@ -75,11 +73,19 @@ async def get_token_id_via_clob(target_question):
     client = ClobClient(host=CLOB_HOST, chain_id=CHAIN_ID)
     
     try:
-        # Fetch all markets (returns a list of tokens/assets)
-        # Note: This might return a next_cursor in some versions, 
-        # but usually returns a simplified list of active markets.
-        markets = await client.get_markets()
+        # REMOVED 'await' here
+        markets_resp = client.get_markets()
         
+        # Handle response structure (list or dict with 'data')
+        if isinstance(markets_resp, dict):
+            markets = markets_resp.get('data', [])
+            if not markets and 'markets' in markets_resp:
+                markets = markets_resp['markets']
+        elif isinstance(markets_resp, list):
+            markets = markets_resp
+        else:
+            markets = []
+
         if not markets:
             print("DEBUG: ERROR -> CLOB get_markets() returned nothing.")
             return None
@@ -89,32 +95,26 @@ async def get_token_id_via_clob(target_question):
         found_token_id = None
         
         for market in markets:
-            # Check if questions match
             if market.get("question") == target_question:
-                # We found the market! Now check for 'Yes' or 'Up' outcome.
                 outcome = market.get("outcome", "")
-                
-                # Debug print to ensure we see what we found
-                # print(f"DEBUG: Found Candidate -> Outcome: {outcome} | ID: {market.get('id')}")
-
                 if outcome in ["Yes", "Up"]:
-                    found_token_id = market.get("id") # This is the real Token ID
+                    found_token_id = market.get("asset_id") # Usually 'asset_id' or 'token_id' in CLOB
+                    if not found_token_id:
+                        found_token_id = market.get("condition_id") # Fallback
+                        
                     print(f"DEBUG: MATCH FOUND! Token ID: {found_token_id} (Outcome: {outcome})")
-                    break
+                    return found_token_id
         
-        if found_token_id:
-            return found_token_id
-        else:
-            print(f"DEBUG: ERROR -> Could not find 'Yes'/'Up' token for question: {target_question}")
-            return None
+        print(f"DEBUG: ERROR -> Could not find 'Yes'/'Up' token for question: {target_question}")
+        return None
 
     except Exception as e:
         print(f"DEBUG: CLOB ID Lookup Exception: {e}")
         return None
 
-async def fetch_clob_history(token_id, start_ts, end_ts):
+def fetch_clob_history(token_id, start_ts, end_ts):
     """
-    Uses the official py-clob-client to fetch history.
+    Uses the official py-clob-client (Synchronous) to fetch history.
     """
     if ClobClient is None: return pd.DataFrame()
     
@@ -123,8 +123,8 @@ async def fetch_clob_history(token_id, start_ts, end_ts):
     client = ClobClient(host=CLOB_HOST, chain_id=CHAIN_ID)
     
     try:
-        # Use get_candles (standard for analysis)
-        resp = await client.get_candles(
+        # REMOVED 'await' here
+        resp = client.get_candles(
             token_id=str(token_id), 
             interval="1m",
             start_ts=int(start_ts),
@@ -141,10 +141,7 @@ async def fetch_clob_history(token_id, start_ts, end_ts):
             print("DEBUG: WARNING -> CLOB DataFrame is empty.")
             return df
 
-        # Standardize columns (API usually returns 'close', 'timestamp')
-        # print(f"DEBUG: CLOB Columns: {df.columns.tolist()}")
-        
-        # Map price and time
+        # Standardize columns
         if 'close' in df.columns:
              df = df.rename(columns={'close': 'Poly_Probability'})
         elif 'p' in df.columns:
@@ -203,17 +200,18 @@ def save_data(df):
     except Exception as e:
         print(f"DEBUG: File Save Error: {e}")
 
+# MAIN is still async because yfinance *can* be async, but here we run sync logic wrapped in it.
 async def main():
     print("--- STARTING MARKET TRACKER ---")
     slug = get_todays_slug()
     if not slug: return
 
-    # 1. Get Question String from Gamma (Reliable)
+    # 1. Get Question String
     question = get_market_question_from_gamma(slug)
     if not question: return
 
-    # 2. Get Real Token ID from CLOB (Reliable)
-    token_id = await get_token_id_via_clob(question)
+    # 2. Get Real Token ID (Removed await)
+    token_id = get_token_id_via_clob(question)
     if not token_id: return
 
     # 3. Get S&P Data
@@ -223,8 +221,8 @@ async def main():
     start_ts = spx_df['Timestamp'].min().timestamp()
     end_ts = spx_df['Timestamp'].max().timestamp()
 
-    # 4. Get CLOB History
-    poly_df = await fetch_clob_history(token_id, start_ts, end_ts)
+    # 4. Get CLOB History (Removed await)
+    poly_df = fetch_clob_history(token_id, start_ts, end_ts)
     if poly_df.empty: return
 
     # 5. Merge
