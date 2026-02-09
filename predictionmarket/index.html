@@ -323,90 +323,78 @@
 
             console.log("Auto-resolving daily S&P 500 market...");
 
-            // 1. CALL WORKER TO FIND TODAY'S MARKET
+            // --- STEP 1: ATTEMPT TO FIND TODAY'S MARKET ---
             try {
-                // Call the new endpoint we just made
                 const resolveRes = await fetch(`${PROXY_URL}/daily-spx`);
                 const data = await resolveRes.json();
                 
                 if (data.id) {
                     polyId = data.id;
-                    
-                    // Update UI Metadata
                     document.getElementById('poly-question').innerText = data.question;
-                    
                     if(data.icon) document.getElementById('poly-icon').src = data.icon;
-                    
                     const vol = data.volume ? `$${Math.floor(data.volume).toLocaleString()}` : "$0";
                     const liq = data.liquidity ? `$${Math.floor(data.liquidity).toLocaleString()}` : "$0";
                     document.getElementById('poly-meta').innerText = `Vol: ${vol} • Liq: ${liq}`;
-                    
-                    console.log(`Daily Market Resolved: ${polyId}`);
                 } else {
-                    console.error("Worker Error:", data.error);
-                    document.getElementById('poly-question').innerText = "Market Not Found (Weekend?)";
+                    console.log("Worker returned error (Weekend?):", data.error);
+                    document.getElementById('poly-question').innerText = "No Daily Market Found";
                 }
             } catch (e) { 
                 console.log("Auto-resolve failed", e); 
-                document.getElementById('poly-question').innerText = "Connection Error";
             }
 
-            if (!polyId) return; // Stop if we couldn't find the market
-
-            // 2. FETCH HISTORY DATA (Stock & Poly)
+            // --- STEP 2: FETCH CHARTS (Decoupled) ---
+            // Even if polyId is null, we STILL fetch the stock data.
             try {
-                const [stockRes, polyRes] = await Promise.allSettled([
-                    fetch(`${PROXY_URL}/stock?ticker=${ticker}`),
-                    fetch(`${PROXY_URL}/polymarket?id=${polyId}`) // Use the resolved Daily ID
-                ]);
-
-                // ... (Rest of your existing chart rendering logic remains exactly the same) ...
-                let stockData = [], polyData = [];
-
-                if(stockRes.status === 'fulfilled') {
-                    const json = await stockRes.value.json();
-                    if(Array.isArray(json)) stockData = json;
+                const promises = [fetch(`${PROXY_URL}/stock?ticker=${ticker}`)];
+                
+                // Only fetch Poly history if we actually found an ID
+                if (polyId) {
+                    promises.push(fetch(`${PROXY_URL}/polymarket?id=${polyId}`));
                 }
 
-                if(polyRes.status === 'fulfilled') {
-                    const json = await polyRes.value.json();
-                    if(Array.isArray(json)) polyData = json;
+                const results = await Promise.allSettled(promises);
+                
+                // 1. Stock Data (Index 0)
+                if (results[0].status === 'fulfilled') {
+                    const stockData = await results[0].value.json();
+                    if (Array.isArray(stockData) && stockData.length > 0) {
+                        crossStockSeries.setData(stockData);
+                        
+                        if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
+                        const openPrice = stockData[0].value;
+                        openPriceLine = crossStockSeries.createPriceLine({
+                            price: openPrice,
+                            color: 'rgba(41, 98, 255, 0.6)',
+                            lineWidth: 1,
+                            lineStyle: LightweightCharts.LineStyle.Dotted,
+                            axisLabelVisible: true,
+                            title: 'OPEN',
+                        });
+                    }
                 }
 
-                // Render Poly Chart
-                if(polyData.length > 0) {
-                    globalPolyData = polyData; 
-                    setPolyTimeframe('1D'); 
-                    
-                    // Reset Active Button
-                    document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelector('.time-controls button:first-child').classList.add('active');
-
-                    // Header Price
-                    const lastVal = polyData[polyData.length - 1].value;
-                    document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
+                // 2. Poly Data (Index 1 - Only if we requested it)
+                if (polyId && results[1] && results[1].status === 'fulfilled') {
+                    const polyData = await results[1].value.json();
+                    if (Array.isArray(polyData) && polyData.length > 0) {
+                        globalPolyData = polyData; 
+                        setPolyTimeframe('1D');
+                        crossPolySeries.setData(polyData);
+                        
+                        const lastVal = polyData[polyData.length - 1].value;
+                        document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
+                        
+                        // Reset Active Button
+                        document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
+                        document.querySelector('.time-controls button:first-child').classList.add('active');
+                    }
                 }
-
-                // Render Correlation
-                if(stockData.length > 0) {
-                    crossStockSeries.setData(stockData);
-                    if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
-                    const openPrice = stockData[0].value;
-                    openPriceLine = crossStockSeries.createPriceLine({
-                        price: openPrice,
-                        color: 'rgba(41, 98, 255, 0.6)',
-                        lineWidth: 1,
-                        lineStyle: LightweightCharts.LineStyle.Dotted,
-                        axisLabelVisible: true,
-                        title: 'OPEN',
-                    });
-                }
-
-                if(polyData.length > 0) crossPolySeries.setData(polyData);
+                
                 crossChart.timeScale().fitContent();
 
             } catch(e) {
-                console.error(e);
+                console.error("Chart Render Error:", e);
             }
         }
         
