@@ -74,7 +74,7 @@ def get_token_id_via_clob(condition_id, target_question):
             market = resp.json()
             token_id = extract_token_from_market(market, target_question)
             if token_id: 
-                print("DEBUG: Direct Lookup Successful!")
+                print(f"DEBUG: Direct Lookup Successful! Token ID: {token_id}")
                 return token_id
     except Exception as e:
         print(f"DEBUG: Direct lookup failed ({e}). Switching to scan...")
@@ -133,7 +133,7 @@ def extract_token_from_market(market, target_question):
             outcome = token.get("outcome", "")
             if outcome in ["Yes", "Up"]:
                 t_id = token.get("token_id")
-                print(f"DEBUG: Found Token ID: {t_id} (Outcome: {outcome})")
+                # print(f"DEBUG: Found Token ID: {t_id} (Outcome: {outcome})")
                 return t_id
                 
         outcome = market.get("outcome")
@@ -150,13 +150,14 @@ def fetch_clob_history(token_id, start_ts, end_ts):
     """
     print(f"DEBUG: Fetching CLOB history for Token {token_id}...")
     
-    # Endpoint for historical prices
     url = f"{CLOB_HOST}/prices-history"
+    
+    # FIX: Use 'fidelity' for resolution, NOT 'interval' when using startTs/endTs
     params = {
         "market": token_id,
-        "interval": "1m",
         "startTs": int(start_ts),
-        "endTs": int(end_ts)
+        "endTs": int(end_ts),
+        "fidelity": 1  # 1 means "1-minute" resolution
     }
     
     try:
