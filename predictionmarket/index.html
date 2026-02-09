@@ -369,19 +369,24 @@
                 // 1. Stock Data (Index 0)
                 if (results[0].status === 'fulfilled') {
                     const stockData = await results[0].value.json();
+                    
+                    // SAFETY CHECK: Ensure we actually have data before plotting
                     if (Array.isArray(stockData) && stockData.length > 0) {
                         crossStockSeries.setData(stockData);
                         
-                        if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
-                        const openPrice = stockData[0].value;
-                        openPriceLine = crossStockSeries.createPriceLine({
-                            price: openPrice,
-                            color: 'rgba(41, 98, 255, 0.6)',
-                            lineWidth: 1,
-                            lineStyle: LightweightCharts.LineStyle.Dotted,
-                            axisLabelVisible: true,
-                            title: 'OPEN',
-                        });
+                        // FIX: Only draw the line if the first point exists and has a value
+                        if (stockData[0] && stockData[0].value != null) {
+                            if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
+                            
+                            openPriceLine = crossStockSeries.createPriceLine({
+                                price: stockData[0].value,
+                                color: 'rgba(41, 98, 255, 0.6)',
+                                lineWidth: 1,
+                                lineStyle: LightweightCharts.LineStyle.Dotted,
+                                axisLabelVisible: true,
+                                title: 'OPEN',
+                            });
+                        }
                     }
                 }
 
