@@ -133,7 +133,6 @@ def extract_token_from_market(market, target_question):
             outcome = token.get("outcome", "")
             if outcome in ["Yes", "Up"]:
                 t_id = token.get("token_id")
-                # print(f"DEBUG: Found Token ID: {t_id} (Outcome: {outcome})")
                 return t_id
                 
         outcome = market.get("outcome")
@@ -152,12 +151,12 @@ def fetch_clob_history(token_id, start_ts, end_ts):
     
     url = f"{CLOB_HOST}/prices-history"
     
-    # FIX: Use 'fidelity' for resolution, NOT 'interval' when using startTs/endTs
+    # Use 'fidelity' for resolution, NOT 'interval'
     params = {
         "market": token_id,
         "startTs": int(start_ts),
         "endTs": int(end_ts),
-        "fidelity": 1  # 1 means "1-minute" resolution
+        "fidelity": 1
     }
     
     try:
@@ -173,7 +172,6 @@ def fetch_clob_history(token_id, start_ts, end_ts):
             
         df = pd.DataFrame(history)
         
-        # Parse 't' (timestamp) and 'p' (price)
         if 't' in df.columns and 'p' in df.columns:
              df = df.rename(columns={'t': 'Timestamp', 'p': 'Poly_Probability'})
         
@@ -197,6 +195,13 @@ def get_spx_data():
             print("DEBUG: ERROR -> yfinance returned empty DataFrame.")
             return pd.DataFrame()
         
+        # --- FIX: FLATTEN MULTI-INDEX COLUMNS ---
+        # yfinance often returns columns like ('Close', '^GSPC'). 
+        # We need just 'Close'.
+        if isinstance(df.columns, pd.MultiIndex):
+            df.columns = df.columns.get_level_values(0)
+        # ----------------------------------------
+
         df = df.reset_index()
         if df['Datetime'].dt.tz is None:
             df['Datetime'] = df['Datetime'].dt.tz_localize('UTC')
