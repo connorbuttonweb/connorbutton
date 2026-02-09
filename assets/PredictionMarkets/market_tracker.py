@@ -5,13 +5,6 @@ import os
 import requests
 from datetime import datetime, timedelta, timezone
 
-# Import the CLOB Client
-try:
-    from py_clob_client.client import ClobClient
-except ImportError:
-    print("CRITICAL ERROR: 'py-clob-client' is not installed.")
-    ClobClient = None
-
 # --- Configuration ---
 SPX_TICKER = "^GSPC"
 EXCEL_FILE_PATH = "assets/PredictionMarkets/Prediction_Market_Master.xlsx"
@@ -20,7 +13,6 @@ CHAIN_ID = 137 # Polygon Mainnet
 
 def get_todays_slug():
     """Generates the slug for the S&P 500 market that JUST closed."""
-    # Convert UTC to ET (approximate)
     now_utc = datetime.now(timezone.utc)
     now_et = now_utc - timedelta(hours=5) 
     
@@ -68,17 +60,13 @@ def get_gamma_details(slug):
 
 def get_token_id_via_clob(condition_id, target_question):
     """
-    Finds the 'Yes'/'Up' Token ID by querying CLOB.
-    Strategy: 
-    1. Try getting specific market by Condition ID (Fast).
-    2. If that fails, paginate through ALL markets (Slow but thorough).
+    Finds the 'Yes'/'Up' Token ID by querying CLOB via HTTP Requests.
     """
     if not condition_id: return None
     
     # --- STRATEGY 1: Direct Lookup (Fast) ---
     print(f"DEBUG: Attempting Direct CLOB Lookup for Condition ID: {condition_id}...")
     try:
-        # Some versions of CLOB API support /markets/{condition_id}
         direct_url = f"{CLOB_HOST}/markets/{condition_id}"
         resp = requests.get(direct_url)
         
@@ -96,7 +84,6 @@ def get_token_id_via_clob(condition_id, target_question):
     
     next_cursor = ""
     page_count = 0
-    found_token_id = None
     
     while True:
         page_count += 1
@@ -110,18 +97,15 @@ def get_token_id_via_clob(condition_id, target_question):
             resp.raise_for_status()
             data = resp.json()
             
-            # Handle different API response structures
             markets = []
             if isinstance(data, list):
                 markets = data
-                next_cursor = None # List usually implies no pagination or end
+                next_cursor = None 
             elif isinstance(data, dict):
                 markets = data.get("data", []) or data.get("markets", [])
                 next_cursor = data.get("next_cursor", "")
             
-            # Scan the current page
             for market in markets:
-                # Match by Condition ID (Best) or Question (Backup)
                 m_cond_id = market.get("condition_id") or market.get("conditionId")
                 m_question = market.get("question")
                 
@@ -131,7 +115,6 @@ def get_token_id_via_clob(condition_id, target_question):
                         print(f"DEBUG: MATCH FOUND on Page {page_count}!")
                         return token_id
             
-            # Stop if no next page
             if not next_cursor or next_cursor == "null":
                 print("DEBUG: Reached end of market list. Market not found.")
                 break
@@ -145,10 +128,7 @@ def get_token_id_via_clob(condition_id, target_question):
 def extract_token_from_market(market, target_question):
     """Helper to parse a market object and find the 'Yes'/'Up' token."""
     try:
-        # Check outcome labels
-        # CLOB markets usually have 'tokens' array: [{token_id: '...', outcome: 'Yes', ...}]
         tokens = market.get("tokens", [])
-        
         for token in tokens:
             outcome = token.get("outcome", "")
             if outcome in ["Yes", "Up"]:
@@ -156,8 +136,6 @@ def extract_token_from_market(market, target_question):
                 print(f"DEBUG: Found Token ID: {t_id} (Outcome: {outcome})")
                 return t_id
                 
-        # Fallback: Check top-level fields if 'tokens' array is missing
-        # Some endpoints return 'asset_id' directly if it's a simple market view
         outcome = market.get("outcome")
         if outcome in ["Yes", "Up"]:
             return market.get("asset_id") or market.get("token_id")
@@ -168,43 +146,35 @@ def extract_token_from_market(market, target_question):
 
 def fetch_clob_history(token_id, start_ts, end_ts):
     """
-    Uses the official py-clob-client (Synchronous) to fetch history.
+    Uses direct HTTP requests to fetch history (Bypassing py-clob-client).
     """
-    if ClobClient is None: return pd.DataFrame()
-    
     print(f"DEBUG: Fetching CLOB history for Token {token_id}...")
     
-    client = ClobClient(host=CLOB_HOST, chain_id=CHAIN_ID)
+    # Endpoint for historical prices
+    url = f"{CLOB_HOST}/prices-history"
+    params = {
+        "market": token_id,
+        "interval": "1m",
+        "startTs": int(start_ts),
+        "endTs": int(end_ts)
+    }
     
     try:
-        # REMOVED 'await'
-        resp = client.get_candles(
-            token_id=str(token_id), 
-            interval="1m",
-            start_ts=int(start_ts),
-            end_ts=int(end_ts)
-        )
+        resp = requests.get(url, params=params)
+        resp.raise_for_status()
+        data = resp.json()
         
-        if not resp:
-            print("DEBUG: WARNING -> CLOB Client returned empty response.")
+        history = data.get("history", [])
+        
+        if not history:
+            print("DEBUG: WARNING -> CLOB API returned no history data.")
             return pd.DataFrame()
             
-        df = pd.DataFrame(resp)
+        df = pd.DataFrame(history)
         
-        if df.empty:
-            print("DEBUG: WARNING -> CLOB DataFrame is empty.")
-            return df
-
-        # Standardize columns
-        if 'close' in df.columns:
-             df = df.rename(columns={'close': 'Poly_Probability'})
-        elif 'p' in df.columns:
-             df = df.rename(columns={'p': 'Poly_Probability'})
-             
-        if 'timestamp' in df.columns:
-             df = df.rename(columns={'timestamp': 'Timestamp'})
-        elif 't' in df.columns:
-             df = df.rename(columns={'t': 'Timestamp'})
+        # Parse 't' (timestamp) and 'p' (price)
+        if 't' in df.columns and 'p' in df.columns:
+             df = df.rename(columns={'t': 'Timestamp', 'p': 'Poly_Probability'})
         
         df['Timestamp'] = pd.to_datetime(df['Timestamp'], unit='s', utc=True)
         
@@ -212,7 +182,7 @@ def fetch_clob_history(token_id, start_ts, end_ts):
         return df[['Timestamp', 'Poly_Probability']]
         
     except Exception as e:
-        print(f"DEBUG: CLOB Client Exception: {e}")
+        print(f"DEBUG: CLOB History Request Exception: {e}")
         return pd.DataFrame()
 
 def get_spx_data():
@@ -263,7 +233,7 @@ async def main():
     condition_id, question = get_gamma_details(slug)
     if not condition_id: return
 
-    # 2. Get Real Token ID via CLOB (With Pagination Support)
+    # 2. Get Real Token ID via CLOB
     token_id = get_token_id_via_clob(condition_id, question)
     if not token_id: return
 
@@ -274,7 +244,7 @@ async def main():
     start_ts = spx_df['Timestamp'].min().timestamp()
     end_ts = spx_df['Timestamp'].max().timestamp()
 
-    # 4. Get CLOB History
+    # 4. Get CLOB History (Direct Request)
     poly_df = fetch_clob_history(token_id, start_ts, end_ts)
     if poly_df.empty: return
 
