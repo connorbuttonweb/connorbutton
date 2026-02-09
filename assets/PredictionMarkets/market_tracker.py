@@ -151,7 +151,6 @@ def fetch_clob_history(token_id, start_ts, end_ts):
     
     url = f"{CLOB_HOST}/prices-history"
     
-    # Use 'fidelity' for resolution, NOT 'interval'
     params = {
         "market": token_id,
         "startTs": int(start_ts),
@@ -195,12 +194,9 @@ def get_spx_data():
             print("DEBUG: ERROR -> yfinance returned empty DataFrame.")
             return pd.DataFrame()
         
-        # --- FIX: FLATTEN MULTI-INDEX COLUMNS ---
-        # yfinance often returns columns like ('Close', '^GSPC'). 
-        # We need just 'Close'.
+        # FIX: Flatten Multi-Index Columns
         if isinstance(df.columns, pd.MultiIndex):
             df.columns = df.columns.get_level_values(0)
-        # ----------------------------------------
 
         df = df.reset_index()
         if df['Datetime'].dt.tz is None:
@@ -217,6 +213,12 @@ def get_spx_data():
 
 def save_data(df):
     print(f"DEBUG: Attempting to save {len(df)} rows to Excel...")
+    
+    # --- CRITICAL FIX: Remove Timezone Info for Excel Compatibility ---
+    if 'Timestamp' in df.columns:
+        df['Timestamp'] = df['Timestamp'].dt.tz_localize(None)
+    # ------------------------------------------------------------------
+
     os.makedirs(os.path.dirname(EXCEL_FILE_PATH), exist_ok=True)
     
     if os.path.exists(EXCEL_FILE_PATH):
