@@ -155,7 +155,7 @@
         let globalPolyData = []; 
         let openPriceLine = null; 
 
-        // --- HELPER: Debug & Validate Data ---
+        // --- HELPER: Strict Data Sanitization ---
         function validateData(data, name) {
             console.log(`[DEBUG] Validating ${name}... Raw Length: ${data ? data.length : 'N/A'}`);
             
@@ -164,20 +164,28 @@
                 return [];
             }
 
-            // Filter out any garbage points
-            const cleanData = data.filter((d, index) => {
-                const isValid = (d && typeof d.time === 'number' && typeof d.value === 'number' && !isNaN(d.value) && d.value !== null);
-                if (!isValid) {
-                    console.error(`[DEBUG] Found BAD point in ${name} at index ${index}:`, d);
-                }
-                return isValid;
-            });
+            // 1. FILTER bad types
+            const clean = data.filter(d => 
+                d && typeof d.time === 'number' && typeof d.value === 'number' && !isNaN(d.value) && d.value !== null
+            );
+            
+            // 2. SORT by time (Critical for Lightweight Charts)
+            clean.sort((a, b) => a.time - b.time);
 
-            console.log(`[DEBUG] ${name} Cleaned. New Length: ${cleanData.length}`);
-            if (cleanData.length > 0) {
-                console.log(`[DEBUG] Sample ${name} Point:`, cleanData[0]);
+            // 3. DEDUPLICATE & INTEGER CAST (Prevent crashes)
+            const unique = [];
+            let lastTime = -1;
+            
+            for (let i = 0; i < clean.length; i++) {
+                const t = Math.floor(clean[i].time); // Force Integer
+                if (t > lastTime) {
+                    unique.push({ time: t, value: clean[i].value });
+                    lastTime = t;
+                }
             }
-            return cleanData;
+
+            console.log(`[DEBUG] ${name} Final. New Length: ${unique.length}`);
+            return unique;
         }
 
         function getDimensions(elementId) {
@@ -198,7 +206,7 @@
                 crosshair: { mode: LightweightCharts.CrosshairMode.Normal }
             };
 
-            // 1. TOP RIGHT: Area Chart
+            // 1. TOP RIGHT: LINE Chart (Swapped from Area)
             const polyContainer = document.getElementById('poly-main-chart');
             const dimPoly = getDimensions('poly-main-chart');
             polyMainChart = LightweightCharts.createChart(polyContainer, {
@@ -207,10 +215,9 @@
                 height: dimPoly.height,
             });
             
-            polyMainSeries = polyMainChart.addAreaSeries({
-                topColor: 'rgba(0, 184, 148, 0.56)',
-                bottomColor: 'rgba(0, 184, 148, 0.04)',
-                lineColor: '#00b894',
+            // Replaced addAreaSeries with addLineSeries
+            polyMainSeries = polyMainChart.addLineSeries({
+                color: '#00b894',
                 lineWidth: 2,
                 title: 'Probability',
                 priceFormat: { type: 'percent', precision: 1, minMove: 0.1 },
@@ -236,24 +243,21 @@
                 color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'S&P 500 (Price)' 
             });
 
-            // --- SYNCHRONIZE X-AXIS (SAFE VERSION) ---
+            // --- SAFE SYNCHRONIZATION ---
             function syncCharts(chart1, chart2) {
                 let isSyncing = false;
-                
                 const syncHandler = (source, target) => (range) => {
                     if (isSyncing || !range || !target) return;
                     isSyncing = true;
                     try {
-                        // Safety Check: Don't sync if range contains nulls
                         if (range.from && range.to) {
                             target.timeScale().setVisibleLogicalRange(range);
                         }
                     } catch (e) {
-                        console.warn("[DEBUG] Sync Error (ignoring):", e);
+                        // Ignore sync errors if one chart is empty
                     }
                     isSyncing = false;
                 };
-
                 chart1.timeScale().subscribeVisibleLogicalRangeChange(syncHandler(chart1, chart2));
                 chart2.timeScale().subscribeVisibleLogicalRangeChange(syncHandler(chart2, chart1));
             }
@@ -274,6 +278,7 @@
                 btn.classList.remove('active');
                 if (btn.innerText === period) btn.classList.add('active');
             });
+            
             const now = Math.floor(Date.now() / 1000);
             let startTime = 0;
             if (period === '1D') startTime = now - (24 * 60 * 60);
@@ -281,15 +286,15 @@
             else if (period === '1M') startTime = now - (30 * 24 * 60 * 60);
             else startTime = 0;
             
-            // Validate before filtering
+            // Re-validate to be safe
             const clean = validateData(globalPolyData, "TimeframeFilter");
             const filtered = clean.filter(d => d.time >= startTime);
             
-            if (polyMainSeries) {
+            if (polyMainSeries && filtered.length > 0) {
                 try {
                     polyMainSeries.setData(filtered);
                     polyMainChart.timeScale().fitContent();
-                } catch(e) { console.error("[DEBUG] SetData Error in Timeframe:", e); }
+                } catch(e) {}
             }
         }
 
@@ -309,10 +314,9 @@
                     const liq = data.liquidity ? `$${Math.floor(data.liquidity).toLocaleString()}` : "$0";
                     document.getElementById('poly-meta').innerText = `Vol: ${vol} • Liq: ${liq}`;
                 } else {
-                    console.log("Worker returned error:", data.error);
                     document.getElementById('poly-question').innerText = "No Daily Market Found";
                 }
-            } catch (e) { console.log("Auto-resolve failed", e); }
+            } catch (e) {}
 
             try {
                 const promises = [fetch(`${PROXY_URL}/stock?ticker=${ticker}`)];
@@ -323,11 +327,12 @@
                 // 1. Stock Data
                 if (results[0].status === 'fulfilled') {
                     const rawData = await results[0].value.json();
-                    const cleanStock = validateData(rawData, "StockData"); // <--- VALIDATION HERE
+                    const cleanStock = validateData(rawData, "StockData"); 
                     
                     if (cleanStock.length > 0) {
                         crossStockSeries.setData(cleanStock);
-                        if (cleanStock[0] && cleanStock[0].value != null) {
+                        // Safe Price Line Creation
+                        if (cleanStock[0] && typeof cleanStock[0].value === 'number') {
                             if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
                             openPriceLine = crossStockSeries.createPriceLine({
                                 price: cleanStock[0].value,
@@ -344,12 +349,10 @@
                 // 2. Poly Data
                 if (polyId && results[1] && results[1].status === 'fulfilled') {
                     const rawPoly = await results[1].value.json();
-                    const cleanPoly = validateData(rawPoly, "PolyData"); // <--- VALIDATION HERE
+                    const cleanPoly = validateData(rawPoly, "PolyData");
                     
                     if (cleanPoly.length > 0) {
                         globalPolyData = cleanPoly; 
-                        
-                        // Explicitly set the main chart data safely
                         try {
                             polyMainSeries.setData(cleanPoly);
                             crossPolySeries.setData(cleanPoly);
@@ -357,15 +360,11 @@
                             const lastVal = cleanPoly[cleanPoly.length - 1].value;
                             document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
                             
-                            // Reset buttons
+                            // Reset default view
                             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
                             document.querySelector('.time-controls button:first-child').classList.add('active');
-                            
-                            // Set 1D view programmatically
                             setPolyTimeframe('1D');
-                        } catch(e) {
-                            console.error("[DEBUG] Error setting Poly Data:", e);
-                        }
+                        } catch(e) {}
                     }
                 }
                 crossChart.timeScale().fitContent();
