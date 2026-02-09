@@ -21,6 +21,7 @@ def get_todays_slug():
     print(f"DEBUG: Current ET Time: {now_et} (Weekday: {now_et.weekday()})")
 
     # Weekday check: 0=Mon, 4=Fri, 5=Sat, 6=Sun
+    # NOTE: You can comment this out if you want to test on a weekend
     if now_et.weekday() >= 5:
         print("DEBUG: Status -> Weekend detected. No S&P 500 market. Exiting.")
         return None
@@ -36,6 +37,7 @@ def get_todays_slug():
 def get_token_id_from_slug(slug):
     """
     CRITICAL STEP: We use Gamma to find the 'Token ID' (Asset ID).
+    Updated to handle both ["No", "Yes"] and ["Down", "Up"] markets.
     """
     gamma_url = f"https://gamma-api.polymarket.com/markets?slug={slug}"
     try:
@@ -50,17 +52,26 @@ def get_token_id_from_slug(slug):
             
         market = data[0] if isinstance(data, list) else data
         
-        # Gamma returns 'clobTokenIds' which matches outcomes ["No", "Yes"]
+        # Gamma returns 'clobTokenIds' which matches outcomes 
+        # usually ["No", "Yes"] OR ["Down", "Up"]
         clob_ids = market.get("clobTokenIds", [])
         outcomes = market.get("outcomes", [])
         
+        target_outcome = None
+        
+        # FIX: Check for "Yes" OR "Up"
         if "Yes" in outcomes:
-            yes_index = outcomes.index("Yes")
-            token_id = clob_ids[yes_index]
-            print(f"DEBUG: Verified Token ID for 'Yes': {token_id}")
+            target_outcome = "Yes"
+        elif "Up" in outcomes:
+            target_outcome = "Up"
+            
+        if target_outcome:
+            idx = outcomes.index(target_outcome)
+            token_id = clob_ids[idx]
+            print(f"DEBUG: Verified Token ID for '{target_outcome}': {token_id}")
             return token_id
         else:
-            print(f"DEBUG: ERROR -> 'Yes' outcome not found in market data. Outcomes: {outcomes}")
+            print(f"DEBUG: ERROR -> Neither 'Yes' nor 'Up' found. Outcomes: {outcomes}")
             return None
             
     except Exception as e:
@@ -74,7 +85,6 @@ async def fetch_clob_history(token_id, start_ts, end_ts):
     if ClobClient is None: return pd.DataFrame()
     
     print(f"DEBUG: Fetching CLOB history for Token {token_id}...")
-    print(f"DEBUG: Time Window -> Start: {start_ts} | End: {end_ts}")
     
     client = ClobClient(host=CLOB_HOST, chain_id=CHAIN_ID)
     
