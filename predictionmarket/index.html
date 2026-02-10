@@ -202,11 +202,10 @@
                 grid: { vertLines: { color: '#2B2B43' }, horzLines: { color: '#2B2B43' } },
                 localization: { timezone: 'America/New_York' },
                 timeScale: { timeVisible: true, secondsVisible: false, borderColor: '#555' },
-                rightPriceScale: { borderColor: '#555' },
                 crosshair: { mode: LightweightCharts.CrosshairMode.Normal }
             };
 
-            // 1. TOP RIGHT: LINE Chart (Swapped from Area)
+            // 1. TOP RIGHT: LINE Chart
             const polyContainer = document.getElementById('poly-main-chart');
             const dimPoly = getDimensions('poly-main-chart');
             polyMainChart = LightweightCharts.createChart(polyContainer, {
@@ -215,7 +214,6 @@
                 height: dimPoly.height,
             });
             
-            // Replaced addAreaSeries with addLineSeries
             polyMainSeries = polyMainChart.addLineSeries({
                 color: '#00b894',
                 lineWidth: 2,
@@ -234,34 +232,23 @@
                 rightPriceScale: { visible: true, borderColor: '#2962FF' },
             });
             
+            // FIX: Color = Green, Markers = False
             crossPolySeries = crossChart.addLineSeries({ 
-                color: '#FF9800', lineWidth: 2, priceScaleId: 'left', title: 'Polymarket (Prob)',
-                pointMarkersVisible: true, pointMarkersRadius: 3 
+                color: '#00b894',        // Matched Green Color
+                lineWidth: 2, 
+                priceScaleId: 'left', 
+                title: 'Polymarket (Prob)',
+                pointMarkersVisible: false // Removed Dots
             });
             
             crossStockSeries = crossChart.addLineSeries({ 
-                color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'S&P 500 (Price)' 
+                color: '#2962FF', 
+                lineWidth: 2, 
+                priceScaleId: 'right', 
+                title: 'S&P 500 (Price)' 
             });
 
-            // --- SAFE SYNCHRONIZATION ---
-            function syncCharts(chart1, chart2) {
-                let isSyncing = false;
-                const syncHandler = (source, target) => (range) => {
-                    if (isSyncing || !range || !target) return;
-                    isSyncing = true;
-                    try {
-                        if (range.from && range.to) {
-                            target.timeScale().setVisibleLogicalRange(range);
-                        }
-                    } catch (e) {
-                        // Ignore sync errors if one chart is empty
-                    }
-                    isSyncing = false;
-                };
-                chart1.timeScale().subscribeVisibleLogicalRangeChange(syncHandler(chart1, chart2));
-                chart2.timeScale().subscribeVisibleLogicalRangeChange(syncHandler(chart2, chart1));
-            }
-            syncCharts(polyMainChart, crossChart);
+            // NOTE: syncCharts() function removed to decouple zooming.
 
             window.addEventListener('resize', () => {
                 const dp = getDimensions('poly-main-chart');
@@ -286,7 +273,6 @@
             else if (period === '1M') startTime = now - (30 * 24 * 60 * 60);
             else startTime = 0;
             
-            // Re-validate to be safe
             const clean = validateData(globalPolyData, "TimeframeFilter");
             const filtered = clean.filter(d => d.time >= startTime);
             
@@ -331,7 +317,6 @@
                     
                     if (cleanStock.length > 0) {
                         crossStockSeries.setData(cleanStock);
-                        // Safe Price Line Creation
                         if (cleanStock[0] && typeof cleanStock[0].value === 'number') {
                             if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
                             openPriceLine = crossStockSeries.createPriceLine({
@@ -360,7 +345,6 @@
                             const lastVal = cleanPoly[cleanPoly.length - 1].value;
                             document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
                             
-                            // Reset default view
                             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
                             document.querySelector('.time-controls button:first-child').classList.add('active');
                             setPolyTimeframe('1D');
