@@ -20,7 +20,7 @@
         @media (min-width: 768px) { .grid-container { grid-template-columns: 1fr 1fr; } .full-width { grid-column: 1 / -1; } }
         
         /* CARD STYLES */
-        .chart-card { background: white; border: 1px solid #e2e3e5; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; overflow: hidden; height: 100%; min-height: 550px; }
+        .chart-card { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; padding: 15px; display: flex; flex-direction: column; overflow: hidden; height: 100%; min-height: 550px; }
         .chart-card.no-padding { padding: 0; background: #131722; border: 1px solid #2B2B43; }
         .chart-card h3 { margin: 0 0 10px 0; font-size: 16px; color: #333; border-bottom: 1px solid #eee; padding-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
         .chart-card.no-padding h3 { margin: 0; padding: 15px; background: #fff; color: #333; border-bottom: 1px solid #e2e3e5; flex-shrink: 0; }
@@ -139,7 +139,7 @@
         </div>
 
         <div class="chart-card full-width">
-            <h3>Calculated Correlation <span class="status-text" id="cross-status"></span></h3>
+            <h3>Combined Chart <span class="status-text" id="cross-status"></span></h3>
             <div id="cross-chart" class="chart-box"></div>
         </div>
         
@@ -212,13 +212,25 @@
                 ...commonOptions,
                 width: dimPoly.width,
                 height: dimPoly.height,
+                // FIX: Fixed 0-100 range works because we scale data by 100
+                rightPriceScale: {
+                    visible: true,
+                    borderColor: '#555',
+                    autoScale: false,
+                    minValue: 0, 
+                    maxValue: 100, 
+                }
             });
             
             polyMainSeries = polyMainChart.addLineSeries({
                 color: '#00b894',
                 lineWidth: 2,
                 title: 'Probability',
-                priceFormat: { type: 'percent', precision: 1, minMove: 0.1 },
+                // This will now show "99%" instead of "0.99%"
+                priceFormat: { 
+                    type: 'custom', 
+                    formatter: price => price.toFixed(1) + '%',
+                },
             });
 
             // 2. BOTTOM: Combined Chart
@@ -228,7 +240,7 @@
                 ...commonOptions,
                 width: dimCross.width,
                 height: dimCross.height,
-                leftPriceScale: { visible: true, borderColor: '#FF9800' },
+                leftPriceScale: { visible: true, borderColor: '#00b894' },
                 rightPriceScale: { visible: true, borderColor: '#2962FF' },
             });
             
@@ -247,8 +259,6 @@
                 priceScaleId: 'right', 
                 title: 'S&P 500 (Price)' 
             });
-
-            // NOTE: syncCharts() function removed to decouple zooming.
 
             window.addEventListener('resize', () => {
                 const dp = getDimensions('poly-main-chart');
@@ -273,8 +283,7 @@
             else if (period === '1M') startTime = now - (30 * 24 * 60 * 60);
             else startTime = 0;
             
-            const clean = validateData(globalPolyData, "TimeframeFilter");
-            const filtered = clean.filter(d => d.time >= startTime);
+            const filtered = globalPolyData.filter(d => d.time >= startTime);
             
             if (polyMainSeries && filtered.length > 0) {
                 try {
@@ -337,13 +346,19 @@
                     const cleanPoly = validateData(rawPoly, "PolyData");
                     
                     if (cleanPoly.length > 0) {
-                        globalPolyData = cleanPoly; 
+                        // FIX: Scale data by 100 for Charting
+                        globalPolyData = cleanPoly.map(d => ({ 
+                            time: d.time, 
+                            value: d.value * 100 // 0.99 becomes 99.0
+                        }));
+
                         try {
-                            polyMainSeries.setData(cleanPoly);
-                            crossPolySeries.setData(cleanPoly);
+                            polyMainSeries.setData(globalPolyData);
+                            crossPolySeries.setData(globalPolyData);
                             
-                            const lastVal = cleanPoly[cleanPoly.length - 1].value;
-                            document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
+                            // Header calculation no longer needs * 100 because data is already scaled
+                            const lastVal = globalPolyData[globalPolyData.length - 1].value;
+                            document.getElementById('poly-price').innerText = lastVal.toFixed(1) + '%';
                             
                             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
                             document.querySelector('.time-controls button:first-child').classList.add('active');
