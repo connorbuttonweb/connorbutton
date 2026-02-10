@@ -202,20 +202,26 @@
                 grid: { vertLines: { color: '#2B2B43' }, horzLines: { color: '#2B2B43' } },
                 localization: { timezone: 'America/New_York' },
                 timeScale: { timeVisible: true, secondsVisible: false, borderColor: '#555' },
-                rightPriceScale: { borderColor: '#555' },
                 crosshair: { mode: LightweightCharts.CrosshairMode.Normal }
             };
 
-            // 1. TOP RIGHT: LINE Chart (Swapped from Area)
+            // 1. TOP RIGHT: LINE Chart (0-100% Fixed Axis)
             const polyContainer = document.getElementById('poly-main-chart');
             const dimPoly = getDimensions('poly-main-chart');
             polyMainChart = LightweightCharts.createChart(polyContainer, {
                 ...commonOptions,
                 width: dimPoly.width,
                 height: dimPoly.height,
+                // Force Y-Axis to 0-100% (Data is 0.0-1.0)
+                rightPriceScale: {
+                    visible: true,
+                    borderColor: '#555',
+                    autoScale: false,
+                    minValue: 0.0,
+                    maxValue: 1.0
+                }
             });
             
-            // Replaced addAreaSeries with addLineSeries
             polyMainSeries = polyMainChart.addLineSeries({
                 color: '#00b894',
                 lineWidth: 2,
@@ -234,35 +240,22 @@
                 rightPriceScale: { visible: true, borderColor: '#2962FF' },
             });
             
+            // FIX: Color is Green, No Markers
             crossPolySeries = crossChart.addLineSeries({ 
-                color: '#FF9800', lineWidth: 2, priceScaleId: 'left', title: 'Polymarket (Prob)',
-                pointMarkersVisible: true, pointMarkersRadius: 3 
+                color: '#00b894', 
+                lineWidth: 2, 
+                priceScaleId: 'left', 
+                title: 'Polymarket (Prob)',
+                pointMarkersVisible: false // <--- THIS REMOVES THE DOTS
             });
             
             crossStockSeries = crossChart.addLineSeries({ 
-                color: '#2962FF', lineWidth: 2, priceScaleId: 'right', title: 'S&P 500 (Price)' 
+                color: '#2962FF', 
+                lineWidth: 2, 
+                priceScaleId: 'right', 
+                title: 'S&P 500 (Price)' 
             });
-
-            // --- SAFE SYNCHRONIZATION ---
-            function syncCharts(chart1, chart2) {
-                let isSyncing = false;
-                const syncHandler = (source, target) => (range) => {
-                    if (isSyncing || !range || !target) return;
-                    isSyncing = true;
-                    try {
-                        if (range.from && range.to) {
-                            target.timeScale().setVisibleLogicalRange(range);
-                        }
-                    } catch (e) {
-                        // Ignore sync errors if one chart is empty
-                    }
-                    isSyncing = false;
-                };
-                chart1.timeScale().subscribeVisibleLogicalRangeChange(syncHandler(chart1, chart2));
-                chart2.timeScale().subscribeVisibleLogicalRangeChange(syncHandler(chart2, chart1));
-            }
-            syncCharts(polyMainChart, crossChart);
-
+            
             window.addEventListener('resize', () => {
                 const dp = getDimensions('poly-main-chart');
                 if(polyMainChart) polyMainChart.applyOptions({ width: dp.width, height: dp.height });
@@ -286,13 +279,13 @@
             else if (period === '1M') startTime = now - (30 * 24 * 60 * 60);
             else startTime = 0;
             
-            // Re-validate to be safe
             const clean = validateData(globalPolyData, "TimeframeFilter");
             const filtered = clean.filter(d => d.time >= startTime);
             
             if (polyMainSeries && filtered.length > 0) {
                 try {
                     polyMainSeries.setData(filtered);
+                    // Force fit ONLY the time scale, preserving the fixed Y-axis
                     polyMainChart.timeScale().fitContent();
                 } catch(e) {}
             }
@@ -331,7 +324,6 @@
                     
                     if (cleanStock.length > 0) {
                         crossStockSeries.setData(cleanStock);
-                        // Safe Price Line Creation
                         if (cleanStock[0] && typeof cleanStock[0].value === 'number') {
                             if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
                             openPriceLine = crossStockSeries.createPriceLine({
@@ -360,7 +352,6 @@
                             const lastVal = cleanPoly[cleanPoly.length - 1].value;
                             document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
                             
-                            // Reset default view
                             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
                             document.querySelector('.time-controls button:first-child').classList.add('active');
                             setPolyTimeframe('1D');
