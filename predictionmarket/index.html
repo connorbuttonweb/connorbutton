@@ -212,24 +212,19 @@
                 ...commonOptions,
                 width: dimPoly.width,
                 height: dimPoly.height,
-                // FIX: Fixed 0-100 range works because we scale data by 100
-                rightPriceScale: {
-                    visible: true,
-                    borderColor: '#555',
-                    autoScale: false,
-                    minValue: 0, 
-                    maxValue: 100, 
-                }
+                // REVERTED: Removed Fixed Axis options to allow Auto-Scale.
+                // The Custom Formatter below handles the 0-100% visual.
             });
             
             polyMainSeries = polyMainChart.addLineSeries({
                 color: '#00b894',
                 lineWidth: 2,
                 title: 'Probability',
-                // This will now show "99%" instead of "0.99%"
+                // BETTER CHANGE: Custom Formatter makes 0.99 look like "99.0%"
+                // without breaking the chart's ability to draw the line.
                 priceFormat: { 
                     type: 'custom', 
-                    formatter: price => price.toFixed(1) + '%',
+                    formatter: price => (price * 100).toFixed(1) + '%',
                 },
             });
 
@@ -240,17 +235,17 @@
                 ...commonOptions,
                 width: dimCross.width,
                 height: dimCross.height,
-                leftPriceScale: { visible: true, borderColor: '#00b894' },
-                rightPriceScale: { visible: true, borderColor: '#2962FF' },
+                leftPriceScale: { visible: true, borderColor: '#00b894' }, // Green Axis
+                rightPriceScale: { visible: true, borderColor: '#2962FF' }, // Blue Axis
             });
             
             // FIX: Color = Green, Markers = False
             crossPolySeries = crossChart.addLineSeries({ 
-                color: '#00b894',        // Matched Green Color
+                color: '#00b894',          // Green
                 lineWidth: 2, 
                 priceScaleId: 'left', 
                 title: 'Polymarket (Prob)',
-                pointMarkersVisible: false // Removed Dots
+                pointMarkersVisible: false // No Dots
             });
             
             crossStockSeries = crossChart.addLineSeries({ 
@@ -259,6 +254,8 @@
                 priceScaleId: 'right', 
                 title: 'S&P 500 (Price)' 
             });
+
+            // NOTE: syncCharts() removed to decouple zooming.
 
             window.addEventListener('resize', () => {
                 const dp = getDimensions('poly-main-chart');
@@ -346,19 +343,16 @@
                     const cleanPoly = validateData(rawPoly, "PolyData");
                     
                     if (cleanPoly.length > 0) {
-                        // FIX: Scale data by 100 for Charting
-                        globalPolyData = cleanPoly.map(d => ({ 
-                            time: d.time, 
-                            value: d.value * 100 // 0.99 becomes 99.0
-                        }));
+                        // REVERTED: No multiplying by 100. Keep data as 0.0 - 1.0
+                        globalPolyData = cleanPoly; 
 
                         try {
-                            polyMainSeries.setData(globalPolyData);
-                            crossPolySeries.setData(globalPolyData);
+                            polyMainSeries.setData(cleanPoly);
+                            crossPolySeries.setData(cleanPoly);
                             
-                            // Header calculation no longer needs * 100 because data is already scaled
-                            const lastVal = globalPolyData[globalPolyData.length - 1].value;
-                            document.getElementById('poly-price').innerText = lastVal.toFixed(1) + '%';
+                            // Header: Manually calculate % string
+                            const lastVal = cleanPoly[cleanPoly.length - 1].value;
+                            document.getElementById('poly-price').innerText = (lastVal * 100).toFixed(1) + '%';
                             
                             document.querySelectorAll('.time-btn').forEach(b => b.classList.remove('active'));
                             document.querySelector('.time-controls button:first-child').classList.add('active');
