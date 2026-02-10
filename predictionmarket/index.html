@@ -212,13 +212,13 @@
                 ...commonOptions,
                 width: dimPoly.width,
                 height: dimPoly.height,
-                // Force Y-Axis to 0-100% (Data is 0.0-1.0)
                 rightPriceScale: {
                     visible: true,
                     borderColor: '#555',
                     autoScale: false,
                     minValue: 0.0,
-                    maxValue: 1.0
+                    maxValue: 1.0,
+                    scaleMargins: { top: 0.05, bottom: 0.05 } // Prevents line from hitting edges
                 }
             });
             
@@ -226,7 +226,12 @@
                 color: '#00b894',
                 lineWidth: 2,
                 title: 'Probability',
-                priceFormat: { type: 'percent', precision: 1, minMove: 0.1 },
+                // FIX: Use CUSTOM formatter to properly handle 0.0-1.0 to %
+                priceFormat: { 
+                    type: 'custom', 
+                    formatter: price => (price * 100).toFixed(1) + '%',
+                    minMove: 0.001
+                },
             });
 
             // 2. BOTTOM: Combined Chart
@@ -246,7 +251,7 @@
                 lineWidth: 2, 
                 priceScaleId: 'left', 
                 title: 'Polymarket (Prob)',
-                pointMarkersVisible: false // <--- THIS REMOVES THE DOTS
+                pointMarkersVisible: false // Removed Dots
             });
             
             crossStockSeries = crossChart.addLineSeries({ 
@@ -285,7 +290,6 @@
             if (polyMainSeries && filtered.length > 0) {
                 try {
                     polyMainSeries.setData(filtered);
-                    // Force fit ONLY the time scale, preserving the fixed Y-axis
                     polyMainChart.timeScale().fitContent();
                 } catch(e) {}
             }
