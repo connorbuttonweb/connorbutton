@@ -18,7 +18,11 @@
         .grid-container { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 40px; align-items: stretch; }
         @media (min-width: 768px) { .grid-container { grid-template-columns: 1fr 1fr; } .full-width { grid-column: 1 / -1; } }
         
-        /* CARD STYLES - Added min-height: 400px to fix compression */
+        /* SECTION HEADERS */
+        .section-header { grid-column: 1 / -1; margin-top: 40px; margin-bottom: 5px; padding-bottom: 10px; border-bottom: 2px solid #2B2B43; color: #EEE; font-size: 24px; font-weight: 600; }
+        .subsection-header { grid-column: 1 / -1; margin-top: 10px; margin-bottom: 0px; color: #888; font-size: 13px; text-transform: uppercase; letter-spacing: 1.5px; }
+
+        /* CARD STYLES */
         .chart-card { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; height: 100%; min-height: 400px; }
         .chart-card.no-padding { padding: 0; background: #131722; border: 1px solid #2B2B43; }
         
@@ -43,7 +47,7 @@
         .time-btn:hover { background: #2B2B43; color: white; }
         .time-btn.active { background: #2962FF; border-color: #2962FF; color: white; }
 
-        /* WIDGET STYLES - Added min-height: 250px to fix compression */
+        /* WIDGET STYLES */
         .widget-container { width: 100%; height: 100%; min-height: 250px; flex-grow: 1; border: none; display: block; position: relative; }
         .chart-box { width: 100%; height: 350px; position: relative; }
         .status-text { font-size: 12px; font-weight: normal; color: #666; }
@@ -83,12 +87,16 @@
         </div>
     </nav>
 
-    <section class="section">
-        <div class="page-title">
+    <section class="section" style="padding-top: 20px;">
+        <div class="page-title" style="margin-bottom: 10px;">
             <h1>Cross-Market Dashboard</h1>
         </div>
 
         <div class="grid-container">
+            
+            <h2 class="section-header">S&P 500</h2>
+            
+            <h3 class="subsection-header">Indices & ETFs</h3>
             
             <div class="chart-card no-padding" style="border-color: #e2e3e5;">
                 <div class="widget-container">
@@ -101,26 +109,15 @@
                 </div>
             </div>
 
-            <div class="chart-card no-padding">
-                <div class="poly-header">
-                    <div class="poly-info">
-                        <img id="poly1-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
-                        <div class="poly-title-group">
-                            <div id="poly1-question" class="poly-question">Loading Market...</div>
-                            <div id="poly1-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
-                        </div>
-                    </div>
-                    <div class="poly-price-box">
-                        <div id="poly1-price" class="poly-price">--%</div>
+            <div class="chart-card no-padding" style="border-color: #e2e3e5;">
+                <div class="widget-container">
+                    <div class="tradingview-widget-container" style="height:100%;width:100%">
+                        <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
+                        <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+                        { "autosize": true, "symbol": "SP:SPX", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
+                        </script>
                     </div>
                 </div>
-                <div class="time-controls">
-                    <button class="time-btn active" onclick="setPolyTimeframe('poly1', '1D', this)">1D</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly1', '1W', this)">1W</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly1', '1M', this)">1M</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly1', 'ALL', this)">ALL</button>
-                </div>
-                <div id="poly1-chart" class="widget-container"></div>
             </div>
 
             <div class="chart-card no-padding" style="border-color: #e2e3e5;">
@@ -128,34 +125,134 @@
                     <div class="tradingview-widget-container" style="height:100%;width:100%">
                         <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                        { "autosize": true, "symbol": "NASDAQ:AAPL", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
+                        { "autosize": true, "symbol": "AMEX:MAGS", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
                         </script>
                     </div>
                 </div>
+            </div>
+            
+            <div></div>
+
+            <h3 class="subsection-header">High-Frequency Markets</h3>
+
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-spx-daily-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-spx-daily-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-spx-daily-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-spx-daily-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-spx-daily', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-daily', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-daily', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-daily', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-spx-daily-chart" class="widget-container"></div>
+            </div>
+            
+            <div></div>
+
+            <h3 class="subsection-header">Low-Frequency Markets</h3>
+
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-spx-dec2026-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-spx-dec2026-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-spx-dec2026-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-spx-dec2026-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-spx-dec2026', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-dec2026', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-dec2026', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-dec2026', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-spx-dec2026-chart" class="widget-container"></div>
             </div>
 
             <div class="chart-card no-padding">
                 <div class="poly-header">
                     <div class="poly-info">
-                        <img id="poly2-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <img id="poly-spx-feb-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly2-question" class="poly-question">Loading Market...</div>
-                            <div id="poly2-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                            <div id="poly-spx-feb-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-spx-feb-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
                     <div class="poly-price-box">
-                        <div id="poly2-price" class="poly-price">--%</div>
+                        <div id="poly-spx-feb-price" class="poly-price">--%</div>
                     </div>
                 </div>
                 <div class="time-controls">
-                    <button class="time-btn active" onclick="setPolyTimeframe('poly2', '1D', this)">1D</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly2', '1W', this)">1W</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly2', '1M', this)">1M</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly2', 'ALL', this)">ALL</button>
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-spx-feb', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-feb', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-feb', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-feb', 'ALL', this)">ALL</button>
                 </div>
-                <div id="poly2-chart" class="widget-container"></div>
+                <div id="poly-spx-feb-chart" class="widget-container"></div>
             </div>
 
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-spx-above-feb-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-spx-above-feb-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-spx-above-feb-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-spx-above-feb-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-spx-above-feb', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-above-feb', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-above-feb', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-above-feb', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-spx-above-feb-chart" class="widget-container"></div>
+            </div>
+
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-spx-ath-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-spx-ath-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-spx-ath-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-spx-ath-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-spx-ath', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-ath', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-ath', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-spx-ath', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-spx-ath-chart" class="widget-container"></div>
+            </div>
+
+            <h2 class="section-header">Bitcoin</h2>
+            
+            <h3 class="subsection-header">Indices & ETFs</h3>
+            
             <div class="chart-card no-padding" style="border-color: #e2e3e5;">
                 <div class="widget-container">
                     <div class="tradingview-widget-container" style="height:100%;width:100%">
@@ -166,27 +263,101 @@
                     </div>
                 </div>
             </div>
+            
+            <div></div>
 
-             <div class="chart-card no-padding">
+            <h3 class="subsection-header">High-Frequency Markets</h3>
+
+            <div class="chart-card no-padding">
                 <div class="poly-header">
                     <div class="poly-info">
-                        <img id="poly3-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <img id="poly-btc-hf-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly3-question" class="poly-question">Loading Market...</div>
-                            <div id="poly3-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                            <div id="poly-btc-hf-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-btc-hf-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
                     <div class="poly-price-box">
-                        <div id="poly3-price" class="poly-price">--%</div>
+                        <div id="poly-btc-hf-price" class="poly-price">--%</div>
                     </div>
                 </div>
                 <div class="time-controls">
-                    <button class="time-btn active" onclick="setPolyTimeframe('poly3', '1D', this)">1D</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly3', '1W', this)">1W</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly3', '1M', this)">1M</button>
-                    <button class="time-btn" onclick="setPolyTimeframe('poly3', 'ALL', this)">ALL</button>
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-btc-hf', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-hf', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-hf', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-hf', 'ALL', this)">ALL</button>
                 </div>
-                <div id="poly3-chart" class="widget-container"></div>
+                <div id="poly-btc-hf-chart" class="widget-container"></div>
+            </div>
+
+            <div></div>
+
+            <h3 class="subsection-header">Low-Frequency Markets</h3>
+
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-btc-feb-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-btc-feb-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-btc-feb-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-btc-feb-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-btc-feb', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-feb', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-feb', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-feb', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-btc-feb-chart" class="widget-container"></div>
+            </div>
+
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-btc-2027-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-btc-2027-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-btc-2027-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-btc-2027-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-btc-2027', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-2027', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-2027', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-2027', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-btc-2027-chart" class="widget-container"></div>
+            </div>
+
+            <div class="chart-card no-padding">
+                <div class="poly-header">
+                    <div class="poly-info">
+                        <img id="poly-btc-ath-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
+                        <div class="poly-title-group">
+                            <div id="poly-btc-ath-question" class="poly-question">Loading Market...</div>
+                            <div id="poly-btc-ath-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
+                        </div>
+                    </div>
+                    <div class="poly-price-box">
+                        <div id="poly-btc-ath-price" class="poly-price">--%</div>
+                    </div>
+                </div>
+                <div class="time-controls">
+                    <button class="time-btn active" onclick="setPolyTimeframe('poly-btc-ath', '1D', this)">1D</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-ath', '1W', this)">1W</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-ath', '1M', this)">1M</button>
+                    <button class="time-btn" onclick="setPolyTimeframe('poly-btc-ath', 'ALL', this)">ALL</button>
+                </div>
+                <div id="poly-btc-ath-chart" class="widget-container"></div>
             </div>
 
         </div> <div class="chart-card full-width no-padding">
@@ -210,15 +381,22 @@
         </div>
     </section>
 
-<script>
+    <script>
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
         
         const DASHBOARD_CONFIG = {
-            stocks: ["SPY", "AAPL", "BTC-USD"],
+            stocks: ["^GSPC", "SPY", "MAGS", "BTC-USD"],
             polymarkets: [
-                { id: 'poly1', endpoint: '/daily-spx', name: 'SPX Daily' },
-                { id: 'poly2', endpoint: '/poly-custom-1', name: 'Custom Market 1' },
-                { id: 'poly3', endpoint: '/poly-custom-2', name: 'Custom Market 2' }
+                { id: 'poly-spx-daily', endpoint: '/daily-spx', name: 'SPX Daily' },
+                { id: 'poly-spx-dec2026', endpoint: '/poly-spx-dec2026', name: 'SPX Close 2026' },
+                { id: 'poly-spx-feb', endpoint: '/poly-spx-feb', name: 'SPX Hit Feb' },
+                { id: 'poly-spx-above-feb', endpoint: '/poly-spx-above-feb', name: 'SPX Above Feb' },
+                { id: 'poly-spx-ath', endpoint: '/poly-spx-ath', name: 'SPX ATH' },
+                
+                { id: 'poly-btc-hf', endpoint: '/poly-btc-hf', name: 'BTC High Freq' },
+                { id: 'poly-btc-feb', endpoint: '/poly-btc-feb', name: 'BTC Hit Feb' },
+                { id: 'poly-btc-2027', endpoint: '/poly-btc-2027', name: 'BTC Before 2027' },
+                { id: 'poly-btc-ath', endpoint: '/poly-btc-ath', name: 'BTC ATH' }
             ]
         };
 
@@ -255,7 +433,6 @@
                 const container = document.getElementById(`${pm.id}-chart`);
                 if (!container) return; 
 
-                // Let the ResizeObserver handle initial dimensions
                 const chart = LightweightCharts.createChart(container, commonOptions);
                 
                 const series = chart.addLineSeries({
@@ -278,8 +455,6 @@
             crossPolySeries = crossChart.addLineSeries({ color: '#00b894', lineWidth: 2, priceScaleId: 'left', pointMarkersVisible: false });
             crossStockSeries = crossChart.addLineSeries({ color: '#2962FF', lineWidth: 2, priceScaleId: 'right' });
 
-            // --- THE RESIZE FIX ---
-            // This constantly monitors the containers and forces the charts to match perfectly
             const resizeObserver = new ResizeObserver(entries => {
                 for (let entry of entries) {
                     const { width, height } = entry.contentRect;
@@ -296,10 +471,8 @@
                 }
             });
 
-            // Attach observer to combined chart
             if (crossContainer) resizeObserver.observe(crossContainer);
             
-            // Attach observer to all polymarket charts
             DASHBOARD_CONFIG.polymarkets.forEach(pm => {
                 const container = document.getElementById(`${pm.id}-chart`);
                 if (container) resizeObserver.observe(container);
@@ -392,22 +565,18 @@
             const stockKey = document.getElementById('sel-stock').value;
             const polyKey = document.getElementById('sel-poly').value;
 
-            // Use fallbacks to prevent errors when switching
             const stockData = stockDataStore[stockKey] || [];
             const polyInst = polyInstances[polyKey];
             const polyData = (polyInst && polyInst.rawData) ? polyInst.rawData : [];
 
-            // Update Stock Series safely
             crossStockSeries.setData(stockData);
             crossStockSeries.applyOptions({ title: stockData.length > 0 ? `${stockKey} (Price)` : stockKey });
             
-            // Carefully remove the old open price line if it exists
             if (openPriceLine) {
                 try { crossStockSeries.removePriceLine(openPriceLine); } catch(e) {}
                 openPriceLine = null;
             }
 
-            // Create new open price line if data is available
             if (stockData.length > 0) {
                 openPriceLine = crossStockSeries.createPriceLine({
                     price: stockData[0].value,
@@ -419,15 +588,14 @@
                 });
             }
 
-            // Update Polymarket Series safely
             crossPolySeries.setData(polyData);
             if (polyData.length > 0) {
                 crossPolySeries.applyOptions({ title: 'Prob (%)' });
             }
 
-            // --- THE UPDATE FIX ---
-            // Use a tiny timeout to ensure the DOM and canvas have registered 
-            // the new data before forcing the view to recenter itself
+            crossChart.priceScale('right').applyOptions({ autoScale: true });
+            crossChart.priceScale('left').applyOptions({ autoScale: true });
+
             setTimeout(() => {
                 crossChart.timeScale().fitContent();
             }, 50);
