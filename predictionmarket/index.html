@@ -27,6 +27,16 @@
         .chart-card { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; height: 100%; min-height: 400px; }
         .chart-card.no-padding { padding: 0; background: #131722; border: 1px solid #2B2B43; }
         
+        /* TEXT CARD STYLES (For Regression Section) */
+        .text-card { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; padding: 30px 40px; color: #D1D4DC; font-size: 15px; line-height: 1.6; margin-bottom: 40px; }
+        .text-card h3 { color: #FFFFFF; font-size: 18px; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid #2B2B43; padding-bottom: 8px; }
+        .text-card h3:first-child { margin-top: 0; }
+        .text-card h4 { color: #2962FF; font-size: 15px; margin-top: 25px; margin-bottom: 10px; letter-spacing: 0.5px; }
+        .text-card p { margin-bottom: 15px; color: #8a919e; font-style: italic; } /* Styled for placeholder text */
+        .text-card ul { margin-bottom: 20px; padding-left: 20px; }
+        .text-card li { margin-bottom: 10px; }
+        .text-card strong { color: #00b894; font-weight: 600; }
+
         /* COMBINED CHART HEADER / CONTROLS */
         .combine-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #fff; border-bottom: 1px solid #e2e3e5; }
         .combine-header h3 { margin: 0; font-size: 16px; color: #333; }
@@ -39,7 +49,8 @@
         .poly-icon { width: 32px; height: 32px; border-radius: 50%; background: #333; object-fit: cover; }
         .poly-title-group { display: flex; flex-direction: column; }
         .poly-question { font-size: 14px; font-weight: 600; color: #EEE; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none; transition: color 0.2s; display: block; }
-        .poly-question:hover { color: #2962FF; } /* Adds blue color on hover */        .poly-meta { font-size: 11px; color: #888; }
+        .poly-question:hover { color: #2962FF; } 
+        .poly-meta { font-size: 11px; color: #888; }
         .poly-price-box { text-align: right; }
         .poly-price { font-size: 24px; font-weight: 700; color: #00b894; }
         
@@ -54,7 +65,7 @@
         .status-text { font-size: 12px; font-weight: normal; color: #666; }
 
         /* DOWNLOAD BUTTON STYLING */
-        .download-container { text-align: center; margin-top: 30px; margin-bottom: 30px; }
+        .download-container { margin-top: 30px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
         .download-btn { display: inline-flex; align-items: center; gap: 8px; background-color: #2962FF; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; }
         .download-btn:hover { background-color: #1e4bd8; color: white; }
     </style>
@@ -89,9 +100,6 @@
     </nav>
 
     <section class="section" style="padding-top: 20px;">
-        <div class="page-title" style="margin-bottom: 10px;">
-            <h1>Cross-Market Dashboard</h1>
-        </div>
 
         <div class="grid-container">
             
@@ -354,7 +362,9 @@
                 <div id="poly-btc-ath-chart" class="widget-container"></div>
             </div>
 
-        </div> <div class="chart-card full-width no-padding">
+        </div> 
+        
+        <div class="chart-card full-width no-padding">
             <div class="combine-header">
                 <h3>Combined Chart <span class="status-text" id="cross-status"></span></h3>
                 <div class="combine-controls">
@@ -368,10 +378,36 @@
             <div id="cross-chart" class="chart-box"></div>
         </div>
         
+        <h2 class="section-header">Regression Testing & Causal Inference</h2>
+        
         <div class="download-container">
             <a href="/assets/PredictionMarkets/Prediction_Market_Master.xlsx" download class="download-btn">
                 <i class="fas fa-file-excel"></i> Download Raw Excel Data
             </a>
+            <span style="color: #666; font-size: 13px;">Raw dataset used for the regression analysis below.</span>
+        </div>
+
+        <div class="text-card">
+            <h3>Process & Methodology</h3>
+            <p>
+                
+            </p>
+
+            <h3>Regression Results</h3>
+            <h4>Model 1: S&P 500 (SPX) Movements vs. Prediction Market Probabilities</h4>
+            <p>
+                
+            </p>
+            
+            <h4>Model 2: Bitcoin (BTC) Movements vs. Prediction Market Probabilities</h4>
+            <p>
+                
+            </p>
+
+            <h3>Conclusion</h3>
+            <p>
+                
+            </p>
         </div>
     </section>
 
@@ -385,13 +421,11 @@
             polymarkets: [
                 { id: 'poly-spx-daily', endpoint: '/daily-spx', name: 'SPX Daily' },
                 { id: 'poly-spx-dec2026', endpoint: '/poly-spx-dec2026', name: 'SPX Close 2026' },
-                // Changed endpoints to match worker, and name to use dynamic month
                 { id: 'poly-spx-feb', endpoint: '/poly-spx-month', name: `SPX Hit ${currentMonthName}` },
                 { id: 'poly-spx-above-feb', endpoint: '/poly-spx-above-month', name: `SPX Above ${currentMonthName}` },
                 { id: 'poly-spx-ath', endpoint: '/poly-spx-ath', name: 'SPX ATH' },
                 
                 { id: 'poly-btc-hf', endpoint: '/poly-btc-hf', name: 'BTC High Freq' },
-                // Changed endpoints to match worker, and name to use dynamic month
                 { id: 'poly-btc-feb', endpoint: '/poly-btc-month', name: `BTC Hit ${currentMonthName}` },
                 { id: 'poly-btc-2027', endpoint: '/poly-btc-2027', name: 'BTC Before 2027' },
                 { id: 'poly-btc-ath', endpoint: '/poly-btc-ath', name: 'BTC ATH' }
