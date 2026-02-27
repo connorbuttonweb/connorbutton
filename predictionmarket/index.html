@@ -210,7 +210,7 @@
         </div>
     </section>
 
-    <script>
+<script>
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
         
         const DASHBOARD_CONFIG = {
@@ -240,12 +240,6 @@
             return unique;
         }
 
-        function getDimensions(elementId) {
-            const el = document.getElementById(elementId);
-            if (!el) return { width: 600, height: 350 };
-            return { width: el.clientWidth || 600, height: el.clientHeight || 350 };
-        }
-
         function initCharts() {
             if (typeof LightweightCharts === 'undefined') return;
 
@@ -261,12 +255,8 @@
                 const container = document.getElementById(`${pm.id}-chart`);
                 if (!container) return; 
 
-                const dim = getDimensions(`${pm.id}-chart`);
-                const chart = LightweightCharts.createChart(container, {
-                    ...commonOptions,
-                    width: dim.width,
-                    height: dim.height
-                });
+                // Let the ResizeObserver handle initial dimensions
+                const chart = LightweightCharts.createChart(container, commonOptions);
                 
                 const series = chart.addLineSeries({
                     color: '#00b894',
@@ -279,11 +269,8 @@
             });
 
             const crossContainer = document.getElementById('cross-chart');
-            const dimCross = getDimensions('cross-chart');
             crossChart = LightweightCharts.createChart(crossContainer, {
                 ...commonOptions,
-                width: dimCross.width,
-                height: dimCross.height,
                 leftPriceScale: { visible: true, borderColor: '#00b894' }, 
                 rightPriceScale: { visible: true, borderColor: '#2962FF' }, 
             });
@@ -291,12 +278,31 @@
             crossPolySeries = crossChart.addLineSeries({ color: '#00b894', lineWidth: 2, priceScaleId: 'left', pointMarkersVisible: false });
             crossStockSeries = crossChart.addLineSeries({ color: '#2962FF', lineWidth: 2, priceScaleId: 'right' });
 
-            window.addEventListener('resize', () => {
-                Object.values(polyInstances).forEach(inst => {
-                    inst.chart.applyOptions({ width: inst.chart._boundContainer?.clientWidth || 600, height: 350 });
-                });
-                const dc = getDimensions('cross-chart');
-                if(crossChart) crossChart.applyOptions({ width: dc.width, height: dc.height });
+            // --- THE RESIZE FIX ---
+            // This constantly monitors the containers and forces the charts to match perfectly
+            const resizeObserver = new ResizeObserver(entries => {
+                for (let entry of entries) {
+                    const { width, height } = entry.contentRect;
+                    if (width === 0 || height === 0) continue; 
+                    
+                    if (entry.target.id === 'cross-chart') {
+                        crossChart.applyOptions({ width, height });
+                    } else {
+                        const pmId = entry.target.id.replace('-chart', '');
+                        if (polyInstances[pmId]) {
+                            polyInstances[pmId].chart.applyOptions({ width, height });
+                        }
+                    }
+                }
+            });
+
+            // Attach observer to combined chart
+            if (crossContainer) resizeObserver.observe(crossContainer);
+            
+            // Attach observer to all polymarket charts
+            DASHBOARD_CONFIG.polymarkets.forEach(pm => {
+                const container = document.getElementById(`${pm.id}-chart`);
+                if (container) resizeObserver.observe(container);
             });
         }
 
@@ -386,33 +392,46 @@
             const stockKey = document.getElementById('sel-stock').value;
             const polyKey = document.getElementById('sel-poly').value;
 
-            if (stockDataStore[stockKey]) {
-                crossStockSeries.setData(stockDataStore[stockKey]);
-                crossStockSeries.applyOptions({ title: `${stockKey} (Price)` });
-                
-                if (stockDataStore[stockKey].length > 0) {
-                    if (openPriceLine) crossStockSeries.removePriceLine(openPriceLine);
-                    openPriceLine = crossStockSeries.createPriceLine({
-                        price: stockDataStore[stockKey][0].value,
-                        color: 'rgba(41, 98, 255, 0.6)',
-                        lineWidth: 1,
-                        lineStyle: LightweightCharts.LineStyle.Dotted,
-                        axisLabelVisible: true,
-                        title: 'OPEN',
-                    });
-                }
+            // Use fallbacks to prevent errors when switching
+            const stockData = stockDataStore[stockKey] || [];
+            const polyInst = polyInstances[polyKey];
+            const polyData = (polyInst && polyInst.rawData) ? polyInst.rawData : [];
+
+            // Update Stock Series safely
+            crossStockSeries.setData(stockData);
+            crossStockSeries.applyOptions({ title: stockData.length > 0 ? `${stockKey} (Price)` : stockKey });
+            
+            // Carefully remove the old open price line if it exists
+            if (openPriceLine) {
+                try { crossStockSeries.removePriceLine(openPriceLine); } catch(e) {}
+                openPriceLine = null;
             }
 
-            const polyInst = polyInstances[polyKey];
-            if (polyInst && polyInst.rawData.length > 0) {
-                crossPolySeries.setData(polyInst.rawData);
+            // Create new open price line if data is available
+            if (stockData.length > 0) {
+                openPriceLine = crossStockSeries.createPriceLine({
+                    price: stockData[0].value,
+                    color: 'rgba(41, 98, 255, 0.6)',
+                    lineWidth: 1,
+                    lineStyle: LightweightCharts.LineStyle.Dotted,
+                    axisLabelVisible: true,
+                    title: 'OPEN',
+                });
+            }
+
+            // Update Polymarket Series safely
+            crossPolySeries.setData(polyData);
+            if (polyData.length > 0) {
                 crossPolySeries.applyOptions({ title: 'Prob (%)' });
             }
 
-            crossChart.timeScale().fitContent();
+            // --- THE UPDATE FIX ---
+            // Use a tiny timeout to ensure the DOM and canvas have registered 
+            // the new data before forcing the view to recenter itself
+            setTimeout(() => {
+                crossChart.timeScale().fitContent();
+            }, 50);
         }
-        
-        // Removed the loadExcel() function entirely.
 
         window.addEventListener('DOMContentLoaded', () => {
             initCharts();
