@@ -390,23 +390,23 @@
         <div class="text-card">
             <h3>Process & Methodology</h3>
             <p>
-                
+                [Detail your econometric approach here. Explain your data collection methods, the specific regression models used (e.g., OLS, log-level interactions), and how you controlled for Omitted Variable Bias (OVB) when testing the causal relationship between prediction market probabilities and asset price movements.]
             </p>
 
             <h3>Regression Results</h3>
             <h4>Model 1: S&P 500 (SPX) Movements vs. Prediction Market Probabilities</h4>
             <p>
-                
+                [Insert your Stata / GROK regression outputs here. Include your variables, R-squared values, coefficients, and robust standard errors.]
             </p>
             
             <h4>Model 2: Bitcoin (BTC) Movements vs. Prediction Market Probabilities</h4>
             <p>
-                
+                [Insert your Bitcoin regression results here. Detail the significance of the findings and any divergence from the SPX model.]
             </p>
 
             <h3>Conclusion</h3>
             <p>
-                
+                [Insert your final thoughts on the validity of causal inference from these prediction markets and how these findings can be integrated into the cross-market tools above.]
             </p>
         </div>
     </section>
@@ -468,7 +468,7 @@
                 const chart = LightweightCharts.createChart(container, commonOptions);
                 
                 const series = chart.addLineSeries({
-                    color: '#00b894',
+                    color: pm.id.includes('btc') ? '#F7931A' : '#00b894',
                     lineWidth: 2,
                     title: 'Prob',
                     priceFormat: { type: 'custom', formatter: price => (price * 100).toFixed(1) + '%' },
@@ -581,7 +581,10 @@
                             polyInstances[pmConfig.id].series.setData(cleanPoly);
                             
                             const priceEl = document.getElementById(`${pmConfig.id}-price`);
-                            if(priceEl) priceEl.innerText = (cleanPoly[cleanPoly.length - 1].value * 100).toFixed(1) + '%';
+                            if(priceEl) {
+                                priceEl.innerText = (cleanPoly[cleanPoly.length - 1].value * 100).toFixed(1) + '%';
+                                priceEl.style.color = pmConfig.id.includes('btc') ? '#F7931A' : '#00b894';
+                            }
                             
                             const btn1D = document.querySelector(`#${pmConfig.id}-chart`).previousElementSibling.querySelector('button:first-child');
                             if(btn1D) window.setPolyTimeframe(pmConfig.id, '1D', btn1D);
@@ -625,11 +628,17 @@
 
             crossPolySeries.setData(polyData);
             if (polyData.length > 0) {
-                crossPolySeries.applyOptions({ title: 'Prob (%)' });
+                crossPolySeries.applyOptions({ 
+                    title: 'Prob (%)',
+                    color: polyKey.includes('btc') ? '#F7931A' : '#00b894'
+                });
             }
 
             crossChart.priceScale('right').applyOptions({ autoScale: true });
-            crossChart.priceScale('left').applyOptions({ autoScale: true });
+            crossChart.priceScale('left').applyOptions({ 
+                autoScale: true,
+                borderColor: polyKey.includes('btc') ? '#F7931A' : '#00b894'
+            });
 
             setTimeout(() => {
                 crossChart.timeScale().fitContent();
