@@ -378,17 +378,21 @@
     <script>
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
         
+        const currentMonthName = new Date().toLocaleString('en-US', { month: 'short' });
+
         const DASHBOARD_CONFIG = {
             stocks: ["^GSPC", "SPY", "MAGS", "BTC-USD"],
             polymarkets: [
                 { id: 'poly-spx-daily', endpoint: '/daily-spx', name: 'SPX Daily' },
                 { id: 'poly-spx-dec2026', endpoint: '/poly-spx-dec2026', name: 'SPX Close 2026' },
-                { id: 'poly-spx-feb', endpoint: '/poly-spx-feb', name: 'SPX Hit Feb' },
-                { id: 'poly-spx-above-feb', endpoint: '/poly-spx-above-feb', name: 'SPX Above Feb' },
+                // Changed endpoints to match worker, and name to use dynamic month
+                { id: 'poly-spx-feb', endpoint: '/poly-spx-month', name: `SPX Hit ${currentMonthName}` },
+                { id: 'poly-spx-above-feb', endpoint: '/poly-spx-above-month', name: `SPX Above ${currentMonthName}` },
                 { id: 'poly-spx-ath', endpoint: '/poly-spx-ath', name: 'SPX ATH' },
                 
                 { id: 'poly-btc-hf', endpoint: '/poly-btc-hf', name: 'BTC High Freq' },
-                { id: 'poly-btc-feb', endpoint: '/poly-btc-feb', name: 'BTC Hit Feb' },
+                // Changed endpoints to match worker, and name to use dynamic month
+                { id: 'poly-btc-feb', endpoint: '/poly-btc-month', name: `BTC Hit ${currentMonthName}` },
                 { id: 'poly-btc-2027', endpoint: '/poly-btc-2027', name: 'BTC Before 2027' },
                 { id: 'poly-btc-ath', endpoint: '/poly-btc-ath', name: 'BTC ATH' }
             ]
