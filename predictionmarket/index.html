@@ -38,8 +38,8 @@
         .poly-info { display: flex; align-items: center; gap: 12px; }
         .poly-icon { width: 32px; height: 32px; border-radius: 50%; background: #333; object-fit: cover; }
         .poly-title-group { display: flex; flex-direction: column; }
-        .poly-question { font-size: 14px; font-weight: 600; color: #EEE; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-        .poly-meta { font-size: 11px; color: #888; }
+        .poly-question { font-size: 14px; font-weight: 600; color: #EEE; max-width: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; text-decoration: none; transition: color 0.2s; display: block; }
+        .poly-question:hover { color: #2962FF; } /* Adds blue color on hover */        .poly-meta { font-size: 11px; color: #888; }
         .poly-price-box { text-align: right; }
         .poly-price { font-size: 24px; font-weight: 700; color: #00b894; }
         
@@ -140,7 +140,7 @@
                     <div class="poly-info">
                         <img id="poly-spx-daily-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-spx-daily-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-spx-daily-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-spx-daily-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -164,7 +164,7 @@
                     <div class="poly-info">
                         <img id="poly-spx-dec2026-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-spx-dec2026-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-spx-dec2026-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-spx-dec2026-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -186,7 +186,7 @@
                     <div class="poly-info">
                         <img id="poly-spx-feb-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-spx-feb-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-spx-feb-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-spx-feb-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -208,7 +208,7 @@
                     <div class="poly-info">
                         <img id="poly-spx-above-feb-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-spx-above-feb-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-spx-above-feb-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-spx-above-feb-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -230,7 +230,7 @@
                     <div class="poly-info">
                         <img id="poly-spx-ath-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-spx-ath-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-spx-ath-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-spx-ath-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -269,7 +269,7 @@
                     <div class="poly-info">
                         <img id="poly-btc-hf-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-btc-hf-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-btc-hf-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-btc-hf-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -293,7 +293,7 @@
                     <div class="poly-info">
                         <img id="poly-btc-feb-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-btc-feb-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-btc-feb-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-btc-feb-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -315,7 +315,7 @@
                     <div class="poly-info">
                         <img id="poly-btc-2027-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-btc-2027-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-btc-2027-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-btc-2027-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -337,7 +337,7 @@
                     <div class="poly-info">
                         <img id="poly-btc-ath-icon" class="poly-icon" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNCAyNCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNDQ0IiBzdHJva2Utd2lkdGg9IjIiPjxjaXJjbGUgY3g9IjEyIiBjeT0iMTIiIHI9IjEwIi8+PC9zdmc+" alt="Icon">
                         <div class="poly-title-group">
-                            <div id="poly-btc-ath-question" class="poly-question">Loading Market...</div>
+                            <a id="poly-btc-ath-question" class="poly-question" target="_blank" href="#">Loading Market...</a>
                             <div id="poly-btc-ath-meta" class="poly-meta">Vol: $0 • Liquidity: $0</div>
                         </div>
                     </div>
@@ -518,7 +518,10 @@
                     
                     if (data.id) {
                         const qEl = document.getElementById(`${pmConfig.id}-question`);
-                        if(qEl) qEl.innerText = data.question;
+                        if(qEl) {
+                            qEl.innerText = data.question;
+                            if (data.slug) qEl.href = `https://polymarket.com/event/${data.slug}`; // Injects the URL
+                        }
                         polyInstances[pmConfig.id].name = data.question;
 
                         const iconEl = document.getElementById(`${pmConfig.id}-icon`);
