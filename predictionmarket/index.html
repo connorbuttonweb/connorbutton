@@ -26,16 +26,22 @@
         /* CARD STYLES */
         .chart-card { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; display: flex; flex-direction: column; overflow: hidden; height: 100%; min-height: 400px; }
         .chart-card.no-padding { padding: 0; background: #131722; border: 1px solid #2B2B43; }
-        
-        /* TEXT CARD STYLES (For Regression Section) */
-        .text-card { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; padding: 30px 40px; color: #D1D4DC; font-size: 15px; line-height: 1.6; margin-bottom: 40px; }
-        .text-card h3 { color: #FFFFFF; font-size: 18px; margin-top: 35px; margin-bottom: 15px; border-bottom: 1px solid #2B2B43; padding-bottom: 8px; }
-        .text-card h3:first-child { margin-top: 0; }
-        .text-card h4 { color: #2962FF; font-size: 15px; margin-top: 25px; margin-bottom: 10px; letter-spacing: 0.5px; }
-        .text-card p { margin-bottom: 15px; color: #8a919e; font-style: italic; } /* Styled for placeholder text */
-        .text-card ul { margin-bottom: 20px; padding-left: 20px; }
-        .text-card li { margin-bottom: 10px; }
-        .text-card strong { color: #00b894; font-weight: 600; }
+
+        /* ROADMAP STYLES */
+        .roadmap-container { background: #131722; border: 1px solid #2B2B43; border-radius: 8px; padding: 30px 40px; margin-bottom: 40px; }
+        .roadmap-header { color: #FFFFFF; font-size: 20px; font-weight: 600; margin-bottom: 10px; border-bottom: 1px solid #2B2B43; padding-bottom: 10px; }
+        .roadmap-goal { color: #8a919e; font-size: 14px; margin-bottom: 30px; line-height: 1.6; }
+        .roadmap-goal strong { color: #FFFFFF; }
+        .phase-group { margin-bottom: 25px; }
+        .phase-title { color: #2962FF; font-size: 14px; font-weight: 600; margin-bottom: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .todo-item { display: flex; align-items: flex-start; margin-bottom: 12px; background: #1E222D; padding: 15px 20px; border-radius: 6px; border: 1px solid #2B2B43; transition: border-color 0.2s; cursor: pointer; }
+        .todo-item:hover { border-color: #2962FF; }
+        .todo-checkbox { appearance: none; -webkit-appearance: none; width: 22px; height: 22px; border: 2px solid #555; border-radius: 4px; margin-right: 15px; margin-top: 2px; cursor: pointer; position: relative; background: #131722; flex-shrink: 0; transition: all 0.2s; }
+        .todo-checkbox:checked { background: #00b894; border-color: #00b894; }
+        .todo-checkbox:checked::after { content: '✔'; position: absolute; color: white; font-size: 14px; left: 4px; top: 0px; }
+        .todo-content { display: flex; flex-direction: column; }
+        .todo-title { color: #E0E3EB; font-weight: 600; font-size: 15px; margin-bottom: 4px; }
+        .todo-desc { color: #8a919e; font-size: 13px; line-height: 1.5; margin: 0; }
 
         /* COMBINED CHART HEADER / CONTROLS */
         .combine-header { display: flex; justify-content: space-between; align-items: center; padding: 15px; background: #fff; border-bottom: 1px solid #e2e3e5; }
@@ -377,38 +383,111 @@
             </div>
             <div id="cross-chart" class="chart-box"></div>
         </div>
-        
-        <h2 class="section-header">Regression Testing & Causal Inference</h2>
-        
-        <div class="download-container">
-            <a href="/assets/PredictionMarkets/Prediction_Market_Master.xlsx" download class="download-btn">
-                <i class="fas fa-file-excel"></i> Download Raw Excel Data
-            </a>
-            <span style="color: #666; font-size: 13px;">Raw dataset used for the regression analysis below.</span>
+
+        <h2 class="section-header">Project Roadmap</h2>
+        <div class="roadmap-container">
+            <div class="roadmap-header">Automated Causality Bot</div>
+            <div class="roadmap-goal">
+                <strong>Final Goal:</strong> An automated, continuous data engine that maps prediction market data (Polymarket) to traditional financial securities (Indices, Securities, Crypto, ETF's). The agent will programmatically filter for liquidity, handle collinearity via LASSO regression, and output a mathematically verified, unified composite trading indicator for each security.
+            </div>
+
+            <div class="phase-group">
+                <div class="phase-title">Phase 1: Data Discovery & Semantic Mapping</div>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Fetch Active Markets</span>
+                        <p class="todo-desc">Continuously pull the master list of active, unresolved markets from the Polymarket API creating a list of recurring markets.</p>
+                    </div>
+                </label>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">AI Ticker Filtering/Matching</span>
+                        <p class="todo-desc">Pass market questions through an AI API to infer and pair their corresponding financial asset/assets using market assumptions ("APPL closes above ___" will be tested with APPL stock price but "will Apple release a foldable iphone by ___" will not be matched).</p>
+                    </div>
+                </label>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Cache Mappings</span>
+                        <p class="todo-desc">Store the matched pairs in a cache to optimize AI API speeds and reduce double counting.</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="phase-group">
+                <div class="phase-title">Phase 2: Quality Control & Data Ingestion</div>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Liquidity Filtering</span>
+                        <p class="todo-desc">Query the Central Limit Order Book (CLOB) to discard any markets that do not meet strict 24-hour volume and depth thresholds, eliminating noise.</p>
+                    </div>
+                </label>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Historical Data Pull</span>
+                        <p class="todo-desc">Fetch and pair high-frequency, minute-by-minute price data for both the Polymarket shares and the matched traditional asset.</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="phase-group">
+                <div class="phase-title">Phase 3: The Statistical Verification Engine</div>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Time-Series Alignment</span>
+                        <p class="todo-desc">Standardize timestamps and create a unified matrix where the traditional asset is the dependent variable and all matched Polymarket trades are independent variables.</p>
+                    </div>
+                </label>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Cross-Correlation Pre-Filter</span>
+                        <p class="todo-desc">Run a maximum cross-correlation test across shifted timeframes to identify potential lead-lag relationships, dropping any markets with a maximum score below a baseline threshold to save compute power.</p>
+                    </div>
+                </label>
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">LASSO Regression (Tandem Test)</span>
+                        <p class="todo-desc">Feed all surviving Polymarket trades simultaneously into a LASSO regression model to automatically penalize redundancy, crush the coefficients of noisy markets to zero, and isolate the strongest predictive signals. Repeat for each traditional asset.</p>
+                    </div>
+                </label>
+            </div>
+
+            <div class="phase-group">
+                <div class="phase-title">Phase 4: Output & Automation</div>
+                
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Master Matrix Export</span>
+                        <p class="todo-desc">Automatically log every verified Polymarket trade, its LASSO coefficient (Beta), optimal lag time, and volume metrics into a central master matrix. Export and update this in your websites repository as a fully styled Excel sheet so it is ready to be queried by independent projects (like volatility cones, liquidity heatmaps, over-night indicators, etc. . .).</p>
+                    </div>
+                </label>
+                
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Live Composite Calculation</span>
+                        <p class="todo-desc">Query the newly updated master matrix to pull the exact coefficients for the surviving markets, multiplying them against live Polymarket probabilities to generate the single real-time sentiment score for my websites dashboard.</p>
+                    </div>
+                </label>
+                
+                <label class="todo-item">
+                    <input type="checkbox" class="todo-checkbox">
+                    <div class="todo-content">
+                        <span class="todo-title">Continuous Loop Execution</span>
+                        <p class="todo-desc">Wrap the entire pipeline in a time-delayed master scheduler so the agent continuously discovers new markets, re-runs the LASSO tandem tests, and updates the Excel master file without any manual input.</p>
+                    </div>
+                </label>
+            </div>
         </div>
 
-        <div class="text-card">
-            <h3>Process & Methodology</h3>
-            <p>
-                [Detail your econometric approach here. Explain your data collection methods, the specific regression models used (e.g., OLS, log-level interactions), and how you controlled for Omitted Variable Bias (OVB) when testing the causal relationship between prediction market probabilities and asset price movements.]
-            </p>
-
-            <h3>Regression Results</h3>
-            <h4>Model 1: S&P 500 (SPX) Movements vs. Prediction Market Probabilities</h4>
-            <p>
-                [Insert your Stata / GROK regression outputs here. Include your variables, R-squared values, coefficients, and robust standard errors.]
-            </p>
-            
-            <h4>Model 2: Bitcoin (BTC) Movements vs. Prediction Market Probabilities</h4>
-            <p>
-                [Insert your Bitcoin regression results here. Detail the significance of the findings and any divergence from the SPX model.]
-            </p>
-
-            <h3>Conclusion</h3>
-            <p>
-                [Insert your final thoughts on the validity of causal inference from these prediction markets and how these findings can be integrated into the cross-market tools above.]
-            </p>
-        </div>
     </section>
 
     <script>
@@ -468,7 +547,7 @@
                 const chart = LightweightCharts.createChart(container, commonOptions);
                 
                 const series = chart.addLineSeries({
-                    color: pm.id.includes('btc') ? '#F7931A' : '#00b894',
+                    color: pm.id.includes('btc') ? '#FFD700' : '#00b894',
                     lineWidth: 2,
                     title: 'Prob',
                     priceFormat: { type: 'custom', formatter: price => (price * 100).toFixed(1) + '%' },
@@ -583,7 +662,7 @@
                             const priceEl = document.getElementById(`${pmConfig.id}-price`);
                             if(priceEl) {
                                 priceEl.innerText = (cleanPoly[cleanPoly.length - 1].value * 100).toFixed(1) + '%';
-                                priceEl.style.color = pmConfig.id.includes('btc') ? '#F7931A' : '#00b894';
+                                priceEl.style.color = pmConfig.id.includes('btc') ? '#FFD700' : '#00b894';
                             }
                             
                             const btn1D = document.querySelector(`#${pmConfig.id}-chart`).previousElementSibling.querySelector('button:first-child');
@@ -630,14 +709,14 @@
             if (polyData.length > 0) {
                 crossPolySeries.applyOptions({ 
                     title: 'Prob (%)',
-                    color: polyKey.includes('btc') ? '#F7931A' : '#00b894'
+                    color: polyKey.includes('btc') ? '#FFD700' : '#00b894'
                 });
             }
 
             crossChart.priceScale('right').applyOptions({ autoScale: true });
             crossChart.priceScale('left').applyOptions({ 
                 autoScale: true,
-                borderColor: polyKey.includes('btc') ? '#F7931A' : '#00b894'
+                borderColor: polyKey.includes('btc') ? '#FFD700' : '#00b894'
             });
 
             setTimeout(() => {
