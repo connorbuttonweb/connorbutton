@@ -129,7 +129,7 @@
                     <div class="tradingview-widget-container" style="height:100%;width:100%">
                         <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                        { "autosize": true, "symbol": "SP:SPX", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
+                        { "autosize": true, "symbol": "FX:US500", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
                         </script>
                     </div>
                 </div>
@@ -488,6 +488,42 @@
             </div>
         </div>
 
+        <!--
+Phase 1: Data Discovery & Mapping
+1. Fetch Active Markets
+Write a function that continuously pings the Polymarket API to pull down the master list of all currently active, unresolved markets and their associated question text.
+
+2. The Semantic AI Matcher
+Pass the title of every new Polymarket market to an AI API (like OpenAI or Gemini). Instruct the AI to output only the single most relevant financial ticker (e.g., matching "Will Tesla deliver 500k cars?" to TSLA).
+
+3. Cache the Mappings
+Save these AI-generated pairs (Polymarket Market ID + Financial Ticker) in a dictionary or database. This ensures you only pay for the AI to read a market once, rather than re-reading it every time the loop runs.
+
+Phase 2: The Filtering Gate (Quality Control)
+4. The Liquidity Check
+Before doing any math, ping the Polymarket Central Limit Order Book (CLOB). Discard any market that does not meet a strict minimum threshold for 24-hour volume and order book depth. This prevents low-dollar, easily manipulated trades from skewing your data.
+
+5. Fetch Historical Prices
+For the markets that survive the liquidity check, pull the historical minute-by-minute price data for the Polymarket shares and the exact matched financial ticker (using a library like yfinance).
+
+Phase 3: The Statistical Verification Engine
+6. Time-Series Alignment
+Use the pandas library to merge the Polymarket timestamps and the stock market timestamps. Standardize them into uniform blocks (e.g., 5-minute or 15-minute intervals) so the math functions can compare apples to apples.
+
+7. Run Granger Causality (Lead-Lag Test)
+Run a statistical test to see if the Polymarket price movements consistently precede the stock's price movements. If Polymarket only moves after the stock moves, discard the pair.
+
+8. Calculate Beta (Magnitude Test)
+For the pairs that pass the causality test, run an Ordinary Least Squares regression to calculate the Beta. This determines the size of the expected move in the stock for every 1% change in the Polymarket odds.
+
+Phase 4: Output & Automation
+9. Update the Local Repository
+Take all the statistically verified pairs, along with their Beta and Causality scores, and automatically export them to an Excel master file in your local repository. Add styling to the Excel output so it is clean, readable, and ready to be used as the backbone for your liquidity heatmaps and expected move cones.
+
+10. The Continuous Loop
+Wrap steps 1 through 9 in a master scheduler (like a Python while loop with a time delay, or a cron job). Set it to run constantly—for example, every 30 minutes—so it automatically discovers new markets, re-evaluates liquidity, and updates the Excel master file without your manual input.
+        -->
+
     </section>
 
     <script>
@@ -496,7 +532,7 @@
         const currentMonthName = new Date().toLocaleString('en-US', { month: 'short' });
 
         const DASHBOARD_CONFIG = {
-            stocks: ["^GSPC", "SPY", "MAGS", "BTC-USD"],
+            stocks: ["SPX-Proxy", "SPY", "MAGS", "BTC-USD"],
             polymarkets: [
                 { id: 'poly-spx-daily', endpoint: '/daily-spx', name: 'SPX Daily' },
                 { id: 'poly-spx-dec2026', endpoint: '/poly-spx-dec2026', name: 'SPX Close 2026' },
