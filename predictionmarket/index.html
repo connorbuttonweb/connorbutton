@@ -129,7 +129,7 @@
                     <div class="tradingview-widget-container" style="height:100%;width:100%">
                         <div class="tradingview-widget-container__widget" style="height:100%;width:100%"></div>
                         <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
-                        { "autosize": true, "symbol": "FX:US500", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
+                        { "autosize": true, "symbol": "SP:OEX", "interval": "1", "range": "1D", "timezone": "America/New_York", "theme": "dark", "style": "3", "locale": "en", "enable_publishing": false, "allow_symbol_change": true, "calendar": false, "support_host": "https://www.tradingview.com" }
                         </script>
                     </div>
                 </div>
@@ -532,7 +532,7 @@ Wrap steps 1 through 9 in a master scheduler (like a Python while loop with a ti
         const currentMonthName = new Date().toLocaleString('en-US', { month: 'short' });
 
         const DASHBOARD_CONFIG = {
-            stocks: ["SPX-Proxy", "SPY", "MAGS", "BTC-USD"],
+            stocks: ["^GSPC", "SPY", "MAGS", "BTC-USD"],
             polymarkets: [
                 { id: 'poly-spx-daily', endpoint: '/daily-spx', name: 'SPX Daily' },
                 { id: 'poly-spx-dec2026', endpoint: '/poly-spx-dec2026', name: 'SPX Close 2026' },
