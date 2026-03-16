@@ -384,172 +384,27 @@
             <div id="cross-chart" class="chart-box"></div>
         </div>
 
-        <h2 class="section-header">Project Roadmap</h2>
+        <h2 class="section-header">Automated Causality Bot</h2>
         <div class="roadmap-container">
-            <div class="roadmap-header">Automated Causality Bot</div>
+            <div class="roadmap-header">v1 - 2026-03-16</div>
             <div class="roadmap-goal">
-                <strong>Final Goal:</strong> An automated, continuous data engine that maps prediction market data (Polymarket) to traditional financial securities (Indices, Securities, Crypto, ETF's). The agent will programmatically filter for liquidity, handle collinearity via LASSO regression, and output a mathematically verified, unified composite trading indicator for each security.
+                <strong>Initial:</strong> Started with roadmap, lasso, and idea finished. Settled on lasso with volume and liquidity filters to remove high
+                multicollinearity. Granger causality test to determine lead-lag relationships. Perplexity Claude Sonnet 4.6 used for prompt building, 
+                api configuration, and optimizing roadmap and plan. GPT-4 API used for phase two to pre-filter market questions. Below; zip of the regression 
+                engine; PDF explainer of running the engine and expected results. [Currently Untested]
             </div>
 
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr)); gap: 40px; margin-top: 30px;">
-                
-                <div class="roadmap-left">
-                    <h3 style="color: #FFFFFF; font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #2B2B43; padding-bottom: 10px;">The Architecture Plan</h3>
-                    
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 1: Data Discovery & Semantic Mapping</div>
-                        <div class="todo-item" style="cursor: default;">
-                            <div class="todo-content">
-                                <span class="todo-title">Fetch Active Markets & Cache</span>
-                                <p class="todo-desc">Continuously pull the master list of active markets. Store matched pairs in a cache to optimize API speeds and reduce double counting.</p>
-                            </div>
-                        </div>
-                        <div class="todo-item" style="cursor: default;">
-                            <div class="todo-content">
-                                <span class="todo-title">AI Ticker Filtering/Matching</span>
-                                <p class="todo-desc">Pass market questions through an AI API to infer and pair their corresponding financial asset based on market assumptions.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 2: Quality Control & Data Ingestion</div>
-                        <div class="todo-item" style="cursor: default;">
-                            <div class="todo-content">
-                                <span class="todo-title">Liquidity Filtering & History</span>
-                                <p class="todo-desc">Query the CLOB to discard markets failing 24h volume thresholds. Fetch and pair high-frequency price data for both assets.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 3: The Statistical Verification Engine</div>
-                        <div class="todo-item" style="cursor: default;">
-                            <div class="todo-content">
-                                <span class="todo-title">Time-Series Alignment & Correlation</span>
-                                <p class="todo-desc">Standardize timestamps. Run a maximum cross-correlation test across shifted timeframes to identify potential lead-lag relationships.</p>
-                            </div>
-                        </div>
-                        <div class="todo-item" style="cursor: default;">
-                            <div class="todo-content">
-                                <span class="todo-title">LASSO Regression (Tandem Test)</span>
-                                <p class="todo-desc">Feed all surviving trades simultaneously into a LASSO regression model to penalize redundancy and isolate the strongest predictive signals.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 4: Output & Automation</div>
-                        <div class="todo-item" style="cursor: default;">
-                            <div class="todo-content">
-                                <span class="todo-title">Live Composite & Master Matrix</span>
-                                <p class="todo-desc">Log verified trades and Beta coefficients into a master matrix. Generate a real-time sentiment score by multiplying against live odds.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="roadmap-right">
-                    <h3 style="color: #FFFFFF; font-size: 18px; margin-bottom: 20px; border-bottom: 1px solid #2B2B43; padding-bottom: 10px;">Step-by-Step Execution</h3>
-                    
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 1: Infrastructure & Ingestion</div>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 1: Database Setup</span>
-                                <p class="todo-desc">Spin up a lightweight relational database (PostgreSQL/SQLite) with tables for Markets, Trades, and TradFi Prices.</p>
-                            </div>
-                        </label>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 2: The Polymarket Fetcher</span>
-                                <p class="todo-desc">Write a Python script to hit the Polymarket API and pull the master list of active markets, filtering out non-financials.</p>
-                            </div>
-                        </label>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 3: The TradFi Data Pipe</span>
-                                <p class="todo-desc">Integrate a reliable financial data provider (like Alpaca or yFinance) to fetch historical prices and live quotes.</p>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 2: Semantic Mapping (AI)</div>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 4: LLM Prompt Engineering</span>
-                                <p class="todo-desc">Connect to an LLM API to evaluate Polymarket questions and return only the relevant financial ticker in JSON.</p>
-                            </div>
-                        </label>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 5: The Caching System</span>
-                                <p class="todo-desc">Save API mappings to the database to prevent duplicate requests and save API credits on recurring markets.</p>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 3: Data Cleaning & Alignment</div>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 6: Liquidity & TTM Filtering</span>
-                                <p class="todo-desc">Drop markets below 24h volume thresholds and markets within 48 hours of resolution to prevent binary option "snap" volatility.</p>
-                            </div>
-                        </label>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 7: Event-Driven Alignment</span>
-                                <p class="todo-desc">Log timestamps based on Polymarket trade execution, matching them to the exact hour/15-minute TradFi price block.</p>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 4: The Statistical Engine</div>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 8: Cross-Correlation Filter</span>
-                                <p class="todo-desc">Shift Polymarket time series backward against the asset to verify predictive lead-lag relationships before running full regressions.</p>
-                            </div>
-                        </label>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 9: LASSO Tandem Test</span>
-                                <p class="todo-desc">Feed time-aligned contracts into a LASSO regression. Let the L1 penalty crush noisy market coefficients to zero.</p>
-                            </div>
-                        </label>
-                    </div>
-
-                    <div class="phase-group">
-                        <div class="phase-title">Phase 5: Automation & Output</div>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 10: Real-time Composite</span>
-                                <p class="todo-desc">Multiply live Polymarket probabilities by their verified LASSO coefficients to create the live sentiment dashboard score.</p>
-                            </div>
-                        </label>
-                        <label class="todo-item">
-                            <input type="checkbox" class="todo-checkbox" onclick="return false;">
-                            <div class="todo-content">
-                                <span class="todo-title">Step 11: Automated Scheduling</span>
-                                <p class="todo-desc">Use Airflow or Cron to schedule sequential execution (Fetch → Map → Align → Regress) and daily Excel master exports.</p>
-                            </div>
-                        </label>
-                    </div>
-                </div>
-
+            <div class="download-container">
+                <a href="assets\images\predictionmarkets\pm-regression-engine.zip" class="download-btn" download>
+                    <i class="fa-solid fa-file-zipper"></i> Download Engine
+                </a>
+                <a href="assets\images\predictionmarkets\pm_engine_explainer.pdf" class="download-btn" target="_blank">
+                    <i class="fa-solid fa-file-pdf"></i> View Explainer
+                </a>
+            </div>
+            
+            <div class="roadmap-goal">
+                <strong>Post:</strong> [Currently Untested] Yet to run engine and debug. Once I do this I will update this section.
             </div>
         </div>
 
