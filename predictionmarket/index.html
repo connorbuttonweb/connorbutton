@@ -483,7 +483,7 @@
         <div class="roadmap-container">
             <div class="roadmap-header">v1 - [2026-03-16]</div>
             <div class="roadmap-goal">
-                <strong>Pre:</strong> Started with roadmap, lasso, and idea finished. Settled on lasso with volume and liquidity filters to remove high
+                <strong>Pre [2026-03-16]:</strong> Started with roadmap, lasso, and idea finished. Settled on lasso with volume and liquidity filters to remove high
                 multicollinearity. Granger causality test to determine lead-lag relationships. Perplexity Claude Sonnet 4.6 used for prompt building, 
                 api configuration, and optimizing roadmap and plan. GPT-4 API used for phase two to pre-filter market questions. Below; zip of the regression 
                 engine; PDF explainer of running the engine and expected results. [Currently Untested]
@@ -499,7 +499,7 @@
             </div>
             
             <div class="roadmap-goal">
-                <strong>Post:</strong> Not a lot of debugging. Very impressed with perplexity computer, I mostly had to change the inner bounds for most 
+                <strong>Post [2026-03-16]:</strong> Not a lot of debugging. Very impressed with perplexity computer, I mostly had to change the inner bounds for most 
                 of the polymarket mapping (how many markets to pull, how many to test at a time). Figuring out the run was slow as well considering I am not 
                 a native python user. Final zip is below with another explainer on how to run. Tweaks as I use it but as of right now the outputs are what I am expecting 
                 with maybe a disapointing quantity but I can always relax the AI to allow more.
@@ -518,9 +518,9 @@
         </div>
 
         <div class="roadmap-container">
-            <div class="roadmap-header">v2 - TBD []</div>
+            <div class="roadmap-header">v2 - []</div>
             <div class="roadmap-goal">
-                <strong>Current [2026-03-18]:</strong> While the program itself is very strong, the causality regression needs fixing (current outputs are skewed with high multicollinearity). 
+                <strong>[2026-03-18]:</strong> While the program itself is very strong, the causality regression needs fixing (current outputs are skewed with high multicollinearity). 
                 Will keep the polymarket API configuration from phase 1 and 2 with tweaks to the filtering and caching system. Phase 3 can stay as is while 4-5 need complete changing. The Granger causality is 
                 eliminating most markets and then the Lasso is filtering the rest out till the only significant markets are typically those with all bets on either poles 
                 (1% and 99%). The hardest part was the API configuration so having all those setup means this project is essentially a test on my econometric skills.
