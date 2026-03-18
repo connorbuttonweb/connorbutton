@@ -12,7 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
 
     <style>
         /* DASHBOARD LAYOUT */
@@ -134,6 +134,32 @@
         .excel-table tbody tr:hover td {
             background: rgba(41, 98, 255, 0.1);
         }
+
+        /* TOGGLE CHARTS BUTTON */
+        .toggle-charts-wrapper {
+            display: flex;
+            justify-content: flex-end;
+            margin-bottom: 10px;
+        }
+        .toggle-charts-btn {
+            background: #1E222D;
+            color: #E0E3EB;
+            border: 1px solid #2B2B43;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+        .toggle-charts-btn:hover {
+            border-color: #2962FF;
+            color: #fff;
+        }
+
     </style>
 </head>
 
@@ -167,9 +193,17 @@
 
     <section class="section" style="padding-top: 20px;">
 
-        <div class="grid-container">
-            
-            <h2 class="section-header">S&P 500</h2>
+        <div class="toggle-charts-wrapper">
+            <button id="toggle-charts-btn" class="toggle-charts-btn">
+                <i class="fa-solid fa-compress"></i> <span>Minimize Charts</span>
+            </button>
+        </div>
+
+        <div id="charts-wrapper">
+
+            <div class="grid-container">
+                
+                <h2 class="section-header">S&P 500</h2>
             
             <h3 class="subsection-header">Indices & ETFs</h3>
             
@@ -444,6 +478,7 @@
             <div id="cross-chart" class="chart-box"></div>
         </div>
 
+        </div>
         <h2 class="section-header">Automated Causality Bot</h2>
         <div class="roadmap-container">
             <div class="roadmap-header">v1 - [2026-03-16]</div>
@@ -469,16 +504,17 @@
                 a native python user. Final zip is below with another explainer on how to run. Tweaks as I use it but as of right now the outputs are what I am expecting 
                 with maybe a disapointing quantity but I can always relax the AI to allow more.
             </div>
-        </div>
 
-        <div class="excel-container" id="excel-viewer-container">
-            <div class="excel-header-bar" id="excel-filename">
-                <i class="fa-solid fa-file-excel"></i> Loading file...
+            <div class="excel-container" id="excel-viewer-container">
+                <div class="excel-header-bar" id="excel-filename">
+                    <i class="fa-solid fa-file-excel"></i> Loading file...
+                </div>
+                <table class="excel-table" id="excel-table">
+                    <thead id="excel-head"></thead>
+                    <tbody id="excel-body"></tbody>
+                </table>
             </div>
-            <table class="excel-table" id="excel-table">
-                <thead id="excel-head"></thead>
-                <tbody id="excel-body"></tbody>
-            </table>
+
         </div>
 
         <div class="roadmap-container">
@@ -494,6 +530,26 @@
     </section>
 
     <script>
+
+        // CHART TOGGLE LOGIC
+        const toggleBtn = document.getElementById('toggle-charts-btn');
+        const chartsWrapper = document.getElementById('charts-wrapper');
+
+        if (toggleBtn && chartsWrapper) {
+            toggleBtn.addEventListener('click', () => {
+                if (chartsWrapper.style.display === 'none') {
+                    chartsWrapper.style.display = 'block';
+                    toggleBtn.innerHTML = '<i class="fa-solid fa-compress"></i> <span>Minimize Charts</span>';
+                    // Force charts to resize correctly when they reappear
+                    window.dispatchEvent(new Event('resize'));
+                } else {
+                    chartsWrapper.style.display = 'none';
+                    toggleBtn.innerHTML = '<i class="fa-solid fa-expand"></i> <span>Expand Charts</span>';
+                }
+            });
+        }
+
+
         const PROXY_URL = "https://market-proxy.buttonconnor12.workers.dev"; 
         
         const currentMonthName = new Date().toLocaleString('en-US', { month: 'short' });
@@ -734,54 +790,65 @@
 
 
         //EXCEL VIEWER LOGIC
-        function loadExcelSheet(csvUrl) {
-            const filename = csvUrl.split('/').pop();
+        async function loadExcelSheet(xlsxUrl) {
+            const filename = xlsxUrl.split('/').pop();
             document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-file-excel"></i> ${filename}`;
 
-            Papa.parse(csvUrl, {
-                download: true, // Fetches the file from the URL
-                complete: function(results) {
-                    const data = results.data;
-                    if (data.length === 0) return;
+            try {
+                // 1. Fetch the file as an ArrayBuffer
+                const response = await fetch(xlsxUrl);
+                if (!response.ok) throw new Error("Network response was not ok");
+                const arrayBuffer = await response.arrayBuffer();
 
-                    const thead = document.getElementById('excel-head');
-                    const tbody = document.getElementById('excel-body');
-                    
+                // 2. Parse the Excel file using SheetJS
+                const workbook = XLSX.read(arrayBuffer, { type: 'array' });
+                
+                // 3. Get the first sheet and convert it to a 2D array
+                const firstSheetName = workbook.SheetNames[0];
+                const worksheet = workbook.Sheets[firstSheetName];
+                const data = XLSX.utils.sheet_to_json(worksheet, { header: 1, defval: "" });
 
-                    let colHeaders = '<tr><th class="excel-row-num" style="z-index: 7;"></th>';
-                    const numCols = data[0].length;
-                    for (let i = 0; i < numCols; i++) {
+                if (data.length === 0) return;
 
-                        let letter = String.fromCharCode(65 + (i % 26)); 
-                        if (i >= 26) letter = String.fromCharCode(64 + Math.floor(i / 26)) + letter;
-                        colHeaders += `<th>${letter}</th>`;
-                    }
-                    colHeaders += '</tr>';
-                    thead.innerHTML = colHeaders;
+                const thead = document.getElementById('excel-head');
+                const tbody = document.getElementById('excel-body');
+                
+                // Find the maximum number of columns across all rows to ensure a uniform grid
+                const numCols = Math.max(...data.map(row => row.length));
 
-
-                    let bodyHtml = '';
-                    data.forEach((row, rowIndex) => {
-
-                        if (row.length === 1 && row[0] === "") return; 
-
-                        bodyHtml += '<tr>';
-
-                        bodyHtml += `<td class="excel-row-num">${rowIndex + 1}</td>`;
-                        
-                        row.forEach(cell => {
-                            const style = rowIndex === 0 ? 'font-weight: 600; color: #fff;' : '';
-                            bodyHtml += `<td style="${style}">${cell}</td>`;
-                        });
-                        bodyHtml += '</tr>';
-                    });
-                    tbody.innerHTML = bodyHtml;
-                },
-                error: function(err) {
-                    document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error loading file`;
-                    console.error("Error parsing CSV:", err);
+                // 4. Build the top row with Excel letters (A, B, C...)
+                let colHeaders = '<tr><th class="excel-row-num" style="z-index: 7;"></th>';
+                for (let i = 0; i < numCols; i++) {
+                    let letter = String.fromCharCode(65 + (i % 26)); 
+                    if (i >= 26) letter = String.fromCharCode(64 + Math.floor(i / 26)) + letter;
+                    colHeaders += `<th>${letter}</th>`;
                 }
-            });
+                colHeaders += '</tr>';
+                thead.innerHTML = colHeaders;
+
+                // 5. Build the rows with data
+                let bodyHtml = '';
+                data.forEach((row, rowIndex) => {
+                    // Skip completely empty rows
+                    if (row.length === 0 || row.every(cell => cell === "")) return; 
+
+                    bodyHtml += '<tr>';
+                    bodyHtml += `<td class="excel-row-num">${rowIndex + 1}</td>`;
+                    
+                    // Iterate up to numCols to ensure empty trailing cells are still rendered
+                    for(let i = 0; i < numCols; i++) {
+                        const cell = row[i] !== undefined ? row[i] : "";
+                        const style = rowIndex === 0 ? 'font-weight: 600; color: #fff;' : '';
+                        bodyHtml += `<td style="${style}">${cell}</td>`;
+                    }
+                    bodyHtml += '</tr>';
+                });
+                tbody.innerHTML = bodyHtml;
+
+            } catch (err) {
+                document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error loading file`;
+                console.error("Error parsing XLSX:", err);
+            }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
