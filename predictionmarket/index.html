@@ -12,6 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/luxon@3.0.1"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-luxon@1.2.0"></script>
     <script src="https://unpkg.com/lightweight-charts@4.1.1/dist/lightweight-charts.standalone.production.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 
     <style>
         /* DASHBOARD LAYOUT */
@@ -74,6 +75,65 @@
         .download-container { margin-top: 30px; margin-bottom: 30px; display: flex; align-items: center; gap: 20px; }
         .download-btn { display: inline-flex; align-items: center; gap: 8px; background-color: #2962FF; color: white; padding: 12px 24px; text-decoration: none; border-radius: 6px; font-weight: 600; font-size: 14px; transition: background 0.2s; }
         .download-btn:hover { background-color: #1e4bd8; color: white; }
+
+        /* EXCEL TABLE DYNAMIC STYLES */
+        .excel-container {
+            width: 100%;
+            max-height: 400px; /* Makes it scrollable */
+            overflow: auto;
+            margin-bottom: 40px;
+            background: #131722;
+            border: 1px solid #2B2B43;
+            border-radius: 8px;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+        .excel-header-bar {
+            background: #107c41; /* Official Excel Green */
+            color: white;
+            padding: 10px 15px;
+            font-size: 14px;
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .excel-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 13px;
+            color: #E0E3EB;
+        }
+        .excel-table th, .excel-table td {
+            border: 1px solid #2B2B43;
+            padding: 8px 12px;
+            white-space: nowrap;
+        }
+        .excel-table th {
+            background: #1E222D;
+            color: #8a919e;
+            font-weight: normal;
+            text-align: center;
+            position: sticky;
+            top: 40px; /* Sits just below the green header */
+            z-index: 5;
+        }
+        .excel-row-num {
+            background: #1E222D;
+            color: #8a919e;
+            text-align: center;
+            width: 40px;
+            font-weight: normal;
+            position: sticky;
+            left: 0;
+            z-index: 6;
+            border-right: 2px solid #2B2B43 !important;
+        }
+        .excel-table tbody tr:hover td {
+            background: rgba(41, 98, 255, 0.1);
+        }
     </style>
 </head>
 
@@ -386,9 +446,9 @@
 
         <h2 class="section-header">Automated Causality Bot</h2>
         <div class="roadmap-container">
-            <div class="roadmap-header">v1 - 2026-03-16</div>
+            <div class="roadmap-header">v1 - [2026-03-16]</div>
             <div class="roadmap-goal">
-                <strong>Initial:</strong> Started with roadmap, lasso, and idea finished. Settled on lasso with volume and liquidity filters to remove high
+                <strong>Pre:</strong> Started with roadmap, lasso, and idea finished. Settled on lasso with volume and liquidity filters to remove high
                 multicollinearity. Granger causality test to determine lead-lag relationships. Perplexity Claude Sonnet 4.6 used for prompt building, 
                 api configuration, and optimizing roadmap and plan. GPT-4 API used for phase two to pre-filter market questions. Below; zip of the regression 
                 engine; PDF explainer of running the engine and expected results. [Currently Untested]
@@ -411,41 +471,25 @@
             </div>
         </div>
 
-        <!--
-Phase 1: Data Discovery & Mapping
-1. Fetch Active Markets
-Write a function that continuously pings the Polymarket API to pull down the master list of all currently active, unresolved markets and their associated question text.
+        <div class="excel-container" id="excel-viewer-container">
+            <div class="excel-header-bar" id="excel-filename">
+                <i class="fa-solid fa-file-excel"></i> Loading file...
+            </div>
+            <table class="excel-table" id="excel-table">
+                <thead id="excel-head"></thead>
+                <tbody id="excel-body"></tbody>
+            </table>
+        </div>
 
-2. The Semantic AI Matcher
-Pass the title of every new Polymarket market to an AI API (like OpenAI or Gemini). Instruct the AI to output only the single most relevant financial ticker (e.g., matching "Will Tesla deliver 500k cars?" to TSLA).
-
-3. Cache the Mappings
-Save these AI-generated pairs (Polymarket Market ID + Financial Ticker) in a dictionary or database. This ensures you only pay for the AI to read a market once, rather than re-reading it every time the loop runs.
-
-Phase 2: The Filtering Gate (Quality Control)
-4. The Liquidity Check
-Before doing any math, ping the Polymarket Central Limit Order Book (CLOB). Discard any market that does not meet a strict minimum threshold for 24-hour volume and order book depth. This prevents low-dollar, easily manipulated trades from skewing your data.
-
-5. Fetch Historical Prices
-For the markets that survive the liquidity check, pull the historical minute-by-minute price data for the Polymarket shares and the exact matched financial ticker (using a library like yfinance).
-
-Phase 3: The Statistical Verification Engine
-6. Time-Series Alignment
-Use the pandas library to merge the Polymarket timestamps and the stock market timestamps. Standardize them into uniform blocks (e.g., 5-minute or 15-minute intervals) so the math functions can compare apples to apples.
-
-7. Run Granger Causality (Lead-Lag Test)
-Run a statistical test to see if the Polymarket price movements consistently precede the stock's price movements. If Polymarket only moves after the stock moves, discard the pair.
-
-8. Calculate Beta (Magnitude Test)
-For the pairs that pass the causality test, run an Ordinary Least Squares regression to calculate the Beta. This determines the size of the expected move in the stock for every 1% change in the Polymarket odds.
-
-Phase 4: Output & Automation
-9. Update the Local Repository
-Take all the statistically verified pairs, along with their Beta and Causality scores, and automatically export them to an Excel master file in your local repository. Add styling to the Excel output so it is clean, readable, and ready to be used as the backbone for your liquidity heatmaps and expected move cones.
-
-10. The Continuous Loop
-Wrap steps 1 through 9 in a master scheduler (like a Python while loop with a time delay, or a cron job). Set it to run constantly—for example, every 30 minutes—so it automatically discovers new markets, re-evaluates liquidity, and updates the Excel master file without your manual input.
-        -->
+        <div class="roadmap-container">
+            <div class="roadmap-header">v2 - TBD []</div>
+            <div class="roadmap-goal">
+                <strong>Current [2026-03-18]:</strong> While the program itself is very strong, the causality regression needs fixing (current outputs are skewed with high multicollinearity). 
+                Will keep the polymarket API configuration from phase 1 and 2 with tweaks to the filtering and caching system. Phase 3 can stay as is while 4-5 need complete changing. The Granger causality is 
+                eliminating most markets and then the Lasso is filtering the rest out till the only significant markets are typically those with all bets on either poles 
+                (1% and 99%). The hardest part was the API configuration so having all those setup means this project is essentially a test on my econometric skills.
+            </div>
+        </div>
 
     </section>
 
@@ -687,6 +731,63 @@ Wrap steps 1 through 9 in a master scheduler (like a Python while loop with a ti
             initCharts();
             setTimeout(updateDashboard, 500);
         });
+
+
+        //EXCEL VIEWER LOGIC
+        function loadExcelSheet(csvUrl) {
+            const filename = csvUrl.split('/').pop();
+            document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-file-excel"></i> ${filename}`;
+
+            Papa.parse(csvUrl, {
+                download: true, // Fetches the file from the URL
+                complete: function(results) {
+                    const data = results.data;
+                    if (data.length === 0) return;
+
+                    const thead = document.getElementById('excel-head');
+                    const tbody = document.getElementById('excel-body');
+                    
+
+                    let colHeaders = '<tr><th class="excel-row-num" style="z-index: 7;"></th>';
+                    const numCols = data[0].length;
+                    for (let i = 0; i < numCols; i++) {
+
+                        let letter = String.fromCharCode(65 + (i % 26)); 
+                        if (i >= 26) letter = String.fromCharCode(64 + Math.floor(i / 26)) + letter;
+                        colHeaders += `<th>${letter}</th>`;
+                    }
+                    colHeaders += '</tr>';
+                    thead.innerHTML = colHeaders;
+
+
+                    let bodyHtml = '';
+                    data.forEach((row, rowIndex) => {
+
+                        if (row.length === 1 && row[0] === "") return; 
+
+                        bodyHtml += '<tr>';
+
+                        bodyHtml += `<td class="excel-row-num">${rowIndex + 1}</td>`;
+                        
+                        row.forEach(cell => {
+                            const style = rowIndex === 0 ? 'font-weight: 600; color: #fff;' : '';
+                            bodyHtml += `<td style="${style}">${cell}</td>`;
+                        });
+                        bodyHtml += '</tr>';
+                    });
+                    tbody.innerHTML = bodyHtml;
+                },
+                error: function(err) {
+                    document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error loading file`;
+                    console.error("Error parsing CSV:", err);
+                }
+            });
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            loadExcelSheet('/assets/PredictionMarkets/library_snapshot.xlsx'); 
+        });
+
     </script>
 </body>
 </html>
