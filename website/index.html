@@ -7,96 +7,7 @@
   <link rel="stylesheet" href="/assets/css/main.css" />
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* Page-specific accents */
-    .page-subtitle { margin: 6px 0 18px; color: var(--color-text-secondary); }
-    .pill {
-      display:inline-block; padding:6px 10px; border-radius:var(--radius-full);
-      background:var(--color-secondary); color:var(--color-text); font-size:var(--font-size-xs); margin-right:8px;
-    }
-    .traits { margin: 12px 0 0; }
-
-    /* Gallery (uses your Lightbox pattern) */
-    .gallery { display:grid; grid-template-columns: repeat(12, 1fr); gap:12px; }
-    .gallery figure { grid-column: span 6; position:relative; cursor:zoom-in; border-radius:var(--radius-base); overflow:hidden; }
-    .gallery figure.wide { grid-column: span 12; }
-    .gallery img { width:100%; height:auto; display:block; }
-
-    /* Folder structure */
-    .folder { border:1px solid var(--color-border); border-radius:var(--radius-lg); overflow:hidden; margin-top: 20px; }
-    .folder .bar {
-      display:flex; align-items:center; gap:8px; padding:10px 12px;
-      background:var(--color-surface); border-bottom:1px solid var(--color-border);
-    }
-    .dot { width:10px; height:10px; border-radius:50%; background:#ff5f56; }
-    .dot.yellow { background:#ffbd2e; } .dot.green { background:#27c93f; }
-    .folder table { width:100%; border-collapse:collapse; background: var(--color-background); }
-    .folder th, .folder td { text-align:left; padding:12px; border-bottom:1px dashed var(--color-border); font-size: var(--font-size-sm); }
-    .folder th { background: var(--color-surface); font-weight: 600; }
-
-    /* --- THE FIX: LIGHTBOX & CODE VIEWER SCREEN CONSTRAINTS --- */
-    .lightbox { 
-      position:fixed; 
-      inset:0; 
-      display:none; 
-      align-items:center; 
-      justify-content:center; 
-      background:rgba(0,0,0,.92); 
-      z-index:9999; 
-      padding: 20px; 
-    }
-    .lightbox.is-open { display:flex; } /* Match your lightbox.js logic */
-    
-    .lightbox-content { 
-      position: relative; 
-      max-width: 95vw; 
-      max-height: 90vh; 
-      width: min(1200px, 95vw); 
-      display: flex; 
-      flex-direction: column; /* Stacks elements vertically so nothing sits on the right */
-      align-items: center; 
-      justify-content: center;
-      background: #1e1e1e; 
-      border-radius: 12px;
-      overflow: hidden;
-    }
-
-    .lightbox pre {
-      margin: 0;
-      padding: 24px;
-      width: 100% !important; /* Forces the code block to fill the entire lightbox width */
-      max-height: 85vh;
-      overflow: auto; 
-      box-sizing: border-box; /* Keeps padding from pushing the box off-screen */
-      white-space: pre;
-    }
-
-    /* Hide the caption element entirely via CSS as a backup */
-    #lbCaption, .caption {
-      display: none !important;
-    }
-
-    /* Custom Scrollbar for Code blocks */
-    .lightbox pre::-webkit-scrollbar { height: 8px; width: 8px; }
-    .lightbox pre::-webkit-scrollbar-track { background: #121212; }
-    .lightbox pre::-webkit-scrollbar-thumb { background: #444; border-radius: 10px; }
-    .lightbox pre::-webkit-scrollbar-thumb:hover { background: var(--color-primary); }
-
-    .lightbox img { max-width:100%; max-height:80vh; object-fit: contain; border-radius:12px; }
-
-    .lightbox .close {
-      position:absolute; top: -45px; right: 0;
-      border:0; background:none; color:#fff; font-size: 36px; cursor:pointer; 
-    }
-
-    .caption { margin-top: 12px; color: #ccc; font-size: 0.9rem; text-align: center; width: 100%; }
-
-    @media (max-width: 768px) {
-      .lightbox pre { font-size: 12px; padding: 16px; }
-      .lightbox .close { top: 10px; right: 10px; background: rgba(0,0,0,0.5); border-radius: 50%; width: 40px; height: 40px; display:flex; align-items:center; justify-content:center; }
-      .gallery figure { grid-column: span 12; }
-    }
-  </style>
+  
 
   <link rel="stylesheet" href="https://unpkg.com/prismjs/themes/prism-okaidia.css">
   <script defer src="https://unpkg.com/prismjs/prism.js"></script>
@@ -125,7 +36,7 @@
                 <li><a href="/#about" class="nav-link">ABOUT</a></li>
                 <li><a href="assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
                 <li class="dropdown">
-                    <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                    <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="/pines/">Pines Landscaping</a></li>
                         <li><a href="/wallstreetprep/">Wall Street Prep</a></li>
@@ -162,15 +73,15 @@
 
       <!-- Process timeline -->
       <section class="card">
-        <h2 style="display:flex; align-items:center; gap:12px; flex-wrap:wrap;">
+        <h2 class="section-heading">
           GitHub Contributions
-          <span class="gh-legend" style="display:inline-flex; align-items:center; gap:6px; font-size:0.85em; color:var(--muted);">
+          <span class="gh-legend">
             <span>Less</span>
-            <span class="gh-box" style="width:12px; height:12px; background:#ebedf0; border-radius:2px;"></span>
-            <span class="gh-box" style="width:12px; height:12px; background:#9be9a8; border-radius:2px;"></span>
-            <span class="gh-box" style="width:12px; height:12px; background:#40c463; border-radius:2px;"></span>
-            <span class="gh-box" style="width:12px; height:12px; background:#30a14e; border-radius:2px;"></span>
-            <span class="gh-box" style="width:12px; height:12px; background:#216e39; border-radius:2px;"></span>
+            <span class="gh-box"></span>
+            <span class="gh-box green-1"></span>
+            <span class="gh-box green-2"></span>
+            <span class="gh-box green-3"></span>
+            <span class="gh-box green-4"></span>
             <span>More</span>
           </span>
         </h2>
@@ -178,7 +89,7 @@
             <img
             src="https://ghchart.rshah.org/30A14E/connorbuttonweb"
             alt="GitHub contributions calendar for @connorbuttonweb"
-            style="max-width:100%; height:auto; display:block; border:1px solid #eaeaea; border-radius:12px;"/>
+            class="responsive-img" />
           </a>
       </section>
 
@@ -224,7 +135,7 @@
       <section id="open-source">
         <h2>Open-source Code Folder</h2>
         <div class="folder">
-          <div class="bar"><span class="dot"></span><span class="dot yellow"></span><span class="dot green"></span><strong style="margin-left:8px;">/site</strong></div>
+          <div class="bar"><span class="dot"></span><span class="dot yellow"></span><span class="dot green"></span><strong>/site</strong></div>
           <table>
             <thead>
               <tr><th>File</th><th>Purpose</th><th class="file-actions">Actions</th></tr>

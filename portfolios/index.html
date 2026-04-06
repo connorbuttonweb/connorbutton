@@ -7,31 +7,6 @@
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
   <link rel="stylesheet" href="/assets/css/main.css" />
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    /* Page-specific light styling that respects your global design */
-    .page-title{ margin:0; }
-    .page-subtitle{ margin:6px 0 18px; color:var(--muted); }
-
-    .port-grid{
-      display:grid; gap:16px;
-      grid-template-columns: repeat(3, minmax(220px, 1fr));
-    }
-    @media (max-width: 1000px){ .port-grid{ grid-template-columns: repeat(2, 1fr);} }
-    @media (max-width: 640px){ .port-grid{ grid-template-columns: 1fr; } }
-
-    .port-card{
-      display:block; border:1px solid var(--line,#e6e6e6); border-radius:12px;
-      overflow:hidden; background:#fff; transition:transform .08s ease, box-shadow .08s ease;
-    }
-    .port-card:hover{ transform:translateY(-2px); box-shadow: var(--shadow, 0 10px 24px rgba(0,0,0,.08)); }
-    .port-thumb{
-      aspect-ratio: 16 / 9; width:100%; object-fit:cover; display:block;
-      background:#f2f2f2;
-    }
-    .port-meta{ padding:12px 14px; }
-    .port-title{ margin:0 0 4px; font-weight:700; }
-    .port-sub{ margin:0; color:var(--muted); font-size:.95rem; }
-  </style>
 </head>
 <body>
     <nav class="navbar">
@@ -52,7 +27,7 @@
                 <li><a href="/#about" class="nav-link">ABOUT</a></li>
                 <li><a href="/assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" >RESUME</a></li>
                 <li class="dropdown">
-                    <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down" style="font-size: 10px; margin-left: 4px;"></i></a>
+                    <a href="/portfolios/" class="nav-link active">PORTFOLIOS <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
                         <li><a href="/pines/">Pines Landscaping</a></li>
                         <li><a href="/wallstreetprep/">Wall Street Prep</a></li>
