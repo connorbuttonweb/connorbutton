@@ -351,10 +351,10 @@
             </div>
 
             <div class="download-container">
-                <a href="/assets/images/predictionmarkets/pm-regression-engine.zip" class="download-btn" download>
+                <a href="/assets/images/predictionmarkets/pm-regression-engine-v1.zip" class="download-btn" download>
                     <i class="fa-solid fa-file-zipper"></i> Download Regression Engine v1
                 </a>
-                <a href="/assets/images/predictionmarkets/pm_engine_explainer.pdf" class="download-btn" target="_blank">
+                <a href="/assets/images/predictionmarkets/pm_engine_explainer_v1.pdf" class="download-btn" target="_blank">
                     <i class="fa-solid fa-file-pdf"></i> View Explainer v1
                 </a>
             </div>
@@ -379,7 +379,7 @@
         </div>
 
         <div class="roadmap-container">
-            <div class="roadmap-header">v2 - []</div>
+            <div class="roadmap-header">v2 - [2026-04-06]</div>
             <div class="roadmap-goal">
                 <strong>[2026-03-18]:</strong> While the program itself is very strong, the causality regression needs fixing (current outputs are skewed with high multicollinearity). 
                 Will keep the polymarket API configuration from phase 1 and 2 with tweaks to the filtering and caching system. Phase 3 can stay as is while 4-5 need complete changing. The Granger causality is 
@@ -390,6 +390,21 @@
                 <strong>[2026-03-26]:</strong> With the announcement of CIRO approval for Wealthsimples binary trading platform I am going to shift to mapping the eligibility of 
                 current markets for use in Canada. The causality testing I will leave untouched but instead pull the working Gamma and CLOB API phases for us in a pre-screening 
                 filtering engine. I figure this might be more beneficial for short term, then with more time pending, I can work on fixing the causality testing to be more robust.
+            </div>
+            <div class="roadmap-goal">
+                <strong>Pre [2026-04-06]:</strong> Tested Cline CLI for assistance and a free test on where Claude may be able to help. Ironed out the engine to include a simplified correlation test
+                as well as a regulatory filter on the polymarket markets for what may be plausible in Ontario given CIRO restrictions. Increased the search parameters on the LASSO and Correlation tests
+                to a traditional finance matrix/universe, for many-to-many scoring. I haven't tested yet and likely machine learning on LASSO still squashes all markets except for the guarunteed fringe,
+                but fingers crossed correlation works as this would be my project marked complete-ish. Additionally it will be a good test to see how API communicates with a much larger cache.
+            </div>
+
+            <div class="download-container">
+                <a href="/assets/images/predictionmarkets/pm-regression-engine-v2.zip" class="download-btn" download>
+                    <i class="fa-solid fa-file-zipper"></i> Download Regression Engine v2
+                </a>
+                <a href="/assets/images/predictionmarkets/pm_engine_explainer_v2.pdf" class="download-btn" target="_blank">
+                    <i class="fa-solid fa-file-pdf"></i> View Explainer v2
+                </a>
             </div>
         </div>
 
