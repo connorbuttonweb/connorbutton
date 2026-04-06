@@ -2630,15 +2630,16 @@ PRINT
 }
 
 /* ==========================================
-PAGE-WIDE PROFESSIONAL TECHNICAL STYLING
+PROFESSIONAL REDESIGN: PAGE-WIDE STYLING
+Transfer these sections to other pages for consistent look
 ========================================== */
 
-/* 1. Push content below the fixed navbar */
+/* REDESIGN: Push content below the fixed navbar */
 body {
     padding-top: 80px;
 }
 
-/* 2. Page section header styling */
+/* REDESIGN: Page section header styling with gradient background */
 .section > .page-title-group {
     background: linear-gradient(135deg, rgba(var(--color-teal-500-rgb), 0.05) 0%, rgba(var(--color-teal-500-rgb), 0.02) 100%);
     border-bottom: 1px solid var(--color-border);
@@ -2648,6 +2649,7 @@ body {
     border-radius: 0;
 }
 
+/* REDESIGN: Page title heading layout */
 .page-title-heading {
     display: flex;
     align-items: baseline;
@@ -2655,6 +2657,7 @@ body {
     margin-bottom: var(--space-12);
 }
 
+/* REDESIGN: Main page title styling */
 .page-title {
     font-size: var(--font-size-4xl);
     font-weight: var(--font-weight-bold);
@@ -2663,6 +2666,7 @@ body {
     margin: 0;
 }
 
+/* REDESIGN: Page subtitle styling */
 .page-subtitle {
     font-size: var(--font-size-base);
     color: var(--color-text-secondary);
@@ -2670,7 +2674,7 @@ body {
     line-height: var(--line-height-normal);
 }
 
-/* 3. Professional section headers */
+/* REDESIGN: Professional section headers with underline */
 .section-header {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
@@ -2685,6 +2689,7 @@ body {
     margin-top: 0;
 }
 
+/* REDESIGN: Uppercase subsection headers */
 .subsection-header {
     font-size: var(--font-size-sm);
     font-weight: var(--font-weight-bold);
@@ -2694,7 +2699,7 @@ body {
     letter-spacing: 0.08em;
 }
 
-/* 4. Nicer looking Project Section */
+/* REDESIGN: Card-based project components with hover effects */
 .project-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -2711,6 +2716,7 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+/* REDESIGN: Semantic card styles - shared across all content cards */
 .image-card,
 .port-card,
 .doc-card,
@@ -2737,22 +2743,26 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+/* REDESIGN: Image card container styling */
 .image-card {
     margin: 32px 0;
     overflow: hidden;
 }
 
+/* REDESIGN: Responsive image sizing */
 .image-card img {
     width: 100%;
     display: block;
 }
 
+/* REDESIGN: Page title group styling */
 .page-title-group {
     border-bottom: 2px solid var(--color-primary);
     padding-bottom: var(--space-16);
     margin-bottom: var(--space-24);
 }
 
+/* REDESIGN: Title heading flex layout */
 .page-title-heading {
     display: flex;
     align-items: center;
@@ -3214,11 +3224,13 @@ body {
     margin-top: 8px;
 }
 
+/* REDESIGN: Highlight text styling */
 .highlight-strong {
     color: var(--color-primary);
     font-size: 1.1rem;
 }
 
+/* REDESIGN: Professional grid layout system */
 .grid-container {
     display: grid;
     grid-template-columns: 1fr;
@@ -3227,16 +3239,19 @@ body {
     align-items: stretch;
 }
 
+/* REDESIGN: Full width grid item */
 .full-width {
     grid-column: 1 / -1;
 }
 
+/* REDESIGN: Responsive grid - 2 columns on tablets */
 @media (min-width: 800px) {
     .grid-container {
         grid-template-columns: 1fr 1fr;
     }
 }
 
+/* REDESIGN: Responsive grid - 3 columns on desktop */
 @media (min-width: 1200px) {
     .grid-container {
         grid-template-columns: 1fr 1fr 1fr;
@@ -3264,6 +3279,7 @@ body {
     letter-spacing: 1.5px;
 }
 
+/* REDESIGN: Chart card styling with professional appearance */
 .chart-card {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -3277,16 +3293,19 @@ body {
     transition: box-shadow var(--duration-normal) var(--ease-standard);
 }
 
+/* REDESIGN: Chart card hover elevation effect */
 .chart-card:hover {
     box-shadow: var(--shadow-md);
 }
 
+/* REDESIGN: Chart card with no internal padding */
 .chart-card.no-padding {
     padding: 0;
     background: var(--color-surface);
     border: 1px solid var(--color-border);
 }
 
+/* REDESIGN: Roadmap container card styling */
 .roadmap-container {
     background: var(--color-surface);
     border: 1px solid var(--color-border);
@@ -3297,10 +3316,12 @@ body {
     transition: box-shadow var(--duration-normal) var(--ease-standard);
 }
 
+/* REDESIGN: Roadmap container hover elevation */
 .roadmap-container:hover {
     box-shadow: var(--shadow-md);
 }
 
+/* REDESIGN: Roadmap section header styling */
 .roadmap-header {
     color: var(--color-primary);
     font-size: var(--font-size-xl);
@@ -3322,6 +3343,7 @@ body {
     font-weight: var(--font-weight-bold);
 }
 
+/* REDESIGN: Phase group spacing */
 .phase-group {
     margin-bottom: var(--space-24);
 }
@@ -3335,6 +3357,7 @@ body {
     letter-spacing: 0.08em;
 }
 
+/* REDESIGN: Todo item card styling */
 .todo-item {
     display: flex;
     align-items: flex-start;
@@ -3347,11 +3370,13 @@ body {
     cursor: pointer;
 }
 
+/* REDESIGN: Todo item hover state */
 .todo-item:hover {
     border-color: var(--color-primary);
     background: rgba(var(--color-primary-rgb, 33, 128, 141), 0.06);
 }
 
+/* REDESIGN: Custom styled checkbox */
 .todo-checkbox {
     appearance: none;
     -webkit-appearance: none;
@@ -3368,11 +3393,13 @@ body {
     transition: all var(--duration-fast) var(--ease-standard);
 }
 
+/* REDESIGN: Checked checkbox state */
 .todo-checkbox:checked {
     background: var(--color-success);
     border-color: var(--color-success);
 }
 
+/* REDESIGN: Checkbox checkmark icon */
 .todo-checkbox:checked::after {
     content: '✔';
     position: absolute;
@@ -3401,6 +3428,7 @@ body {
     margin: 0;
 }
 
+/* REDESIGN: Combined chart header styling */
 .combine-header {
     display: flex;
     justify-content: space-between;
@@ -3410,6 +3438,7 @@ body {
     border-bottom: 1px solid var(--color-border);
 }
 
+/* REDESIGN: Combined chart title */
 .combine-header h3 {
     margin: 0;
     font-size: var(--font-size-lg);
@@ -3440,6 +3469,7 @@ body {
     outline: none;
 }
 
+/* REDESIGN: Polymarket card header styling */
 .poly-header {
     padding: var(--space-20) var(--space-24);
     border-bottom: 1px solid var(--color-border);
@@ -3450,12 +3480,14 @@ body {
     align-items: center;
 }
 
+/* REDESIGN: Polymarket info section flex layout */
 .poly-info {
     display: flex;
     align-items: center;
     gap: var(--space-12);
 }
 
+/* REDESIGN: Polymarket icon styling */
 .poly-icon {
     width: 32px;
     height: 32px;
@@ -3495,12 +3527,14 @@ body {
     text-align: right;
 }
 
+/* REDESIGN: Polymarket price display */
 .poly-price {
     font-size: var(--font-size-3xl);
     font-weight: var(--font-weight-bold);
     color: var(--color-success);
 }
 
+/* REDESIGN: Time control button group */
 .time-controls {
     display: flex;
     gap: var(--space-8);
@@ -3509,6 +3543,7 @@ body {
     border-top: 1px solid var(--color-border);
 }
 
+/* REDESIGN: Individual time control button styling */
 .time-btn {
     background: transparent;
     border: 1px solid var(--color-border);
@@ -3521,12 +3556,14 @@ body {
     transition: all var(--duration-fast) var(--ease-standard);
 }
 
+/* REDESIGN: Time button hover state */
 .time-btn:hover {
     background: var(--color-secondary);
     border-color: var(--color-primary);
     color: var(--color-text);
 }
 
+/* REDESIGN: Active time button state */
 .time-btn.active {
     background: var(--color-primary);
     border-color: var(--color-primary);
@@ -3549,12 +3586,14 @@ body {
     position: relative;
 }
 
+/* REDESIGN: Status text styling */
 .status-text {
     font-size: var(--font-size-sm);
     font-weight: normal;
     color: var(--color-text-secondary);
 }
 
+/* REDESIGN: Download button container */
 .download-container {
     margin-top: var(--space-32);
     margin-bottom: var(--space-32);
@@ -3564,6 +3603,7 @@ body {
     flex-wrap: wrap;
 }
 
+/* REDESIGN: Primary action button styling */
 .download-btn {
     display: inline-flex;
     align-items: center;
@@ -3579,6 +3619,7 @@ body {
     border: 1px solid transparent;
 }
 
+/* REDESIGN: Download button hover elevation */
 .download-btn:hover {
     background-color: var(--color-primary-hover);
     color: var(--color-btn-primary-text);
@@ -3586,6 +3627,7 @@ body {
     box-shadow: var(--shadow-md);
 }
 
+/* REDESIGN: Excel table container styling */
 .excel-container {
     width: 100%;
     max-height: 400px;
@@ -3598,6 +3640,7 @@ body {
     box-shadow: var(--shadow-sm);
 }
 
+/* REDESIGN: Excel table header bar (file name) */
 .excel-header-bar {
     background: var(--color-primary);
     color: var(--color-btn-primary-text);
@@ -3612,6 +3655,7 @@ body {
     gap: var(--space-12);
 }
 
+/* REDESIGN: Excel table styling */
 .excel-table {
     width: 100%;
     border-collapse: collapse;
@@ -3619,6 +3663,7 @@ body {
     color: var(--color-text);
 }
 
+/* REDESIGN: Excel table cell borders and padding */
 .excel-table th,
 .excel-table td {
     border: 1px solid var(--color-border);
@@ -3626,6 +3671,7 @@ body {
     white-space: nowrap;
 }
 
+/* REDESIGN: Excel table header styling */
 .excel-table th {
     background: rgba(var(--color-primary-rgb, 33, 128, 141), 0.05);
     color: var(--color-text-secondary);
@@ -3636,6 +3682,7 @@ body {
     z-index: 5;
 }
 
+/* REDESIGN: Excel table row number column */
 .excel-row-num {
     background: rgba(var(--color-primary-rgb, 33, 128, 141), 0.05);
     color: var(--color-text-secondary);
@@ -3652,12 +3699,14 @@ body {
     background: rgba(var(--color-primary-rgb, 33, 128, 141), 0.08);
 }
 
+/* REDESIGN: Toggle button wrapper container */
 .toggle-charts-wrapper {
     display: flex;
     justify-content: flex-end;
     margin-bottom: var(--space-16);
 }
 
+/* REDESIGN: Toggle charts button styling */
 .toggle-charts-btn {
     background: var(--color-surface);
     color: var(--color-text-secondary);
@@ -3673,36 +3722,43 @@ body {
     transition: all var(--duration-fast) var(--ease-standard);
 }
 
+/* REDESIGN: Toggle button hover state */
 .toggle-charts-btn:hover {
     border-color: var(--color-primary);
     color: var(--color-primary);
     background: rgba(var(--color-primary-rgb, 33, 128, 141), 0.05);
 }
 
-/* Professional page responsiveness improvements */
+/* REDESIGN: Mobile responsiveness for professional layout */
 @media (max-width: 768px) {
+    /* REDESIGN: Mobile-optimized section padding */
     .section {
         padding: var(--space-24) var(--space-16);
     }
 
+    /* REDESIGN: Mobile-optimized page title section */
     .section > .page-title-group {
         padding: var(--space-32) var(--space-16);
         margin-bottom: var(--space-32);
     }
 
+    /* REDESIGN: Responsive page title sizing */
     .page-title {
         font-size: var(--font-size-3xl);
     }
 
+    /* REDESIGN: Responsive page subtitle sizing */
     .page-subtitle {
         font-size: var(--font-size-sm);
     }
 
+    /* REDESIGN: Responsive section header sizing */
     .section-header {
         font-size: var(--font-size-2xl);
         margin: var(--space-32) 0 var(--space-16) 0;
     }
 
+    /* REDESIGN: Responsive grid spacing */
     .grid-container {
         gap: var(--space-16);
         margin-bottom: var(--space-32);
@@ -3714,20 +3770,24 @@ body {
         }
     }
 
+    /* REDESIGN: Mobile chart card height */
     .chart-card {
         min-height: 300px;
     }
 
+    /* REDESIGN: Mobile roadmap padding */
     .roadmap-container {
         padding: var(--space-24) var(--space-20);
     }
 
+    /* REDESIGN: Stack chart controls vertically on mobile */
     .combine-header {
         flex-direction: column;
         gap: var(--space-16);
         align-items: flex-start;
     }
 
+    /* REDESIGN: Full width select controls on mobile */
     .combine-controls {
         width: 100%;
         flex-wrap: wrap;
@@ -3738,20 +3798,28 @@ body {
         min-width: 120px;
     }
 
+    /* REDESIGN: Mobile table header sizing */
     .excel-header-bar {
         padding: var(--space-8) var(--space-12);
         font-size: var(--font-size-xs);
     }
 
+    /* REDESIGN: Mobile table text sizing */
     .excel-table {
         font-size: var(--font-size-xs);
     }
 
+    /* REDESIGN: Compact mobile table cells */
     .excel-table th,
     .excel-table td {
         padding: var(--space-4) var(--space-8);
     }
 }
+
+/* ==========================================
+END OF PROFESSIONAL REDESIGN
+Transfer all sections marked with REDESIGN to other pages
+========================================== */
 
 /* 3. Improved Splits Grid (Sports Stats Style) */
 .splits {
