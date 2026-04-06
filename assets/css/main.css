@@ -688,6 +688,22 @@ select.form-control {
   }
 }
 
+.section {
+  padding: var(--space-40) 0;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-24);
+  margin: 0 -12px;
+}
+
+.row > div {
+  flex: 1 1 minmax(240px, 1fr);
+  padding: 0 12px;
+}
+
 /* Utility classes */
 .flex {
   display: flex;
@@ -812,7 +828,7 @@ html {
 body {
     font-family: var(--font-family-base);
     color: var(--color-text);
-    background-color: #f6f6ed;  /* optional */
+    background-color: var(--color-background);
     line-height: var(--line-height-normal);
 }
 
@@ -823,15 +839,17 @@ body {
 .dropdown {
     position: relative;
     display: inline-block;
+    padding-bottom: 15px; /* Creates a richer hover target */
+    margin-bottom: -15px;
 }
 
 .dropdown-menu {
-    display: none; /* Hidden by default */
+    display: none;
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    background-color: #f6f6ed; /* Matches your navbar background */
+    background-color: var(--color-surface);
     min-width: 180px;
     box-shadow: var(--shadow-lg);
     border: 1px solid var(--color-border);
@@ -839,100 +857,10 @@ body {
     padding: var(--space-8) 0;
     list-style: none;
     z-index: 1001;
-    margin-top: 10px; /* Gap so it doesn't close immediately on move */
+    margin-top: 0;
+    padding-top: 15px;
 }
 
-/* Arrow pointer for the dropdown */
-.dropdown-menu::before {
-    content: '';
-    position: absolute;
-    top: -6px;
-    left: 50%;
-    transform: translateX(-50%) rotate(45deg);
-    width: 10px;
-    height: 10px;
-    background: #f6f6ed;
-    border-top: 1px solid var(--color-border);
-    border-left: 1px solid var(--color-border);
-}
-
-.dropdown:hover .dropdown-menu {
-    display: block; /* Show on hover */
-    animation: fadeInDown 0.2s var(--ease-standard);
-}
-
-.dropdown-menu li a {
-    display: block;
-    padding: var(--space-10) var(--space-20);
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
-    font-weight: var(--font-weight-medium);
-    text-decoration: none;
-    transition: all var(--duration-fast) var(--ease-standard);
-}
-
-.dropdown-menu li a:hover {
-    background-color: rgba(var(--color-teal-500-rgb), 0.05);
-    color: var(--color-primary);
-    padding-left: var(--space-24); /* Subtle slide effect */
-}
-
-/* Animation for the dropdown */
-@keyframes fadeInDown {
-    from {
-        opacity: 0;
-        transform: translateX(-50%) translateY(-10px);
-    }
-    to {
-        opacity: 1;
-        transform: translateX(-50%) translateY(0);
-    }
-}
-
-/* Mobile Fix: Disable dropdown or stack it */
-@media (max-width: 768px) {
-    .dropdown-menu {
-        position: static;
-        display: block;
-        box-shadow: none;
-        border: none;
-        background: transparent;
-        padding-left: var(--space-16);
-        transform: none;
-    }
-    .dropdown-menu::before { display: none; }
-}
-
-/* ==========================================
-   NAVBAR DROPDOWN
-   ========================================== */
-
-.dropdown {
-    position: relative;
-    display: inline-block;
-    padding-bottom: 15px; /* Creates a 'bridge' of active hover area below the link */
-    margin-bottom: -15px; /* Offsets the padding so it doesn't push other elements down */
-}
-
-.dropdown-menu {
-    display: none; /* Hidden by default */
-    position: absolute;
-    top: 100%;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f6f6ed; /* Matches your navbar background */
-    min-width: 180px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--color-border);
-    border-radius: var(--radius-md);
-    padding: var(--space-8) 0;
-    list-style: none;
-    z-index: 1001;
-    margin-top: 0; /* Remove the gap that breaks the hover */
-    padding-top: 15px; /* Add internal space instead so the mouse stays 'inside' the menu */
-}
-
-/* Arrow pointer for the dropdown */
 .dropdown-menu::before {
     content: '';
     position: absolute;
@@ -941,13 +869,13 @@ body {
     transform: translateX(-50%) rotate(45deg);
     width: 10px;
     height: 10px;
-    background: #f6f6ed;
+    background: var(--color-surface);
     border-top: 1px solid var(--color-border);
     border-left: 1px solid var(--color-border);
 }
 
 .dropdown:hover .dropdown-menu {
-    display: block; /* Show on hover */
+    display: block;
     animation: fadeInDown 0.2s var(--ease-standard);
 }
 
@@ -964,10 +892,9 @@ body {
 .dropdown-menu li a:hover {
     background-color: rgba(var(--color-teal-500-rgb), 0.05);
     color: var(--color-primary);
-    padding-left: var(--space-24); /* Subtle slide effect */
+    padding-left: var(--space-24);
 }
 
-/* Animation for the dropdown */
 @keyframes fadeInDown {
     from {
         opacity: 0;
@@ -979,7 +906,6 @@ body {
     }
 }
 
-/* Mobile Fix: Disable dropdown or stack it */
 @media (max-width: 768px) {
     .dropdown-menu {
         position: static;
@@ -992,6 +918,7 @@ body {
     }
     .dropdown-menu::before { display: none; }
 }
+
 
 /* ==========================================
    NAVIGATION BAR
@@ -1001,7 +928,7 @@ body {
     position: fixed;
     top: 0;
     width: 100%;
-    background: #f6f6ed;    /* changed from var(--color-surface) */
+    background: var(--color-surface);
     padding: var(--space-16) 0;
     z-index: 1000;
     box-shadow: var(--shadow-sm);
@@ -2722,6 +2649,33 @@ body {
 }
 
 .project-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-md);
+}
+
+.image-card,
+.port-card,
+.doc-card,
+.chart-card,
+.roadmap-container,
+.folder,
+.lede {
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--duration-normal) var(--ease-standard),
+                box-shadow var(--duration-normal) var(--ease-standard);
+}
+
+.image-card:hover,
+.port-card:hover,
+.doc-card:hover,
+.chart-card:hover,
+.roadmap-container:hover,
+.folder:hover,
+.lede:hover {
+    transform: translateY(-2px);
     box-shadow: var(--shadow-md);
 }
 
@@ -2729,28 +2683,6 @@ body {
     border-bottom: 2px solid var(--color-primary);
     padding-bottom: var(--space-16);
     margin-bottom: var(--space-24);
-}
-
-/* Shared page utilities */
-.dropdown .nav-link .fa-chevron-down,
-.dropdown .nav-link i.fas.fa-chevron-down {
-    font-size: 10px;
-    margin-left: 4px;
-    vertical-align: middle;
-}
-
-.tradingview-widget-container,
-.tradingview-widget-container__widget {
-    width: 100%;
-    height: 100%;
-}
-
-.chart-card.no-padding {
-    border-color: #e2e3e5;
-}
-
-.section.section--spaced {
-    padding-top: 20px;
 }
 
 .page-title-heading {
@@ -2800,10 +2732,133 @@ body {
     margin-top: 32px;
 }
 
-/* Pages: Wall Street Prep & Prediction Market */
-.wsp-course-list {
-    margin-top: 40px;
+.gallery {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: repeat(12, 1fr);
 }
+
+.gallery figure {
+    grid-column: span 6;
+    position: relative;
+    cursor: zoom-in;
+    border-radius: var(--radius-base);
+    overflow: hidden;
+}
+
+.gallery figure img,
+.gallery figure video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.gallery figure.wide {
+    grid-column: span 12;
+}
+
+.gallery.gallery--strip {
+    display: flex;
+    gap: 12px;
+    overflow-x: auto;
+    padding: 0.5rem 0;
+    scroll-snap-type: x mandatory;
+}
+
+.gallery.gallery--strip figure {
+    flex: 0 0 clamp(180px, 45vw, 350px);
+    scroll-snap-align: center;
+    min-height: 180px;
+}
+
+.gallery.gallery--strip figure img,
+.gallery.gallery--strip figure video {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.responsive-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--color-border);
+}
+
+.port-grid {
+    display: grid;
+    gap: 24px;
+    grid-template-columns: repeat(4, minmax(220px, 1fr));
+}
+
+.port-card {
+    display: block;
+    overflow: hidden;
+    text-decoration: none;
+    color: inherit;
+    border-radius: var(--radius-lg);
+    transform: translateZ(0);
+}
+
+.port-thumb {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    display: block;
+    background: #f2f2f2;
+    border-bottom: 1px solid var(--color-border);
+}
+
+.port-meta {
+    padding: 16px;
+}
+
+.port-title {
+    margin: 0 0 8px;
+    font-size: var(--font-size-xl);
+    color: var(--color-primary);
+}
+
+.port-sub {
+    margin: 0;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+}
+
+.page-subtitle {
+    margin: 4px 0 24px;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.gallery figure .media-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: rgba(0, 0, 0, 0.65);
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: var(--radius-full);
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.tradingview-widget-container,
+.tradingview-widget-container__widget {
+    width: 100%;
+    height: 100%;
+}
+
+.chart-card.no-padding {
+    border-color: #e2e3e5;
+}
+
+.section.section--spaced {
+    padding-top: 20px;
+}
+
 
 .course-row {
     display: flex;
@@ -3691,7 +3746,7 @@ body {
         top: 100%;
         left: 0;
         width: 100%;
-        background-color: #f6f6ed; /* Match your navbar color */
+        background-color: var(--color-surface);
         border-bottom: 1px solid var(--color-border);
         box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
         
