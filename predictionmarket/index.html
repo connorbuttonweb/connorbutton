@@ -366,13 +366,13 @@
                 with maybe a disapointing quantity but I can always relax the AI to allow more.
             </div>
 
-            <div class="excel-container" id="excel-viewer-container">
-                <div class="excel-header-bar" id="excel-filename">
+            <div class="excel-container" id="excel-viewer-v1">
+                <div class="excel-header-bar excel-filename">
                     <i class="fa-solid fa-file-excel"></i> Loading file...
                 </div>
-                <table class="excel-table" id="excel-table">
-                    <thead id="excel-head"></thead>
-                    <tbody id="excel-body"></tbody>
+                <table class="excel-table">
+                    <thead class="excel-head"></thead>
+                    <tbody class="excel-body"></tbody>
                 </table>
             </div>
 
@@ -406,6 +406,23 @@
                     <i class="fa-solid fa-file-pdf"></i> View Explainer v2
                 </a>
             </div>
+
+            <div class="roadmap-goal">
+                <strong>Post [2026-04-07]:</strong> Still adjusting databases to allow for all three functions. Current correlation and regulatory functionsare inefficient and use API
+                for all markets instead of batches. Seperated everything into batches but need to tweak still. Will change output to not have the OTHER category but as of v2 there is the output for 
+                the regulatory filter on all current active markets.
+            </div>
+
+            <div class="excel-container" id="excel-viewer-v2">
+                <div class="excel-header-bar excel-filename">
+                    <i class="fa-solid fa-file-excel"></i> Loading file...
+                </div>
+                <table class="excel-table">
+                    <thead class="excel-head"></thead>
+                    <tbody class="excel-body"></tbody>
+                </table>
+            </div>
+
         </div>
 
     </section>
@@ -670,10 +687,17 @@
         });
 
 
-        //EXCEL VIEWER LOGIC
-        async function loadExcelSheet(xlsxUrl) {
+        // EXCEL VIEWER LOGIC
+        async function loadExcelSheet(xlsxUrl, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            const filenameEl = container.querySelector('.excel-filename');
+            const thead = container.querySelector('.excel-head');
+            const tbody = container.querySelector('.excel-body');
+
             const filename = xlsxUrl.split('/').pop();
-            document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-file-excel"></i> ${filename}`;
+            filenameEl.innerHTML = `<i class="fa-solid fa-file-excel"></i> ${filename}`;
 
             try {
                 // 1. Fetch the file as an ArrayBuffer
@@ -691,9 +715,6 @@
 
                 if (data.length === 0) return;
 
-                const thead = document.getElementById('excel-head');
-                const tbody = document.getElementById('excel-body');
-                
                 // Find the maximum number of columns across all rows to ensure a uniform grid
                 const numCols = Math.max(...data.map(row => row.length));
 
@@ -727,13 +748,17 @@
                 tbody.innerHTML = bodyHtml;
 
             } catch (err) {
-                document.getElementById('excel-filename').innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error loading file`;
-                console.error("Error parsing XLSX:", err);
+                filenameEl.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> Error loading file`;
+                console.error("Error parsing XLSX for " + containerId + ":", err);
             }
         }
 
         window.addEventListener('DOMContentLoaded', () => {
-            loadExcelSheet('/assets/PredictionMarkets/library_snapshot.xlsx'); 
+            // Load the first excel file into the first container
+            loadExcelSheet('/assets/PredictionMarkets/library_snapshot.xlsx', 'excel-viewer-v1'); 
+            
+            // Load the second excel file into the second container (Change the path to your actual second file)
+            loadExcelSheet('/assets/PredictionMarkets/regulatory_assessment.xlsx', 'excel-viewer-v2'); 
         });
 
     </script>
