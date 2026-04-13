@@ -20,10 +20,7 @@
         .logo span:nth-child(4){color:#32B8C6}
         .logo span:nth-child(5){color:#13343B}
         .logo span:nth-child(6){color:#5E5240}
-        input { width: min(560px, 100%); padding: 14px 20px; font-size: 16px;
-        border: 1px solid #dfe1e5; border-radius: 24px; outline: none; }
-        input:focus { box-shadow: 0 0 0 2px #4285F4; border-color: transparent; }
-        .btns { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btns { margin-top: 20px; display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
         .search-wrapper { padding: 0 20px; width: 100%; display: flex; flex-direction: column; align-items: center; }
         button { padding: 10px 20px; font-size: 14px; border: 1px solid #dfe1e5;
         border-radius: 6px; background: #f8f9fa; cursor: pointer; }
@@ -73,18 +70,17 @@
         <div class="logo">
             <span>G</span><span>o</span><span>o</span><span>g</span><span>l</span><span>e</span>
         </div>
-            <input id="q" type="text" onkeydown="if(event.key==='Enter')s()"/>
+            <form action="https://www.google.com/search" method="get" target="_blank" style="width:min(560px,100%)">
+                <input id="q" name="q" type="search" autofocus autocomplete="on"
+                    style="width:100%;padding:14px 20px;font-size:16px;border:1px solid #dfe1e5;border-radius:24px;outline:none;"
+                    onfocus="this.style.boxShadow='0 0 0 2px #21808D';this.style.borderColor='transparent';"
+                    onblur="this.style.boxShadow='';this.style.borderColor='#dfe1e5';"/>
+            </form>
         <div class="btns">
             <button onclick="window.open('https://mail.google.com', '_blank')">Gmail</button>
-            <button onclick="window.open('', '_blank')">Profiles</button>
+            <button onclick="window.open('https://sso.dayforcehcm.com/SSOLogin.aspx', '_blank')">DayForce</button>
             <button onclick="window.open('https://github.com/connorbuttonweb', '_blank')">GitHub</button>
         </div>
-        <script>
-            function s() {
-                var q = document.getElementById('q').value;
-                if (q) window.open('https://www.google.com/search?q=' + encodeURIComponent(q), '_blank');
-            }
-        </script>
     </section>
 
   <script src="/assets/js/nav.js"></script>
