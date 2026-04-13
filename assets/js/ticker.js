@@ -1,7 +1,7 @@
 (function () {
     const API_KEY    = 'd61qcv1r01qgcobqh8k0d61qcv1r01qgcobqh8kg'; // ← replace with key from finnhub.io
-    const SYMBOLS    = ['AAPL','MSFT','NVDA','TSLA','META','AMZN','GOOGL',
-                        'SPY','QQQ','JPM','AMD','NFLX'];
+    const SYMBOLS    = ['TSX:XEQT','TSX:ENB','TSX:PXT','TSX:BEPC','TSX:MMY',
+                        'TSX:HMMJ','TSX:VDY','TSX:ZEB','TSX:VEQT'];
     const REFRESH_MS = 60_000;
 
     // Position ticker flush below the navbar regardless of its rendered height
@@ -28,9 +28,10 @@
             const up    = q.change >= 0;
             const cls   = up ? 'stock-ticker__change--up' : 'stock-ticker__change--down';
             const sign  = up ? '+' : '';
-            const arrow = up ? '▲' : '▼';
+            const arrow   = up ? '▲' : '▼';
+            const display = q.symbol.replace(/^[^:]+:/, '');
             return `<span class="stock-ticker__item">` +
-                `<span class="stock-ticker__symbol">${q.symbol}</span>` +
+                `<span class="stock-ticker__symbol">${display}</span>` +
                 `<span class="stock-ticker__price">$${q.price.toFixed(2)}</span>` +
                 `<span class="${cls}">${arrow} ${sign}${q.change.toFixed(2)} (${sign}${q.pct.toFixed(2)}%)</span>` +
                 `<span class="stock-ticker__sep">|</span>` +
