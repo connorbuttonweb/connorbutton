@@ -1,12 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
-  <title>Portfolio Selections — Connor Button</title>
-  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
-  <link rel="stylesheet" href="/assets/css/main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+    <title>Portfolio Selections — Connor Button</title>
+    <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+    <link rel="stylesheet" href="/assets/css/main.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: Arial, sans-serif; display: flex;
+        flex-direction: column; align-items: center;
+        justify-content: center; height: 100vh; background: #fff; }
+        .logo { font-size: 72px; font-weight: 500; margin-bottom: 32px; }
+        .logo span:nth-child(1){color:#4285F4}
+        .logo span:nth-child(2){color:#EA4335}
+        .logo span:nth-child(3){color:#FBBC05}
+        .logo span:nth-child(4){color:#4285F4}
+        .logo span:nth-child(5){color:#34A853}
+        .logo span:nth-child(6){color:#EA4335}
+        input { width: 560px; padding: 14px 20px; font-size: 16px;
+        border: 1px solid #dfe1e5; border-radius: 24px; outline: none; }
+        input:focus { box-shadow: 0 0 0 2px #4285F4; border-color: transparent; }
+        .btns { margin-top: 20px; display: flex; gap: 12px; }
+        button { padding: 10px 20px; font-size: 14px; border: 1px solid #dfe1e5;
+        border-radius: 6px; background: #f8f9fa; cursor: pointer; }
+        button:hover { border-color: #aaa; }
+    </style>
 </head>
 
 <body>
@@ -48,9 +68,21 @@
     </nav>
 
     <section class="section">
-        <script async src="https://cse.google.com/cse.js?cx=951619e64d9344814">
+        <div class="logo">
+            <span>G</span><span>o</span><span>o</span>
+            <span>g</span><span>l</span><span>e</span>
+        </div>
+            <input id="q" type="text" onkeydown="if(event.key==='Enter')s()"/>
+        <div class="btns">
+            <button onclick="s()">Google Search</button>
+            <button onclick="l()">I'm Feeling Lucky</button>
+        </div>
+        <script>
+            function s(){var q=document.getElementById('q').value;
+                if(q)location.href='https://www.google.com/search?q='+encodeURIComponent(q);}
+            function l(){var q=document.getElementById('q').value;
+                if(q)location.href='https://www.google.com/search?q='+encodeURIComponent(q)+'&btnI=1';}
         </script>
-        <div class="gcse-search"></div>
     </section>
 
   <script src="/assets/js/nav.js"></script>
