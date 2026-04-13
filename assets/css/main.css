@@ -3997,6 +3997,60 @@ Transfer all sections marked with REDESIGN to other pages
     .about-photo-grid {
         gap: 8px;
         /* Keep 2 columns, or use 1fr for single column stack */
-        grid-template-columns: repeat(2, 1fr); 
+        grid-template-columns: repeat(2, 1fr);
     }
+}
+
+/* ==========================================
+   STOCK TICKER BANNER
+   ========================================== */
+.stock-ticker {
+    position: fixed;
+    top: 64px;
+    left: 0;
+    width: 100%;
+    height: 34px;
+    background: #000;
+    overflow: hidden;
+    z-index: 999;
+    border-bottom: 1px solid #222;
+    display: flex;
+    align-items: center;
+}
+
+.stock-ticker__track {
+    display: inline-flex;
+    white-space: nowrap;
+    will-change: transform;
+    animation: ticker-scroll 40s linear infinite;
+}
+
+.stock-ticker__track:hover { animation-play-state: paused; }
+
+.stock-ticker__item {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 0 20px;
+    font-size: 12px;
+    font-family: 'SF Mono', 'Consolas', monospace;
+    color: #fff;
+    letter-spacing: 0.02em;
+}
+
+.stock-ticker__symbol  { font-weight: 700; color: #e5e7eb; }
+.stock-ticker__price   { color: #9ca3af; }
+.stock-ticker__change--up   { color: #22c55e; }
+.stock-ticker__change--down { color: #ef4444; }
+.stock-ticker__sep     { color: #374151; padding-left: 10px; }
+.stock-ticker__loading { color: #6b7280; font-size: 12px;
+                         font-family: monospace; padding: 0 20px; }
+
+@keyframes ticker-scroll {
+    0%   { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+    .stock-ticker { top: 62px; }
 }
