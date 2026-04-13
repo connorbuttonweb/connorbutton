@@ -4046,6 +4046,8 @@ Transfer all sections marked with REDESIGN to other pages
 .stock-ticker__badge {
     flex-shrink: 0;
     height: 100%;
+    position: relative;
+    z-index: 1;
     padding: 0 12px;
     display: flex;
     align-items: center;
@@ -4067,7 +4069,7 @@ Transfer all sections marked with REDESIGN to other pages
 }
 
 .stock-ticker--closed .stock-ticker__track {
-    opacity: 0.45;
+    opacity: 0.75;
 }
 
 @keyframes ticker-scroll {
