@@ -77,6 +77,12 @@
         </div>
     </nav>
 
+    <div class="stock-ticker" id="stock-ticker" aria-hidden="true">
+        <div class="stock-ticker__track" id="ticker-track">
+            <span class="stock-ticker__loading">Loading market data…</span>
+        </div>
+    </div>
+
     <section class="search-wrapper">
         <div class="logo">
             <span>C</span><span>o</span><span>n</span><span>n</span><span>o</span><span>r</span>
@@ -98,6 +104,7 @@
     </section>
 
   <script src="/assets/js/nav.js"></script>
+  <script src="/assets/js/ticker.js"></script>
   <script>
     let sel = -1, reqId = 0, debounce;
 
