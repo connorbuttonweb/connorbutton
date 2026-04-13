@@ -1,8 +1,20 @@
 (function () {
-    const API_KEY    = 'd61qcv1r01qgcobqh8k0d61qcv1r01qgcobqh8kg'; // ← replace with key from finnhub.io
-    const SYMBOLS    = ['TSX:XEQT','TSX:ENB','TSX:PXT','TSX:BEPC','TSX:MMY',
-                        'TSX:HMMJ','TSX:VDY','TSX:ZEB','TSX:VEQT'];
+    // Yahoo Finance symbols — TSX tickers use the ".TO" suffix
+    const SYMBOLS    = ['XEQT.TO','ENB.TO','PXT.TO','BEPC.TO','MMY.TO',
+                        'HMMJ.TO','VDY.TO','ZEB.TO','VEQT.TO'];
     const REFRESH_MS = 60_000;
+
+    const YF_BASE    = 'https://query1.finance.yahoo.com/v7/finance/quote?symbols=';
+    const PROXY      = 'https://corsproxy.io/?';
+
+    // TSX hours: 9:30–16:00 ET, Mon–Fri
+    function isMarketOpen() {
+        const et  = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Toronto' }));
+        const day = et.getDay();
+        if (day === 0 || day === 6) return false;
+        const mins = et.getHours() * 60 + et.getMinutes();
+        return mins >= 9 * 60 + 30 && mins < 16 * 60;
+    }
 
     // Position ticker flush below the navbar regardless of its rendered height
     function positionTicker() {
@@ -13,27 +25,35 @@
         }
     }
 
-    async function fetchQuote(symbol) {
-        const res = await fetch(
-            `https://finnhub.io/api/v1/quote?symbol=${symbol}&token=${API_KEY}`
-        );
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const d = await res.json();
-        return { symbol, price: d.c, change: d.d, pct: d.dp };
+    function updateMarketStatus() {
+        const ticker = document.getElementById('stock-ticker');
+        if (!ticker) return;
+        ticker.classList.toggle('stock-ticker--closed', !isMarketOpen());
     }
 
-    function buildItems(quotes) {
-        return quotes.map(q => {
-            if (!q.price) return '';
-            const up    = q.change >= 0;
-            const cls   = up ? 'stock-ticker__change--up' : 'stock-ticker__change--down';
-            const sign  = up ? '+' : '';
+    async function fetchQuotes() {
+        const url = PROXY + encodeURIComponent(YF_BASE + SYMBOLS.join(','));
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+        return data.quoteResponse.result;
+    }
+
+    function buildItems(results) {
+        return results.map(q => {
+            const price  = q.regularMarketPrice;
+            const change = q.regularMarketChange;
+            const pct    = q.regularMarketChangePercent;
+            if (price == null) return '';
+            const up      = change >= 0;
+            const cls     = up ? 'stock-ticker__change--up' : 'stock-ticker__change--down';
+            const sign    = up ? '+' : '';
             const arrow   = up ? '▲' : '▼';
-            const display = q.symbol.replace(/^[^:]+:/, '');
+            const display = q.symbol.replace(/\.TO$/i, '');
             return `<span class="stock-ticker__item">` +
                 `<span class="stock-ticker__symbol">${display}</span>` +
-                `<span class="stock-ticker__price">$${q.price.toFixed(2)}</span>` +
-                `<span class="${cls}">${arrow} ${sign}${q.change.toFixed(2)} (${sign}${q.pct.toFixed(2)}%)</span>` +
+                `<span class="stock-ticker__price">$${price.toFixed(2)}</span>` +
+                `<span class="${cls}">${arrow} ${sign}${change.toFixed(2)} (${sign}${pct.toFixed(2)}%)</span>` +
                 `<span class="stock-ticker__sep">|</span>` +
                 `</span>`;
         }).join('');
@@ -41,10 +61,10 @@
 
     async function refresh() {
         try {
-            const quotes = await Promise.all(SYMBOLS.map(fetchQuote));
-            const track  = document.getElementById('ticker-track');
+            const results = await fetchQuotes();
+            const track   = document.getElementById('ticker-track');
             if (!track) return;
-            const html = buildItems(quotes);
+            const html = buildItems(results);
             track.innerHTML = html + html; // duplicate for seamless loop
             // Dynamic speed: ~80 px/s
             const duration = (track.scrollWidth / 2) / 80;
@@ -56,8 +76,9 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         positionTicker();
+        updateMarketStatus();
         window.addEventListener('resize', positionTicker);
         refresh();
-        setInterval(refresh, REFRESH_MS);
+        setInterval(() => { refresh(); updateMarketStatus(); }, REFRESH_MS);
     });
 })();
