@@ -4043,9 +4043,6 @@ Transfer all sections marked with REDESIGN to other pages
 .stock-ticker__change--up   { color: #22c55e; }
 .stock-ticker__change--down { color: #ef4444; }
 .stock-ticker__sep     { color: #374151; padding-left: 10px; }
-.stock-ticker__loading { color: #6b7280; font-size: 12px;
-                         font-family: monospace; padding: 0 20px; }
-
 .stock-ticker__badge {
     flex-shrink: 0;
     height: 100%;
