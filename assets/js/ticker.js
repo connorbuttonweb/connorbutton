@@ -1,8 +1,9 @@
 (function () {
-    // Yahoo Finance symbols — TSX tickers use the ".TO" suffix
-    const SYMBOLS    = ['XEQT.TO','ENB.TO','PXT.TO','BEPC.TO','MMY.TO',
-                        'HMMJ.TO','VDY.TO','ZEB.TO','VEQT.TO'];
+    // Yahoo Finance symbols — TSX uses ".TO", TSX-V uses ".V"
+    const SYMBOLS = ['XEQT.TO','ENB.TO','PXT.TO','BEPC.TO','MMY.V',
+                     'HMMJ.TO','VDY.TO','ZEB.TO','VEQT.TO'];
     const REFRESH_MS = 60_000;
+    const PROXY = 'https://api.allorigins.win/raw?url=';
 
     // TSX hours: 9:30–16:00 ET, Mon–Fri
     function isMarketOpen() {
@@ -25,10 +26,10 @@
     }
 
     async function fetchQuote(symbol) {
-        const url = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`HTTP ${res.status}`);
-        const data = await res.json();
+        const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
+        const res   = await fetch(PROXY + encodeURIComponent(yfUrl));
+        if (!res.ok) throw new Error(`HTTP ${res.status} for ${symbol}`);
+        const data  = await res.json();
         const meta  = data.chart.result[0].meta;
         const price = meta.regularMarketPrice;
         const prev  = meta.chartPreviousClose ?? meta.previousClose;
@@ -39,12 +40,11 @@
 
     function buildItems(quotes) {
         return quotes.map(q => {
-            if (q.price == null) return '';
             const up      = q.change >= 0;
             const cls     = up ? 'stock-ticker__change--up' : 'stock-ticker__change--down';
             const sign    = up ? '+' : '';
             const arrow   = up ? '▲' : '▼';
-            const display = q.symbol.replace(/\.TO$/i, '');
+            const display = q.symbol.replace(/\.(TO|V)$/i, '');
             return `<span class="stock-ticker__item">` +
                 `<span class="stock-ticker__symbol">${display}</span>` +
                 `<span class="stock-ticker__price">$${q.price.toFixed(2)}</span>` +
@@ -55,17 +55,26 @@
     }
 
     async function refresh() {
-        try {
-            const quotes = await Promise.all(SYMBOLS.map(fetchQuote));
-            const track  = document.getElementById('ticker-track');
-            if (!track) return;
-            const html = buildItems(quotes);
-            track.innerHTML = html + html; // duplicate for seamless loop
-            const duration = (track.scrollWidth / 2) / 80; // ~80 px/s
-            track.style.animationDuration = `${duration}s`;
-        } catch (err) {
-            console.warn('Ticker update failed:', err);
-        }
+        const settled = await Promise.allSettled(SYMBOLS.map(fetchQuote));
+
+        // Log any per-symbol failures so they're visible in DevTools
+        settled.forEach(r => {
+            if (r.status === 'rejected') console.warn('Ticker fetch failed:', r.reason);
+        });
+
+        const quotes = settled
+            .filter(r => r.status === 'fulfilled')
+            .map(r => r.value);
+
+        if (!quotes.length) return;
+
+        const track = document.getElementById('ticker-track');
+        if (!track) return;
+
+        const html = buildItems(quotes);
+        track.innerHTML = html + html; // duplicate for seamless loop
+        const duration = (track.scrollWidth / 2) / 80; // ~80 px/s
+        track.style.animationDuration = `${duration}s`;
     }
 
     document.addEventListener('DOMContentLoaded', () => {
