@@ -4083,17 +4083,13 @@ Transfer all sections marked with REDESIGN to other pages
    ========================================== */
 .market-leaders {
     position: fixed;
-    left: 0;
+    left: 10px;
     z-index: 999;
-    background: rgba(10, 10, 10, 0.95);
-    border: 1px solid #222;
-    border-left: none;
-    border-radius: 0 6px 6px 0;
-    padding: 8px 12px 8px 8px;
+    background: transparent;
+    padding: 8px 4px;
     font-family: 'SF Mono', 'Consolas', monospace;
-    min-width: 130px;
+    min-width: 120px;
     display: none;
-    backdrop-filter: blur(4px);
 }
 
 .market-leaders__label {
@@ -4102,14 +4098,14 @@ Transfer all sections marked with REDESIGN to other pages
     letter-spacing: 0.1em;
     display: block;
     margin-bottom: 3px;
-    opacity: 0.55;
+    opacity: 0.7;
 }
 .market-leaders__label--up   { color: #22c55e; }
 .market-leaders__label--down { color: #ef4444; }
 
 .market-leaders__divider {
     height: 1px;
-    background: #222;
+    background: #ccc;
     margin: 6px 0;
 }
 
@@ -4117,11 +4113,11 @@ Transfer all sections marked with REDESIGN to other pages
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 10px;
+    gap: 5px;
     padding: 1px 0;
 }
 
-.market-leaders__sym        { font-weight: 700; color: #e5e7eb; font-size: 11px; }
+.market-leaders__sym        { font-weight: 700; color: #000; font-size: 11px; }
 .market-leaders__pct--up    { color: #22c55e; font-size: 11px; }
 .market-leaders__pct--down  { color: #ef4444; font-size: 11px; }
 
