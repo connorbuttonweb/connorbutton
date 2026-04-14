@@ -4006,13 +4006,13 @@ Transfer all sections marked with REDESIGN to other pages
    ========================================== */
 .stock-ticker {
     position: fixed;
-    top: 64px;
+    top: 0;
     left: 0;
     width: 100%;
     height: 34px;
     background: #000;
     overflow: hidden;
-    z-index: 999;
+    z-index: 1001;
     border-bottom: 1px solid #222;
     display: flex;
     align-items: center;
@@ -4077,6 +4077,3 @@ Transfer all sections marked with REDESIGN to other pages
     100% { transform: translateX(-50%); }
 }
 
-@media (max-width: 768px) {
-    .stock-ticker { top: 62px; }
-}
