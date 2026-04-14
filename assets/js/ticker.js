@@ -17,7 +17,7 @@
     function positionTicker() {
         const navbar = document.querySelector('.navbar');
         const ticker = document.getElementById('stock-ticker');
-        if (navbar && ticker) ticker.style.top = navbar.offsetHeight + 'px';
+        if (navbar && ticker) navbar.style.top = ticker.offsetHeight + 'px';
     }
 
     function updateMarketStatus() {
