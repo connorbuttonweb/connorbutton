@@ -4088,7 +4088,7 @@ Transfer all sections marked with REDESIGN to other pages
     background: transparent;
     padding: 8px 4px;
     font-family: 'SF Mono', 'Consolas', monospace;
-    min-width: 120px;
+    min-width: 100px;
     display: none;
 }
 
