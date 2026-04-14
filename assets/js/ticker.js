@@ -3,8 +3,7 @@
     const SYMBOLS = ['XEQT.TO','ENB.TO','PXT.TO','BEPC.TO','MMY.V',
                      'HMMJ.TO','VDY.TO','ZEB.TO','VEQT.TO'];
     const REFRESH_MS = 60_000;
-    const PROXY = 'https://api.allorigins.win/raw?url=';
-    const CACHE_KEY = 'ticker_quotes_v1';
+    const WORKER = 'https://market-proxy.buttonconnor12.workers.dev';
 
     // TSX hours: 9:30–16:00 ET, Mon–Fri
     function isMarketOpen() {
@@ -27,33 +26,11 @@
     }
 
     async function fetchQuote(symbol) {
-        const yfUrl = `https://query1.finance.yahoo.com/v8/finance/chart/${symbol}?interval=1d&range=1d`;
-        const res   = await fetch(PROXY + encodeURIComponent(yfUrl));
+        const res  = await fetch(`${WORKER}/ticker-quote?symbol=${encodeURIComponent(symbol)}`);
         if (!res.ok) throw new Error(`HTTP ${res.status} for ${symbol}`);
-        const data  = await res.json();
-        const meta  = data.chart.result[0].meta;
-        const price = meta.regularMarketPrice;
-        const prev  = meta.chartPreviousClose ?? meta.previousClose;
-        const change = price - prev;
-        const pct    = (change / prev) * 100;
-        return { symbol, price, change, pct };
-    }
-
-    function loadCached() {
-        try {
-            const raw = localStorage.getItem(CACHE_KEY);
-            if (!raw) return;
-            const { quotes } = JSON.parse(raw);
-            if (!Array.isArray(quotes) || !quotes.length) return;
-            const track = document.getElementById('ticker-track');
-            if (!track) return;
-            const html = buildItems(quotes);
-            track.innerHTML = html + html;
-            requestAnimationFrame(() => {
-                const duration = (track.scrollWidth / 2) / 80;
-                if (duration > 0) track.style.animationDuration = `${duration}s`;
-            });
-        } catch (e) { /* ignore corrupt cache */ }
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+        return data; // { symbol, price, change, pct }
     }
 
     function buildItems(quotes) {
@@ -75,7 +52,6 @@
     async function refresh() {
         const settled = await Promise.allSettled(SYMBOLS.map(fetchQuote));
 
-        // Log any per-symbol failures so they're visible in DevTools
         settled.forEach(r => {
             if (r.status === 'rejected') console.warn('Ticker fetch failed:', r.reason);
         });
@@ -86,17 +62,11 @@
 
         if (!quotes.length) return;
 
-        try {
-            localStorage.setItem(CACHE_KEY, JSON.stringify({ quotes, ts: Date.now() }));
-        } catch (e) { /* ignore quota errors */ }
-
         const track = document.getElementById('ticker-track');
         if (!track) return;
 
         const html = buildItems(quotes);
         track.innerHTML = html + html; // duplicate for seamless loop
-        // Defer measurement until after browser layout — on mobile scrollWidth
-        // can read as 0 if measured synchronously, yielding a ~0s duration.
         requestAnimationFrame(() => {
             const duration = (track.scrollWidth / 2) / 80; // ~80 px/s
             if (duration > 0) track.style.animationDuration = `${duration}s`;
@@ -107,7 +77,6 @@
         positionTicker();
         updateMarketStatus();
         window.addEventListener('resize', positionTicker);
-        loadCached();
         refresh();
         setInterval(() => { refresh(); updateMarketStatus(); }, REFRESH_MS);
     });
