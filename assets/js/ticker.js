@@ -73,8 +73,12 @@
 
         const html = buildItems(quotes);
         track.innerHTML = html + html; // duplicate for seamless loop
-        const duration = (track.scrollWidth / 2) / 80; // ~80 px/s
-        track.style.animationDuration = `${duration}s`;
+        // Defer measurement until after browser layout — on mobile scrollWidth
+        // can read as 0 if measured synchronously, yielding a ~0s duration.
+        requestAnimationFrame(() => {
+            const duration = (track.scrollWidth / 2) / 80; // ~80 px/s
+            if (duration > 0) track.style.animationDuration = `${duration}s`;
+        });
     }
 
     document.addEventListener('DOMContentLoaded', () => {
