@@ -4,6 +4,7 @@
                      'HMMJ.TO','VDY.TO','ZEB.TO','VEQT.TO'];
     const REFRESH_MS = 60_000;
     const PROXY = 'https://api.allorigins.win/raw?url=';
+    const CACHE_KEY = 'ticker_quotes_v1';
 
     // TSX hours: 9:30–16:00 ET, Mon–Fri
     function isMarketOpen() {
@@ -38,6 +39,23 @@
         return { symbol, price, change, pct };
     }
 
+    function loadCached() {
+        try {
+            const raw = localStorage.getItem(CACHE_KEY);
+            if (!raw) return;
+            const { quotes } = JSON.parse(raw);
+            if (!Array.isArray(quotes) || !quotes.length) return;
+            const track = document.getElementById('ticker-track');
+            if (!track) return;
+            const html = buildItems(quotes);
+            track.innerHTML = html + html;
+            requestAnimationFrame(() => {
+                const duration = (track.scrollWidth / 2) / 80;
+                if (duration > 0) track.style.animationDuration = `${duration}s`;
+            });
+        } catch (e) { /* ignore corrupt cache */ }
+    }
+
     function buildItems(quotes) {
         return quotes.map(q => {
             const up      = q.change >= 0;
@@ -68,6 +86,10 @@
 
         if (!quotes.length) return;
 
+        try {
+            localStorage.setItem(CACHE_KEY, JSON.stringify({ quotes, ts: Date.now() }));
+        } catch (e) { /* ignore quota errors */ }
+
         const track = document.getElementById('ticker-track');
         if (!track) return;
 
@@ -85,6 +107,7 @@
         positionTicker();
         updateMarketStatus();
         window.addEventListener('resize', positionTicker);
+        loadCached();
         refresh();
         setInterval(() => { refresh(); updateMarketStatus(); }, REFRESH_MS);
     });
