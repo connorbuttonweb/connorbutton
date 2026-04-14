@@ -49,6 +49,44 @@
         }).join('');
     }
 
+    function positionLeaders() {
+        const ticker  = document.getElementById('stock-ticker');
+        const navbar  = document.querySelector('.navbar');
+        const leaders = document.getElementById('market-leaders');
+        if (!leaders) return;
+        const tickerH = ticker ? ticker.offsetHeight : 0;
+        const navbarH = navbar ? navbar.offsetHeight : 0;
+        leaders.style.top = (tickerH + navbarH + 12) + 'px';
+    }
+
+    function updateLeaders(quotes) {
+        const leaders = document.getElementById('market-leaders');
+        if (!leaders || quotes.length < 2) return;
+
+        const sorted = [...quotes].sort((a, b) => b.pct - a.pct);
+        const top    = sorted.slice(0, 3);
+        const bottom = sorted.slice(-3).reverse();
+
+        function buildRows(items) {
+            return items.map(q => {
+                const up      = q.pct >= 0;
+                const cls     = up ? 'market-leaders__pct--up' : 'market-leaders__pct--down';
+                const sign    = up ? '+' : '';
+                const display = q.symbol.replace(/\.(TO|V)$/i, '');
+                return `<div class="market-leaders__row">` +
+                       `<span class="market-leaders__sym">${display}</span>` +
+                       `<span class="${cls}">${sign}${q.pct.toFixed(2)}%</span>` +
+                       `</div>`;
+            }).join('');
+        }
+
+        document.getElementById('leaders-top').innerHTML    = buildRows(top);
+        document.getElementById('leaders-bottom').innerHTML = buildRows(bottom);
+        leaders.style.display = 'block';
+        leaders.removeAttribute('aria-hidden');
+        positionLeaders();
+    }
+
     async function refresh() {
         const settled = await Promise.allSettled(SYMBOLS.map(fetchQuote));
 
@@ -67,6 +105,7 @@
 
         const html = buildItems(quotes);
         track.innerHTML = html + html; // duplicate for seamless loop
+        updateLeaders(quotes);
         requestAnimationFrame(() => {
             const duration = (track.scrollWidth / 2) / 80; // ~80 px/s
             if (duration > 0) track.style.animationDuration = `${duration}s`;
@@ -75,9 +114,11 @@
 
     document.addEventListener('DOMContentLoaded', () => {
         positionTicker();
+        positionLeaders();
         updateMarketStatus();
         window.addEventListener('resize', () => {
             positionTicker();
+            positionLeaders();
             const track = document.getElementById('ticker-track');
             if (track && track.scrollWidth > 0) {
                 requestAnimationFrame(() => {
