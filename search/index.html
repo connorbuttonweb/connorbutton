@@ -86,7 +86,7 @@
             <span>C</span><span>o</span><span>n</span><span>n</span><span>o</span><span>r</span>
         </div>
             <div id="search-box">
-                <form id="sf" action="https://www.google.com/search" method="get" target="_blank">
+                <form id="sf" action="https://www.google.com/search" method="get">
                     <input id="q" name="q" type="text" autofocus autocomplete="off"
                         oninput="suggest(this.value)"
                         onkeydown="navDrop(event)"
@@ -95,9 +95,9 @@
                 <ul id="drop"></ul>
             </div>
         <div class="btns">
-            <button onclick="window.open('https://mail.google.com')">Gmail</button>
-            <button onclick="window.open('https://sso.dayforcehcm.com/SSOLogin.aspx')">DayForce</button>
-            <button onclick="window.open('https://github.com/connorbuttonweb')">GitHub</button>
+            <button onclick="location.href='https://mail.google.com'">Gmail</button>
+            <button onclick="location.href='https://dayforcehcm.com/mydayforce/login.aspx'">DayForce</button>
+            <button onclick="location.href='https://github.com/connorbuttonweb'">GitHub</button>
         </div>
     </section>
 

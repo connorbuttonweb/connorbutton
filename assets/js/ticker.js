@@ -76,7 +76,16 @@
     document.addEventListener('DOMContentLoaded', () => {
         positionTicker();
         updateMarketStatus();
-        window.addEventListener('resize', positionTicker);
+        window.addEventListener('resize', () => {
+            positionTicker();
+            const track = document.getElementById('ticker-track');
+            if (track && track.scrollWidth > 0) {
+                requestAnimationFrame(() => {
+                    const duration = (track.scrollWidth / 2) / 80;
+                    if (duration > 0) track.style.animationDuration = `${duration}s`;
+                });
+            }
+        });
         refresh();
         setInterval(() => { refresh(); updateMarketStatus(); }, REFRESH_MS);
     });
