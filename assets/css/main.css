@@ -2291,7 +2291,7 @@ PERFORMANCE: REDUCE ANIMATIONS ON MOBILE
 ========================================== */
 
 @media (max-width: 768px) {
-  * {
+  *:not(#ticker-track) {
     animation-duration: 0.15s !important;
   }
 
@@ -2597,7 +2597,7 @@ MOBILE & TOUCH GLOBAL TWEAKS
 
 /* Reduce animations on mobile */
 @media (max-width: 768px) {
-  * {
+  *:not(#ticker-track) {
     animation-duration: 0.15s !important;
   }
 }
