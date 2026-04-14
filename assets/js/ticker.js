@@ -65,7 +65,7 @@
 
         const sorted = [...quotes].sort((a, b) => b.pct - a.pct);
         const top    = sorted.slice(0, 3);
-        const bottom = sorted.slice(-3).reverse();
+        const bottom = sorted.slice(-3); // ascending loss: least bad → worst at bottom
 
         function buildRows(items) {
             return items.map(q => {
