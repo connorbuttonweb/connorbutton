@@ -4112,6 +4112,7 @@ Transfer all sections marked with REDESIGN to other pages
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 1px;
     padding: 1px 0;
 }
 
