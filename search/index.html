@@ -108,10 +108,10 @@
             </div>
         <div class="btns">
             <button onclick="location.href='https://mail.google.com'">Gmail</button>
-            <!--<button onclick="location.href='https://dayforcehcm.com/mydayforce/login.aspx'">DayForce</button>-->
             <button onclick="location.href='https://onq.queensu.ca/d2l/home'">OnQ</button>
             <button onclick="location.href='https://github.com/connorbuttonweb'">GitHub</button>
         </div>
+                    <!--<button onclick="location.href='https://dayforcehcm.com/mydayforce/login.aspx'">DayForce</button>-->
     </section>
 
   <script src="/assets/js/nav.js"></script>
@@ -168,6 +168,13 @@
         hideDrop();
         document.getElementById('sf').submit();
     }
+
+    document.addEventListener('keydown', function(e) {
+        if (document.activeElement === document.getElementById('q')) return;
+        if (e.key === '1') location.href = 'https://mail.google.com';
+        else if (e.key === '2') location.href = 'https://onq.queensu.ca/d2l/home';
+        else if (e.key === '3') location.href = 'https://github.com/connorbuttonweb';
+    });
 
     function navDrop(e) {
         const items = document.querySelectorAll('#drop li');
