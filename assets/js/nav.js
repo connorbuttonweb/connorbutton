@@ -1,3 +1,52 @@
+/* ==========================================================
+   SITE NAVIGATION — single source of truth for every page.
+   Edit the nav here and the change lands on all pages.
+
+   Each page carries only <div id="site-nav"></div> as a
+   placeholder; the markup below replaces it.
+   ========================================================== */
+const NAV_HTML = `
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <span class="logo-icon"></span>
+                <a href="/" class="logo-text">CONNOR BUTTON</a>
+            </div>
+
+            <button class="mobile-toggle" aria-label="Open navigation">
+                <span class="bar"></span>
+                <span class="bar"></span>
+                <span class="bar"></span>
+            </button>
+
+            <ul class="nav-menu">
+                <li><a href="/" class="nav-link" id="nav-home">HOME</a></li>
+                <li><a href="/#about" class="nav-link" id="nav-about">ABOUT</a></li>
+                <li><a href="/assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" id="nav-resume">RESUME</a></li>
+                <li class="dropdown">
+                    <a href="/portfolios/" class="nav-link" id="nav-portfolios">PORTFOLIOS <i class="fas fa-chevron-down"></i></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="/pines/">Pines Landscaping</a></li>
+                        <li><a href="/wallstreetprep/">Wall Street Prep</a></li>
+                        <li><a href="/website/">Website Build</a></li>
+                        <li><a href="/hyrox/">HYROX</a></li>
+                        <li><a href="/documents/">Documents</a></li>
+                    </ul>
+                </li>
+            </ul>
+
+            <div class="nav-right">
+                <a href="/contact/" class="contact-btn">Contact Me</a>
+            </div>
+        </div>
+    </nav>`;
+
+// Inject immediately (not on DOMContentLoaded) so that .navbar exists
+// for any script loaded after this one — ticker.js on /search/ measures
+// it to position the stock ticker bar.
+const navMount = document.getElementById('site-nav');
+if (navMount) navMount.outerHTML = NAV_HTML;
+
 document.addEventListener('DOMContentLoaded', () => {
     const mobileBtn = document.querySelector('.mobile-toggle');
     const navMenu = document.querySelector('.nav-menu');
