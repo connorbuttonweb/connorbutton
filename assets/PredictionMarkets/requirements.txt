@@ -1,5 +1,0 @@
-requests
-pandas
-openpyxl
-yfinance
-py-clob-client

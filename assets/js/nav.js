@@ -33,13 +33,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
     const navHome = document.getElementById('nav-home');
     const navPortfolios = document.getElementById('nav-portfolios');
-    const navPrediction = document.getElementById('nav-prediction');
 
-    if (navHome && navPortfolios && navPrediction) {
+    if (navHome && navPortfolios) {
         if (path === '/' || path === '/index.html') {
             navHome.classList.add('active');
-        } else if (path.startsWith('/predictionmarket')) {
-            navPrediction.classList.add('active');
         } else if (path.startsWith('/portfolios') || path.startsWith('/pines') || path.startsWith('/wallstreetprep') || path.startsWith('/website') || path.startsWith('/hyrox') || path.startsWith('/documents')) {
             navPortfolios.classList.add('active');
         }
