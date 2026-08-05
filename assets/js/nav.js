@@ -23,6 +23,7 @@ const NAV_HTML = `
                 <li><a href="/" class="nav-link" id="nav-home">HOME</a></li>
                 <li><a href="/#about" class="nav-link" id="nav-about">ABOUT</a></li>
                 <li><a href="/assets/documents/Connor Button Resume.pdf" class="nav-link" target="_blank" id="nav-resume">RESUME</a></li>
+                <li><a href="/dashboard/" class="nav-link" id="nav-dashboard">DASHBOARD</a></li>
                 <li class="dropdown">
                     <a href="/portfolios/" class="nav-link" id="nav-portfolios">PORTFOLIOS <i class="fas fa-chevron-down"></i></a>
                     <ul class="dropdown-menu">
@@ -82,10 +83,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const path = window.location.pathname;
     const navHome = document.getElementById('nav-home');
     const navPortfolios = document.getElementById('nav-portfolios');
+    const navDashboard = document.getElementById('nav-dashboard');
 
     if (navHome && navPortfolios) {
         if (path === '/' || path === '/index.html') {
             navHome.classList.add('active');
+        } else if (path.startsWith('/dashboard')) {
+            if (navDashboard) navDashboard.classList.add('active');
         } else if (path.startsWith('/portfolios') || path.startsWith('/pines') || path.startsWith('/wallstreetprep') || path.startsWith('/website') || path.startsWith('/hyrox') || path.startsWith('/documents')) {
             navPortfolios.classList.add('active');
         }
