@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
+  <title>Investment Dashboard — Connor Button</title>
+  <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
+  <link rel="stylesheet" href="/assets/css/main.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div id="site-nav"></div>
+
+  <section class="section">
+    <div class="container">
+      <div class="page-title-group">
+        <div class="page-title-heading">
+          <h1 class="page-title">Investment Dashboard</h1>
+        </div>
+        <p class="page-subtitle">
+          A fund page for my own portfolio — holdings, performance against the S&amp;P 500, and a
+          look-through view that shows what I actually own once you unpack the ETFs.
+        </p>
+      </div>
+
+      <!-- Global controls: apply to every tab -->
+      <div class="dash-bar">
+        <label class="sr-only" for="dash-account">Account</label>
+        <select class="form-control" id="dash-account" aria-label="Filter all tabs by account">
+          <option value="all">All Accounts</option>
+        </select>
+
+        <div class="dash-badge-row" role="group" aria-label="Display currency">
+          <button class="btn btn--sm btn--primary" id="dash-ccy-cad" data-ccy="CAD">CAD</button>
+          <button class="btn btn--sm btn--outline" id="dash-ccy-usd" data-ccy="USD">USD</button>
+        </div>
+
+        <span class="dash-bar__spacer"></span>
+
+        <span class="dash-stamp" id="dash-stamp">Loading…</span>
+        <button class="btn btn--sm btn--outline" id="dash-refresh">
+          <i class="fas fa-rotate" aria-hidden="true"></i>&nbsp; Refresh
+        </button>
+      </div>
+
+      <!-- Tab bar. Links reuse .nav-link styling; #hash keeps tabs linkable. -->
+      <ul class="dash-tabs" id="dash-tabs" role="tablist"></ul>
+
+      <div id="dash-panels" aria-live="polite">
+        <div class="dash-empty" id="dash-boot">
+          <i class="fas fa-circle-notch fa-spin" aria-hidden="true"></i> Loading portfolio…
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Symbol detail panel. Reuses the site lightbox shell the same way
+       /website/ reuses it for source code — inject markup, toggle .is-open. -->
+  <div class="lightbox" id="lightbox" aria-modal="true" role="dialog" aria-label="Position detail">
+    <div class="lightbox-content lightbox-content--panel" id="lbContent" tabindex="0" aria-live="polite"></div>
+    <button class="close" id="lbClose" aria-label="Close (Esc)">×</button>
+    <p class="caption" id="lbCaption"></p>
+  </div>
+
+  <script src="/assets/js/dashboard/data.js"></script>
+  <script src="/assets/js/dashboard/metrics.js"></script>
+  <script src="/assets/js/dashboard/charts.js"></script>
+  <script src="/assets/js/dashboard/table.js"></script>
+  <script src="/assets/js/dashboard/tabs-core.js"></script>
+  <script src="/assets/js/dashboard/tabs-perf.js"></script>
+  <script src="/assets/js/dashboard/tabs-ops.js"></script>
+  <script src="/assets/js/dashboard/main.js"></script>
+  <script src="/assets/js/nav.js"></script>
+</body>
+</html>

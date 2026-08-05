@@ -175,6 +175,29 @@
   --mobile-padding: 16px;
   --mobile-padding-lg: 20px;
   --mobile-padding-xl: 24px;
+
+  /* Gain / loss. These two hexes were already in use by the stock ticker and
+     the market-leaders widget; promoted to tokens so the dashboard and the
+     ticker share one palette instead of two. Deliberately NOT --color-success,
+     which is teal (identical to --color-primary) and would make a positive
+     number read as a chart series. */
+  --color-up: #22c55e;
+  --color-down: #ef4444;
+
+  /* Categorical chart series. Fixed order, never cycled — a 9th slice folds
+     into "Other". Validated against the --color-background surface (#FCFCF9):
+     lightness band, chroma floor, CVD separation and normal-vision floor all
+     pass. Three slots sit below 3:1 contrast, so every chart using them ships
+     visible labels and a table view underneath. */
+  --series-1: #2a78d6;
+  --series-2: #eb6834;
+  --series-3: #1baf7a;
+  --series-4: #eda100;
+  --series-5: #e87ba4;
+  --series-6: #008300;
+  --series-7: #4a3aa7;
+  --series-8: #e34948;
+  --series-other: #a7a9a9;
 }
 
 /* ==========================================
@@ -3440,8 +3463,8 @@ Transfer all sections marked with REDESIGN to other pages
 
 .stock-ticker__symbol  { font-weight: 700; color: #e5e7eb; }
 .stock-ticker__price   { color: #9ca3af; }
-.stock-ticker__change--up   { color: #22c55e; }
-.stock-ticker__change--down { color: #ef4444; }
+.stock-ticker__change--up   { color: var(--color-up); }
+.stock-ticker__change--down { color: var(--color-down); }
 .stock-ticker__sep     { color: #374151; padding-left: 10px; }
 .stock-ticker__badge {
     flex-shrink: 0;
@@ -3498,8 +3521,8 @@ Transfer all sections marked with REDESIGN to other pages
     margin-bottom: 3px;
     opacity: 0.7;
 }
-.market-leaders__label--up   { color: #22c55e; }
-.market-leaders__label--down { color: #ef4444; }
+.market-leaders__label--up   { color: var(--color-up); }
+.market-leaders__label--down { color: var(--color-down); }
 
 .market-leaders__divider {
     height: 1px;
@@ -3516,6 +3539,434 @@ Transfer all sections marked with REDESIGN to other pages
 }
 
 .market-leaders__sym        { font-weight: 700; color: #000; font-size: 11px; }
-.market-leaders__pct--up    { color: #22c55e; font-size: 11px; }
-.market-leaders__pct--down  { color: #ef4444; font-size: 11px; }
+.market-leaders__pct--up    { color: var(--color-up); font-size: 11px; }
+.market-leaders__pct--down  { color: var(--color-down); font-size: 11px; }
+
+/* ==========================================
+   INVESTMENT DASHBOARD  (/dashboard/)
+   Deliberately thin. The dashboard is assembled from components that already
+   exist here — .folder tables, .splits stat tiles, .status pills, .btn,
+   .form-control, .card, .dropdown-menu, .callout, .pill, .lightbox. Only the
+   pieces with no existing equivalent live below.
+   ========================================== */
+
+/* --- global control bar --- */
+.dash-bar {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--space-12);
+    margin-bottom: var(--space-16);
+}
+
+.dash-bar .form-control {
+    width: auto;
+    min-width: 150px;
+}
+
+.dash-bar__spacer { flex: 1 1 auto; }
+
+.dash-stamp {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    white-space: nowrap;
+}
+
+/* nowrap suits the inline uses (toolbar timestamp, a figure beside a label),
+   but the same class also carries explanatory sentences — those must wrap or
+   they push the page sideways on a narrow screen. */
+p.dash-stamp { white-space: normal; }
+
+/* --- tab bar. The <a> children reuse .nav-link / .nav-link.active; only the
+       list itself needs styling. Horizontal scroll under 768px because ten
+       tabs will never fit — same approach as .gallery--strip. --- */
+.dash-tabs {
+    display: flex;
+    list-style: none;
+    gap: var(--space-24);
+    margin: 0 0 var(--space-24);
+    padding: 0 0 var(--space-8);
+    border-bottom: 1px solid var(--color-border);
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.dash-tabs li { flex: 0 0 auto; }
+
+.dash-tabs .nav-link {
+    display: block;
+    padding: var(--space-8) var(--space-2);
+    border-bottom: 2px solid transparent;
+    margin-bottom: calc(-1 * var(--space-8) - 1px);
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.dash-tabs .nav-link.active { border-bottom-color: var(--color-primary); }
+
+/* --- layout --- */
+.dash-cols {
+    display: grid;
+    grid-template-columns: minmax(280px, 400px) 1fr;
+    gap: var(--space-24);
+    align-items: start;
+}
+
+.dash-stack { display: grid; gap: var(--space-24); }
+
+/* Grid and flex items default to min-width:auto, so they refuse to shrink
+   below their content's intrinsic width. On a narrow screen that pushes the
+   whole page sideways even though the wide tables have their own scroll
+   container. Letting these tracks collapse keeps horizontal scrolling inside
+   .dash-scroll where it belongs. */
+.dash-stack > *,
+.dash-cols > *,
+.dash-bar > *,
+#dash-panels .doc-grid > *,
+#dash-panels .project-card,
+#dash-panels .folder { min-width: 0; }
+
+.dash-head {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: var(--space-12);
+    margin-bottom: var(--space-12);
+}
+
+.dash-head h2 {
+    margin: 0;
+    font-size: var(--font-size-xl);
+    color: var(--color-text);
+}
+
+.dash-head p {
+    margin: 0;
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+}
+
+/* --- gain / loss text. Always rendered with a ▲/▼ glyph by the JS so the
+       meaning never rests on colour alone. --- */
+.up   { color: var(--color-up); }
+.down { color: var(--color-down); }
+.flat { color: var(--color-text-secondary); }
+
+/* --- additive table behaviour on the existing .folder component --- */
+.dash-scroll {
+    overflow-x: auto;
+    overflow-y: auto;
+    max-height: 70vh;
+}
+
+.folder table { font-variant-numeric: tabular-nums; }
+
+.folder thead th {
+    position: sticky;
+    top: 0;
+    z-index: 2;
+}
+
+.folder th[data-sort] {
+    cursor: pointer;
+    user-select: none;
+    white-space: nowrap;
+}
+
+.folder th[data-sort]:hover { color: var(--color-primary); }
+
+.folder th[data-sort]::after {
+    content: '\f0dc';           /* fa-sort */
+    font-family: 'Font Awesome 6 Free';
+    font-weight: 900;
+    font-size: 9px;
+    opacity: 0.28;
+    margin-left: 6px;
+}
+
+.folder th[data-sort][aria-sort="ascending"]::after  { content: '\f0de'; opacity: 1; color: var(--color-primary); }
+.folder th[data-sort][aria-sort="descending"]::after { content: '\f0dd'; opacity: 1; color: var(--color-primary); }
+
+.folder td.num,
+.folder th.num { text-align: right; font-family: var(--font-family-mono); }
+
+.folder th.num { font-family: var(--font-family-base); }
+
+.folder td.sym { font-family: var(--font-family-mono); font-weight: 600; }
+
+.folder tbody tr.is-clickable { cursor: pointer; }
+.folder tbody tr.is-clickable:hover { background: rgba(var(--color-teal-500-rgb), 0.045); }
+
+/* expanded child rows (ETF constituents, per-ETF contribution breakdowns) */
+.folder tr.dash-child > td {
+    background: rgba(var(--color-brown-600-rgb), 0.035);
+    padding: 0;
+}
+
+.folder tr.dash-child table {
+    background: transparent;
+    margin: 0;
+}
+
+.folder tr.dash-child th,
+.folder tr.dash-child td {
+    font-size: var(--font-size-xs);
+    padding: 7px 12px;
+    border-bottom: 1px dashed rgba(var(--color-brown-600-rgb), 0.14);
+}
+
+.folder tfoot td {
+    background: var(--color-surface);
+    font-weight: var(--font-weight-bold);
+    border-top: 2px solid var(--color-border);
+    border-bottom: none;
+    position: sticky;
+    bottom: 0;
+}
+
+.dash-expand {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: var(--color-text-secondary);
+    padding: 0 6px 0 0;
+    font-size: 11px;
+    width: 18px;
+}
+
+.dash-expand:hover { color: var(--color-primary); }
+
+/* --- charts --- */
+.dash-chart { width: 100%; }
+.dash-chart svg { display: block; width: 100%; height: auto; overflow: visible; }
+
+.dash-chart svg .seg,
+.dash-chart svg .bar { transition: opacity var(--duration-fast) var(--ease-standard); }
+
+.dash-chart svg .seg { cursor: pointer; }
+.dash-chart svg .seg.is-dim,
+.dash-chart svg .bar.is-dim { opacity: 0.25; }
+
+.dash-donut-centre {
+    font-family: var(--font-family-mono);
+    text-anchor: middle;
+    fill: var(--color-text);
+}
+
+.dash-axis { stroke: var(--color-border); stroke-width: 1; }
+.dash-grid-line { stroke: rgba(var(--color-brown-600-rgb), 0.13); stroke-width: 1; }
+.dash-tick {
+    font-size: 10px;
+    fill: var(--color-text-secondary);
+    font-family: var(--font-family-mono);
+}
+
+/* legend — doubles as the required visible labelling for the three series
+   colours that sit under 3:1 contrast on the cream surface */
+.dash-legend {
+    list-style: none;
+    margin: var(--space-16) 0 0;
+    padding: 0;
+    display: grid;
+    gap: 2px;
+}
+
+.dash-legend button {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    width: 100%;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 5px 6px;
+    border-radius: var(--radius-sm);
+    text-align: left;
+    font-size: var(--font-size-sm);
+    color: var(--color-text);
+    transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.dash-legend button:hover { background: rgba(var(--color-teal-500-rgb), 0.06); }
+.dash-legend button[aria-pressed="false"] { opacity: 0.42; text-decoration: line-through; }
+
+.dash-swatch {
+    width: 11px;
+    height: 11px;
+    border-radius: 3px;
+    flex: 0 0 auto;
+}
+
+.dash-legend .lbl {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.dash-legend .val {
+    font-family: var(--font-family-mono);
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+}
+
+/* shared floating tooltip for every chart type */
+.dash-tip {
+    position: fixed;
+    z-index: 1200;
+    pointer-events: none;
+    background: var(--color-slate-900);
+    color: var(--color-cream-50);
+    border-radius: var(--radius-sm);
+    padding: 7px 10px;
+    font-size: var(--font-size-xs);
+    line-height: 1.45;
+    box-shadow: var(--shadow-lg);
+    max-width: 260px;
+    opacity: 0;
+    transition: opacity var(--duration-fast) var(--ease-standard);
+}
+
+.dash-tip.is-on { opacity: 1; }
+.dash-tip b { font-family: var(--font-family-mono); }
+
+/* --- stat tiles: reuse .splits, add a hero size for the fund page --- */
+.splits div.is-hero {
+    grid-column: 1 / -1;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+    border-left-width: 5px;
+}
+
+.splits div.is-hero .time {
+    font-size: 40px;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+}
+
+.splits div.is-stacked {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: var(--space-4);
+}
+
+.splits .sub {
+    font-size: var(--font-size-xs);
+    color: var(--color-text-secondary);
+    font-family: var(--font-family-mono);
+}
+
+/* --- ETF inclusion checklist (Fact Sheet "what if I sold this") --- */
+.dash-check {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: var(--space-4);
+}
+
+.dash-check label {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;               /* the value + freshness tag can't shrink */
+    gap: var(--space-8);
+    padding: 7px 8px;
+    border-radius: var(--radius-sm);
+    cursor: pointer;
+    font-size: var(--font-size-sm);
+    transition: background var(--duration-fast) var(--ease-standard);
+}
+
+.dash-check label:hover { background: rgba(var(--color-teal-500-rgb), 0.06); }
+.dash-check input { accent-color: var(--color-primary); }
+
+.dash-check .nm {
+    flex: 1 1 auto;
+    min-width: 0;
+    font-family: var(--font-family-mono);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* --- symbol detail panel: reuses the .lightbox shell, which is black by
+       default (built for photos). This flips it to the site surface. --- */
+.lightbox-content--panel {
+    background: var(--color-surface);
+    color: var(--color-text);
+    align-items: stretch;
+    text-align: left;
+    padding: var(--space-24);
+    width: min(680px, 92vw);
+    max-height: 88vh;
+    overflow-y: auto;
+}
+
+.lightbox-content--panel h3 { margin: 0 0 var(--space-4); }
+
+/* --- states --- */
+.dash-empty {
+    padding: var(--space-32);
+    text-align: center;
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+}
+
+.dash-error {
+    border-left: 4px solid var(--color-error);
+    background: rgba(var(--color-error-rgb), 0.06);
+    padding: var(--space-16) var(--space-20);
+    border-radius: var(--radius-sm);
+}
+
+.dash-badge-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--space-8);
+    align-items: center;
+}
+
+/* .dropdown opens on hover for the navbar; the Columns menu needs a click
+   toggle, so it opts in with .is-open instead. */
+.dropdown.dash-menu .dropdown-menu { padding-top: var(--space-8); }
+.dropdown.dash-menu .dropdown-menu::before { display: none; }
+.dropdown.dash-menu:hover .dropdown-menu { display: none; }
+.dropdown.dash-menu.is-open .dropdown-menu { display: block; }
+
+.dropdown.dash-menu .dropdown-menu label {
+    display: flex;
+    align-items: center;
+    gap: var(--space-8);
+    padding: var(--space-6) var(--space-20);
+    font-size: var(--font-size-sm);
+    cursor: pointer;
+    white-space: nowrap;
+}
+
+.dropdown.dash-menu .dropdown-menu label:hover { background: rgba(var(--color-teal-500-rgb), 0.05); }
+
+@media (max-width: 900px) {
+    .dash-cols { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 768px) {
+    .dash-tabs { gap: var(--space-16); scroll-snap-type: x proximity; }
+    .dash-tabs li { scroll-snap-align: start; }
+    .dash-bar .form-control { width: 100%; min-width: 0; }
+    .dash-bar__spacer { display: none; }
+    .splits div.is-hero .time { font-size: 30px; }
+    /* Keep the internal scroll on small screens too: the Fact Sheet's ~90 rows
+       otherwise make the page roughly ten thousand pixels tall. Sticky header
+       and footer are dropped here because they eat too much of a short
+       viewport. */
+    .dash-scroll { max-height: 65vh; }
+    .folder thead th { position: static; }
+    .folder tfoot td { position: static; }
+}
 
