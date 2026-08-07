@@ -437,8 +437,7 @@ const lines = [
   'activities       ' + activities.length + '   (+' + added + ' new)',
   'net flow         $' + netFlow.toFixed(2) + ' since ' + (lastSnapshot ? lastSnapshot.date : 'inception'),
   'history          ' + prevHistory.length + ' -> ' + history.length + ' snapshots',
-  'etfs preserved   ' + Object.keys(out.etfs).length + ' fund(s)',
-  'targets          preserved'
+  'etfs preserved   ' + Object.keys(out.etfs).length + ' fund(s)'
 ];
 console.log(lines.join('\n'));
 

@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-05T01:49:17.791Z",
-  "as_of": "2026-08-04",
+  "generated_at": "2026-08-07T01:57:48.953Z",
+  "as_of": "2026-08-06",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4045
+   "USDCAD": 1.4012
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,8 +13,8 @@
  },
  "profile": {
   "blended_mer": null,
-  "distribution_yield": 0.013,
-  "holdings_count": 8,
+  "distribution_yield": 0.0109,
+  "holdings_count": 9,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,141 +23,157 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 676.26,
+   "cash": 54.96,
    "currency": "CAD",
-   "buying_power": 660.74
+   "buying_power": 53.74
   }
  ],
  "positions": [
   {
    "symbol": "XEQT.TO",
    "name": "iShares Core Equity ETF Portfolio",
+   "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 44.1272,
-   "price": 46.01,
-   "prev_close": 44.8,
+   "price": 45.9,
+   "prev_close": 45.97,
+   "market_value": 9180,
+   "open_pnl": 354.56,
    "sector": null,
    "geography": null,
-   "market_cap_bucket": null,
-   "account_id": "main",
-   "market_value": 9202,
-   "open_pnl": 376.56
+   "market_cap_bucket": null
   },
   {
    "symbol": "FINN.TO",
    "name": "Fidelity Global Innovators ETF (Series L)",
+   "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
    "quantity": 262,
    "avg_cost": 31.0831,
-   "price": 32.93,
-   "prev_close": 31.73,
+   "price": 32.65,
+   "prev_close": 32.83,
+   "market_value": 8554.3,
+   "open_pnl": 410.53,
    "sector": null,
    "geography": null,
-   "market_cap_bucket": null,
-   "account_id": "main",
-   "market_value": 8627.66,
-   "open_pnl": 483.89
-  },
-  {
-   "symbol": "CHAT",
-   "name": "Roundhill Generative AI & Technology ETF",
-   "asset_type": "ETF",
-   "currency": "USD",
-   "quantity": 46,
-   "avg_cost": 84.7968,
-   "price": 90,
-   "prev_close": 85.22,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null,
-   "account_id": "main",
-   "market_value": 4140,
-   "open_pnl": 239.35
+   "market_cap_bucket": null
   },
   {
    "symbol": "VDY.TO",
    "name": "Vanguard FTSE Canadian High Dividend Yield Index ETF",
+   "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
    "quantity": 59,
    "avg_cost": 73.9457,
-   "price": 78,
-   "prev_close": 78.46,
+   "price": 77.54,
+   "prev_close": 77.495,
+   "market_value": 4574.86,
+   "open_pnl": 212.06,
    "sector": null,
    "geography": null,
-   "market_cap_bucket": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "CHAT",
+   "name": "Roundhill Generative AI & Technology ETF",
    "account_id": "main",
-   "market_value": 4602,
-   "open_pnl": 239.2
+   "asset_type": "ETF",
+   "currency": "USD",
+   "quantity": 46,
+   "avg_cost": 84.7968,
+   "price": 87.26,
+   "prev_close": 88.38,
+   "market_value": 4013.96,
+   "open_pnl": 113.31,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
   },
   {
    "symbol": "BEPC.TO",
    "name": "Brookfield Renewable Corporation",
+   "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
    "quantity": 53,
    "avg_cost": 47.1381,
-   "price": 47.23,
-   "prev_close": 46.78,
+   "price": 46.68,
+   "prev_close": 46.62,
+   "market_value": 2474.04,
+   "open_pnl": -24.28,
    "sector": "Utilities",
    "geography": "Canada",
-   "market_cap_bucket": "Mid",
-   "account_id": "main",
-   "market_value": 2503.19,
-   "open_pnl": 4.87
-  },
-  {
-   "symbol": "BEPC",
-   "name": "Brookfield Renewable Corporation (US listing)",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 20,
-   "avg_cost": 33.35,
-   "price": 33.6,
-   "prev_close": 34.21,
-   "sector": "Utilities",
-   "geography": "Canada",
-   "market_cap_bucket": "Mid",
-   "account_id": "main",
-   "market_value": 672,
-   "open_pnl": 5,
-   "canonical_ticker": "BEPC.TO"
+   "market_cap_bucket": "Mid"
   },
   {
    "symbol": "GOLD.QM",
    "name": "Gold (ounce)",
+   "account_id": "main",
    "asset_type": "Commodity",
    "currency": "USD",
    "quantity": 0.3,
    "avg_cost": 4185.8137,
-   "price": 4084.93,
-   "prev_close": 4045.33,
+   "price": 4253.915,
+   "prev_close": 4250.2302,
+   "market_value": 1276.17,
+   "open_pnl": 20.43,
    "sector": "Commodities",
    "geography": "Global",
-   "market_cap_bucket": "n/a",
+   "market_cap_bucket": "n/a"
+  },
+  {
+   "symbol": "SPCX",
+   "name": "SPACE EXPLORATION TECHNOLOGIES CORP",
    "account_id": "main",
-   "market_value": 1225.48,
-   "open_pnl": -30.27
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 6,
+   "avg_cost": 110.3201,
+   "price": 114.19,
+   "prev_close": 107.54,
+   "market_value": 685.14,
+   "open_pnl": 23.22,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "SPCX15JAN27C200.00",
+   "name": "CALL SPCX 01/15/27 200",
+   "account_id": "main",
+   "asset_type": "Option",
+   "currency": "USD",
+   "quantity": 1,
+   "avg_cost": 4.5,
+   "price": 5.7,
+   "prev_close": 4.74,
+   "market_value": 570,
+   "open_pnl": 120,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null,
+   "multiplier": 100
   },
   {
    "symbol": "AGI15JAN27C34.00",
    "name": "Alamos Gold — $34 call, expires 2027-01-15",
+   "account_id": "main",
    "asset_type": "Option",
    "currency": "USD",
-   "multiplier": 100,
    "quantity": 1,
    "avg_cost": 2.6,
-   "price": 2.43,
-   "prev_close": 2.15,
+   "price": 3.55,
+   "prev_close": 3.55,
+   "market_value": 355,
+   "open_pnl": 95,
    "sector": "Materials",
    "geography": "Canada",
    "market_cap_bucket": "n/a",
-   "account_id": "main",
-   "market_value": 243,
-   "open_pnl": -17
+   "multiplier": 100
   }
  ],
  "etfs": {
@@ -18300,6 +18316,67 @@
  },
  "activities": [
   {
+   "uid": "t_02fe8e5878",
+   "date": "2026-08-04",
+   "type": "FX",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Conversion USD/CAD",
+   "amount": -21.28,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_28866f8f58",
+   "date": "2026-08-04",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Call IREN 11/20/26 45 — IREN Limited",
+   "amount": 874.98,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_08c5b149c6",
+   "date": "2026-08-04",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Gold ounce",
+   "amount": -391.41,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_d38220d9c6",
+   "date": "2026-08-04",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Call ZEB 09/18/26 75.50 — BMO Equal Weight Banks Index ETF",
+   "amount": 284.01,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_9765855fd7",
+   "date": "2026-08-04",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Brookfield Renewable Corp",
+   "amount": -2498.32,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "c_91992cc3e8#0",
    "date": "2026-07-31",
    "type": "Other",
    "account_id": "main",
@@ -18311,6 +18388,7 @@
    "price": null
   },
   {
+   "uid": "c_6e9281da19#0",
    "date": "2026-07-31",
    "type": "Other",
    "account_id": "main",
@@ -18322,6 +18400,7 @@
    "price": null
   },
   {
+   "uid": "c_158a58a3e3#0",
    "date": "2026-07-31",
    "type": "Deposit",
    "account_id": "main",
@@ -18333,6 +18412,7 @@
    "price": null
   },
   {
+   "uid": "c_6787d92e4f#0",
    "date": "2026-07-31",
    "type": "Trade",
    "account_id": "main",
@@ -18344,6 +18424,7 @@
    "price": null
   },
   {
+   "uid": "c_0c1514d6c1#0",
    "date": "2026-07-31",
    "type": "Trade",
    "account_id": "main",
@@ -18355,6 +18436,7 @@
    "price": null
   },
   {
+   "uid": "c_0d22347deb#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18366,6 +18448,7 @@
    "price": null
   },
   {
+   "uid": "c_07d1191ec1#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18377,6 +18460,7 @@
    "price": null
   },
   {
+   "uid": "c_ac87402ca7#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18388,6 +18472,7 @@
    "price": null
   },
   {
+   "uid": "c_dd2d77669b#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18399,6 +18484,7 @@
    "price": null
   },
   {
+   "uid": "c_2c9207367d#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18410,6 +18496,7 @@
    "price": null
   },
   {
+   "uid": "c_b39af0deac#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18421,6 +18508,7 @@
    "price": null
   },
   {
+   "uid": "c_3b957b1618#0",
    "date": "2026-07-30",
    "type": "FX",
    "account_id": "main",
@@ -18432,6 +18520,7 @@
    "price": null
   },
   {
+   "uid": "c_cdca8ecd7f#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18443,6 +18532,7 @@
    "price": null
   },
   {
+   "uid": "c_c53bfa698e#0",
    "date": "2026-07-30",
    "type": "Trade",
    "account_id": "main",
@@ -18454,6 +18544,7 @@
    "price": null
   },
   {
+   "uid": "c_6ef4ed8e83#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18465,6 +18556,7 @@
    "price": null
   },
   {
+   "uid": "c_baddd481b8#0",
    "date": "2026-07-29",
    "type": "FX",
    "account_id": "main",
@@ -18476,6 +18568,7 @@
    "price": null
   },
   {
+   "uid": "c_a76cc6e79b#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18487,6 +18580,7 @@
    "price": null
   },
   {
+   "uid": "c_4490b22a8c#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18498,6 +18592,7 @@
    "price": null
   },
   {
+   "uid": "c_a5506a110d#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18509,6 +18604,7 @@
    "price": null
   },
   {
+   "uid": "c_489fc0c4d5#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18520,6 +18616,7 @@
    "price": null
   },
   {
+   "uid": "c_b02234446a#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18531,6 +18628,7 @@
    "price": null
   },
   {
+   "uid": "c_a337afe44b#0",
    "date": "2026-07-29",
    "type": "FX",
    "account_id": "main",
@@ -18542,6 +18640,7 @@
    "price": null
   },
   {
+   "uid": "c_9c41e4e0f7#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18553,6 +18652,7 @@
    "price": null
   },
   {
+   "uid": "c_021072dce1#0",
    "date": "2026-07-29",
    "type": "Trade",
    "account_id": "main",
@@ -18564,6 +18664,7 @@
    "price": null
   },
   {
+   "uid": "c_c36f30368f#0",
    "date": "2026-07-24",
    "type": "Trade",
    "account_id": "main",
@@ -18575,6 +18676,7 @@
    "price": null
   },
   {
+   "uid": "c_ea87022413#0",
    "date": "2026-07-24",
    "type": "Dividend",
    "account_id": "main",
@@ -18586,6 +18688,7 @@
    "price": null
   },
   {
+   "uid": "c_710b3c50c2#0",
    "date": "2026-07-24",
    "type": "Dividend",
    "account_id": "main",
@@ -18597,6 +18700,7 @@
    "price": null
   },
   {
+   "uid": "c_e14e920821#0",
    "date": "2026-07-24",
    "type": "Trade",
    "account_id": "main",
@@ -18608,6 +18712,7 @@
    "price": null
   },
   {
+   "uid": "c_c42db654e0#0",
    "date": "2026-07-17",
    "type": "FX",
    "account_id": "main",
@@ -18619,6 +18724,7 @@
    "price": null
   },
   {
+   "uid": "c_7553d67d7d#0",
    "date": "2026-07-17",
    "type": "Trade",
    "account_id": "main",
@@ -18630,6 +18736,7 @@
    "price": null
   },
   {
+   "uid": "c_3917438901#0",
    "date": "2026-07-16",
    "type": "Trade",
    "account_id": "main",
@@ -18641,6 +18748,7 @@
    "price": null
   },
   {
+   "uid": "c_88f9764ce3#0",
    "date": "2026-07-16",
    "type": "Deposit",
    "account_id": "main",
@@ -18652,6 +18760,7 @@
    "price": null
   },
   {
+   "uid": "c_dcffab4aac#0",
    "date": "2026-07-13",
    "type": "Trade",
    "account_id": "main",
@@ -18663,6 +18772,7 @@
    "price": null
   },
   {
+   "uid": "c_98f36fc052#0",
    "date": "2026-07-10",
    "type": "Trade",
    "account_id": "main",
@@ -18674,6 +18784,7 @@
    "price": null
   },
   {
+   "uid": "c_b788eed2fc#0",
    "date": "2026-07-10",
    "type": "Trade",
    "account_id": "main",
@@ -18685,6 +18796,7 @@
    "price": null
   },
   {
+   "uid": "c_18ae1e5038#0",
    "date": "2026-07-08",
    "type": "Trade",
    "account_id": "main",
@@ -18696,6 +18808,7 @@
    "price": null
   },
   {
+   "uid": "c_d1917e5433#0",
    "date": "2026-07-08",
    "type": "Trade",
    "account_id": "main",
@@ -18707,6 +18820,7 @@
    "price": null
   },
   {
+   "uid": "c_f4d191d26a#0",
    "date": "2026-07-08",
    "type": "Other",
    "account_id": "main",
@@ -18718,6 +18832,7 @@
    "price": null
   },
   {
+   "uid": "c_5f3397ae05#0",
    "date": "2026-07-07",
    "type": "Trade",
    "account_id": "main",
@@ -18729,6 +18844,7 @@
    "price": null
   },
   {
+   "uid": "c_016b460a16#0",
    "date": "2026-07-07",
    "type": "FX",
    "account_id": "main",
@@ -18740,6 +18856,7 @@
    "price": null
   },
   {
+   "uid": "c_ef6f11f808#0",
    "date": "2026-07-06",
    "type": "Trade",
    "account_id": "main",
@@ -18751,6 +18868,7 @@
    "price": null
   },
   {
+   "uid": "c_56daf9a4e6#0",
    "date": "2026-07-06",
    "type": "Trade",
    "account_id": "main",
@@ -18762,6 +18880,7 @@
    "price": null
   },
   {
+   "uid": "c_57b54ac280#0",
    "date": "2026-07-06",
    "type": "Trade",
    "account_id": "main",
@@ -18773,6 +18892,7 @@
    "price": null
   },
   {
+   "uid": "c_4bd2fffab0#0",
    "date": "2026-07-03",
    "type": "Trade",
    "account_id": "main",
@@ -18784,6 +18904,7 @@
    "price": null
   },
   {
+   "uid": "c_44da2305fb#0",
    "date": "2026-07-02",
    "type": "Trade",
    "account_id": "main",
@@ -18795,6 +18916,7 @@
    "price": null
   },
   {
+   "uid": "c_a25bd4821e#0",
    "date": "2026-07-02",
    "type": "Trade",
    "account_id": "main",
@@ -18806,6 +18928,7 @@
    "price": null
   },
   {
+   "uid": "c_7ff16135fa#0",
    "date": "2026-07-02",
    "type": "Trade",
    "account_id": "main",
@@ -18817,6 +18940,7 @@
    "price": null
   },
   {
+   "uid": "c_b6e8b5838e#0",
    "date": "2026-07-02",
    "type": "Trade",
    "account_id": "main",
@@ -18828,6 +18952,7 @@
    "price": null
   },
   {
+   "uid": "c_30306cf5da#0",
    "date": "2026-07-02",
    "type": "Deposit",
    "account_id": "main",
@@ -18839,6 +18964,7 @@
    "price": null
   },
   {
+   "uid": "c_9095951ca5#0",
    "date": "2026-07-02",
    "type": "Trade",
    "account_id": "main",
@@ -18850,6 +18976,7 @@
    "price": null
   },
   {
+   "uid": "c_3884894364#0",
    "date": "2026-07-02",
    "type": "Trade",
    "account_id": "main",
@@ -18861,6 +18988,7 @@
    "price": null
   },
   {
+   "uid": "c_5a8655888a#0",
    "date": "2026-07-02",
    "type": "FX",
    "account_id": "main",
@@ -18872,6 +19000,7 @@
    "price": null
   },
   {
+   "uid": "c_105d135d0d#0",
    "date": "2026-06-30",
    "type": "Trade",
    "account_id": "main",
@@ -18883,6 +19012,7 @@
    "price": null
   },
   {
+   "uid": "c_a4de6918a3#0",
    "date": "2026-06-30",
    "type": "Dividend",
    "account_id": "main",
@@ -18894,6 +19024,7 @@
    "price": null
   },
   {
+   "uid": "c_a4de6918a3#1",
    "date": "2026-06-30",
    "type": "Dividend",
    "account_id": "main",
@@ -18905,6 +19036,7 @@
    "price": null
   },
   {
+   "uid": "c_c1541147dc#0",
    "date": "2026-06-30",
    "type": "Dividend",
    "account_id": "main",
@@ -18916,6 +19048,7 @@
    "price": null
   },
   {
+   "uid": "c_b35fe5fc11#0",
    "date": "2026-06-29",
    "type": "Other",
    "account_id": "main",
@@ -18927,6 +19060,7 @@
    "price": null
   },
   {
+   "uid": "c_8fd1bd77ce#0",
    "date": "2026-06-29",
    "type": "Trade",
    "account_id": "main",
@@ -18938,6 +19072,7 @@
    "price": null
   },
   {
+   "uid": "c_dc060e9a63#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -18949,6 +19084,7 @@
    "price": null
   },
   {
+   "uid": "c_fa3953a301#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -18960,6 +19096,7 @@
    "price": null
   },
   {
+   "uid": "c_43c29d6f04#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -18971,6 +19108,7 @@
    "price": null
   },
   {
+   "uid": "c_06f8b347ef#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -18982,6 +19120,7 @@
    "price": null
   },
   {
+   "uid": "c_8c5c29d8d7#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -18993,6 +19132,7 @@
    "price": null
   },
   {
+   "uid": "c_2447a1b233#0",
    "date": "2026-06-26",
    "type": "Dividend",
    "account_id": "main",
@@ -19004,6 +19144,7 @@
    "price": null
   },
   {
+   "uid": "c_406007b396#0",
    "date": "2026-06-26",
    "type": "Dividend",
    "account_id": "main",
@@ -19015,6 +19156,7 @@
    "price": null
   },
   {
+   "uid": "c_f3bde37819#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -19026,6 +19168,7 @@
    "price": null
   },
   {
+   "uid": "c_f74924eec3#0",
    "date": "2026-06-26",
    "type": "Trade",
    "account_id": "main",
@@ -19037,6 +19180,7 @@
    "price": null
   },
   {
+   "uid": "c_b3f74ce150#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19048,6 +19192,7 @@
    "price": null
   },
   {
+   "uid": "c_509738e0e2#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19059,6 +19204,7 @@
    "price": null
   },
   {
+   "uid": "c_d0e6b9aba2#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19070,6 +19216,7 @@
    "price": null
   },
   {
+   "uid": "c_0eb1196c80#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19081,6 +19228,7 @@
    "price": null
   },
   {
+   "uid": "c_c640db1262#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19092,6 +19240,7 @@
    "price": null
   },
   {
+   "uid": "c_512cae97c2#0",
    "date": "2026-06-25",
    "type": "FX",
    "account_id": "main",
@@ -19103,6 +19252,7 @@
    "price": null
   },
   {
+   "uid": "c_f91a4925d1#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19114,6 +19264,7 @@
    "price": null
   },
   {
+   "uid": "c_df901d460d#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19125,6 +19276,7 @@
    "price": null
   },
   {
+   "uid": "c_fa0fff739f#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19136,6 +19288,7 @@
    "price": null
   },
   {
+   "uid": "c_9de679ea4e#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19147,6 +19300,7 @@
    "price": null
   },
   {
+   "uid": "c_c664189f90#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19158,6 +19312,7 @@
    "price": null
   },
   {
+   "uid": "c_9ab18d8603#0",
    "date": "2026-06-25",
    "type": "Trade",
    "account_id": "main",
@@ -19169,6 +19324,7 @@
    "price": null
   },
   {
+   "uid": "c_fda22779bb#0",
    "date": "2026-06-24",
    "type": "Deposit",
    "account_id": "main",
@@ -19180,6 +19336,7 @@
    "price": null
   },
   {
+   "uid": "c_e11aa93a0f#0",
    "date": "2026-06-24",
    "type": "Deposit",
    "account_id": "main",
@@ -19191,6 +19348,7 @@
    "price": null
   },
   {
+   "uid": "c_229cd93506#0",
    "date": "2026-06-24",
    "type": "Trade",
    "account_id": "main",
@@ -19202,6 +19360,7 @@
    "price": null
   },
   {
+   "uid": "c_faf9787370#0",
    "date": "2026-06-24",
    "type": "FX",
    "account_id": "main",
@@ -19213,6 +19372,7 @@
    "price": null
   },
   {
+   "uid": "c_f11473645d#0",
    "date": "2026-06-24",
    "type": "Trade",
    "account_id": "main",
@@ -19224,6 +19384,7 @@
    "price": null
   },
   {
+   "uid": "c_ce6ae5a310#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19235,6 +19396,7 @@
    "price": null
   },
   {
+   "uid": "c_4e1edc2a3e#0",
    "date": "2026-06-23",
    "type": "FX",
    "account_id": "main",
@@ -19246,6 +19408,7 @@
    "price": null
   },
   {
+   "uid": "c_6156adad15#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19257,6 +19420,7 @@
    "price": null
   },
   {
+   "uid": "c_cc8462aac8#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19268,6 +19432,7 @@
    "price": null
   },
   {
+   "uid": "c_99aba9abf1#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19279,6 +19444,7 @@
    "price": null
   },
   {
+   "uid": "c_6984bb150e#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19290,6 +19456,7 @@
    "price": null
   },
   {
+   "uid": "c_b962ae2cb0#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19301,6 +19468,7 @@
    "price": null
   },
   {
+   "uid": "c_8f300a1ee4#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19312,6 +19480,7 @@
    "price": null
   },
   {
+   "uid": "c_c0f5b0256f#0",
    "date": "2026-06-23",
    "type": "FX",
    "account_id": "main",
@@ -19323,6 +19492,7 @@
    "price": null
   },
   {
+   "uid": "c_bda5e10171#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19334,6 +19504,7 @@
    "price": null
   },
   {
+   "uid": "c_da67cf131f#0",
    "date": "2026-06-23",
    "type": "Trade",
    "account_id": "main",
@@ -19345,6 +19516,7 @@
    "price": null
   },
   {
+   "uid": "c_be031c7d07#0",
    "date": "2026-06-22",
    "type": "FX",
    "account_id": "main",
@@ -19356,6 +19528,7 @@
    "price": null
   },
   {
+   "uid": "c_f05c5fb76e#0",
    "date": "2026-06-22",
    "type": "Trade",
    "account_id": "main",
@@ -19367,6 +19540,7 @@
    "price": null
   },
   {
+   "uid": "c_f004be2206#0",
    "date": "2026-06-22",
    "type": "Trade",
    "account_id": "main",
@@ -19378,6 +19552,7 @@
    "price": null
   },
   {
+   "uid": "c_c20ce7da4d#0",
    "date": "2026-06-22",
    "type": "Deposit",
    "account_id": "main",
@@ -19389,6 +19564,7 @@
    "price": null
   },
   {
+   "uid": "c_73873230d6#0",
    "date": "2026-06-18",
    "type": "Trade",
    "account_id": "main",
@@ -19400,6 +19576,7 @@
    "price": null
   },
   {
+   "uid": "c_597bda5819#0",
    "date": "2026-06-18",
    "type": "Trade",
    "account_id": "main",
@@ -19411,6 +19588,7 @@
    "price": null
   },
   {
+   "uid": "c_dd2e71bd46#0",
    "date": "2026-06-18",
    "type": "Trade",
    "account_id": "main",
@@ -19422,6 +19600,7 @@
    "price": null
   },
   {
+   "uid": "c_5eda1e62d8#0",
    "date": "2026-06-18",
    "type": "FX",
    "account_id": "main",
@@ -19433,6 +19612,7 @@
    "price": null
   },
   {
+   "uid": "c_86f750e9d0#0",
    "date": "2026-06-18",
    "type": "Trade",
    "account_id": "main",
@@ -19444,6 +19624,7 @@
    "price": null
   },
   {
+   "uid": "c_86c2001e9f#0",
    "date": "2026-06-18",
    "type": "Trade",
    "account_id": "main",
@@ -19455,6 +19636,7 @@
    "price": null
   },
   {
+   "uid": "c_97b8128068#0",
    "date": "2026-06-17",
    "type": "Trade",
    "account_id": "main",
@@ -19466,6 +19648,7 @@
    "price": null
   },
   {
+   "uid": "c_fe28eb9a3e#0",
    "date": "2026-06-17",
    "type": "Fee",
    "account_id": "main",
@@ -19477,6 +19660,7 @@
    "price": null
   },
   {
+   "uid": "c_67be699e2e#0",
    "date": "2026-06-17",
    "type": "Other",
    "account_id": "main",
@@ -19488,6 +19672,7 @@
    "price": null
   },
   {
+   "uid": "c_e2c05aad4a#0",
    "date": "2026-06-17",
    "type": "Fee",
    "account_id": "main",
@@ -19499,6 +19684,7 @@
    "price": null
   },
   {
+   "uid": "c_e0de7796a7#0",
    "date": "2026-06-17",
    "type": "Other",
    "account_id": "main",
@@ -19510,6 +19696,7 @@
    "price": null
   },
   {
+   "uid": "c_2ce6bf7fcb#0",
    "date": "2026-06-17",
    "type": "FX",
    "account_id": "main",
@@ -19521,6 +19708,7 @@
    "price": null
   },
   {
+   "uid": "c_86d72469e7#0",
    "date": "2026-06-15",
    "type": "Trade",
    "account_id": "main",
@@ -19532,6 +19720,7 @@
    "price": null
   },
   {
+   "uid": "c_6396791671#0",
    "date": "2026-06-15",
    "type": "Trade",
    "account_id": "main",
@@ -19543,6 +19732,7 @@
    "price": null
   },
   {
+   "uid": "c_c6855a5c24#0",
    "date": "2026-06-15",
    "type": "Deposit",
    "account_id": "main",
@@ -19554,6 +19744,7 @@
    "price": null
   },
   {
+   "uid": "c_c811afaf92#0",
    "date": "2026-06-15",
    "type": "Trade",
    "account_id": "main",
@@ -19565,6 +19756,7 @@
    "price": null
   },
   {
+   "uid": "c_43e8d59463#0",
    "date": "2026-06-15",
    "type": "Dividend",
    "account_id": "main",
@@ -19576,6 +19768,7 @@
    "price": null
   },
   {
+   "uid": "c_f205a75a4c#0",
    "date": "2026-06-12",
    "type": "Trade",
    "account_id": "main",
@@ -19587,6 +19780,7 @@
    "price": null
   },
   {
+   "uid": "c_6320941506#0",
    "date": "2026-06-12",
    "type": "Trade",
    "account_id": "main",
@@ -19598,6 +19792,7 @@
    "price": null
   },
   {
+   "uid": "c_ae2ea6e8cc#0",
    "date": "2026-06-12",
    "type": "FX",
    "account_id": "main",
@@ -19609,6 +19804,7 @@
    "price": null
   },
   {
+   "uid": "c_021e243262#0",
    "date": "2026-06-11",
    "type": "Trade",
    "account_id": "main",
@@ -19620,6 +19816,7 @@
    "price": null
   },
   {
+   "uid": "c_ae059e6293#0",
    "date": "2026-06-11",
    "type": "Trade",
    "account_id": "main",
@@ -19631,6 +19828,7 @@
    "price": null
   },
   {
+   "uid": "c_5db4bbe47c#0",
    "date": "2026-06-11",
    "type": "Trade",
    "account_id": "main",
@@ -19642,6 +19840,7 @@
    "price": null
   },
   {
+   "uid": "c_2e577fb08a#0",
    "date": "2026-06-11",
    "type": "Trade",
    "account_id": "main",
@@ -19653,6 +19852,7 @@
    "price": null
   },
   {
+   "uid": "c_6bec372e2f#0",
    "date": "2026-06-11",
    "type": "FX",
    "account_id": "main",
@@ -19664,6 +19864,7 @@
    "price": null
   },
   {
+   "uid": "c_c7159bf0b5#0",
    "date": "2026-06-11",
    "type": "Trade",
    "account_id": "main",
@@ -19675,6 +19876,7 @@
    "price": null
   },
   {
+   "uid": "c_3cfaa9a3f7#0",
    "date": "2026-06-11",
    "type": "Trade",
    "account_id": "main",
@@ -19686,6 +19888,7 @@
    "price": null
   },
   {
+   "uid": "c_758c042dc0#0",
    "date": "2026-06-10",
    "type": "Trade",
    "account_id": "main",
@@ -19697,6 +19900,7 @@
    "price": null
   },
   {
+   "uid": "c_2f90298eba#0",
    "date": "2026-06-10",
    "type": "Trade",
    "account_id": "main",
@@ -19708,6 +19912,7 @@
    "price": null
   },
   {
+   "uid": "c_0ed45058f4#0",
    "date": "2026-06-10",
    "type": "FX",
    "account_id": "main",
@@ -19719,6 +19924,7 @@
    "price": null
   },
   {
+   "uid": "c_6e80cfd675#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19730,6 +19936,7 @@
    "price": null
   },
   {
+   "uid": "c_2927de7d65#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19741,6 +19948,7 @@
    "price": null
   },
   {
+   "uid": "c_2e85451f9f#0",
    "date": "2026-06-09",
    "type": "FX",
    "account_id": "main",
@@ -19752,6 +19960,7 @@
    "price": null
   },
   {
+   "uid": "c_b10804c05d#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19763,6 +19972,7 @@
    "price": null
   },
   {
+   "uid": "c_e3dffd8486#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19774,6 +19984,7 @@
    "price": null
   },
   {
+   "uid": "c_9d545f587b#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19785,6 +19996,7 @@
    "price": null
   },
   {
+   "uid": "c_d927b72a86#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19796,6 +20008,7 @@
    "price": null
   },
   {
+   "uid": "c_d2c5416eaf#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19807,6 +20020,7 @@
    "price": null
   },
   {
+   "uid": "c_971f0d4a54#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19818,6 +20032,7 @@
    "price": null
   },
   {
+   "uid": "c_fb92b9d40b#0",
    "date": "2026-06-09",
    "type": "FX",
    "account_id": "main",
@@ -19829,6 +20044,7 @@
    "price": null
   },
   {
+   "uid": "c_af1024fba3#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19840,6 +20056,7 @@
    "price": null
   },
   {
+   "uid": "c_376817e78a#0",
    "date": "2026-06-09",
    "type": "Trade",
    "account_id": "main",
@@ -19851,6 +20068,7 @@
    "price": null
   },
   {
+   "uid": "c_a1c1a11dc6#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19862,6 +20080,7 @@
    "price": null
   },
   {
+   "uid": "c_3e8daea1db#0",
    "date": "2026-06-08",
    "type": "Other",
    "account_id": "main",
@@ -19873,6 +20092,7 @@
    "price": null
   },
   {
+   "uid": "c_e28dd98fbd#0",
    "date": "2026-06-08",
    "type": "FX",
    "account_id": "main",
@@ -19884,6 +20104,7 @@
    "price": null
   },
   {
+   "uid": "c_3d1ef7fbb0#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19895,6 +20116,7 @@
    "price": null
   },
   {
+   "uid": "c_74d8529dd5#0",
    "date": "2026-06-08",
    "type": "Other",
    "account_id": "main",
@@ -19906,6 +20128,7 @@
    "price": null
   },
   {
+   "uid": "c_76b03cb192#0",
    "date": "2026-06-08",
    "type": "Other",
    "account_id": "main",
@@ -19917,6 +20140,7 @@
    "price": null
   },
   {
+   "uid": "c_d937985cf9#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19928,6 +20152,7 @@
    "price": null
   },
   {
+   "uid": "c_bc016002fb#0",
    "date": "2026-06-08",
    "type": "Other",
    "account_id": "main",
@@ -19939,6 +20164,7 @@
    "price": null
   },
   {
+   "uid": "c_45f38c229b#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19950,6 +20176,7 @@
    "price": null
   },
   {
+   "uid": "c_b726e31d7b#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19961,6 +20188,7 @@
    "price": null
   },
   {
+   "uid": "c_0d6838565a#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19972,6 +20200,7 @@
    "price": null
   },
   {
+   "uid": "c_652be67186#0",
    "date": "2026-06-08",
    "type": "Other",
    "account_id": "main",
@@ -19983,6 +20212,7 @@
    "price": null
   },
   {
+   "uid": "c_e4e92058df#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -19994,6 +20224,7 @@
    "price": null
   },
   {
+   "uid": "c_78472978cd#0",
    "date": "2026-06-08",
    "type": "FX",
    "account_id": "main",
@@ -20005,6 +20236,7 @@
    "price": null
   },
   {
+   "uid": "c_432a5d355d#0",
    "date": "2026-06-08",
    "type": "Trade",
    "account_id": "main",
@@ -20016,6 +20248,7 @@
    "price": null
   },
   {
+   "uid": "c_fbbf82da82#0",
    "date": "2026-06-05",
    "type": "Deposit",
    "account_id": "main",
@@ -20027,6 +20260,7 @@
    "price": null
   },
   {
+   "uid": "c_f0e02dfe38#0",
    "date": "2026-06-05",
    "type": "Transfer",
    "account_id": "main",
@@ -20038,6 +20272,7 @@
    "price": null
   },
   {
+   "uid": "c_dcde9fa716#0",
    "date": "2026-06-04",
    "type": "Trade",
    "account_id": "main",
@@ -20049,6 +20284,7 @@
    "price": null
   },
   {
+   "uid": "c_e87205e4c4#0",
    "date": "2026-06-03",
    "type": "FX",
    "account_id": "main",
@@ -20060,6 +20296,7 @@
    "price": null
   },
   {
+   "uid": "c_671a24af59#0",
    "date": "2026-06-03",
    "type": "Trade",
    "account_id": "main",
@@ -20071,6 +20308,7 @@
    "price": null
   },
   {
+   "uid": "c_6b526ce76b#0",
    "date": "2026-06-02",
    "type": "Trade",
    "account_id": "main",
@@ -20082,6 +20320,7 @@
    "price": null
   },
   {
+   "uid": "c_eda82f709b#0",
    "date": "2026-06-02",
    "type": "Trade",
    "account_id": "main",
@@ -20093,6 +20332,7 @@
    "price": null
   },
   {
+   "uid": "c_1949cc6fae#0",
    "date": "2026-06-02",
    "type": "FX",
    "account_id": "main",
@@ -20104,6 +20344,7 @@
    "price": null
   },
   {
+   "uid": "c_1d72a6777d#0",
    "date": "2026-06-02",
    "type": "Fee",
    "account_id": "main",
@@ -20115,6 +20356,7 @@
    "price": null
   },
   {
+   "uid": "c_1cd4cd2c1d#0",
    "date": "2026-06-02",
    "type": "Trade",
    "account_id": "main",
@@ -20126,6 +20368,7 @@
    "price": null
   },
   {
+   "uid": "c_cfccd584ed#0",
    "date": "2026-06-02",
    "type": "Trade",
    "account_id": "main",
@@ -20137,6 +20380,7 @@
    "price": null
   },
   {
+   "uid": "c_d65592b53f#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20148,6 +20392,7 @@
    "price": null
   },
   {
+   "uid": "c_fec7beef46#0",
    "date": "2026-06-01",
    "type": "Dividend",
    "account_id": "main",
@@ -20159,6 +20404,7 @@
    "price": null
   },
   {
+   "uid": "c_9e6e6e5409#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20170,6 +20416,7 @@
    "price": null
   },
   {
+   "uid": "c_d9823aba4c#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20181,6 +20428,7 @@
    "price": null
   },
   {
+   "uid": "c_951c7b6259#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20192,6 +20440,7 @@
    "price": null
   },
   {
+   "uid": "c_2d4307dc82#0",
    "date": "2026-06-01",
    "type": "FX",
    "account_id": "main",
@@ -20203,6 +20452,7 @@
    "price": null
   },
   {
+   "uid": "c_fe609222a5#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20214,6 +20464,7 @@
    "price": null
   },
   {
+   "uid": "c_cfcf77c384#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20225,6 +20476,7 @@
    "price": null
   },
   {
+   "uid": "c_8e14debf62#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20236,6 +20488,7 @@
    "price": null
   },
   {
+   "uid": "c_bd9ef2d4e0#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20247,6 +20500,7 @@
    "price": null
   },
   {
+   "uid": "c_298bb5e384#0",
    "date": "2026-06-01",
    "type": "Trade",
    "account_id": "main",
@@ -20258,6 +20512,7 @@
    "price": null
   },
   {
+   "uid": "c_04e2a61dc3#0",
    "date": "2026-05-29",
    "type": "Deposit",
    "account_id": "main",
@@ -20269,6 +20524,7 @@
    "price": null
   },
   {
+   "uid": "c_ff80f9ec4e#0",
    "date": "2026-05-29",
    "type": "Trade",
    "account_id": "main",
@@ -20280,6 +20536,7 @@
    "price": null
   },
   {
+   "uid": "c_8343fa4569#0",
    "date": "2026-05-29",
    "type": "Trade",
    "account_id": "main",
@@ -20291,6 +20548,7 @@
    "price": null
   },
   {
+   "uid": "c_77e2a492a1#0",
    "date": "2026-05-29",
    "type": "FX",
    "account_id": "main",
@@ -20302,6 +20560,7 @@
    "price": null
   },
   {
+   "uid": "c_66dedc961c#0",
    "date": "2026-05-29",
    "type": "Trade",
    "account_id": "main",
@@ -20313,6 +20572,7 @@
    "price": null
   },
   {
+   "uid": "c_752f88d449#0",
    "date": "2026-05-28",
    "type": "Trade",
    "account_id": "main",
@@ -20324,6 +20584,7 @@
    "price": null
   },
   {
+   "uid": "c_9af8741de1#0",
    "date": "2026-05-28",
    "type": "Trade",
    "account_id": "main",
@@ -20335,6 +20596,7 @@
    "price": null
   },
   {
+   "uid": "c_06e84cba90#0",
    "date": "2026-05-28",
    "type": "Trade",
    "account_id": "main",
@@ -20346,6 +20608,7 @@
    "price": null
   },
   {
+   "uid": "c_0461156ada#0",
    "date": "2026-05-25",
    "type": "Trade",
    "account_id": "main",
@@ -20357,6 +20620,7 @@
    "price": null
   },
   {
+   "uid": "c_0ee9f91bbe#0",
    "date": "2026-05-25",
    "type": "Trade",
    "account_id": "main",
@@ -20368,6 +20632,7 @@
    "price": null
   },
   {
+   "uid": "c_c6aacd6294#0",
    "date": "2026-05-22",
    "type": "Trade",
    "account_id": "main",
@@ -20379,6 +20644,7 @@
    "price": null
   },
   {
+   "uid": "c_810a532759#0",
    "date": "2026-05-15",
    "type": "Trade",
    "account_id": "main",
@@ -20390,6 +20656,7 @@
    "price": null
   },
   {
+   "uid": "c_b84106b864#0",
    "date": "2026-05-15",
    "type": "Deposit",
    "account_id": "main",
@@ -20401,6 +20668,7 @@
    "price": null
   },
   {
+   "uid": "c_494ce8560f#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20412,6 +20680,7 @@
    "price": null
   },
   {
+   "uid": "c_96182b9a9e#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20423,6 +20692,7 @@
    "price": null
   },
   {
+   "uid": "c_b129195216#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20434,6 +20704,7 @@
    "price": null
   },
   {
+   "uid": "c_e61d2e504d#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20445,6 +20716,7 @@
    "price": null
   },
   {
+   "uid": "c_ac0b36a90c#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20456,6 +20728,7 @@
    "price": null
   },
   {
+   "uid": "c_0a11cf3611#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20467,6 +20740,7 @@
    "price": null
   },
   {
+   "uid": "c_ce1341e377#0",
    "date": "2026-05-14",
    "type": "Transfer",
    "account_id": "main",
@@ -20481,14 +20755,7 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7377,
-   "frequency": "quarterly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  },
-  {
-   "symbol": "CHAT",
-   "annual_rate_per_share": 1.8455,
+   "annual_rate_per_share": 0.7166,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -20501,8 +20768,8 @@
    "next_pay_date": null
   },
   {
-   "symbol": "BEPC",
-   "annual_rate_per_share": 1.5797,
+   "symbol": "CHAT",
+   "annual_rate_per_share": 1.6281,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -20513,6 +20780,11 @@
    {
     "date": "2026-08-04",
     "value": 34432.04,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-08-06",
+    "value": 34506.82,
     "net_flow": 0
    }
   ],

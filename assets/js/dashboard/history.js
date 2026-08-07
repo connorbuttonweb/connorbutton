@@ -54,10 +54,12 @@ window.DASH = window.DASH || {};
       hasActual: actual.length >= MIN_POINTS,
       hasHypothetical: hypothetical.length >= MIN_POINTS,
       actualIsMeaningful: actual.length >= MEANINGFUL_POINTS,
-      /* Prefer the real record once it says something; until then lead with the
-         hypothetical, which is longer and is labelled as such wherever it shows. */
-      defaultMode: (actual.length >= MEANINGFUL_POINTS || hypothetical.length < MIN_POINTS)
-        ? 'actual' : 'hypothetical',
+      /* ALWAYS lead with the real record when one exists, however short.
+         Leading with the hypothetical was tried and it misleads: a number in the
+         headline position gets read as "my return" no matter what the banner
+         above it says. A short honest series that says so beats a long one that
+         answers a different question. */
+      defaultMode: actual.length >= MIN_POINTS ? 'actual' : 'hypothetical',
       firstSnapshot: (history && history.meta && history.meta.first_snapshot) || null,
       snapshots: (history && history.snapshots) || [],
       approximated: (history && history.meta && history.meta.approximated) || [],
