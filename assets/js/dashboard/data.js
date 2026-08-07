@@ -112,7 +112,6 @@ window.DASH = window.DASH || {};
   function buildLookThrough(positions, etfs, opts) {
     const options = opts || {};
     const excluded = options.excludedEtfs || new Set();
-    const extra = options.extraPositions || [];   // Watchlist "Preview Add"
     const map = new Map();
 
     function bucket(key, meta) {
@@ -132,7 +131,7 @@ window.DASH = window.DASH || {};
       return e;
     }
 
-    positions.concat(extra).forEach(p => {
+    positions.forEach(p => {
       const mv = p.mv_cad;
       if (!mv) return;
 
@@ -172,9 +171,15 @@ window.DASH = window.DASH || {};
 
       /* A directly held stock is its own constituent at 100%. That's what lets
          combined Apple = shares held outright + Apple inside every ETF.
-         Positions carry `symbol`, not `ticker`, so map it across explicitly. */
-      const e = bucket(p.symbol, {
-        ticker: p.symbol, name: p.name, sector: p.sector,
+         Positions carry `symbol`, not `ticker`, so map it across explicitly.
+
+         canonical_ticker folds cross-listings of one company onto a single key
+         (BEPC on the NYSE and BEPC.TO on the TSX are the same business). Without
+         it a concentration split across two exchanges reads as two smaller
+         positions and never trips a threshold. */
+      const key = p.canonical_ticker || p.symbol;
+      const e = bucket(key, {
+        ticker: key, name: p.name, sector: p.sector,
         geography: p.geography, market_cap_bucket: p.market_cap_bucket, currency: p.currency
       });
       e.value += mv;
