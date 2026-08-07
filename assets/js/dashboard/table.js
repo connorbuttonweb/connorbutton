@@ -154,54 +154,8 @@ window.DASH = window.DASH || {};
       '</tbody></table>';
   }
 
-  /* Click-toggled column menu built on the existing .dropdown-menu component
-     (which opens on hover for the navbar, so this opts into .is-open). */
-  function columnsMenu(id, columns, visible) {
-    const items = columns.filter(c => c.optional).map(c =>
-      '<label><input type="checkbox" data-col="' + fmt.esc(c.key) + '"' +
-      (visible.has(c.key) ? ' checked' : '') + '> ' + fmt.esc(c.label) + '</label>').join('');
-    return '<span class="dropdown dash-menu" id="' + id + '">' +
-      '<button type="button" class="btn btn--sm btn--outline" data-menu-toggle>' +
-      '<i class="fas fa-table-columns" aria-hidden="true"></i>&nbsp; Columns</button>' +
-      '<ul class="dropdown-menu"><li>' + items + '</li></ul></span>';
-  }
-
-  /* Bound by delegation on document, once per menu id. The menu markup lives
-     inside the table, which re-renders itself on sort and on row expand — with
-     handlers attached to the elements they would be silently dropped, leaving a
-     dead button. Delegation survives any number of re-renders, and the registry
-     keeps repeat paints from stacking duplicate listeners. */
-  const boundMenus = {};
-  function bindColumnsMenu(root, id, visible, onChange) {
-    const already = boundMenus[id] && boundMenus[id].wired;
-    boundMenus[id] = { visible: visible, onChange: onChange, wired: already };
-    if (already) return;
-
-    document.addEventListener('click', ev => {
-      const wrap = document.getElementById(id);
-      if (!wrap) return;
-      if (ev.target.closest('#' + id + ' [data-menu-toggle]')) {
-        wrap.classList.toggle('is-open');
-        return;
-      }
-      if (!wrap.contains(ev.target)) wrap.classList.remove('is-open');
-    });
-
-    document.addEventListener('change', ev => {
-      const cb = ev.target.closest('#' + id + ' input[data-col]');
-      if (!cb) return;
-      const cfg = boundMenus[id];
-      if (cb.checked) cfg.visible.add(cb.dataset.col); else cfg.visible.delete(cb.dataset.col);
-      cfg.onChange(cfg.visible);
-    });
-
-    boundMenus[id].wired = true;
-  }
-
   DASH.table = {
     render: render,
-    childTable: childTable,
-    columnsMenu: columnsMenu,
-    bindColumnsMenu: bindColumnsMenu
+    childTable: childTable
   };
 })();

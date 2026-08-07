@@ -299,59 +299,6 @@ window.DASH = window.DASH || {};
     return svg;
   }
 
-  /* ---------- grouped bars (current vs target) ---------- */
-  function groupedBars(mount, rows, opts) {
-    const o = opts || {};
-    mount.innerHTML = '';
-    if (!rows.length) { mount.innerHTML = '<p class="dash-empty">Set a target allocation to compare against.</p>'; return; }
-
-    const groupH = 46, W = 760, L = 170, R = 70;
-    const H = rows.length * groupH + 10;
-    const svg = el('svg', { viewBox: '0 0 ' + W + ' ' + H, role: 'img', 'aria-label': 'Current versus target allocation' }, mount);
-    const max = Math.max(0.01, Math.max.apply(null, rows.map(r => Math.max(r.current, r.target))));
-    const iw = W - L - R;
-    const cCur = cssVar('--series-1', '#2a78d6');
-    const cTgt = cssVar('--color-border', '#ccc');
-
-    rows.forEach((r, i) => {
-      const y = i * groupH + 6;
-      const lab = el('text', { class: 'dash-tick', x: L - 10, y: y + 22, 'text-anchor': 'end', 'font-size': '11' }, svg);
-      lab.textContent = r.label;
-
-      [[r.target, cTgt, 'Target', y], [r.current, cCur, 'Current', y + 16]].forEach(([v, col, name, yy]) => {
-        const w = Math.max(2, (v / max) * iw);
-        const rect = el('rect', { class: 'bar', x: L, y: yy, width: w, height: 13, rx: 4, fill: col }, svg);
-        rect.onmousemove = ev => showTip('<b>' + fmt.esc(r.label) + '</b><br>' + name + ': ' + fmt.pct(v, 1), ev.clientX, ev.clientY);
-        rect.onmouseleave = hideTip;
-      });
-
-      const drift = r.current - r.target;
-      const d = el('text', { x: W - R + 8, y: y + 22, 'font-size': '11', 'font-family': cssVar('--font-family-mono', 'monospace') }, svg);
-      d.setAttribute('fill', Math.abs(drift) >= (o.threshold || 0.05) ? cssVar('--color-down', '#ef4444') : cssVar('--color-text-secondary', '#626c71'));
-      d.textContent = (drift >= 0 ? '+' : '') + (drift * 100).toFixed(1) + 'pt';
-    });
-    return svg;
-  }
-
-  /* ---------- sparkline (returns a string; used inside table cells) ---------- */
-  function sparkline(values, opts) {
-    const o = opts || {};
-    if (!values || values.length < 2) return '';
-    const W = 88, H = 24, P = 2;
-    const min = Math.min.apply(null, values), max = Math.max.apply(null, values);
-    const span = max - min || 1;
-    const pts = values.map((v, i) => {
-      const x = P + (i / (values.length - 1)) * (W - P * 2);
-      const y = H - P - ((v - min) / span) * (H - P * 2);
-      return x.toFixed(1) + ',' + y.toFixed(1);
-    }).join(' ');
-    const up = values[values.length - 1] >= values[0];
-    const col = o.color || cssVar(up ? '--color-up' : '--color-down', '#888');
-    return '<svg viewBox="0 0 ' + W + ' ' + H + '" width="' + W + '" height="' + H +
-      '" aria-hidden="true" style="display:block"><polyline points="' + pts +
-      '" fill="none" stroke="' + col + '" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"/></svg>';
-  }
-
   /* ---------- vertical bars (monthly income) ---------- */
   function columns(mount, rows, opts) {
     const o = opts || {};
@@ -401,7 +348,7 @@ window.DASH = window.DASH || {};
   DASH.charts = {
     palette: palette, colorFor: colorFor, niceTicks: niceTicks,
     donut: donut, legend: legend, line: line, bars: bars,
-    groupedBars: groupedBars, columns: columns, sparkline: sparkline,
+    columns: columns,
     showTip: showTip, hideTip: hideTip, cssVar: cssVar
   };
 })();

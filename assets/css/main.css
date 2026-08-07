@@ -3578,35 +3578,6 @@ Transfer all sections marked with REDESIGN to other pages
    they push the page sideways on a narrow screen. */
 p.dash-stamp { white-space: normal; }
 
-/* --- tab bar. The <a> children reuse .nav-link / .nav-link.active; only the
-       list itself needs styling. Horizontal scroll under 768px because ten
-       tabs will never fit — same approach as .gallery--strip. --- */
-.dash-tabs {
-    display: flex;
-    list-style: none;
-    gap: var(--space-24);
-    margin: 0 0 var(--space-24);
-    padding: 0 0 var(--space-8);
-    border-bottom: 1px solid var(--color-border);
-    overflow-x: auto;
-    scrollbar-width: thin;
-}
-
-.dash-tabs li { flex: 0 0 auto; }
-
-.dash-tabs .nav-link {
-    display: block;
-    padding: var(--space-8) var(--space-2);
-    border-bottom: 2px solid transparent;
-    margin-bottom: calc(-1 * var(--space-8) - 1px);
-    white-space: nowrap;
-    font-size: var(--font-size-sm);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
-}
-
-.dash-tabs .nav-link.active { border-bottom-color: var(--color-primary); }
-
 /* --- layout --- */
 .dash-cols {
     display: grid;
@@ -3615,7 +3586,6 @@ p.dash-stamp { white-space: normal; }
     align-items: start;
 }
 
-.dash-stack { display: grid; gap: var(--space-24); }
 
 /* Grid and flex items default to min-width:auto, so they refuse to shrink
    below their content's intrinsic width. On a narrow screen that pushes the
@@ -3697,9 +3667,6 @@ p.dash-stamp { white-space: normal; }
 .folder th.num { font-family: var(--font-family-base); }
 
 .folder td.sym { font-family: var(--font-family-mono); font-weight: 600; }
-
-.folder tbody tr.is-clickable { cursor: pointer; }
-.folder tbody tr.is-clickable:hover { background: rgba(var(--color-teal-500-rgb), 0.045); }
 
 /* expanded child rows (ETF constituents, per-ETF contribution breakdowns) */
 .folder tr.dash-child > td {
@@ -3862,54 +3829,6 @@ p.dash-stamp { white-space: normal; }
     font-family: var(--font-family-mono);
 }
 
-/* --- ETF inclusion checklist (Fact Sheet "what if I sold this") --- */
-.dash-check {
-    list-style: none;
-    margin: 0;
-    padding: 0;
-    display: grid;
-    gap: var(--space-4);
-}
-
-.dash-check label {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;               /* the value + freshness tag can't shrink */
-    gap: var(--space-8);
-    padding: 7px 8px;
-    border-radius: var(--radius-sm);
-    cursor: pointer;
-    font-size: var(--font-size-sm);
-    transition: background var(--duration-fast) var(--ease-standard);
-}
-
-.dash-check label:hover { background: rgba(var(--color-teal-500-rgb), 0.06); }
-.dash-check input { accent-color: var(--color-primary); }
-
-.dash-check .nm {
-    flex: 1 1 auto;
-    min-width: 0;
-    font-family: var(--font-family-mono);
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-/* --- symbol detail panel: reuses the .lightbox shell, which is black by
-       default (built for photos). This flips it to the site surface. --- */
-.lightbox-content--panel {
-    background: var(--color-surface);
-    color: var(--color-text);
-    align-items: stretch;
-    text-align: left;
-    padding: var(--space-24);
-    width: min(680px, 92vw);
-    max-height: 88vh;
-    overflow-y: auto;
-}
-
-.lightbox-content--panel h3 { margin: 0 0 var(--space-4); }
-
 /* --- states --- */
 .dash-empty {
     padding: var(--space-32);
@@ -3932,34 +3851,11 @@ p.dash-stamp { white-space: normal; }
     align-items: center;
 }
 
-/* .dropdown opens on hover for the navbar; the Columns menu needs a click
-   toggle, so it opts in with .is-open instead. */
-.dropdown.dash-menu .dropdown-menu { padding-top: var(--space-8); }
-.dropdown.dash-menu .dropdown-menu::before { display: none; }
-.dropdown.dash-menu:hover .dropdown-menu { display: none; }
-.dropdown.dash-menu.is-open .dropdown-menu { display: block; }
-
-.dropdown.dash-menu .dropdown-menu label {
-    display: flex;
-    align-items: center;
-    gap: var(--space-8);
-    padding: var(--space-6) var(--space-20);
-    font-size: var(--font-size-sm);
-    cursor: pointer;
-    white-space: nowrap;
-}
-
-.dropdown.dash-menu .dropdown-menu label:hover { background: rgba(var(--color-teal-500-rgb), 0.05); }
-
 @media (max-width: 900px) {
     .dash-cols { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 768px) {
-    .dash-tabs { gap: var(--space-16); scroll-snap-type: x proximity; }
-    .dash-tabs li { scroll-snap-align: start; }
-    .dash-bar .form-control { width: 100%; min-width: 0; }
-    .dash-bar__spacer { display: none; }
     .splits div.is-hero .time { font-size: 30px; }
     /* Keep the internal scroll on small screens too: the Fact Sheet's ~90 rows
        otherwise make the page roughly ten thousand pixels tall. Sticky header
@@ -3970,3 +3866,87 @@ p.dash-stamp { white-space: normal; }
     .folder tfoot td { position: static; }
 }
 
+
+/* ==========================================
+   FACT SHEET LAYOUT  (/dashboard/)
+   Single scrolling page with a sticky section nav, modelled on a fund
+   product page. Replaces the tab bar the dashboard previously used.
+   ========================================== */
+
+/* Pins below the site navbar (fixed, 80px) and tracks the section in view.
+   z-index sits under .navbar (1000) so the main nav always wins. */
+.fs-subnav {
+    position: sticky;
+    top: 80px;
+    z-index: 900;
+    background: var(--color-surface);
+    border-top: 1px solid var(--color-border);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-xs);
+}
+
+.fs-subnav ul {
+    display: flex;
+    list-style: none;
+    gap: var(--space-32);
+    margin: 0;
+    padding: 0;
+    overflow-x: auto;
+    scrollbar-width: thin;
+}
+
+.fs-subnav li { flex: 0 0 auto; }
+
+.fs-subnav .nav-link {
+    display: block;
+    padding: var(--space-12) var(--space-2);
+    border-bottom: 2px solid transparent;
+    margin-bottom: -1px;
+    white-space: nowrap;
+    font-size: var(--font-size-sm);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.fs-subnav .nav-link.active {
+    border-bottom-color: var(--color-primary);
+    color: var(--color-primary);
+}
+
+.fs-hero { margin-top: var(--space-24); }
+
+.fs-section {
+    display: grid;
+    gap: var(--space-24);
+    /* Clears the fixed navbar plus the sticky sub-nav when jumped to by anchor,
+       so a heading never lands underneath them. */
+    scroll-margin-top: 140px;
+    padding-bottom: var(--space-48);
+}
+
+.fs-section + .fs-section { border-top: 1px solid var(--color-border); padding-top: var(--space-40); }
+
+.fs-section > .dash-head h2 {
+    font-size: var(--font-size-3xl);
+    color: var(--color-primary);
+    letter-spacing: var(--letter-spacing-tight);
+}
+
+@media (max-width: 768px) {
+    .fs-subnav { top: 70px; }          /* the mobile navbar is shorter */
+    .fs-subnav ul { gap: var(--space-16); }
+    .fs-section { scroll-margin-top: 120px; }
+    .dash-bar .form-control { width: 100%; min-width: 0; }
+}
+
+/* Two even columns on wide screens. A class, not an inline style: inline
+   declarations outrank the stylesheet, so an inline grid-template-columns
+   would survive the narrow-screen media query below and force a page-wide
+   horizontal scroll on tablets. */
+.dash-cols--even { grid-template-columns: 1fr 1fr; }
+@media (max-width: 900px) { .dash-cols--even { grid-template-columns: 1fr; } }
+
+/* .fs-section is a grid, and grid items default to min-width:auto — they refuse
+   to shrink below their content, so the wide holdings table pushed the whole
+   page sideways at tablet widths despite having its own scroll container. */
+.fs-section > * { min-width: 0; }

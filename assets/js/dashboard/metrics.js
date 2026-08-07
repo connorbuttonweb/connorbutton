@@ -216,6 +216,37 @@ window.DASH = window.DASH || {};
     };
   }
 
+  /* Calendar-year returns, the second table every fund sheet carries. The
+     current year is partial and flagged as such rather than annualized —
+     annualizing a part-year is how "up 300%" happens in January. */
+  function calendarYearReturns(series) {
+    if (!series || series.length < 2) return [];
+    const byYear = new Map();
+    series.forEach(p => {
+      const y = p.date.slice(0, 4);
+      if (!byYear.has(y)) byYear.set(y, { first: p, last: p });
+      else byYear.get(y).last = p;
+    });
+
+    const years = Array.from(byYear.keys()).sort();
+    const out = [];
+    years.forEach((y, i) => {
+      /* Open at the previous year's close so January's move is included; the
+         first year opens at its own first observation. */
+      const open = i === 0 ? byYear.get(y).first.index : byYear.get(years[i - 1]).last.index;
+      const close = byYear.get(y).last.index;
+      if (!open) return;
+      out.push({
+        year: y,
+        ret: close / open - 1,
+        partial: i === 0 || y === series[series.length - 1].date.slice(0, 4),
+        from: byYear.get(y).first.date,
+        to: byYear.get(y).last.date
+      });
+    });
+    return out.reverse();                     // most recent year first
+  }
+
   function bestWorstDay(series) {
     let best = null, worst = null;
     for (let i = 1; i < series.length; i++) {
@@ -224,46 +255,6 @@ window.DASH = window.DASH || {};
       if (!worst || r < worst.ret) worst = { date: series[i].date, ret: r };
     }
     return { best: best, worst: worst };
-  }
-
-  /* ---------- money-weighted return (XIRR) ----------
-     Answers a different question than TWR: what did MY timing earn? Because it
-     is sensitive to when contributions landed, it's offered as a toggle rather
-     than as the headline. */
-  function mwr(history) {
-    if (!history || history.length < 2) return null;
-    const flows = [];
-    const t0 = parse(history[0].date);
-    // Opening balance is money put in at t0, whatever its composition.
-    if (history[0].value > 0) flows.push({ t: 0, amount: -history[0].value });
-    for (let i = 1; i < history.length; i++) {
-      const f = history[i].net_flow || 0;
-      if (f !== 0) flows.push({ t: (parse(history[i].date) - t0) / (365.25 * DAY), amount: -f });
-    }
-    const last = history[history.length - 1];
-    flows.push({ t: (parse(last.date) - t0) / (365.25 * DAY), amount: last.value });
-
-    const npv = r => flows.reduce((a, f) => a + f.amount / Math.pow(1 + r, f.t), 0);
-
-    // Newton-Raphson, with a bracketing bisection fallback — Newton alone
-    // diverges on flow patterns that put the root near -100%.
-    let r = 0.1;
-    for (let i = 0; i < 60; i++) {
-      const v = npv(r);
-      const d = (npv(r + 1e-6) - v) / 1e-6;
-      if (!isFinite(d) || Math.abs(d) < 1e-12) break;
-      const next = r - v / d;
-      if (!isFinite(next) || next <= -0.999) break;
-      if (Math.abs(next - r) < 1e-10) return next;
-      r = next;
-    }
-    let lo = -0.95, hi = 10;
-    if (npv(lo) * npv(hi) > 0) return isFinite(r) && r > -1 ? r : null;
-    for (let i = 0; i < 200; i++) {
-      const mid = (lo + hi) / 2;
-      if (npv(lo) * npv(mid) <= 0) hi = mid; else lo = mid;
-    }
-    return (lo + hi) / 2;
   }
 
   DASH.metrics = {
@@ -284,7 +275,7 @@ window.DASH = window.DASH || {};
     monthlyReturns: monthlyReturns,
     bestWorstMonth: bestWorstMonth,
     bestWorstDay: bestWorstDay,
-    mwr: mwr,
+    calendarYearReturns: calendarYearReturns,
     yearsBetween: yearsBetween
   };
 })();
