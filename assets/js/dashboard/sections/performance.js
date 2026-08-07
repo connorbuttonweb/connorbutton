@@ -117,19 +117,33 @@ DASH.sections = DASH.sections || {};
         return;
       }
 
+      /* A short real record needs saying so, or a few days' noise reads as a
+         result — and it will not match the brokerage's own since-inception
+         figure, which covers the whole account life. */
+      if (mode === 'actual' && !h.actualIsMeaningful) {
+        notice.innerHTML = '<div class="callout" style="margin-top:0">' +
+          '<strong>This covers ' + h.actual.length + ' trading days, not the account\'s life.</strong><br>' +
+          'Daily tracking began ' + fmt.date(h.firstSnapshot) + '. Your brokerage\'s ' +
+          'since-inception figure covers the account from the day it opened and will not match ' +
+          'this until tracking has run for longer — the brokerage has no account-value history to ' +
+          'hand over, so this can only build forward.</div>';
+      } else notice.innerHTML = '';
+
       /* The hypothetical series is never allowed to render unlabelled. */
-      notice.innerHTML = mode === 'hypothetical'
-        ? '<div class="callout" style="margin-top:0;border-left-color:var(--color-warning)">' +
-        '<strong><i class="fas fa-flask" aria-hidden="true"></i> Hypothetical — not actual performance.</strong><br>' +
-        'This is what the <em>current</em> holdings would have returned over the period. It ignores ' +
-        'every position bought and sold along the way, so it is not what the portfolio actually earned. ' +
-        (h.hasActual
-          ? 'The real record began ' + fmt.date(h.firstSnapshot) + ' and covers ' + h.actual.length +
-          ' trading days so far — too few to lead with, but available under <strong>Actual</strong>. ' +
-          'It takes over here automatically once it spans enough days to mean something.'
-          : 'The actual record began ' + fmt.date(h.firstSnapshot) + ' and is charted here once it spans more than a day.') +
-        '</div>'
-        : '';
+      if (mode === 'hypothetical') {
+        notice.innerHTML =
+          '<div class="callout" style="margin-top:0;border-left-color:var(--color-warning)">' +
+          '<strong><i class="fas fa-flask" aria-hidden="true"></i> Hypothetical — not actual performance.</strong><br>' +
+          'This is what the <em>current</em> holdings would have returned over the period. It ignores ' +
+          'every position bought and sold along the way, so it is not what the portfolio earned and ' +
+          'will not match your brokerage. ' +
+          (h.hasActual
+            ? 'Switch to <strong>Actual</strong> for the real record, which began ' +
+            fmt.date(h.firstSnapshot) + '.'
+            : 'The actual record began ' + fmt.date(h.firstSnapshot) +
+            ' and is charted once it spans more than a day.') +
+          '</div>';
+      }
 
       /* Period selection, re-based so $10,000 starts at the period's opening. */
       const first = full[0].date, last = full[full.length - 1].date;

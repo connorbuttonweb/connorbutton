@@ -36,6 +36,7 @@ const YAHOO_SYMBOLS = {
   'CHAT': 'CHAT',
   'BEPC.TO': 'BEPC.TO',
   'BEPC': 'BEPC',
+  'SPCX': 'SPCX',           // Space Exploration Technologies, NASDAQ
   'VFV.TO': 'VFV.TO',        // benchmark: S&P 500 in CAD
   /* Questrade's fractional gold has no Yahoo listing. GC=F (front-month gold
      future) is the closest daily series. Yahoo has no XAUUSD=X. */
@@ -126,7 +127,37 @@ if (DO_SNAPSHOT) {
     const cad = a.currency === 'USD' ? a.amount * fx : a.amount;
     byDate[a.date] = (byDate[a.date] || 0) + cad;
   });
+
+  /* Securities transferred in from another broker arrive with NO cash movement,
+     so the feed records them as amount 0. Left at zero they look like value that
+     appeared from nowhere, and any TWR spanning the transfer date would report
+     the entire transferred balance as investment gain. Book value is the only
+     figure the feed publishes, so it is used as the flow — it understates the
+     contribution by whatever unrealized gain came across, which is why the
+     computed return runs a little above the brokerage's own figure.
+     Internal CAD/USD journals are excluded: they move a position between
+     currency sides of the same account and are not a contribution. */
+  const BOOK_VALUE = /book value[:\s]+\$?([\d,]+\.\d{2})/i;
+  const IS_JOURNAL = /journal/i;
+  const inKind = [];
+  (portfolio.activities || []).forEach(a => {
+    if (a.amount !== 0) return;
+    if (IS_JOURNAL.test(a.description)) return;
+    const m = String(a.description).match(BOOK_VALUE);
+    if (!m) return;
+    const v = parseFloat(m[1].replace(/,/g, ''));
+    if (!isFinite(v) || v <= 0) return;
+    byDate[a.date] = (byDate[a.date] || 0) + v;
+    inKind.push({ date: a.date, amount: v, what: a.description.slice(0, 50) });
+  });
+  if (inKind.length) {
+    const t = inKind.reduce((x, y) => x + y.amount, 0);
+    console.log('in-kind transfers  ' + inKind.length + ' securities, $' + t.toFixed(2) +
+      ' at book value, counted as contributions (not gains)');
+  }
+
   history.flows = Object.keys(byDate).sort().map(d => ({ date: d, amount: r2(byDate[d]) }));
+  history.in_kind = inKind;
 }
 
 if (!history.snapshots.length) {
