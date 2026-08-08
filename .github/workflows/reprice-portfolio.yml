@@ -1,0 +1,42 @@
+name: Reprice portfolio history
+
+on:
+  schedule:
+    # 23:15 UTC weekdays — after the Questrade refresh routine (22:40 UTC) has
+    # had time to bank a snapshot.
+    - cron: '15 23 * * 1-5'
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: reprice-portfolio
+  cancel-in-progress: false
+
+jobs:
+  reprice:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Rebuild daily price series
+        run: node .claude/skills/refresh-portfolio/scripts/rebuild-history.js --to "$(date -u +%F)"
+
+      - name: Commit if changed
+        run: |
+          if git diff --quiet -- assets/data/history.json; then
+            echo "No repricing changes."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add assets/data/history.json
+          git commit -m "data: reprice portfolio history $(date -u +%F)"
+          git push
