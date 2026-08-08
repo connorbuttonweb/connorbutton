@@ -40,7 +40,14 @@ const YAHOO_SYMBOLS = {
   'VFV.TO': 'VFV.TO',        // benchmark: S&P 500 in CAD
   /* Questrade's fractional gold has no Yahoo listing. GC=F (front-month gold
      future) is the closest daily series. Yahoo has no XAUUSD=X. */
-  'GOLD.QM': 'GC=F'
+  'GOLD.QM': 'GC=F',
+  /* Added for the May-July 2026 history backfill — symbols that only ever
+     appear in historical snapshots, several fully closed out long ago. */
+  'ENB.TO': 'ENB.TO', 'HMMJ.TO': 'HMMJ.TO', 'PXT.TO': 'PXT.TO', 'CAE.TO': 'CAE.TO',
+  'MDA.TO': 'MDA.TO', 'TEC.TO': 'TEC.TO', 'ZEB.TO': 'ZEB.TO', 'RBO.TO': 'RBO.TO',
+  'DLR.TO': 'DLR.TO', 'MMY': 'MMY.V', 'ASTS': 'ASTS', 'FIG': 'FIG', 'BB': 'BB',
+  'NOW': 'NOW', 'GOOGL': 'GOOGL', 'WEN': 'WEN', 'VT': 'VT', 'IREN': 'IREN',
+  'ABAT': 'ABAT', 'HOOD': 'HOOD'
 };
 
 /* Symbols priced off a proxy rather than the instrument itself. The proxy

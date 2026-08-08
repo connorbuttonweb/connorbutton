@@ -1,17 +1,2778 @@
 {
  "meta": {
   "base_currency": "CAD",
-  "first_snapshot": "2026-08-04",
-  "generated_at": "2026-08-08T20:54:51.566Z",
+  "first_snapshot": "2026-05-14",
+  "generated_at": "2026-08-08T22:48:48.500Z",
   "as_of": "2026-08-07",
   "price_source": "yahoo via market-proxy",
   "approximated": [
+   "ENB29MAY26C77.00",
+   "ZEB05JUN26C70.00",
+   "ZEB05JUN26C69.50",
+   "SPCE26JUN26P5.50",
+   "PLTR21AUG26C165.00",
+   "DLR",
+   "PLTR21AUG26C160.00",
+   "NOW26JUN26C99.00",
+   "WEN26JUN26P6.50",
+   "WEN17JUL26C8.00",
+   "SPY16OCT26C745.00",
+   "IREN20NOV26C45.00",
+   "ZEB18SEP26C75.50.MX",
    "AGI15JAN27C34.00",
+   "PXT21AUG26C24.00.MX",
    "SPCX15JAN27C200.00"
   ],
   "note": "Holdings are assumed constant between snapshots, so a trade is recognised at the next refresh rather than on its trade date."
  },
  "snapshots": [
+  {
+   "date": "2026-05-14",
+   "cash": -161.96,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 49.7164
+    },
+    "ENB.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.11
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.3181
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 43.446
+    },
+    "MMY": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.9
+    },
+    "PXT.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.5868
+    }
+   }
+  },
+  {
+   "date": "2026-05-15",
+   "cash": 0.05,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 49.5085
+    },
+    "ENB.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.13
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.1586
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 42.8752
+    },
+    "MMY": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.87
+    },
+    "PXT.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.7149
+    },
+    "ENB29MAY26C77.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.37,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-05-22",
+   "cash": 334.06,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 51.3106
+    },
+    "ENB.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 80.19
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.4577
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 43.6645
+    },
+    "MMY": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.86
+    },
+    "PXT.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.0547
+    }
+   }
+  },
+  {
+   "date": "2026-05-25",
+   "cash": 1194.36,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 51.3997
+    },
+    "ENB.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 79.73
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.5375
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.4389
+    },
+    "MMY": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.9
+    },
+    "PXT.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 25.2467
+    },
+    "CAE.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 33.45
+    }
+   }
+  },
+  {
+   "date": "2026-05-28",
+   "cash": 453.58,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 54.39
+    },
+    "ENB.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.58
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.5574
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.0417
+    },
+    "MMY": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.9
+    },
+    "PXT.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 24.005
+    },
+    "CAE.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 35.37
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "ZEB05JUN26C69.50": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.4,
+     "flat": true
+    },
+    "MDA.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 67.13
+    }
+   }
+  },
+  {
+   "date": "2026-05-29",
+   "cash": 1453.54,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 55.29
+    },
+    "ENB.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.64
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.4577
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.1758
+    },
+    "MMY": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.9
+    },
+    "PXT.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.6995
+    },
+    "CAE.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 35.69
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "ZEB05JUN26C69.50": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.4,
+     "flat": true
+    },
+    "MDA.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 61.48
+    }
+   }
+  },
+  {
+   "date": "2026-06-01",
+   "cash": 78.67,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.93
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.4278
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.3495
+    },
+    "PXT.TO": {
+     "qty": 50,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.1335
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "ZEB05JUN26C69.50": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.4,
+     "flat": true
+    },
+    "TEC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 62.87
+    },
+    "VDY.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 72.0856
+    },
+    "GOLD.QM": {
+     "qty": 0.049,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4475.2002
+    },
+    "FIG": {
+     "qty": 15,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 27.12
+    }
+   }
+  },
+  {
+   "date": "2026-06-02",
+   "cash": 156.29,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 54.44
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.2483
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.6176
+    },
+    "PXT.TO": {
+     "qty": 50,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.9317
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "ZEB05JUN26C69.50": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.4,
+     "flat": true
+    },
+    "TEC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 62.97
+    },
+    "VDY.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 73.3995
+    },
+    "GOLD.QM": {
+     "qty": 0.071,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4489.1001
+    },
+    "BB": {
+     "qty": 12,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 10.32
+    }
+   }
+  },
+  {
+   "date": "2026-06-03",
+   "cash": 1.24,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.67
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.1586
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.3694
+    },
+    "PXT.TO": {
+     "qty": 50,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.5376
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "ZEB05JUN26C69.50": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.4,
+     "flat": true
+    },
+    "TEC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 62.53
+    },
+    "VDY.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 73.3497
+    },
+    "GOLD.QM": {
+     "qty": 0.071,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4436.7002
+    },
+    "BB": {
+     "qty": 23,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 10.18
+    }
+   }
+  },
+  {
+   "date": "2026-06-04",
+   "cash": 45.25,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.96
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.3779
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.7367
+    },
+    "PXT.TO": {
+     "qty": 50,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.5967
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "TEC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 62.44
+    },
+    "VDY.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 74.2057
+    },
+    "GOLD.QM": {
+     "qty": 0.071,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4475.7998
+    },
+    "BB": {
+     "qty": 23,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 10.34
+    }
+   }
+  },
+  {
+   "date": "2026-06-05",
+   "cash": 1228.66,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 54.04
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.2184
+    },
+    "XEQT.TO": {
+     "qty": 160,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 43.5652
+    },
+    "PXT.TO": {
+     "qty": 50,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.035
+    },
+    "ZEB05JUN26C70.00": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 0.25,
+     "flat": true
+    },
+    "TEC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 59.7
+    },
+    "VDY.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 73.6981
+    },
+    "GOLD.QM": {
+     "qty": 0.071,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4337.1001
+    },
+    "BB": {
+     "qty": 23,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 9.41
+    }
+   }
+  },
+  {
+   "date": "2026-06-08",
+   "cash": 293.34,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.86
+    },
+    "HMMJ.TO": {
+     "qty": 30,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 7.2882
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 43.7538
+    },
+    "PXT.TO": {
+     "qty": 50,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.49
+    },
+    "TEC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 60.13
+    },
+    "VDY.TO": {
+     "qty": 46,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 73.927
+    },
+    "GOLD.QM": {
+     "qty": 0.078,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4335.8999
+    },
+    "BB": {
+     "qty": 23,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 9.29
+    },
+    "ZEB.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 69.8436
+    },
+    "RBO.TO": {
+     "qty": 41,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 18.552
+    },
+    "ABAT": {
+     "qty": 30,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.8
+    },
+    "HOOD": {
+     "qty": 1.69,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 85.04
+    },
+    "CHAT": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.6
+    }
+   }
+  },
+  {
+   "date": "2026-06-09",
+   "cash": 931.14,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 54.19
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 43.6645
+    },
+    "PXT.TO": {
+     "qty": 25,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 25.36
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 73.937
+    },
+    "GOLD.QM": {
+     "qty": 0.078,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4260
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.84
+    },
+    "ABAT": {
+     "qty": 30,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.24
+    },
+    "HOOD": {
+     "qty": 1.69,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 83.77
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 91.06
+    }
+   }
+  },
+  {
+   "date": "2026-06-10",
+   "cash": 127.35,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 52.21
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 43.1035
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 25.64
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 74.2057
+    },
+    "GOLD.QM": {
+     "qty": 0.078,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4108.2002
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.82
+    },
+    "ABAT": {
+     "qty": 30,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.075
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 86.36
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 87.62
+    }
+   }
+  },
+  {
+   "date": "2026-06-11",
+   "cash": 27.91,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 52.62
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.0814
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.31
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 74.8229
+    },
+    "GOLD.QM": {
+     "qty": 0.078,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4090.3
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 9.29
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.42
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 92.23
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 92.43
+    },
+    "SPCE26JUN26P5.50": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 1.05,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-06-12",
+   "cash": 20.84,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 50.98
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.3594
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 26.39
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.3106
+    },
+    "GOLD.QM": {
+     "qty": 0.078,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4215
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 9.19
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.38
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.19
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.14
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-06-15",
+   "cash": 28.34,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 25,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 51.2
+    },
+    "XEQT.TO": {
+     "qty": 340,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.9551
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 25.15
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.1016
+    },
+    "GOLD.QM": {
+     "qty": 0.078,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4328
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 9.24
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.39
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 98.12
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 98.55
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "DLR.TO": {
+     "qty": 77,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 14.1063
+    }
+   }
+  },
+  {
+   "date": "2026-06-17",
+   "cash": 4.59,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 25,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 50.82
+    },
+    "XEQT.TO": {
+     "qty": 340,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.7466
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 24.76
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.1812
+    },
+    "GOLD.QM": {
+     "qty": 0.08,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4358.8999
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.83
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.1
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 105.2
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 96.87
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "DLR": {
+     "qty": 77,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 10.18,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-06-18",
+   "cash": 206.55,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 25,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 52.9
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.114
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 24.66
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.1812
+    },
+    "GOLD.QM": {
+     "qty": 0.08,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4224.1001
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.38
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3.12
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 108.15
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 102.34
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "NOW26JUN26C99.00": {
+     "qty": 3,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 1.6,
+     "flat": true
+    },
+    "NOW": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 95.04
+    }
+   }
+  },
+  {
+   "date": "2026-06-22",
+   "cash": 167.71,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 25,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.71
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.1289
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 24.78
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.6501
+    },
+    "GOLD.QM": {
+     "qty": 0.08,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4181.8999
+    },
+    "BB": {
+     "qty": 53,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.79
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 2.93
+    },
+    "HOOD": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 105.71
+    },
+    "CHAT": {
+     "qty": 25,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 104.07
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "NOW26JUN26C99.00": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 1.6,
+     "flat": true
+    },
+    "NOW": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.01
+    }
+   }
+  },
+  {
+   "date": "2026-06-23",
+   "cash": 15.95,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.83
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.6176
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.83
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.0293
+    },
+    "GOLD.QM": {
+     "qty": 0.081,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4129.8999
+    },
+    "BB": {
+     "qty": 50,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.82
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 2.84
+    },
+    "CHAT": {
+     "qty": 27,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 96.37
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "NOW": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 95.94
+    },
+    "GOOGL": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 346.13
+    }
+   }
+  },
+  {
+   "date": "2026-06-24",
+   "cash": 27.82,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.61
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.558
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.61
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.3808
+    },
+    "GOLD.QM": {
+     "qty": 0.081,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3990.3
+    },
+    "BB": {
+     "qty": 50,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.62
+    },
+    "ABAT": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 2.7
+    },
+    "CHAT": {
+     "qty": 27,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 95.76
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "NOW": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.8
+    },
+    "GOOGL": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 345.29
+    },
+    "WEN26JUN26P6.50": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 0.2,
+     "flat": true
+    },
+    "WEN": {
+     "qty": 18,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 7.86
+    }
+   }
+  },
+  {
+   "date": "2026-06-25",
+   "cash": 66.91,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.38
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.65
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.34
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.8597
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4030.5
+    },
+    "CHAT": {
+     "qty": 27,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 97.78
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "NOW": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 89.52
+    },
+    "GOOGL": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 343.71
+    },
+    "WEN26JUN26P6.50": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 0.2,
+     "flat": true
+    },
+    "WEN17JUL26C8.00": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 0.8,
+     "flat": true
+    },
+    "VT": {
+     "qty": 2.3874,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 154.85
+    }
+   }
+  },
+  {
+   "date": "2026-06-26",
+   "cash": 293.59,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 53.44
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.55
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.05
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.6102
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4078.7
+    },
+    "CHAT": {
+     "qty": 16,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.61
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 337.39
+    },
+    "WEN26JUN26P6.50": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 0.2,
+     "flat": true
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 153.95
+    },
+    "SPY16OCT26C745.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 24,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-06-29",
+   "cash": 4149.99,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 52.91
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.92
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 21.87
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.7
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4022.3
+    },
+    "CHAT": {
+     "qty": 16,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 95.43
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 353.65
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 155.83
+    }
+   }
+  },
+  {
+   "date": "2026-06-30",
+   "cash": 4257.28,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 52.72
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.1
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 21.39
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.8297
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4022.8999
+    },
+    "CHAT": {
+     "qty": 16,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 98.68
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 357.37
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 156.95
+    }
+   }
+  },
+  {
+   "date": "2026-07-01",
+   "cash": 2411.15,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 52.72
+    },
+    "XEQT.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.1
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 21.39
+    },
+    "VDY.TO": {
+     "qty": 55,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.8297
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4068.3
+    },
+    "CHAT": {
+     "qty": 16,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 93.52
+    },
+    "PLTR21AUG26C165.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.3,
+     "flat": true
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 361.21
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 156.12
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-02",
+   "cash": 231.89,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 51.74
+    },
+    "XEQT.TO": {
+     "qty": 340,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.12
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.85
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.4606
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4112.7002
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 88.79
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 359.91
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 156.17
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "IREN": {
+     "qty": 24,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 38.82
+    }
+   }
+  },
+  {
+   "date": "2026-07-03",
+   "cash": 186.31,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 51.6
+    },
+    "XEQT.TO": {
+     "qty": 341,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.46
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 21.01
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 75.73
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4112.7002
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 88.79
+    },
+    "PLTR21AUG26C160.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 3.15,
+     "flat": true
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 359.91
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 156.17
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "IREN": {
+     "qty": 24,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 38.82
+    }
+   }
+  },
+  {
+   "date": "2026-07-06",
+   "cash": 2186.54,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 51.99
+    },
+    "XEQT.TO": {
+     "qty": 341,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.55
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.69
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.0492
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4155.1001
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 91
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 366.46
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 157.81
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-07",
+   "cash": 1579.08,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 50.29
+    },
+    "XEQT.TO": {
+     "qty": 341,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.21
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 21.1
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.9472
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4145.2998
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 87.6
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 367.03
+    },
+    "VT": {
+     "qty": 2,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 156.34
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-08",
+   "cash": 33.7,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 50.91
+    },
+    "XEQT.TO": {
+     "qty": 341,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.89
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.02
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.4883
+    },
+    "GOLD.QM": {
+     "qty": 0.1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4070.8999
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 89.81
+    },
+    "GOOGL": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 361.92
+    },
+    "VT": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 155.81
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-10",
+   "cash": 509.89,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 49.61
+    },
+    "XEQT.TO": {
+     "qty": 341,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.35
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.3
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 77.2964
+    },
+    "GOLD.QM": {
+     "qty": 0.105,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4104.1001
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 91.74
+    },
+    "VT": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 157.63
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-13",
+   "cash": -60.47,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 48.42
+    },
+    "XEQT.TO": {
+     "qty": 341,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.01
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.17
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 77.6956
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3997
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 87.63
+    },
+    "VT": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 155.81
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-16",
+   "cash": 316.6,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 47.9
+    },
+    "XEQT.TO": {
+     "qty": 366,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.86
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.14
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 78.833
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 3985.6001
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 83.73
+    },
+    "VT": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 156.13
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-17",
+   "cash": -48.36,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 47.47
+    },
+    "XEQT.TO": {
+     "qty": 366,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.48
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.6
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 78.79
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4012.7
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 81.94
+    },
+    "VT": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 154.78
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    },
+    "AGI15JAN27C34.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 2.6,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-24",
+   "cash": -13,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 47.34
+    },
+    "XEQT.TO": {
+     "qty": 366,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.565
+    },
+    "PXT.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.59
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 78.66
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4067.6001
+    },
+    "CHAT": {
+     "qty": 26,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 82.86
+    },
+    "VT": {
+     "qty": 9,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 154.2
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    },
+    "AGI15JAN27C34.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 2.6,
+     "flat": true
+    },
+    "PXT21AUG26C24.00.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 1.02,
+     "flat": true
+    }
+   }
+  },
+  {
+   "date": "2026-07-29",
+   "cash": -1.1,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 27,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.1
+    },
+    "XEQT.TO": {
+     "qty": 365,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.13
+    },
+    "PXT.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.29
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 77.75
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4034.7
+    },
+    "CHAT": {
+     "qty": 46,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 74.58
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    },
+    "AGI15JAN27C34.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 2.6,
+     "flat": true
+    },
+    "PXT21AUG26C24.00.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 1.02,
+     "flat": true
+    },
+    "FINN.TO": {
+     "qty": 13,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 30.43
+    }
+   }
+  },
+  {
+   "date": "2026-07-30",
+   "cash": -62.54,
+   "positions": {
+    "BEPC.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 46.41
+    },
+    "XEQT.TO": {
+     "qty": 200,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.78
+    },
+    "PXT.TO": {
+     "qty": 15,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 23.42
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 78.57
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4100.1001
+    },
+    "CHAT": {
+     "qty": 46,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 80.18
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    },
+    "AGI15JAN27C34.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 2.6,
+     "flat": true
+    },
+    "PXT21AUG26C24.00.MX": {
+     "qty": 2,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 1.02,
+     "flat": true
+    },
+    "FINN.TO": {
+     "qty": 262,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 31.22
+    }
+   }
+  },
+  {
+   "date": "2026-07-31",
+   "cash": 2109.46,
+   "positions": {
+    "XEQT.TO": {
+     "qty": 200,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.8
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 78.46
+    },
+    "GOLD.QM": {
+     "qty": 0.205,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4049.1001
+    },
+    "CHAT": {
+     "qty": 46,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 81.96
+    },
+    "IREN20NOV26C45.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 13,
+     "flat": true
+    },
+    "ZEB18SEP26C75.50.MX": {
+     "qty": 1,
+     "currency": "CAD",
+     "multiplier": 100,
+     "last_price": 2.4099,
+     "flat": true
+    },
+    "AGI15JAN27C34.00": {
+     "qty": 1,
+     "currency": "USD",
+     "multiplier": 100,
+     "last_price": 2.6,
+     "flat": true
+    },
+    "FINN.TO": {
+     "qty": 262,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 31.77
+    },
+    "BEPC": {
+     "qty": 20,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 33.35
+    }
+   }
+  },
   {
    "date": "2026-08-04",
    "cash": 676.26,
@@ -226,6 +2987,281 @@
   }
  ],
  "daily": [
+  {
+   "date": "2026-05-14",
+   "value": 10857.01,
+   "net_flow": 10253
+  },
+  {
+   "date": "2026-05-15",
+   "value": 10953.27,
+   "net_flow": 200
+  },
+  {
+   "date": "2026-05-19",
+   "value": 10954.17,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-20",
+   "value": 11067.91,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-21",
+   "value": 11153.72,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-22",
+   "value": 11502.56,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-25",
+   "value": 11602.56,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-26",
+   "value": 11527.74,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-27",
+   "value": 11506.92,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-28",
+   "value": 11499.72,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-05-29",
+   "value": 12450.58,
+   "net_flow": 1000
+  },
+  {
+   "date": "2026-06-01",
+   "value": 12513.8,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-02",
+   "value": 12714.22,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-03",
+   "value": 12626.2,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-04",
+   "value": 12723.6,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-05",
+   "value": 13582.03,
+   "net_flow": 1183.41
+  },
+  {
+   "date": "2026-06-08",
+   "value": 25189.78,
+   "net_flow": 11474.48
+  },
+  {
+   "date": "2026-06-09",
+   "value": 25044.83,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-10",
+   "value": 24695.8,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-11",
+   "value": 25439.12,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-12",
+   "value": 25731.25,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-15",
+   "value": 28615.9,
+   "net_flow": 2500
+  },
+  {
+   "date": "2026-06-16",
+   "value": 28436.02,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-17",
+   "value": 28536.88,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-18",
+   "value": 28882.86,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-19",
+   "value": 28966.5,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-22",
+   "value": 29262.09,
+   "net_flow": 400
+  },
+  {
+   "date": "2026-06-23",
+   "value": 28849.26,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-24",
+   "value": 28909.94,
+   "net_flow": 230
+  },
+  {
+   "date": "2026-06-25",
+   "value": 29128.15,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-26",
+   "value": 29008.72,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-29",
+   "value": 29594.67,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-06-30",
+   "value": 29823.48,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-02",
+   "value": 30683.45,
+   "net_flow": 1200
+  },
+  {
+   "date": "2026-07-03",
+   "value": 30817.44,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-06",
+   "value": 31205.97,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-07",
+   "value": 30855.33,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-08",
+   "value": 30817.74,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-09",
+   "value": 31056.31,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-10",
+   "value": 31087.17,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-13",
+   "value": 30795.65,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-14",
+   "value": 30846.8,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-15",
+   "value": 30912.44,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-16",
+   "value": 32088.39,
+   "net_flow": 1500
+  },
+  {
+   "date": "2026-07-17",
+   "value": 31838.99,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-20",
+   "value": 31779.79,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-21",
+   "value": 32275.95,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-22",
+   "value": 32289.97,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-23",
+   "value": 32059.93,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-24",
+   "value": 31967.44,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-27",
+   "value": 31975.76,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-28",
+   "value": 31816.62,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-29",
+   "value": 31268.14,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-30",
+   "value": 31965.3,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-07-31",
+   "value": 33830.01,
+   "net_flow": 1500
+  },
   {
    "date": "2026-08-04",
    "value": 34454.98,
