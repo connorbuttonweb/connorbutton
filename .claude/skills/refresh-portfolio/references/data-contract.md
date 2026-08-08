@@ -11,7 +11,7 @@ This table is the load-bearing part of this document.
 |---|---|---|
 | `meta.generated_at`, `as_of`, `fx` | Derived from the feed | **rewrite** |
 | `meta.inception_date`, `risk_free_rate`, `notes` | Set once | **carry forward** |
-| `profile.*` | Derived, except `blended_mer` | **rewrite** (leave `blended_mer` null) |
+| `profile.*` | Derived; `blended_mer` from the hand-kept `FUND_MER` table | **rewrite** |
 | `accounts[]` | Derived, except `contribution_room` | **rewrite**, carrying room forward |
 | `positions[]` | Derived, except `sector`/`geography`/`market_cap_bucket` | **rewrite**, carrying tags forward |
 | `activities[]` | Feed | **merge** — never replace wholesale |
@@ -48,7 +48,11 @@ Losing either is unrecoverable.
   },
 
   "profile": {
-    "blended_mer": null,            // NOT in the feed — stays null, never guessed
+    "blended_mer": 0.0049,          // NOT in the feed — each fund's published MER
+                                    // (FUND_MER in merge-portfolio.js) weighted by
+                                    // share of the WHOLE portfolio, so non-fund
+                                    // holdings and cash sit in the denominator at
+                                    // 0%. null if any held fund has no MER on file.
     "distribution_yield": 0.013,    // quote yields weighted by CAD market value
     "holdings_count": 8,
     "etf_count": 4,

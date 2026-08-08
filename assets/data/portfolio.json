@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-07T01:57:48.953Z",
-  "as_of": "2026-08-06",
+  "generated_at": "2026-08-08T18:38:39.428Z",
+  "as_of": "2026-08-07",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4012
+   "USDCAD": 1.3942
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": null,
-  "distribution_yield": 0.0109,
-  "holdings_count": 9,
+  "blended_mer": 0.0049,
+  "distribution_yield": 0.0139,
+  "holdings_count": 7,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 54.96,
+   "cash": 3514.62,
    "currency": "CAD",
-   "buying_power": 53.74
+   "buying_power": 3437.28
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 44.1272,
-   "price": 45.9,
-   "prev_close": 45.97,
-   "market_value": 9180,
-   "open_pnl": 354.56,
+   "price": 46.1,
+   "prev_close": 46.1,
+   "market_value": 9220,
+   "open_pnl": 394.56,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 262,
    "avg_cost": 31.0831,
-   "price": 32.65,
-   "prev_close": 32.83,
-   "market_value": 8554.3,
-   "open_pnl": 410.53,
+   "price": 32.88,
+   "prev_close": 32.88,
+   "market_value": 8614.56,
+   "open_pnl": 470.79,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 59,
    "avg_cost": 73.9457,
-   "price": 77.54,
-   "prev_close": 77.495,
-   "market_value": 4574.86,
-   "open_pnl": 212.06,
+   "price": 77.07,
+   "prev_close": 77.07,
+   "market_value": 4547.13,
+   "open_pnl": 184.33,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -83,31 +83,15 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "USD",
-   "quantity": 46,
-   "avg_cost": 84.7968,
-   "price": 87.26,
-   "prev_close": 88.38,
-   "market_value": 4013.96,
-   "open_pnl": 113.31,
+   "quantity": 51,
+   "avg_cost": 85.1785,
+   "price": 89.11,
+   "prev_close": 89.11,
+   "market_value": 4544.61,
+   "open_pnl": 200.51,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
-  },
-  {
-   "symbol": "BEPC.TO",
-   "name": "Brookfield Renewable Corporation",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 53,
-   "avg_cost": 47.1381,
-   "price": 46.68,
-   "prev_close": 46.62,
-   "market_value": 2474.04,
-   "open_pnl": -24.28,
-   "sector": "Utilities",
-   "geography": "Canada",
-   "market_cap_bucket": "Mid"
   },
   {
    "symbol": "GOLD.QM",
@@ -115,48 +99,31 @@
    "account_id": "main",
    "asset_type": "Commodity",
    "currency": "USD",
-   "quantity": 0.3,
-   "avg_cost": 4185.8137,
-   "price": 4253.915,
-   "prev_close": 4250.2302,
-   "market_value": 1276.17,
-   "open_pnl": 20.43,
+   "quantity": 0.2,
+   "avg_cost": 4265.2306,
+   "price": 4344.6299,
+   "prev_close": 4344.6299,
+   "market_value": 868.93,
+   "open_pnl": 15.88,
    "sector": "Commodities",
    "geography": "Global",
    "market_cap_bucket": "n/a"
   },
   {
-   "symbol": "SPCX",
-   "name": "SPACE EXPLORATION TECHNOLOGIES CORP",
+   "symbol": "BEPC",
+   "name": "Brookfield Renewable Corporation",
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 6,
-   "avg_cost": 110.3201,
-   "price": 114.19,
-   "prev_close": 107.54,
-   "market_value": 685.14,
-   "open_pnl": 23.22,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "SPCX15JAN27C200.00",
-   "name": "CALL SPCX 01/15/27 200",
-   "account_id": "main",
-   "asset_type": "Option",
-   "currency": "USD",
-   "quantity": 1,
-   "avg_cost": 4.5,
-   "price": 5.7,
-   "prev_close": 4.74,
-   "market_value": 570,
-   "open_pnl": 120,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null,
-   "multiplier": 100
+   "quantity": 20,
+   "avg_cost": 33.6035,
+   "price": 33.74,
+   "prev_close": 33.74,
+   "market_value": 674.8,
+   "open_pnl": 2.73,
+   "sector": "Utilities",
+   "geography": "Canada",
+   "market_cap_bucket": "Mid"
   },
   {
    "symbol": "AGI15JAN27C34.00",
@@ -166,10 +133,10 @@
    "currency": "USD",
    "quantity": 1,
    "avg_cost": 2.6,
-   "price": 3.55,
-   "prev_close": 3.55,
-   "market_value": 355,
-   "open_pnl": 95,
+   "price": 4.58,
+   "prev_close": 4.58,
+   "market_value": 458,
+   "open_pnl": 198,
    "sector": "Materials",
    "geography": "Canada",
    "market_cap_bucket": "n/a",
@@ -18316,12 +18283,72 @@
  },
  "activities": [
   {
+   "uid": "t_1cb68dd4ce",
+   "date": "2026-08-06",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION FROM CAD BOOK VALUE: $1345.70 CNV@ 1.4012",
+   "amount": 0,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_bc3e56716d",
+   "date": "2026-08-06",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION TO USD",
+   "amount": 0,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_b7310d74ac",
+   "date": "2026-08-06",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+   "amount": -661.92,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_f5fd5a179f",
+   "date": "2026-08-06",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+   "amount": 669.98,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_c1a4cd7095",
+   "date": "2026-08-06",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CALL SPCX 01/15/27 200 SPACE EXPLORATION TECHNOLOGIES WE ACTED AS AGENT",
+   "amount": -450,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_02fe8e5878",
    "date": "2026-08-04",
    "type": "FX",
    "account_id": "main",
    "symbol": null,
-   "description": "Conversion USD/CAD",
+   "description": "CONVERSION - USD/CAD",
    "amount": -21.28,
    "currency": "USD",
    "quantity": null,
@@ -18333,7 +18360,7 @@
    "type": "Trade",
    "account_id": "main",
    "symbol": null,
-   "description": "Call IREN 11/20/26 45 — IREN Limited",
+   "description": "CALL IREN 11/20/26 45 IREN LIMITED WE ACTED AS AGENT",
    "amount": 874.98,
    "currency": "USD",
    "quantity": null,
@@ -18345,7 +18372,7 @@
    "type": "Trade",
    "account_id": "main",
    "symbol": null,
-   "description": "Gold ounce",
+   "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
    "amount": -391.41,
    "currency": "USD",
    "quantity": null,
@@ -18357,7 +18384,7 @@
    "type": "Trade",
    "account_id": "main",
    "symbol": null,
-   "description": "Call ZEB 09/18/26 75.50 — BMO Equal Weight Banks Index ETF",
+   "description": "CALL .ZEB 09/18/26 75.50 BMO EQUAL WEIGHT BNK INDX ETF WE ACTED AS AGENT",
    "amount": 284.01,
    "currency": "CAD",
    "quantity": null,
@@ -18369,7 +18396,7 @@
    "type": "Trade",
    "account_id": "main",
    "symbol": null,
-   "description": "Brookfield Renewable Corp",
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
    "amount": -2498.32,
    "currency": "CAD",
    "quantity": null,
@@ -20755,21 +20782,28 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7166,
+   "annual_rate_per_share": 0.7215,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1655,
+   "annual_rate_per_share": 2.1651,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.6281,
+   "annual_rate_per_share": 1.7021,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
+   "symbol": "BEPC",
+   "annual_rate_per_share": 1.5863,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -20785,6 +20819,11 @@
    {
     "date": "2026-08-06",
     "value": 34506.82,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-08-07",
+    "value": 35023.22,
     "net_flow": 0
    }
   ],
@@ -20847,8 +20886,8 @@
      "level": 186.3
     },
     {
-     "date": "2026-08-04",
-     "level": 193.27
+     "date": "2026-08-07",
+     "level": 191.7
     }
    ]
   }
