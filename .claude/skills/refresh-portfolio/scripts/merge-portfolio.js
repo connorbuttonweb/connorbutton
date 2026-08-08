@@ -192,12 +192,19 @@ const account = {
 const quotes = {};
 (snap.quotes || []).forEach(q => { quotes[q.symbol] = q; });
 
-function classify(symbol, q) {
+/* `name` is the resolved name (see below), not the raw quote: get_quotes does
+   not return a `description`, so classifying on the quote alone files every
+   fund as a Stock — which empties the look-through and nulls the blended fee
+   without erroring. That failure is silent, so it must not depend on a field
+   the feed may or may not populate. */
+function classify(symbol, q, name) {
   if (OPTION_RE.test(symbol)) return 'Option';
   const t = (q && q.securityType) || '';
   if (/gold|metal|commodit/i.test(t) || /\.QM$/.test(symbol)) return 'Commodity';
-  const name = ((q && q.description) || '') + ' ' + symbol;
-  if (/\bETF\b|INDEX FUND|PORTFOLIO UNITS|TRUST II/i.test(name)) return 'ETF';
+  /* Authoritative, and independent of any name: a symbol we hold fund
+     constituents or a published MER for is a fund, however it is described. */
+  if ((prev.etfs && prev.etfs[symbol]) || typeof FUND_MER[symbol] === 'number') return 'ETF';
+  if (/\bETF\b|INDEX FUND|PORTFOLIO UNITS|TRUST II/i.test(name + ' ' + symbol)) return 'ETF';
   return 'Stock';
 }
 
@@ -226,17 +233,22 @@ const positions = Array.from(bySymbol.values()).map(e => {
   if (!q) die('no quote for held symbol ' + e.symbol + ' — add it to the get_quotes call.');
   if (typeof q.lastPrice !== 'number') die('quote for ' + e.symbol + ' has no lastPrice');
 
-  const assetType = classify(e.symbol, q);
+  const old = prevBySymbol[e.symbol] || {};
+  const name = old.name || q.description || e.symbol;
+  const assetType = classify(e.symbol, q, name);
   const multiplier = assetType === 'Option' ? 100 : 1;
-  const price = q.lastPrice;
+  /* Rounded because some instruments quote to 8+ decimals (GOLD.QM at
+     4344.62989528), and a fractional tail that long is an unbroken run of
+     digits — which the account-number guard rejects, killing the whole refresh.
+     Four decimals is finer than any price this portfolio holds. */
+  const price = r4(q.lastPrice);
   /* Questrade reports today's move, not yesterday's close. */
   const prevClose = r4(price - (q.priceChangeAmount || 0));
   const avgCost = e.qty ? e.cost / e.qty : 0;
-  const old = prevBySymbol[e.symbol] || {};
 
   const pos = {
     symbol: e.symbol,
-    name: old.name || q.description || e.symbol,
+    name: name,
     account_id: ACCOUNT_ID,
     asset_type: assetType,
     currency: q.currency || 'CAD',
