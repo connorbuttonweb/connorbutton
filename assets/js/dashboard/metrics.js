@@ -34,7 +34,17 @@ window.DASH = window.DASH || {};
         const v0 = history[i - 1].value;
         if (v0 > 0) {
           const r = (history[i].value - (history[i].net_flow || 0)) / v0;
-          if (isFinite(r) && r > 0) idx *= r;
+          if (isFinite(r) && r > 0) {
+            idx *= r;
+          } else {
+            /* A day whose flow-adjusted value is non-positive can't be
+               expressed as a multiplicative factor without breaking every
+               later index value, so it's excluded rather than applied —
+               but that's an anomaly worth surfacing, not silently eating a
+               real loss, since prior versions of this code returned no
+               signal at all. */
+            console.warn('twrIndex: skipped ' + history[i].date + ' (r=' + r + '), check net_flow for that date');
+          }
         }
       }
       out.push({ date: history[i].date, index: idx });
