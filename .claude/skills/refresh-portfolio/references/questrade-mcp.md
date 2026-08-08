@@ -72,7 +72,7 @@ stock and not an ETF; classify it as `Commodity`.
 |---|---|
 | **ETF constituent holdings** | The Fact Sheet's look-through cannot be populated. Constituents come from each fund's own fact sheet and are typed into the `etfs` block by hand. |
 | **Account-value history** | No endpoint returns historical account equity. Combined with the missing share quantities, this is why `history.portfolio` is append-only. |
-| **MER / management fees** | `profile.blended_mer` stays `null`. A guessed figure on a page that presents itself as a fund fact sheet would read as a stated fee. |
+| **MER / management fees** | Each fund's published MER is transcribed by hand into `FUND_MER` in `merge-portfolio.js`; `profile.blended_mer` is then derived from it (portfolio-weighted, recomputed each refresh). A fund with no MER on file blanks the figure rather than being estimated — a guessed fee on a page that presents itself as a fund fact sheet would read as a stated one. |
 | **Sector / geography for equities** | Not in the quote payload. Whatever was tagged previously is carried forward by the merge. |
 
 ## Deriving the exchange rate

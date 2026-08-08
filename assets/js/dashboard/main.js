@@ -114,7 +114,7 @@
       ['Positions', fmt.num(data.positions.length), p.etf_count + ' funds'],
       ['Look-through holdings', fmt.num(lt.rows.length), 'distinct companies'],
       ['Distribution yield', p.distribution_yield ? fmt.pct(p.distribution_yield, 2) : '—', 'projected'],
-      ['Management fee', p.blended_mer == null ? '—' : fmt.pct(p.blended_mer, 2), 'not published by the broker'],
+      ['Management fee', p.blended_mer == null ? '—' : fmt.pct(p.blended_mer, 2), 'fund MERs, portfolio-weighted'],
       ['Base currency', data.meta.base_currency, '1 USD = ' + data.usdcad.toFixed(4) + ' CAD']
     ];
     document.getElementById('fs-facts').innerHTML = facts.map(([l, v, sub]) =>

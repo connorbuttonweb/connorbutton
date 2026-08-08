@@ -46,6 +46,27 @@ const TYPE_MAP = {
    chaining returns, so misclassifying one corrupts every published figure. */
 const FLOW_TYPES = new Set(['Deposit', 'Withdrawal', 'Transfer']);
 
+/* Each fund's published MER / total expense ratio, as a decimal. The brokerage
+   feed carries no fee data, so these are transcribed from the funds themselves
+   and are the one part of the fee figure that is hand-maintained. Recheck them
+   when a fact sheet is reloaded — they move rarely, but they do move.
+     XEQT.TO  0.20%  BlackRock. An all-in wrap fee: the underlying iShares MERs
+                     are already inside it and must not be added on top. (The
+                     management fee component was cut 0.18% -> 0.17% on
+                     2025-12-18; the published MER is still 0.20%.)
+     FINN.TO  1.09%  Fidelity, MER as at 2026-03-31 (management fee 0.85%).
+     VDY.TO   0.22%  Vanguard, MER at the most recent fund year end.
+     CHAT     0.75%  Roundhill, gross expense ratio.
+   Deliberately NOT stored in `etfs` — the fund-holdings skill replaces those
+   entries wholesale, so a fee parked there would vanish on the next fact sheet
+   load. */
+const FUND_MER = {
+  'XEQT.TO': 0.0020,
+  'FINN.TO': 0.0109,
+  'VDY.TO': 0.0022,
+  'CHAT': 0.0075
+};
+
 const OPTION_RE = /^[A-Z.]+\d{2}[A-Z]{3}\d{2}[CP][\d.]+$/;
 const SECRET_RE = /\b\d{7,}\b/;                       // account numbers
 const UUID_RE = /\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}\b/;
@@ -377,6 +398,33 @@ const dividends_projected = positions
 const income = positions.reduce(
   (a, p) => a + toCad(p) * ((quotes[p.symbol] && quotes[p.symbol].dividendYield) || 0), 0);
 
+/* The fee actually borne by the account: each fund's MER weighted by its share
+   of the WHOLE portfolio, not just of the fund sleeve. The stock, commodity,
+   option and cash carry no fund fee, so they belong in the denominator at 0% —
+   weighting across the funds alone would overstate the drag (0.59% vs 0.49% at
+   the time this was written). Recomputed every refresh because the weights move
+   with prices, which is why it is derived here rather than stored by hand. */
+function blendedMer() {
+  const funds = positions.filter(p => p.asset_type === 'ETF');
+  if (!funds.length || !totalValue) return { rate: null, dollars: 0 };
+  const missing = funds.filter(p => typeof FUND_MER[p.symbol] !== 'number').map(p => p.symbol);
+  if (missing.length) {
+    /* Blending only the funds we have fees for would publish a number lower
+       than what is really being paid, on a stat labelled "Management fee".
+       Showing nothing is the honest failure. */
+    console.error('WARNING: no MER on file for ' + missing.join(', ') +
+      ' — publishing no management fee rather than a blend that understates it. ' +
+      'Add them to FUND_MER in merge-portfolio.js.');
+    return { rate: null, dollars: 0 };
+  }
+  /* Dollars are kept unrounded: reporting rate x totalValue instead would carry
+     the 4-decimal rounding of the rate into the fee, overstating it by ~1%. */
+  const dollars = funds.reduce((a, p) => a + toCad(p) * FUND_MER[p.symbol], 0);
+  return { rate: r4(dollars / totalValue), dollars: dollars };
+}
+const mer = blendedMer();
+const blended_mer = mer.rate;
+
 /* ------------------------------------------------------------- 9. assemble */
 
 const out = {
@@ -395,10 +443,10 @@ const out = {
       'account is excluded.'
   },
   profile: {
-    /* Not published by the brokerage. Left null rather than estimated — this
-       page presents itself as a fund fact sheet, and a guessed fee would read
-       as a stated one. */
-    blended_mer: (prev.profile && prev.profile.blended_mer) || null,
+    /* Not in the brokerage feed: derived from each fund's own published MER
+       (FUND_MER above) weighted by portfolio share. Still never guessed — a
+       fund with no MER on file blanks the figure rather than estimating it. */
+    blended_mer: blended_mer,
     distribution_yield: marketValue ? r4(income / marketValue) : 0,
     holdings_count: positions.length,
     etf_count: positions.filter(p => p.asset_type === 'ETF').length,
@@ -437,7 +485,9 @@ const lines = [
   'activities       ' + activities.length + '   (+' + added + ' new)',
   'net flow         $' + netFlow.toFixed(2) + ' since ' + (lastSnapshot ? lastSnapshot.date : 'inception'),
   'history          ' + prevHistory.length + ' -> ' + history.length + ' snapshots',
-  'etfs preserved   ' + Object.keys(out.etfs).length + ' fund(s)'
+  'etfs preserved   ' + Object.keys(out.etfs).length + ' fund(s)',
+  'blended MER      ' + (blended_mer == null ? '—' : (blended_mer * 100).toFixed(2) + '%') +
+  '   ($' + mer.dollars.toFixed(2) + '/yr in fund fees, portfolio-weighted)'
 ];
 console.log(lines.join('\n'));
 
