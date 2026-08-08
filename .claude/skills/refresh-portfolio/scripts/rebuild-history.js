@@ -69,7 +69,9 @@ const WORKER = arg('worker', DEFAULT_WORKER);
 const DRY = argv.includes('--dry-run');
 const OFFLINE = argv.includes('--offline');
 const DIRECT = argv.includes('--direct');
-const DO_SNAPSHOT = argv.includes('--snapshot');
+/* Implies --snapshot: recording and then stopping is the only thing it means. */
+const SNAPSHOT_ONLY = argv.includes('--snapshot-only');
+const DO_SNAPSHOT = argv.includes('--snapshot') || SNAPSHOT_ONLY;
 
 const r2 = n => Math.round(n * 100) / 100;
 const r6 = n => Math.round(n * 1e6) / 1e6;
@@ -166,6 +168,35 @@ if (!history.snapshots.length) {
 history.meta = history.meta || {};
 history.meta.base_currency = 'CAD';
 history.meta.first_snapshot = history.snapshots[0].date;
+
+/* --------------------------------------------- 1b. record without repricing */
+
+/* Recording what is held needs no network; repricing does. Doing both in one
+   step means a blocked or unreachable price feed throws the snapshot away too —
+   and a day's holdings, unlike the daily series, can never be recovered
+   afterwards. That is the one loss this whole script exists to prevent, so
+   --snapshot-only writes what was captured and stops.
+   `daily`, `benchmark` and `hypothetical` are left exactly as they were, and
+   meta.as_of / price_source are deliberately NOT advanced: they describe the
+   priced series, which this run did not rebuild. Advancing them would date a
+   stale curve to today. A later run with network reprices every snapshot
+   banked in the meantime and catches the series up completely. */
+if (SNAPSHOT_ONLY) {
+  history.meta.reprice_pending = AS_OF;
+  console.log('snapshots        ' + priorSnapshots + ' -> ' + history.snapshots.length +
+    '   (recorded through ' + AS_OF + ')');
+  console.log('flows            ' + (history.flows || []).length);
+  console.log('daily            ' + priorDaily + ' day(s), UNCHANGED — repricing deferred');
+  console.log('                 run rebuild-history.js without --snapshot from a session that');
+  console.log('                 can reach the price feed to catch the daily series up.');
+  if (DRY) {
+    console.log('\n(DRY RUN — nothing written)');
+    process.exit(0);
+  }
+  fs.writeFileSync(HISTORY, JSON.stringify(history, null, 1));
+  console.log('\nwrote ' + HISTORY + ' (' + (fs.statSync(HISTORY).size / 1024).toFixed(1) + ' KB)');
+  process.exit(0);
+}
 
 /* ------------------------------------------------- 2. which symbols to price */
 
