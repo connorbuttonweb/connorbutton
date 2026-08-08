@@ -1,0 +1,86 @@
+name: Process portfolio snapshot
+
+# The Questrade routine runs in a sandbox with no git push credentials and a
+# 25,000-token cap on its only write channel (the GitHub MCP file-write
+# tool), so it can't push portfolio.json (~230,000 tokens) directly. Instead
+# it writes just the small raw pull to assets/data/pending-snapshot.json.
+# This workflow — on a runner with real push access and open egress — does
+# the actual merge, reprice and publish.
+
+on:
+  push:
+    branches: [main]
+    paths: ['assets/data/pending-snapshot.json']
+  workflow_dispatch: {}
+
+permissions:
+  contents: write
+
+concurrency:
+  group: portfolio-data-write
+  cancel-in-progress: false
+
+jobs:
+  process:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Check for a pending snapshot
+        id: check
+        run: |
+          if [ -f assets/data/pending-snapshot.json ]; then
+            echo "found=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "found=false" >> "$GITHUB_OUTPUT"
+            echo "No assets/data/pending-snapshot.json — nothing to process."
+          fi
+
+      - name: Record pre-merge counts
+        if: steps.check.outputs.found == 'true'
+        id: prev
+        run: |
+          node -e "
+            const p = require('./assets/data/portfolio.json');
+            const fs = require('fs');
+            fs.appendFileSync(process.env.GITHUB_OUTPUT,
+              'history_count=' + p.history.portfolio.length + '\n' +
+              'etf_count=' + Object.keys(p.etfs).length + '\n');
+          "
+
+      - name: Merge snapshot into portfolio.json
+        if: steps.check.outputs.found == 'true'
+        run: node .claude/skills/refresh-portfolio/scripts/merge-portfolio.js assets/data/pending-snapshot.json assets/data/portfolio.json
+
+      - name: Reprice daily history
+        if: steps.check.outputs.found == 'true'
+        run: |
+          AS_OF="$(node -e "console.log(require('./assets/data/portfolio.json').meta.as_of)")"
+          node .claude/skills/refresh-portfolio/scripts/rebuild-history.js --snapshot --to "$AS_OF" || {
+            echo "Repricing failed (price feed likely unavailable) — banking the snapshot without it."
+            node .claude/skills/refresh-portfolio/scripts/rebuild-history.js --snapshot-only
+          }
+
+      - name: Validate
+        if: steps.check.outputs.found == 'true'
+        run: |
+          node .claude/skills/refresh-portfolio/scripts/validate-portfolio.js assets/data/portfolio.json \
+            --prev-history-count "${{ steps.prev.outputs.history_count }}" \
+            --prev-etf-count "${{ steps.prev.outputs.etf_count }}"
+
+      - name: Publish
+        if: steps.check.outputs.found == 'true'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          AS_OF="$(node -e "console.log(require('./assets/data/portfolio.json').meta.as_of)")"
+          git add assets/data/portfolio.json assets/data/history.json
+          git rm --quiet assets/data/pending-snapshot.json
+          git commit -m "data: portfolio refresh $AS_OF"
+          git push
