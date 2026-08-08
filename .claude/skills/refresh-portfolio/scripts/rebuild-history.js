@@ -482,11 +482,20 @@ function buildSeries(prices) {
   const out = Object.assign({}, history, {
     meta: Object.assign({}, history.meta, {
       generated_at: new Date().toISOString(),
-      as_of: TO,
+      /* The actual last priced day, not the requested TO — dates[] (and so
+         daily[]) only contains days a real price was fetched for, while TO is
+         just the requested upper bound. A caller asking to reprice "through
+         today" on a market holiday would otherwise get a stamp claiming
+         prices exist for a day that has none. */
+      as_of: daily[daily.length - 1].date,
       price_source: OFFLINE ? 'cached' : 'yahoo via market-proxy',
       approximated: approximated,
       note: 'Holdings are assumed constant between snapshots, so a trade is ' +
-        'recognised at the next refresh rather than on its trade date.'
+        'recognised at the next refresh rather than on its trade date.',
+      /* Cleared on every successful full reprice — Object.assign otherwise
+         carries a flag set by an earlier --snapshot-only run forward forever,
+         even once a later run has actually caught the series up. */
+      reprice_pending: undefined
     }),
     daily: daily,
     benchmark: benchmark,
