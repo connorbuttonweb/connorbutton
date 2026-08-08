@@ -11,7 +11,7 @@ permissions:
   contents: write
 
 concurrency:
-  group: reprice-portfolio
+  group: portfolio-data-write
   cancel-in-progress: false
 
 jobs:
