@@ -18,7 +18,7 @@ DASH.sections = DASH.sections || {};
   const DIMENSIONS = [
     { key: 'sector', label: 'Sector' },
     { key: 'geography', label: 'Geography' },
-    { key: 'market_cap_bucket', label: 'Market Cap' },
+    { key: 'heldVia', label: 'Held Via' },
     { key: 'currency', label: 'Currency' }
   ];
 
@@ -76,7 +76,10 @@ DASH.sections = DASH.sections || {};
 
       el.querySelector('#al-basis').innerHTML =
         'Computed by looking through every fund to the companies it holds, then combining those with ' +
-        'directly-held positions. Percentages are of total portfolio value.';
+        'directly-held positions. Percentages are of total portfolio value.' +
+        (dim.key === 'heldVia'
+          ? ' A holding split across more than one fund is grouped under whichever fund contributes the largest share of it.'
+          : '');
 
       T.render(el.querySelector('#al-table'), {
         title: dim.label.toUpperCase() + ' MIX',

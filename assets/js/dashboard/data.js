@@ -199,6 +199,12 @@ window.DASH = window.DASH || {};
         : r.weight >= CONCENTRATION_ALERT ? 'alert'
           : r.weight >= CONCENTRATION_WARN ? 'warn' : null;
       r.sources.sort((a, b) => b.value - a.value);
+      /* Which single fund actually drives this holding, as opposed to which fund
+         is largest overall. Mirrors the CASH/UNRESOLVED special-casing above so
+         those sentinel buckets read the same way across every dimension. */
+      r.heldVia = r.key === CASH ? 'Cash'
+        : r.key === UNRESOLVED ? 'Unresolved'
+          : (r.sources[0] && r.sources[0].etf) || 'Direct';
     });
     rows.sort((a, b) => b.value - a.value);
     return { rows: rows, total: total, byKey: map };
