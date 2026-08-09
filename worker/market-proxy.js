@@ -3,9 +3,6 @@
  * Yahoo Finance CORS proxy for the ticker bar + market leaders panel
  * on connorbutton.ca/search/, and daily closes for the portfolio dashboard.
  *
- * This is the deployed source, copied out of Cloudflare so it is versioned here.
- * Keep this file in step with the worker whenever either changes.
- *
  * Routes
  *   /ticker-quote?symbol=XEQT.TO
  *       One live quote. CONTRACT IS FIXED — assets/js/ticker.js reads
