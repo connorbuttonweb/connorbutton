@@ -1,0 +1,8 @@
+{
+  "name": "connorbuttonweb-github-io",
+  "private": true,
+  "description": "Static site, served as-is by GitHub Pages. `npm test` runs a local preview server (serve.js) — no install step, no dependencies.",
+  "scripts": {
+    "test": "node serve.js"
+  }
+}

@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes">
   <title>Portfolio Fact Sheet — Connor Button</title>
   <link rel="icon" type="image/png" href="/assets/images/favicon.png" />
-  <link rel="stylesheet" href="/assets/css/main.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="/assets/css/main.min.css" />
+  <link rel="stylesheet" href="/assets/css/fontawesome.min.css">
 </head>
 
 <body>
@@ -51,16 +51,9 @@
     </div>
   </section>
 
-  <script src="/assets/js/dashboard/data.js"></script>
-  <script src="/assets/js/dashboard/metrics.js"></script>
-  <script src="/assets/js/dashboard/history.js"></script>
-  <script src="/assets/js/dashboard/charts.js"></script>
-  <script src="/assets/js/dashboard/table.js"></script>
-  <script src="/assets/js/dashboard/sections/performance.js"></script>
-  <script src="/assets/js/dashboard/sections/allocation.js"></script>
-  <script src="/assets/js/dashboard/sections/holdings.js"></script>
-  <script src="/assets/js/dashboard/sections/distributions.js"></script>
-  <script src="/assets/js/dashboard/main.js"></script>
+  <!-- Bundled from assets/js/dashboard/**/*.js — edit those, not this file.
+       Regenerate: cd asset-pipeline && npm run build:js -->
+  <script src="/assets/js/dashboard.bundle.min.js"></script>
   <script src="/assets/js/nav.js"></script>
 </body>
 </html>

@@ -6,6 +6,12 @@
    Classic script + a shared window.DASH namespace, matching the
    site's existing convention (nav.js / ticker.js), so no build
    step and no module loader are involved.
+
+   This file (and the other 9 under assets/js/dashboard/**) is
+   bundled+minified into assets/js/dashboard.bundle.min.js, which
+   is what dashboard/index.html actually loads. After editing any
+   of these 10 files, regenerate the bundle:
+   cd asset-pipeline && npm run build:js
    ========================================================== */
 window.DASH = window.DASH || {};
 
