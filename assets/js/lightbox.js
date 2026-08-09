@@ -38,7 +38,7 @@
     }
 
     // 3. Gallery lightbox (images + videos)
-    const galleries = Array.from(document.querySelectorAll('.gallery'));
+    const galleries = Array.from(document.querySelectorAll('.gallery, [data-gallery]'));
     const lightbox = document.getElementById('lightbox');
     const lbContent = document.getElementById('lbContent');
     const lbCaption = document.getElementById('lbCaption');

@@ -1725,6 +1725,12 @@ body {
   box-shadow: var(--shadow-md);
 }
 
+.about-photo-grid figure {
+  margin: 0;
+  height: 100%;
+  cursor: zoom-in;
+}
+
 /* text on the right */
 .about-text h2 {
   margin-right: 40px;
