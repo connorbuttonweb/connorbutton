@@ -95,5 +95,20 @@
   </section>
 
   <script src="/assets/js/nav.js"></script>
+  <script>
+    // Easter egg: type "iddqd" then Enter to find a hidden page.
+    (function () {
+      var code = 'iddqd';
+      var buffer = '';
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Enter') {
+          if (buffer === code) window.location.href = '/half-baked/';
+          buffer = '';
+          return;
+        }
+        if (e.key.length === 1) buffer = (buffer + e.key).slice(-code.length);
+      });
+    })();
+  </script>
 </body>
 </html>
