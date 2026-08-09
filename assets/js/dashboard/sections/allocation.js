@@ -64,7 +64,7 @@ DASH.sections = DASH.sections || {};
         '<button type="button" class="btn btn--sm ' + (d.key === dim.key ? 'btn--primary' : 'btn--outline') +
         '" data-dim="' + d.key + '">' + fmt.esc(d.label) + '</button>').join('');
 
-      const rows = D.rollup(lt.rows, dim.key);
+      const rows = dim.key === 'heldVia' ? D.rollupBySource(lt.rows) : D.rollup(lt.rows, dim.key);
       const slices = D.topN(rows, 9).map((x, i) => Object.assign({}, x, { color: charts.colorFor(x.key, i) }));
 
       charts.donut(el.querySelector('#al-donut'), slices, {
@@ -78,7 +78,7 @@ DASH.sections = DASH.sections || {};
         'Computed by looking through every fund to the companies it holds, then combining those with ' +
         'directly-held positions. Percentages are of total portfolio value.' +
         (dim.key === 'heldVia'
-          ? ' A holding split across more than one fund is grouped under whichever fund contributes the largest share of it.'
+          ? ' A company held through more than one fund counts toward each of them, in proportion to what each actually contributed — so every fund’s slice matches its own position weight.'
           : '');
 
       T.render(el.querySelector('#al-table'), {

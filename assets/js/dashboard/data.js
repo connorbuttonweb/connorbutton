@@ -199,12 +199,6 @@ window.DASH = window.DASH || {};
         : r.weight >= CONCENTRATION_ALERT ? 'alert'
           : r.weight >= CONCENTRATION_WARN ? 'warn' : null;
       r.sources.sort((a, b) => b.value - a.value);
-      /* Which single fund actually drives this holding, as opposed to which fund
-         is largest overall. Mirrors the CASH/UNRESOLVED special-casing above so
-         those sentinel buckets read the same way across every dimension. */
-      r.heldVia = r.key === CASH ? 'Cash'
-        : r.key === UNRESOLVED ? 'Unresolved'
-          : (r.sources[0] && r.sources[0].etf) || 'Direct';
     });
     rows.sort((a, b) => b.value - a.value);
     return { rows: rows, total: total, byKey: map };
@@ -233,6 +227,27 @@ window.DASH = window.DASH || {};
       acc.set(k, (acc.get(k) || 0) + r.value);
     });
     const total = rows.reduce((a, r) => a + r.value, 0);
+    return Array.from(acc.entries())
+      .map(([label, value]) => ({ key: label, label: label, value: value, weight: total ? value / total : 0 }))
+      .sort((a, b) => b.value - a.value);
+  }
+
+  /* Same look-through rows, but grouped by which vehicle the money actually sits
+     in rather than by a trait of the underlying company. A company held through
+     two funds has two sources on its row, so each source's own dollar value is
+     credited to its own fund/Direct/Cash — never the whole row to one "winner" —
+     which is what makes every fund's slice add up to exactly its own position
+     weight, the same figure the Positions Held table reports. */
+  function rollupBySource(rows) {
+    const acc = new Map();
+    let total = 0;
+    rows.forEach(r => {
+      r.sources.forEach(s => {
+        const key = s.etf || (s.label === 'Held directly' ? 'Direct' : 'Cash');
+        acc.set(key, (acc.get(key) || 0) + s.value);
+        total += s.value;
+      });
+    });
     return Array.from(acc.entries())
       .map(([label, value]) => ({ key: label, label: label, value: value, weight: total ? value / total : 0 }))
       .sort((a, b) => b.value - a.value);
@@ -275,6 +290,7 @@ window.DASH = window.DASH || {};
     scope: scope,
     buildLookThrough: buildLookThrough,
     rollup: rollup,
+    rollupBySource: rollupBySource,
     rollupPositions: rollupPositions,
     topN: topN
   };
