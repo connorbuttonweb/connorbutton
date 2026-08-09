@@ -4,3 +4,17 @@
 .Ruserdata
 
 node_modules/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor
+.vscode/
+
+# Claude Code local settings (personal, per-machine — not shared)
+.claude/settings.local.json
+
+# npm
+npm-debug.log*
