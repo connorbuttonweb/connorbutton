@@ -23,7 +23,8 @@
    "PXT21AUG26C24.00.MX",
    "SPCX15JAN27C200.00"
   ],
-  "note": "Holdings are assumed constant between snapshots, so a trade is recognised at the next refresh rather than on its trade date."
+  "note": "Holdings are assumed constant between snapshots, so a trade is recognised at the next refresh rather than on its trade date.",
+  "reprice_pending": "2026-08-10"
  },
  "snapshots": [
   {
@@ -2938,12 +2939,66 @@
      "flat": true
     }
    }
+  },
+  {
+   "date": "2026-08-10",
+   "cash": 831.79,
+   "positions": {
+    "XEQT.TO": {
+     "qty": 200,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 46.05
+    },
+    "FINN.TO": {
+     "qty": 262,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 33
+    },
+    "VDY.TO": {
+     "qty": 59,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 77.45
+    },
+    "CHAT": {
+     "qty": 51,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 89
+    },
+    "GOLD.QM": {
+     "qty": 0.3,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 4393.759
+    },
+    "TSLA": {
+     "qty": 3,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 330.1354
+    },
+    "SPCX": {
+     "qty": 7,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 136.3
+    },
+    "BEPC": {
+     "qty": 20,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 33.7
+    }
+   }
   }
  ],
  "flows": [
   {
    "date": "2026-05-14",
-   "amount": 10857
+   "amount": 10253
   },
   {
    "date": "2026-05-15",
@@ -2959,7 +3014,7 @@
   },
   {
    "date": "2026-06-08",
-   "amount": 11402.77
+   "amount": 11474.48
   },
   {
    "date": "2026-06-15",

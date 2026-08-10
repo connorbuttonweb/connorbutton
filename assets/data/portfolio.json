@@ -1,7 +1,7 @@
 {
  "meta": {
-  "generated_at": "2026-08-08T20:54:51.007Z",
-  "as_of": "2026-08-07",
+  "generated_at": "2026-08-10T22:44:24.235Z",
+  "as_of": "2026-08-10",
   "base_currency": "CAD",
   "fx": {
    "USDCAD": 1.3942
@@ -13,8 +13,8 @@
  },
  "profile": {
   "blended_mer": 0.0049,
-  "distribution_yield": 0.0139,
-  "holdings_count": 7,
+  "distribution_yield": 0.0128,
+  "holdings_count": 8,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 3514.62,
+   "cash": 831.79,
    "currency": "CAD",
-   "buying_power": 3437.28
+   "buying_power": 813.48
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 44.1272,
-   "price": 46.1,
+   "price": 46.05,
    "prev_close": 46.1,
-   "market_value": 9220,
-   "open_pnl": 394.56,
+   "market_value": 9210,
+   "open_pnl": 384.56,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 262,
    "avg_cost": 31.0831,
-   "price": 32.88,
+   "price": 33,
    "prev_close": 32.88,
-   "market_value": 8614.56,
-   "open_pnl": 470.79,
+   "market_value": 8646,
+   "open_pnl": 502.23,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 59,
    "avg_cost": 73.9457,
-   "price": 77.07,
+   "price": 77.45,
    "prev_close": 77.07,
-   "market_value": 4547.13,
-   "open_pnl": 184.33,
+   "market_value": 4569.55,
+   "open_pnl": 206.75,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 51,
    "avg_cost": 85.1785,
-   "price": 89.11,
-   "prev_close": 89.11,
-   "market_value": 4544.61,
-   "open_pnl": 200.51,
+   "price": 89,
+   "prev_close": 90.23,
+   "market_value": 4539,
+   "open_pnl": 194.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -99,15 +99,47 @@
    "account_id": "main",
    "asset_type": "Commodity",
    "currency": "USD",
-   "quantity": 0.2,
-   "avg_cost": 4265.2306,
-   "price": 4344.6299,
+   "quantity": 0.3,
+   "avg_cost": 4304.4437,
+   "price": 4393.759,
    "prev_close": 4344.6299,
-   "market_value": 868.93,
-   "open_pnl": 15.88,
+   "market_value": 1318.13,
+   "open_pnl": 26.79,
    "sector": "Commodities",
    "geography": "Global",
    "market_cap_bucket": "n/a"
+  },
+  {
+   "symbol": "TSLA",
+   "name": "TSLA",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 3,
+   "avg_cost": 331.0654,
+   "price": 330.1354,
+   "prev_close": 327.8354,
+   "market_value": 990.41,
+   "open_pnl": -2.79,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "SPCX",
+   "name": "SPCX",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 7,
+   "avg_cost": 134.1753,
+   "price": 136.3,
+   "prev_close": 130.67,
+   "market_value": 954.1,
+   "open_pnl": 14.87,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
   },
   {
    "symbol": "BEPC",
@@ -117,30 +149,13 @@
    "currency": "USD",
    "quantity": 20,
    "avg_cost": 33.6035,
-   "price": 33.74,
-   "prev_close": 33.74,
-   "market_value": 674.8,
-   "open_pnl": 2.73,
+   "price": 33.7,
+   "prev_close": 34.22,
+   "market_value": 674,
+   "open_pnl": 1.93,
    "sector": "Utilities",
    "geography": "Canada",
    "market_cap_bucket": "Mid"
-  },
-  {
-   "symbol": "AGI15JAN27C34.00",
-   "name": "Alamos Gold — $34 call, expires 2027-01-15",
-   "account_id": "main",
-   "asset_type": "Option",
-   "currency": "USD",
-   "quantity": 1,
-   "avg_cost": 2.6,
-   "price": 4.58,
-   "prev_close": 4.58,
-   "market_value": 458,
-   "open_pnl": 198,
-   "sector": "Materials",
-   "geography": "Canada",
-   "market_cap_bucket": "n/a",
-   "multiplier": 100
   }
  ],
  "etfs": {
@@ -18283,6 +18298,114 @@
  },
  "activities": [
   {
+   "uid": "t_e00e1c48f9",
+   "date": "2026-08-07",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION TO USD",
+   "amount": 0,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_b9e61dfc60",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CALL SPCX 01/15/27 200 SPACE EXPLORATION TECHNOLOGIES WE ACTED AS AGENT",
+   "amount": 629.98,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_4ce3283cdf",
+   "date": "2026-08-07",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION FROM CAD BOOK VALUE: $437.29 CNV@ 1.4014",
+   "amount": 0,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_165415962b",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+   "amount": 757.24,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_bfbfc7e351",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": 1107.9,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_ce888b7166",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT",
+   "amount": -443.45,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_b7d9a254b8",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SNOWFLAKE INC COMMON STOCK WE ACTED AS AGENT",
+   "amount": 326.17,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_6b629ed984",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
+   "amount": 430.6,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_843e137234",
+   "date": "2026-08-07",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SNOWFLAKE INC COMMON STOCK WE ACTED AS AGENT",
+   "amount": -326.76,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_1cb68dd4ce",
    "date": "2026-08-06",
    "type": "Other",
@@ -20782,28 +20905,28 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7215,
+   "annual_rate_per_share": 0.7207,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1651,
+   "annual_rate_per_share": 2.1757,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7021,
+   "annual_rate_per_share": 1.7,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "BEPC",
-   "annual_rate_per_share": 1.5863,
+   "annual_rate_per_share": 1.5844,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -20825,69 +20948,66 @@
     "date": "2026-08-07",
     "value": 35023.22,
     "net_flow": 0
+   },
+   {
+    "date": "2026-08-10",
+    "value": 35074.08,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
     {
-     "date": "2026-05-01",
-     "level": 174.29
-    },
-    {
-     "date": "2026-05-08",
-     "level": 179.42
-    },
-    {
-     "date": "2026-05-15",
+     "date": "2026-05-10",
      "level": 180.84
     },
     {
-     "date": "2026-05-22",
+     "date": "2026-05-17",
      "level": 183.2
     },
     {
-     "date": "2026-05-29",
+     "date": "2026-05-24",
      "level": 185.61
     },
     {
-     "date": "2026-06-05",
+     "date": "2026-05-31",
      "level": 182.9
     },
     {
-     "date": "2026-06-12",
+     "date": "2026-06-07",
      "level": 184.62
     },
     {
-     "date": "2026-06-19",
+     "date": "2026-06-14",
      "level": 188.36
     },
     {
-     "date": "2026-06-26",
+     "date": "2026-06-21",
      "level": 184.37
     },
     {
-     "date": "2026-07-03",
+     "date": "2026-06-28",
      "level": 189.34
     },
     {
-     "date": "2026-07-10",
+     "date": "2026-07-05",
      "level": 190.09
     },
     {
-     "date": "2026-07-17",
+     "date": "2026-07-12",
      "level": 185.25
     },
     {
-     "date": "2026-07-24",
+     "date": "2026-07-19",
      "level": 185.28
     },
     {
-     "date": "2026-07-31",
+     "date": "2026-07-26",
      "level": 186.3
     },
     {
-     "date": "2026-08-07",
-     "level": 191.7
+     "date": "2026-08-02",
+     "level": 191.82
     }
    ]
   }
