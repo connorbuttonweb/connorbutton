@@ -1,0 +1,191 @@
+/* ==========================================================
+   project new-day — shared global stylesheet.
+   Loaded as-is (no build/minify step) by every page under
+   half-baked/. Intentionally independent of the main site's
+   assets/css/main.css.
+   ========================================================== */
+
+:root {
+  --nd-bg: #000;
+  --nd-fg: #fff;
+}
+
+html, body {
+  margin: 0;
+  height: 100%;
+  background: var(--nd-bg);
+  color: var(--nd-fg);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+}
+
+/* Shared backdrop for every page in the sub-site: near-black with a
+   fine dot grid, framed by a vignette (the ::before overlay below).
+   The hub's WebGL canvas clears transparent so this shows through. */
+body {
+  background-color: #0b0f14;
+  background-image: radial-gradient(rgba(210, 225, 245, 0.09) 1px, transparent 1.4px);
+  background-size: 24px 24px;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background: radial-gradient(ellipse 75% 65% at 50% 45%, transparent 40%, rgba(0, 0, 0, 0.5) 100%);
+}
+
+body.nd-canvas-page {
+  overflow: hidden;
+}
+
+/* The scene starts invisible so the page paints as bare backdrop, then
+   materializes once main.js flips on .nd-live -- and dissolves back into
+   the backdrop (.nd-canvas-out) during a departure zoom. The backdrop is
+   identical on every page, so both ends of a navigation meet on the
+   same frame. */
+#nd-canvas {
+  position: fixed;
+  inset: 0;
+  display: block;
+  touch-action: none;
+  user-select: none;
+  opacity: 0;
+  transition: opacity 0.6s ease;
+}
+
+#nd-canvas.nd-live {
+  opacity: 1;
+}
+
+#nd-canvas.nd-canvas-out {
+  opacity: 0;
+  transition-duration: 0.35s;
+}
+
+/* Departure is committed: input goes dead and the nav links dissolve
+   with the scene, so the pre-navigation beat is bare background.
+   (page.js reuses this class for the project-page exit.) */
+body.nd-departing #nd-canvas,
+body.nd-departing .nd-back,
+body.nd-departing .nd-coins a {
+  pointer-events: none;
+}
+
+body.nd-departing .nd-back-hotspot,
+body.nd-departing .nd-coins-hotspot {
+  opacity: 0;
+}
+
+/* Back link wrapper: layout-only. Pointer events pass through to the
+   canvas everywhere except the link itself; the wrapper's opacity
+   carries the load fade-in and the departure fade-out. */
+.nd-back-hotspot {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 160px;
+  height: 110px;
+  z-index: 50;
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  animation: nd-ui-in 0.9s ease;
+}
+
+@keyframes nd-ui-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Same holographic light-text treatment as the scene itself -- no box.
+   Color family mirrors assets/js/palette.js (kept in sync by hand).
+   Always lightly visible; brightens to full glow on hover or keyboard
+   focus. */
+.nd-back-hotspot .nd-back,
+.nd-coins a {
+  color: #dceeff;
+  text-decoration: none;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px rgba(159, 208, 255, 0.8),
+    0 0 22px rgba(159, 208, 255, 0.35);
+  pointer-events: auto;
+  opacity: 0.38;
+  transition: opacity 0.35s ease;
+}
+
+.nd-back-hotspot .nd-back:hover,
+.nd-back-hotspot .nd-back:focus,
+.nd-coins a:hover,
+.nd-coins a:focus {
+  opacity: 1;
+}
+
+/* Coin index: always lightly visible on the far right edge, vertically
+   centered; individual entries brighten on hover (see the shared link
+   rules above). Entries are injected from projects.js. The wrapper is
+   layout-only -- pointer events pass through to the canvas except on
+   the links themselves. */
+.nd-coins-hotspot {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  box-sizing: border-box;
+  min-width: 90px;
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding: 20px;
+  pointer-events: none;
+  transition: opacity 0.35s ease;
+  animation: nd-ui-in 0.9s ease;
+}
+
+.nd-coins {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 14px;
+}
+
+/* Project pages: content emerges from the bare backdrop after a beat
+   (mirroring the hub's dissolve) and fades back into it when leaving
+   via the back link (page.js adds .nd-content-out). The wrapper is the
+   full-viewport layer; anything inside is flex-centered by default. */
+.nd-page-content {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 1;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: nd-content-in 0.75s ease;
+}
+
+@keyframes nd-content-in {
+  0%   { opacity: 0; transform: scale(0.985); }
+  33%  { opacity: 0; transform: scale(0.985); } /* hold on bare background */
+  100% { opacity: 1; transform: scale(1); }
+}
+
+.nd-page-content.nd-content-out {
+  opacity: 0;
+  transform: scale(0.985);
+}
+
+/* Fabricated-steel PODS wordmark (inline SVG in pods/index.html).
+   Scales with the viewport; the viewBox keeps the aspect ratio. */
+.nd-wordmark {
+  display: block;
+  width: min(88vw, 880px);
+  height: auto;
+}

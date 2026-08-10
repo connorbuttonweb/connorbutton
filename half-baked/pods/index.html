@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=yes" />
+  <meta name="robots" content="noindex, nofollow" />
+  <title>PODS</title>
+  <link rel="stylesheet" href="/half-baked/assets/css/newday.css" />
+</head>
+<body>
+  <div class="nd-back-hotspot">
+    <a class="nd-back" href="/half-baked/">&larr; Back</a>
+  </div>
+
+  <main class="nd-page-content">
+    <!-- Fabricated-steel wordmark, drawn rather than photographed: every
+         glyph is a straight-edged polygon with 45-degree chamfers, so the
+         whole thing is resolution-independent and adds no binary to the
+         repo. Plate weathering comes from feTurbulence; rivet rows are a
+         single tiling pattern clipped to the letters, so studs only land
+         on metal and never inside a counter. -->
+    <!-- aria-label rather than a <title> child: <title> names the graphic for
+         assistive tech but browsers also surface it as a hover tooltip. -->
+    <svg class="nd-wordmark" viewBox="0 0 940 370" role="img" aria-label="PODS">
+      <defs>
+        <path id="nd-g-p" fill-rule="evenodd" clip-rule="evenodd"
+              d="M16 0 164 0 180 16 180 128 164 144 58 144 58 244 42 260 16 260 0 244 0 16Z
+                 M70 40 128 40 140 52 140 92 128 104 70 104 58 92 58 52Z" />
+        <path id="nd-g-o" fill-rule="evenodd" clip-rule="evenodd"
+              d="M16 0 174 0 190 16 190 244 174 260 16 260 0 244 0 16Z
+                 M66 52 124 52 138 66 138 194 124 208 66 208 52 194 52 66Z" />
+        <path id="nd-g-d" fill-rule="evenodd" clip-rule="evenodd"
+              d="M16 0 140 0 190 50 190 210 140 260 16 260 0 244 0 16Z
+                 M64 52 104 52 138 86 138 174 104 208 64 208 52 196 52 64Z" />
+        <!-- S is the fussy one. Two things stop it collapsing into a 5:
+             thinner strokes than the other glyphs (48 vs 58, which keeps both
+             counters a full 58 open instead of a cramped 43), and the hooked
+             terminals -- the top-right descends past the bar's underside and
+             the bottom-left rises above it. Blunt terminals read as a 5 no
+             matter how the corners are chamfered. -->
+        <path id="nd-g-s" fill-rule="evenodd" clip-rule="evenodd"
+              d="M34 0 164 0 180 16 180 62 166 76 152 76 152 48 52 48 52 106 164 106
+                 180 122 180 226 146 260 16 260 0 244 0 198 14 184 28 184 28 212
+                 128 212 128 154 16 154 0 138 0 34Z" />
+
+        <g id="nd-word">
+          <use href="#nd-g-p" x="40" y="40" />
+          <use href="#nd-g-o" x="260" y="40" />
+          <use href="#nd-g-d" x="490" y="40" />
+          <use href="#nd-g-s" x="720" y="40" />
+        </g>
+
+        <clipPath id="nd-word-clip">
+          <use href="#nd-g-p" x="40" y="40" clip-rule="evenodd" />
+          <use href="#nd-g-o" x="260" y="40" clip-rule="evenodd" />
+          <use href="#nd-g-d" x="490" y="40" clip-rule="evenodd" />
+          <use href="#nd-g-s" x="720" y="40" clip-rule="evenodd" />
+        </clipPath>
+
+        <!-- Cool-biased steel: the reference is warm rust on white, but this
+             page is ice-blue on near-black, so rust stays an accent. -->
+        <linearGradient id="nd-steel" gradientUnits="userSpaceOnUse" x1="60" y1="20" x2="880" y2="330">
+          <stop offset="0" stop-color="#b4bdc3" />
+          <stop offset="0.26" stop-color="#727b82" />
+          <stop offset="0.6" stop-color="#464e55" />
+          <stop offset="1" stop-color="#262d33" />
+        </linearGradient>
+        <linearGradient id="nd-side" gradientUnits="userSpaceOnUse" x1="0" y1="40" x2="0" y2="310">
+          <stop offset="0" stop-color="#3c454c" />
+          <stop offset="0.55" stop-color="#232a30" />
+          <stop offset="1" stop-color="#141a1e" />
+        </linearGradient>
+        <linearGradient id="nd-bevel" gradientUnits="userSpaceOnUse" x1="60" y1="20" x2="700" y2="320">
+          <stop offset="0" stop-color="#c4ced5" />
+          <stop offset="0.45" stop-color="#818b93" />
+          <stop offset="1" stop-color="#3e464c" />
+        </linearGradient>
+        <radialGradient id="nd-rivet-face" cx="0.34" cy="0.28" r="0.85">
+          <stop offset="0" stop-color="#d2d9de" />
+          <stop offset="0.45" stop-color="#828b91" />
+          <stop offset="1" stop-color="#363d43" />
+        </radialGradient>
+        <radialGradient id="nd-ground" cx="0.5" cy="0.5" r="0.5">
+          <stop offset="0" stop-color="#000" stop-opacity="0.55" />
+          <stop offset="1" stop-color="#000" stop-opacity="0" />
+        </radialGradient>
+
+        <!-- One tile = one stud; a rect the height of the tile draws a whole
+             row, and the letter clip decides which studs survive. -->
+        <pattern id="nd-rivet-h" patternUnits="userSpaceOnUse" x="0" y="0" width="39" height="19">
+          <circle cx="19.5" cy="10.2" r="4.6" fill="#1e2429" opacity="0.62" />
+          <circle cx="19.5" cy="9.5" r="3.9" fill="url(#nd-rivet-face)" />
+          <circle cx="18.3" cy="8.3" r="1.15" fill="#eef3f6" opacity="0.55" />
+        </pattern>
+        <pattern id="nd-rivet-v" patternUnits="userSpaceOnUse" x="0" y="0" width="19" height="39">
+          <circle cx="10.2" cy="19.5" r="4.6" fill="#1e2429" opacity="0.62" />
+          <circle cx="9.5" cy="18.8" r="3.9" fill="url(#nd-rivet-face)" />
+          <circle cx="8.3" cy="17.6" r="1.15" fill="#eef3f6" opacity="0.55" />
+        </pattern>
+
+        <!-- Broad dark staining, oxide blooms, then fine tooth. -->
+        <filter id="nd-scorch" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.006" numOctaves="4" seed="23" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.05
+                                               0 0 0 0 0.055
+                                               0 0 0 0 0.065
+                                               1.5 0 0 0 -0.68" />
+        </filter>
+        <filter id="nd-rust" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.013" numOctaves="5" seed="11" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.47
+                                               0 0 0 0 0.27
+                                               0 0 0 0 0.13
+                                               1.7 0 0 0 -0.86" />
+        </filter>
+        <filter id="nd-grain" x="-5%" y="-5%" width="110%" height="110%">
+          <feTurbulence type="fractalNoise" baseFrequency="0.75" numOctaves="3" seed="5" />
+          <feColorMatrix type="matrix" values="0 0 0 0 0.07
+                                               0 0 0 0 0.08
+                                               0 0 0 0 0.09
+                                               0.6 0 0 0 -0.28" />
+        </filter>
+      </defs>
+
+      <ellipse cx="462" cy="322" rx="392" ry="19" fill="url(#nd-ground)" />
+
+      <!-- Extruded body, offset back-left so each letter shows a side face. -->
+      <use href="#nd-word" transform="translate(-23,11)" fill="url(#nd-side)" />
+      <use href="#nd-word" transform="translate(-23,11)" fill="none" stroke="#0a0e11" stroke-width="2" opacity="0.9" />
+
+      <g clip-path="url(#nd-word-clip)">
+        <rect width="940" height="370" fill="url(#nd-steel)" />
+
+        <!-- Panel-to-panel tonal drift, aligned to the seam grid: without it
+             every plate reads as one continuous sheet. -->
+        <g>
+          <rect x="0" y="40" width="940" height="110" fill="#dce4e9" opacity="0.07" />
+          <rect x="0" y="240" width="940" height="60" fill="#05080a" opacity="0.22" />
+          <rect x="260" y="40" width="96" height="110" fill="#05080a" opacity="0.16" />
+          <rect x="490" y="150" width="58" height="90" fill="#dce4e9" opacity="0.06" />
+          <rect x="720" y="150" width="58" height="90" fill="#05080a" opacity="0.14" />
+          <rect x="98" y="150" width="122" height="90" fill="#05080a" opacity="0.1" />
+        </g>
+
+        <rect width="940" height="370" filter="url(#nd-scorch)" />
+        <rect width="940" height="370" filter="url(#nd-rust)" />
+
+        <!-- Raised border frame: a wide stroke on the outline, half of which
+             the clip removes, leaving a band hugging every edge. -->
+        <use href="#nd-word" fill="none" stroke="url(#nd-bevel)" stroke-width="26" opacity="0.46" />
+        <use href="#nd-word" fill="none" stroke="#0a0e11" stroke-width="7" opacity="0.85" />
+
+        <!-- Plate seams: dark groove plus a catch-light on the lower side. -->
+        <g>
+          <rect x="0" y="149" width="940" height="3" fill="#0d1114" opacity="0.72" />
+          <rect x="0" y="152" width="940" height="1.4" fill="#c8d1d7" opacity="0.28" />
+          <rect x="0" y="239" width="940" height="3" fill="#0d1114" opacity="0.72" />
+          <rect x="0" y="242" width="940" height="1.4" fill="#c8d1d7" opacity="0.28" />
+          <g fill="#0d1114" opacity="0.72">
+            <rect x="96.5" y="40" width="3" height="260" />
+            <rect x="353.5" y="40" width="3" height="260" />
+            <rect x="546.5" y="40" width="3" height="260" />
+            <rect x="770.5" y="40" width="3" height="260" />
+          </g>
+          <g fill="#c8d1d7" opacity="0.26">
+            <rect x="99.5" y="40" width="1.4" height="260" />
+            <rect x="356.5" y="40" width="1.4" height="260" />
+            <rect x="549.5" y="40" width="1.4" height="260" />
+            <rect x="773.5" y="40" width="1.4" height="260" />
+          </g>
+        </g>
+
+        <!-- Rivet rows: frame edges, then flanking each horizontal seam. -->
+        <g>
+          <rect x="0" y="47" width="940" height="19" fill="url(#nd-rivet-h)" />
+          <rect x="0" y="128" width="940" height="19" fill="url(#nd-rivet-h)" />
+          <rect x="0" y="155" width="940" height="19" fill="url(#nd-rivet-h)" />
+          <rect x="0" y="218" width="940" height="19" fill="url(#nd-rivet-h)" />
+          <rect x="0" y="245" width="940" height="19" fill="url(#nd-rivet-h)" />
+          <rect x="0" y="275" width="940" height="19" fill="url(#nd-rivet-h)" />
+          <rect x="88" y="40" width="19" height="260" fill="url(#nd-rivet-v)" />
+          <rect x="345" y="40" width="19" height="260" fill="url(#nd-rivet-v)" />
+          <rect x="538" y="40" width="19" height="260" fill="url(#nd-rivet-v)" />
+          <rect x="762" y="40" width="19" height="260" fill="url(#nd-rivet-v)" />
+        </g>
+
+        <rect width="940" height="370" filter="url(#nd-grain)" />
+      </g>
+
+      <!-- Outermost lit edge, drawn unclipped so it sits on the silhouette. -->
+      <use href="#nd-word" fill="none" stroke="#c6cfd5" stroke-width="1.6" opacity="0.45" />
+    </svg>
+  </main>
+
+  <script src="/half-baked/assets/js/page.js" defer></script>
+</body>
+</html>
