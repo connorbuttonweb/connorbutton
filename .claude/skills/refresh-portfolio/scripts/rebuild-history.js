@@ -84,6 +84,39 @@ function candidatesFor(sym) {
    quoted in the other currency, so the two cases separate cleanly. */
 const MATCH_TOLERANCE = 0.05;
 
+/* Statement-confirmed net flows, keyed by date, in CAD. These replace the
+   derived value for that date entirely.
+
+   An in-kind transfer arrives with NO cash movement, so the feed records it as
+   amount 0 and publishes only "BOOK VALUE" in the description. The brokerage
+   counts the transfer at MARKET value, which appears nowhere in the feed — so
+   the derivation below can only use book value, and it therefore understates
+   every transfer that came across at a gain. That understatement flatters the
+   return, and it is not a rounding difference: through June it was $748.11 of
+   $27,989.00 contributed.
+
+   How each figure is read off a statement: Balance Changes gives "Deposits" as
+   the market value of all deposits AND transfers-in. Subtract the month's cash
+   contributions to isolate the securities, then net any cash transferred out on
+   the same day. Cross-check with A - B - C + D against the stated change in
+   balance before trusting it.
+
+   This lives in code, not in history.json, on purpose. Commit befd6ef corrected
+   these same two dates by hand-editing history.json without touching any
+   script; the next snapshot run recomputed flows and silently reverted it, and
+   the file's generated_at stamp did not move, so nothing showed it had happened.
+   A constant cannot be rewritten by a pipeline run. */
+const FLOW_OVERRIDES = {
+  /* TFSA statement 2026-05: deposits 12,315.70 - 1,200.00 cash contributions
+     = 11,115.70 securities at market, less 161.96 TD Waterhouse cash out.
+     Derived book value was 10,253.00 (understated by 700.74). */
+  '2026-05-14': 10953.74,
+  /* FHSA statement 2026-06: deposits 12,705.25 - 1,183.40 cash transferred in
+     on 06-05 = 11,521.85 securities at market, no cash out that day.
+     Derived book value was 11,474.48 (understated by 47.37). */
+  '2026-06-08': 11521.85
+};
+
 /* Symbols priced off a proxy rather than the instrument itself. The proxy
    supplies the daily SHAPE; the level is anchored to the brokerage's own price
    at the snapshot date, so the series moves with the underlying without
@@ -198,6 +231,38 @@ if (DO_SNAPSHOT) {
     console.log('in-kind transfers  ' + inKind.length + ' securities, $' + t.toFixed(2) +
       ' at book value, counted as contributions (not gains)');
   }
+
+  /* Statement figures win over the book-value derivation. The derived value is
+     printed alongside so that if it ever moves — a late-posting activity landing
+     on an overridden date — the delta changes visibly instead of being silently
+     absorbed by the override. */
+  Object.keys(FLOW_OVERRIDES).forEach(d => {
+    const v = FLOW_OVERRIDES[d];
+    if (typeof v !== 'number' || !isFinite(v)) {
+      console.warn('  FLOW_OVERRIDES[' + d + '] is not a finite number — ignored');
+      return;
+    }
+    const derived = byDate[d];
+    byDate[d] = v;
+    console.log('flow override      ' + d + '  derived ' +
+      (derived === undefined ? '(none)' : '$' + r2(derived).toFixed(2)) +
+      '  ->  statement $' + v.toFixed(2) +
+      (derived === undefined ? '' : '   (' + (v - derived >= 0 ? '+' : '') + (v - derived).toFixed(2) + ')'));
+  });
+
+  /* A transfer with no statement figure yet is reported, never fatal: the day
+     still publishes at book value and the figure can be corrected once the
+     statement arrives. Failing here would stop the daily pipeline over a number
+     that is only knowable weeks later. */
+  const unconfirmed = Array.from(new Set(inKind.map(x => x.date)))
+    .filter(d => !(d in FLOW_OVERRIDES)).sort();
+  unconfirmed.forEach(d => {
+    const t = inKind.filter(x => x.date === d).reduce((a, x) => a + x.amount, 0);
+    console.warn('  in-kind transfer on ' + d + ' ($' + t.toFixed(2) + ' at book value) has no ' +
+      'statement figure.\n' +
+      '    Book value understates a transfer that came across at a gain. Read the market\n' +
+      '    value off that month\'s statement and add it to FLOW_OVERRIDES.');
+  });
 
   history.flows = Object.keys(byDate).sort().map(d => ({ date: d, amount: r2(byDate[d]) }));
   history.in_kind = inKind;

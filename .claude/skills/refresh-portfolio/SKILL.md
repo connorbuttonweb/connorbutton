@@ -33,6 +33,12 @@ from the brokerage feed. `scripts/merge-portfolio.js` exists to protect them.
 - **Never back-fill history** by marking current holdings backwards against past
   prices. That produces a curve for a portfolio that was never held. Leave the
   figures blank; the dashboard already explains why they are missing.
+- **Never correct a flow by editing `history.json`.** `history.flows` is
+  re-derived from the activity feed on every `--snapshot` run, so a hand-edit is
+  silently reverted by the next one — commit `befd6ef` lost exactly this way.
+  Statement-confirmed figures go in `FLOW_OVERRIDES` in
+  `scripts/rebuild-history.js`, and never without a comment naming the statement
+  and showing the arithmetic. See `references/statement-reconciliation.md`.
 - **Never push without asking.** Pushing publishes real balances.
 
 ## Workflow
@@ -179,5 +185,9 @@ least two points. It fills in as snapshots accumulate.
 - **`references/questrade-mcp.md`** — call sequence and the feed quirks that
   cause silent corruption (formatted-string balances, plural type names, paging,
   missing quantities, option multipliers).
+- **`references/statement-reconciliation.md`** — the two figures the feed cannot
+  supply (market value of an in-kind transfer, and a past option mark), how to
+  read them off a monthly statement, what is already corrected, and the one
+  correction still outstanding pending the July 2026 statements.
 - **`scripts/merge-portfolio.js`** — the transformation and merge.
 - **`scripts/validate-portfolio.js`** — the invariant gate.
