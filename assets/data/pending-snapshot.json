@@ -1,0 +1,737 @@
+{
+  "as_of": "2026-08-11",
+  "accounts": [
+    {
+      "positions": [
+        {
+          "id": "79830f1a-0957-4902-0a52-560ea15a0503",
+          "instrument": "DRAM",
+          "qty": 8,
+          "side": "buy",
+          "avgPrice": 50.9075
+        },
+        {
+          "id": "2a213c25-2d57-4a22-096c-2b617d89062d",
+          "instrument": "TSLA",
+          "qty": 3,
+          "side": "buy",
+          "avgPrice": 331.0654
+        },
+        {
+          "id": "181f3121-241f-4842-0e5e-d1a41e0ea54f",
+          "instrument": "SPCX",
+          "qty": 7,
+          "side": "buy",
+          "avgPrice": 134.1753
+        },
+        {
+          "id": "07101a1a-691b-4782-0ee3-00866d4e0e82",
+          "instrument": "BEPC",
+          "qty": 25,
+          "side": "buy",
+          "avgPrice": 33.889
+        },
+        {
+          "id": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+          "instrument": "FINN.TO",
+          "qty": 159,
+          "side": "buy",
+          "avgPrice": 31.1
+        },
+        {
+          "id": "1e251804-0f12-4e62-0a7d-348ba26a076c",
+          "instrument": "CHAT",
+          "qty": 22,
+          "side": "buy",
+          "avgPrice": 83.1416
+        },
+        {
+          "id": "62311c1b-0f6e-4252-0d0c-1c6c338d005d",
+          "instrument": "GOLD.QM",
+          "qty": 0.3,
+          "side": "buy",
+          "avgPrice": 4304.4437
+        },
+        {
+          "id": "06007f2f-2653-4612-0981-079d6f491810",
+          "instrument": "VDY.TO",
+          "qty": 29,
+          "side": "buy",
+          "avgPrice": 73.6103
+        },
+        {
+          "id": "08284e81-1330-4812-0586-032980451817",
+          "instrument": "XEQT.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 44.1751
+        }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {
+            "cad": "$0.02",
+            "usd": "$11.81",
+            "combinedCad": "$16.13",
+            "combinedUsd": "$11.83"
+          },
+          "totalBuyingPower": {
+            "cad": "$0.02",
+            "usd": "$11.81",
+            "combinedCad": "$16.13",
+            "combinedUsd": "$11.83"
+          },
+          "buyingPower": {
+            "cad": "$0.02",
+            "usd": "$11.81",
+            "combinedCad": "$16.13",
+            "combinedUsd": "$11.83"
+          },
+          "totalEquity": {
+            "cad": "$12,049.93",
+            "usd": "$6,472.56",
+            "combinedCad": "$21,073.00",
+            "combinedUsd": "$15,116.39"
+          },
+          "marketValue": {
+            "cad": "$12,049.91",
+            "usd": "$6,460.74",
+            "combinedCad": "$21,056.51",
+            "combinedUsd": "$15,104.56"
+          },
+          "cash": {
+            "cad": "$0.02",
+            "usd": "$11.81",
+            "combinedCad": "$16.49",
+            "combinedUsd": "$11.83"
+          }
+        },
+        "profit": {
+          "dayPnl": {
+            "cad": "-$48.14",
+            "usd": "-$0.97",
+            "combinedCad": "-$49.49",
+            "combinedUsd": "-$35.50"
+          },
+          "closedPnl": {
+            "cad": "$71.96",
+            "usd": "$6.94",
+            "combinedCad": "$81.63",
+            "combinedUsd": "$58.56"
+          },
+          "openPnl": {
+            "cad": "$552.80",
+            "usd": "$153.39",
+            "combinedCad": "$766.63",
+            "combinedUsd": "$549.93"
+          }
+        }
+      }
+    },
+    {
+      "positions": [
+        {
+          "id": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+          "instrument": "FINN.TO",
+          "qty": 103,
+          "side": "buy",
+          "avgPrice": 31.057
+        },
+        {
+          "id": "08284e81-1330-4812-0586-032980451817",
+          "instrument": "XEQT.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 44.0793
+        },
+        {
+          "id": "06007f2f-2653-4612-0981-079d6f491810",
+          "instrument": "VDY.TO",
+          "qty": 30,
+          "side": "buy",
+          "avgPrice": 74.27
+        },
+        {
+          "id": "1e251804-0f12-4e62-0a7d-348ba26a076c",
+          "instrument": "CHAT",
+          "qty": 29,
+          "side": "buy",
+          "avgPrice": 86.7237
+        }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {
+            "cad": "$0.00",
+            "usd": "$5.43",
+            "combinedCad": "$7.40",
+            "combinedUsd": "$5.43"
+          },
+          "totalBuyingPower": {
+            "cad": "$0.00",
+            "usd": "$5.43",
+            "combinedCad": "$7.40",
+            "combinedUsd": "$5.43"
+          },
+          "buyingPower": {
+            "cad": "$0.00",
+            "usd": "$5.43",
+            "combinedCad": "$7.40",
+            "combinedUsd": "$5.43"
+          },
+          "totalEquity": {
+            "cad": "$10,293.45",
+            "usd": "$2,566.42",
+            "combinedCad": "$13,871.16",
+            "combinedUsd": "$9,950.26"
+          },
+          "marketValue": {
+            "cad": "$10,293.45",
+            "usd": "$2,560.99",
+            "combinedCad": "$13,863.60",
+            "combinedUsd": "$9,944.84"
+          },
+          "cash": {
+            "cad": "$0.00",
+            "usd": "$5.43",
+            "combinedCad": "$7.56",
+            "combinedUsd": "$5.43"
+          }
+        },
+        "profit": {
+          "dayPnl": {
+            "cad": "-$34.05",
+            "usd": "$12.47",
+            "combinedCad": "-$16.67",
+            "combinedUsd": "-$11.96"
+          },
+          "closedPnl": {
+            "cad": "$30.14",
+            "usd": "$0.00",
+            "combinedCad": "$30.14",
+            "combinedUsd": "$21.62"
+          },
+          "openPnl": {
+            "cad": "$458.53",
+            "usd": "$46.00",
+            "combinedCad": "$522.66",
+            "combinedUsd": "$374.92"
+          }
+        }
+      }
+    }
+  ],
+  "quotes": [
+    {
+      "securityUuid": "62311c1b-0f6e-4252-0d0c-1c6c338d005d",
+      "symbol": "GOLD.QM",
+      "currency": "USD",
+      "bidPrice": 4375.7,
+      "bidSize": 100,
+      "askPrice": 4376.79,
+      "askSize": 100,
+      "lastPrice": 4375.7,
+      "quoteTime": "2026-08-11T22:41:17Z",
+      "lastTradeTime": "2026-08-11T22:41:17Z",
+      "lastTradeSize": null,
+      "tick": "Down",
+      "volume": null,
+      "openPrice": 4370.429,
+      "highPrice": 4378.07,
+      "lowPrice": 4369.173,
+      "highPrice52Weeks": null,
+      "lowPrice52Weeks": null,
+      "volumeWeightedAveragePrice": null,
+      "priceChangeAmount": -16.19986012,
+      "priceChangePercent": -0.003689,
+      "afterHourPriceChangeAmount": null,
+      "afterHourPriceChangePercent": null,
+      "isTradingHour": true,
+      "marketSector": "otcpm",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Open",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "79830f1a-0957-4902-0a52-560ea15a0503",
+      "symbol": "DRAM",
+      "currency": "USD",
+      "bidPrice": 51.01,
+      "bidSize": 200,
+      "askPrice": 51.09,
+      "askSize": 3100,
+      "lastPrice": 51.03,
+      "quoteTime": "2026-08-11T22:40:52Z",
+      "lastTradeTime": "2026-08-11T22:40:29Z",
+      "lastTradeSize": 100,
+      "tick": "Down",
+      "volume": 32281849,
+      "openPrice": 50.99,
+      "highPrice": 51.46,
+      "lowPrice": 50.36,
+      "highPrice52Weeks": 81.34,
+      "lowPrice52Weeks": 26.14,
+      "volumeWeightedAveragePrice": 50.841669,
+      "priceChangeAmount": 1.29,
+      "priceChangePercent": 0.026008,
+      "afterHourPriceChangeAmount": 0.14,
+      "afterHourPriceChangePercent": 0.002751,
+      "isTradingHour": false,
+      "marketSector": "amex",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "2a213c25-2d57-4a22-096c-2b617d89062d",
+      "symbol": "TSLA",
+      "currency": "USD",
+      "bidPrice": 332.47,
+      "bidSize": 40,
+      "askPrice": 332.6,
+      "askSize": 80,
+      "lastPrice": 332.5258,
+      "quoteTime": "2026-08-11T22:40:36Z",
+      "lastTradeTime": "2026-08-11T22:41:03Z",
+      "lastTradeSize": 60,
+      "tick": "Up",
+      "volume": 23310780,
+      "openPrice": 332.8,
+      "highPrice": 336.2,
+      "lowPrice": 329.53,
+      "highPrice52Weeks": 498.83,
+      "lowPrice52Weeks": 297.38,
+      "volumeWeightedAveragePrice": 332.989,
+      "priceChangeAmount": 1.93,
+      "priceChangePercent": 0.005833,
+      "afterHourPriceChangeAmount": -0.2842,
+      "afterHourPriceChangePercent": -0.000854,
+      "isTradingHour": false,
+      "marketSector": "nasdaq",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 304.24074,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "181f3121-241f-4842-0e5e-d1a41e0ea54f",
+      "symbol": "SPCX",
+      "currency": "USD",
+      "bidPrice": 132.76,
+      "bidSize": 200,
+      "askPrice": 132.78,
+      "askSize": 300,
+      "lastPrice": 132.7795,
+      "quoteTime": "2026-08-11T22:40:28Z",
+      "lastTradeTime": "2026-08-11T22:41:14Z",
+      "lastTradeSize": 280,
+      "tick": "Down",
+      "volume": 108644675,
+      "openPrice": 138.655,
+      "highPrice": 139.98,
+      "lowPrice": 130.5,
+      "highPrice52Weeks": 225.64,
+      "lowPrice52Weeks": 104.83,
+      "volumeWeightedAveragePrice": 133.806424,
+      "priceChangeAmount": -5.45,
+      "priceChangePercent": -0.039282,
+      "afterHourPriceChangeAmount": -0.5105,
+      "afterHourPriceChangePercent": -0.00383,
+      "isTradingHour": false,
+      "marketSector": "nasdaq",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "07101a1a-691b-4782-0ee3-00866d4e0e82",
+      "symbol": "BEPC",
+      "currency": "USD",
+      "bidPrice": 33.35,
+      "bidSize": 100,
+      "askPrice": 34.9,
+      "askSize": 100,
+      "lastPrice": 34.79,
+      "quoteTime": "2026-08-11T22:34:31Z",
+      "lastTradeTime": "2026-08-11T20:00:03Z",
+      "lastTradeSize": 254,
+      "tick": "Up",
+      "volume": 1806516,
+      "openPrice": 33.34,
+      "highPrice": 34.9,
+      "lowPrice": 33.34,
+      "highPrice52Weeks": 45.18,
+      "lowPrice52Weeks": 31.82,
+      "volumeWeightedAveragePrice": 34.55272,
+      "priceChangeAmount": 1.57,
+      "priceChangePercent": 0.047261,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "nyse",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0.046473
+    },
+    {
+      "securityUuid": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+      "symbol": "FINN.TO",
+      "currency": "CAD",
+      "bidPrice": 32.53,
+      "bidSize": 1,
+      "askPrice": 32.89,
+      "askSize": 1,
+      "lastPrice": 32.75,
+      "quoteTime": "2026-08-11T21:30:00Z",
+      "lastTradeTime": "2026-08-11T19:59:30Z",
+      "lastTradeSize": 200,
+      "tick": null,
+      "volume": 226499,
+      "openPrice": 32.95,
+      "highPrice": 32.95,
+      "lowPrice": 32.65,
+      "highPrice52Weeks": 33.93,
+      "lowPrice52Weeks": 20.82,
+      "volumeWeightedAveragePrice": 32.76371,
+      "priceChangeAmount": -0.25,
+      "priceChangePercent": -0.007576,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "neo",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "1e251804-0f12-4e62-0a7d-348ba26a076c",
+      "symbol": "CHAT",
+      "currency": "USD",
+      "bidPrice": 88.4,
+      "bidSize": 100,
+      "askPrice": 89,
+      "askSize": 200,
+      "lastPrice": 88.31,
+      "quoteTime": "2026-08-11T22:31:22Z",
+      "lastTradeTime": "2026-08-11T22:11:49Z",
+      "lastTradeSize": 100,
+      "tick": "Up",
+      "volume": 377578,
+      "openPrice": 88.79,
+      "highPrice": 88.81,
+      "lowPrice": 87.615,
+      "highPrice52Weeks": 105.2,
+      "lowPrice52Weeks": 50.73,
+      "volumeWeightedAveragePrice": 88.244818,
+      "priceChangeAmount": 0.44,
+      "priceChangePercent": 0.005007,
+      "afterHourPriceChangeAmount": -0.01,
+      "afterHourPriceChangePercent": -0.000113,
+      "isTradingHour": false,
+      "marketSector": "amex",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0.018861
+    },
+    {
+      "securityUuid": "06007f2f-2653-4612-0981-079d6f491810",
+      "symbol": "VDY.TO",
+      "currency": "CAD",
+      "bidPrice": 77.5,
+      "bidSize": 2,
+      "askPrice": 77.67,
+      "askSize": 1,
+      "lastPrice": 77.54,
+      "quoteTime": "2026-08-11T20:02:07Z",
+      "lastTradeTime": "2026-08-11T19:58:19Z",
+      "lastTradeSize": 3500,
+      "tick": "Down",
+      "volume": 169202,
+      "openPrice": 77.69,
+      "highPrice": 78.04,
+      "lowPrice": 77.5,
+      "highPrice52Weeks": 79.29,
+      "lowPrice52Weeks": 52.91,
+      "volumeWeightedAveragePrice": 77.668205,
+      "priceChangeAmount": 0.09,
+      "priceChangePercent": 0.001162,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.028264
+    },
+    {
+      "securityUuid": "08284e81-1330-4812-0586-032980451817",
+      "symbol": "XEQT.TO",
+      "currency": "CAD",
+      "bidPrice": 45.93,
+      "bidSize": 43,
+      "askPrice": 46.01,
+      "askSize": 3,
+      "lastPrice": 45.94,
+      "quoteTime": "2026-08-11T20:59:04Z",
+      "lastTradeTime": "2026-08-11T19:59:43Z",
+      "lastTradeSize": 100,
+      "tick": "Down",
+      "volume": 628118,
+      "openPrice": 46.17,
+      "highPrice": 46.19,
+      "lowPrice": 45.89,
+      "highPrice52Weeks": 46.48,
+      "lowPrice52Weeks": 36.625,
+      "volumeWeightedAveragePrice": 46.01917,
+      "priceChangeAmount": -0.11,
+      "priceChangePercent": -0.002389,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-08-11T22:41:17Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.015582
+    }
+  ],
+  "activities": [
+    {
+      "transactionId": "b10f0a7d-ed99-4f8d-b892-0d56392c72ff",
+      "transactionType": "Trades",
+      "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
+      "amount": -438.29,
+      "currency": "USD",
+      "tradeDate": "2026-08-10"
+    },
+    {
+      "transactionId": "07b7acbe-5c5d-4745-a50f-4d2ec8272150",
+      "transactionType": "Trades",
+      "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+      "amount": -1613.76,
+      "currency": "USD",
+      "tradeDate": "2026-08-10"
+    },
+    {
+      "transactionId": "fc4a513d-40b3-4cda-bc99-2d3e854a0cde",
+      "transactionType": "Trades",
+      "description": "CALL AGI 01/15/27 34 ALAMOS GOLD INC WE ACTED AS AGENT",
+      "amount": 449.99,
+      "currency": "USD",
+      "tradeDate": "2026-08-10"
+    },
+    {
+      "transactionId": "2b81014f-4dd0-4fc4-b764-7431c0088970",
+      "transactionType": "Trades",
+      "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+      "amount": 670.97,
+      "currency": "USD",
+      "tradeDate": "2026-08-10"
+    },
+    {
+      "transactionId": "5f8328f7-da64-4d58-93cb-b710df7d0a86",
+      "transactionType": "Other",
+      "description": "Securities lending int payment as of July Symbol-BEPC",
+      "amount": 0.02,
+      "currency": "CAD",
+      "tradeDate": "2026-08-10"
+    },
+    {
+      "transactionId": "0fbeb6e1-856b-418b-91f2-041008a4ae7f",
+      "transactionType": "Trades",
+      "description": "TESLA INC COMMON STOCK WE ACTED AS AGENT",
+      "amount": -993.2,
+      "currency": "USD",
+      "tradeDate": "2026-08-10"
+    },
+    {
+      "transactionId": "42caf85b-5c36-4099-bce9-486d6e771ecc",
+      "transactionType": "Other",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION TO USD",
+      "amount": 0,
+      "currency": "CAD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "3f8459f9-06d4-4351-bf1a-8d4bae10c47f",
+      "transactionType": "Trades",
+      "description": "CALL SPCX 01/15/27 200 SPACE EXPLORATION TECHNOLOGIES WE ACTED AS AGENT",
+      "amount": 629.98,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "6c093f16-5f67-42d3-809c-33a2dd09c4e7",
+      "transactionType": "Other",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION FROM CAD BOOK VALUE: $437.29 CNV@ 1.4014",
+      "amount": 0,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "ab0620eb-dd17-4c71-9618-8087e97b3f75",
+      "transactionType": "Trades",
+      "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+      "amount": 757.24,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "52f7927a-7d7e-4161-b6c1-74a32d63da6e",
+      "transactionType": "Trades",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+      "amount": 1107.9,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "71584234-0fec-4cfb-8ecc-4864f96f5dc3",
+      "transactionType": "Other",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION FROM CAD BOOK VALUE: $1345.70 CNV@ 1.4012",
+      "amount": 0,
+      "currency": "USD",
+      "tradeDate": "2026-08-06"
+    },
+    {
+      "transactionId": "d287966c-e2e9-4a96-bc8d-f9559da54153",
+      "transactionType": "Other",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION TO USD",
+      "amount": 0,
+      "currency": "CAD",
+      "tradeDate": "2026-08-06"
+    },
+    {
+      "transactionId": "18e9b102-028c-4310-8100-82f7544aa2ec",
+      "transactionType": "Trades",
+      "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+      "amount": -661.92,
+      "currency": "USD",
+      "tradeDate": "2026-08-06"
+    },
+    {
+      "transactionId": "6e7d5f2a-4e13-41d5-aa68-b80d1895143d",
+      "transactionType": "Trades",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+      "amount": 669.98,
+      "currency": "USD",
+      "tradeDate": "2026-08-06"
+    },
+    {
+      "transactionId": "487c6e5d-ace3-4426-87c7-2919e17d20cb",
+      "transactionType": "Trades",
+      "description": "CALL SPCX 01/15/27 200 SPACE EXPLORATION TECHNOLOGIES WE ACTED AS AGENT",
+      "amount": -450,
+      "currency": "USD",
+      "tradeDate": "2026-08-06"
+    },
+    {
+      "transactionId": "4bbc3769-1b5f-4b71-9751-4f722c805b90",
+      "transactionType": "FX conversion",
+      "description": "CONVERSION - USD/CAD",
+      "amount": -21.28,
+      "currency": "USD",
+      "tradeDate": "2026-08-04"
+    },
+    {
+      "transactionId": "605c06a7-978b-42ab-ba4c-12497a03f5d6",
+      "transactionType": "Trades",
+      "description": "CALL IREN 11/20/26 45 IREN LIMITED WE ACTED AS AGENT",
+      "amount": 874.98,
+      "currency": "USD",
+      "tradeDate": "2026-08-04"
+    },
+    {
+      "transactionId": "1b7ca3ba-ec58-4b78-bb8c-b54c0e501807",
+      "transactionType": "Trades",
+      "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
+      "amount": -391.41,
+      "currency": "USD",
+      "tradeDate": "2026-08-04"
+    },
+    {
+      "transactionId": "f0103347-e748-4431-bb91-6a8e720f613a",
+      "transactionType": "Trades",
+      "description": "CALL .ZEB 09/18/26 75.50 BMO EQUAL WEIGHT BNK INDX ETF WE ACTED AS AGENT",
+      "amount": 284.01,
+      "currency": "CAD",
+      "tradeDate": "2026-08-04"
+    },
+    {
+      "transactionId": "674c72fb-41a8-48d3-9463-a2c665feee9a",
+      "transactionType": "Trades",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+      "amount": -2498.32,
+      "currency": "CAD",
+      "tradeDate": "2026-08-04"
+    },
+    {
+      "transactionId": "74778295-b696-43ef-afb6-111fb93299d9",
+      "transactionType": "Trades",
+      "description": "TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT",
+      "amount": -443.45,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "c6e79aa2-f214-4386-93a5-2ff24be0fcad",
+      "transactionType": "Trades",
+      "description": "SNOWFLAKE INC COMMON STOCK WE ACTED AS AGENT",
+      "amount": 326.17,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "b0fd86c1-58ad-4a06-a920-67cb36999fcc",
+      "transactionType": "Trades",
+      "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
+      "amount": 430.6,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    },
+    {
+      "transactionId": "5c387428-70cf-4376-975d-c7c964239396",
+      "transactionType": "Trades",
+      "description": "SNOWFLAKE INC COMMON STOCK WE ACTED AS AGENT",
+      "amount": -326.76,
+      "currency": "USD",
+      "tradeDate": "2026-08-07"
+    }
+  ],
+  "benchmark": {
+    "symbol": "VFV.TO",
+    "series": [
+      { "date": "2026-04-26", "level": 174.29 },
+      { "date": "2026-05-03", "level": 179.42 },
+      { "date": "2026-05-10", "level": 180.84 },
+      { "date": "2026-05-17", "level": 183.2 },
+      { "date": "2026-05-24", "level": 185.61 },
+      { "date": "2026-05-31", "level": 182.9 },
+      { "date": "2026-06-07", "level": 184.62 },
+      { "date": "2026-06-14", "level": 188.36 },
+      { "date": "2026-06-21", "level": 184.37 },
+      { "date": "2026-06-28", "level": 189.34 },
+      { "date": "2026-07-05", "level": 190.09 },
+      { "date": "2026-07-12", "level": 185.25 },
+      { "date": "2026-07-19", "level": 185.28 },
+      { "date": "2026-07-26", "level": 186.3 },
+      { "date": "2026-08-02", "level": 191.82 },
+      { "date": "2026-08-09", "level": 191.67 }
+    ]
+  }
+}
