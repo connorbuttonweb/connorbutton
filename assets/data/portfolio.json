@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-10T22:44:24.235Z",
-  "as_of": "2026-08-10",
+  "generated_at": "2026-08-11T22:46:09.551Z",
+  "as_of": "2026-08-11",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3942
+   "USDCAD": 1.394
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0049,
+  "blended_mer": 0.0048,
   "distribution_yield": 0.0128,
-  "holdings_count": 8,
+  "holdings_count": 9,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 831.79,
+   "cash": 24.05,
    "currency": "CAD",
-   "buying_power": 813.48
+   "buying_power": 23.53
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 44.1272,
-   "price": 46.05,
-   "prev_close": 46.1,
-   "market_value": 9210,
-   "open_pnl": 384.56,
+   "price": 45.94,
+   "prev_close": 46.05,
+   "market_value": 9188,
+   "open_pnl": 362.56,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 262,
    "avg_cost": 31.0831,
-   "price": 33,
-   "prev_close": 32.88,
-   "market_value": 8646,
-   "open_pnl": 502.23,
+   "price": 32.75,
+   "prev_close": 33,
+   "market_value": 8580.5,
+   "open_pnl": 436.73,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 59,
    "avg_cost": 73.9457,
-   "price": 77.45,
-   "prev_close": 77.07,
-   "market_value": 4569.55,
-   "open_pnl": 206.75,
+   "price": 77.54,
+   "prev_close": 77.45,
+   "market_value": 4574.86,
+   "open_pnl": 212.06,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 51,
    "avg_cost": 85.1785,
-   "price": 89,
-   "prev_close": 90.23,
-   "market_value": 4539,
-   "open_pnl": 194.9,
+   "price": 88.31,
+   "prev_close": 87.87,
+   "market_value": 4503.81,
+   "open_pnl": 159.71,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "USD",
    "quantity": 0.3,
    "avg_cost": 4304.4437,
-   "price": 4393.759,
-   "prev_close": 4344.6299,
-   "market_value": 1318.13,
-   "open_pnl": 26.79,
+   "price": 4375.7,
+   "prev_close": 4391.8999,
+   "market_value": 1312.71,
+   "open_pnl": 21.38,
    "sector": "Commodities",
    "geography": "Global",
    "market_cap_bucket": "n/a"
@@ -117,10 +117,10 @@
    "currency": "USD",
    "quantity": 3,
    "avg_cost": 331.0654,
-   "price": 330.1354,
-   "prev_close": 327.8354,
-   "market_value": 990.41,
-   "open_pnl": -2.79,
+   "price": 332.5258,
+   "prev_close": 330.5958,
+   "market_value": 997.58,
+   "open_pnl": 4.38,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "USD",
    "quantity": 7,
    "avg_cost": 134.1753,
-   "price": 136.3,
-   "prev_close": 130.67,
-   "market_value": 954.1,
-   "open_pnl": 14.87,
+   "price": 132.7795,
+   "prev_close": 138.2295,
+   "market_value": 929.46,
+   "open_pnl": -9.77,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -147,15 +147,31 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 20,
-   "avg_cost": 33.6035,
-   "price": 33.7,
-   "prev_close": 34.22,
-   "market_value": 674,
-   "open_pnl": 1.93,
+   "quantity": 25,
+   "avg_cost": 33.889,
+   "price": 34.79,
+   "prev_close": 33.22,
+   "market_value": 869.75,
+   "open_pnl": 22.52,
    "sector": "Utilities",
    "geography": "Canada",
    "market_cap_bucket": "Mid"
+  },
+  {
+   "symbol": "DRAM",
+   "name": "DRAM",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 8,
+   "avg_cost": 50.9075,
+   "price": 51.03,
+   "prev_close": 49.74,
+   "market_value": 408.24,
+   "open_pnl": 0.98,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
   }
  ],
  "etfs": {
@@ -18298,6 +18314,78 @@
  },
  "activities": [
   {
+   "uid": "t_207583db81",
+   "date": "2026-08-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
+   "amount": -438.29,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_590f7e16d9",
+   "date": "2026-08-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -1613.76,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_11e9b888e4",
+   "date": "2026-08-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CALL AGI 01/15/27 34 ALAMOS GOLD INC WE ACTED AS AGENT",
+   "amount": 449.99,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_9ca14f4442",
+   "date": "2026-08-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+   "amount": 670.97,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_78ce7ce223",
+   "date": "2026-08-10",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Securities lending int payment as of July Symbol-BEPC",
+   "amount": 0.02,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_8bf5b6d720",
+   "date": "2026-08-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "TESLA INC COMMON STOCK WE ACTED AS AGENT",
+   "amount": -993.2,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_e00e1c48f9",
    "date": "2026-08-07",
    "type": "Other",
@@ -20905,28 +20993,28 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7207,
+   "annual_rate_per_share": 0.7158,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1757,
+   "annual_rate_per_share": 2.1916,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7,
+   "annual_rate_per_share": 1.6656,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "BEPC",
-   "annual_rate_per_share": 1.5844,
+   "annual_rate_per_share": 1.6168,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -20953,10 +21041,23 @@
     "date": "2026-08-10",
     "value": 35074.08,
     "net_flow": 0
+   },
+   {
+    "date": "2026-08-11",
+    "value": 34943.45,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-04-26",
+     "level": 174.29
+    },
+    {
+     "date": "2026-05-03",
+     "level": 179.42
+    },
     {
      "date": "2026-05-10",
      "level": 180.84
@@ -21008,6 +21109,10 @@
     {
      "date": "2026-08-02",
      "level": 191.82
+    },
+    {
+     "date": "2026-08-09",
+     "level": 191.67
     }
    ]
   }
