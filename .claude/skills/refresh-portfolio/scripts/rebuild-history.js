@@ -26,29 +26,63 @@
 
 const fs = require('fs');
 
-/* Brokerage symbol -> Yahoo symbol. Any held symbol missing from here is a hard
-   error: silently skipping one understates the portfolio and misstates every
-   return derived from it. */
-const YAHOO_SYMBOLS = {
-  'XEQT.TO': 'XEQT.TO',
-  'VDY.TO': 'VDY.TO',
+/* Brokerage symbol -> Yahoo symbol, for the cases where the two genuinely
+   differ. Everything else resolves to itself and is then reconciled against the
+   brokerage's own last price (see resolveSymbols): US tickers and TSX .TO
+   suffixes are already Yahoo's own notation.
+
+   This used to be an allowlist naming every holding, and a symbol missing from
+   it was a hard error. That made it a trip-wire rather than a safeguard — every
+   newly opened position killed the whole rebuild until someone hand-edited this
+   file, which is exactly what happened when TSLA was bought on 2026-08-10 and
+   the daily series silently stopped advancing. The safeguard that actually
+   matters (never price a symbol as the wrong security) is now enforced against
+   the brokerage's price instead of against this list. */
+const SYMBOL_OVERRIDES = {
   'FINN.TO': 'FINN.NE',      // Cboe Canada listing; Yahoo uses .NE
-  'CHAT': 'CHAT',
-  'BEPC.TO': 'BEPC.TO',
-  'BEPC': 'BEPC',
-  'SPCX': 'SPCX',           // Space Exploration Technologies, NASDAQ
-  'VFV.TO': 'VFV.TO',        // benchmark: S&P 500 in CAD
+  'MMY': 'MMY.V',            // TSX Venture
   /* Questrade's fractional gold has no Yahoo listing. GC=F (front-month gold
      future) is the closest daily series. Yahoo has no XAUUSD=X. */
-  'GOLD.QM': 'GC=F',
-  /* Added for the May-July 2026 history backfill — symbols that only ever
-     appear in historical snapshots, several fully closed out long ago. */
-  'ENB.TO': 'ENB.TO', 'HMMJ.TO': 'HMMJ.TO', 'PXT.TO': 'PXT.TO', 'CAE.TO': 'CAE.TO',
-  'MDA.TO': 'MDA.TO', 'TEC.TO': 'TEC.TO', 'ZEB.TO': 'ZEB.TO', 'RBO.TO': 'RBO.TO',
-  'DLR.TO': 'DLR.TO', 'MMY': 'MMY.V', 'ASTS': 'ASTS', 'FIG': 'FIG', 'BB': 'BB',
-  'NOW': 'NOW', 'GOOGL': 'GOOGL', 'WEN': 'WEN', 'VT': 'VT', 'IREN': 'IREN',
-  'ABAT': 'ABAT', 'HOOD': 'HOOD'
+  'GOLD.QM': 'GC=F'
 };
+
+/* Resolved lookup: overrides, plus whatever resolveSymbols works out at runtime
+   and whatever a previous run cached in history.meta.symbol_map. */
+const YAHOO_SYMBOLS = Object.assign({}, SYMBOL_OVERRIDES);
+
+/* Listings to try for a symbol with no override, in the notations the brokerage
+   and Yahoo actually disagree about. Ordered cheapest-guess-first; the winner is
+   picked by price agreement, not by position in this list. */
+function candidatesFor(sym) {
+  const m = sym.match(/^(.*?)(\.TO|\.NE|\.V)?$/);
+  const suffix = m[2] || '';
+  /* Share classes: brokers write BRK.B / CTC.A.TO, Yahoo writes BRK-B /
+     CTC-A.TO. Only the class separator becomes a hyphen — the exchange suffix
+     stays a dot. */
+  const bases = [m[1]];
+  if (m[1].indexOf('.') >= 0) bases.push(m[1].replace(/\./g, '-'));
+
+  const c = [];
+  bases.forEach(b => {
+    if (suffix) {
+      c.push(b + suffix);
+      if (suffix === '.TO') c.push(b + '.NE', b + '.V');   // Cboe Canada, TSXV
+    } else {
+      c.push(b);
+      /* A bare ticker is ambiguous between US and Canadian listings. One that
+         already carries a class separator is not — it is a US class share, so
+         don't fabricate Canadian variants of it. */
+      if (bases.length === 1) c.push(b + '.TO', b + '.V', b + '.NE');
+    }
+  });
+  return Array.from(new Set(c));
+}
+
+/* How far a candidate's close may sit from the brokerage's last price before it
+   is judged a different security. Post-market drift against the same day's close
+   runs 1-2% on volatile names; a wrong listing is out by tens of percent, or is
+   quoted in the other currency, so the two cases separate cleanly. */
+const MATCH_TOLERANCE = 0.05;
 
 /* Symbols priced off a proxy rather than the instrument itself. The proxy
    supplies the daily SHAPE; the level is anchored to the brokerage's own price
@@ -215,17 +249,25 @@ history.snapshots.forEach(s => {
   });
 });
 
-const unmapped = Array.from(needed).filter(s => !YAHOO_SYMBOLS[s]);
-if (unmapped.length) {
-  die('no Yahoo mapping for: ' + unmapped.join(', ') +
-    '\n  Add them to YAHOO_SYMBOLS. Skipping a held symbol would understate the\n' +
-    '  portfolio and misstate every return derived from it.');
-}
+/* A previous run's accepted resolutions. Treated like overrides so the candidate
+   fetches happen once per new symbol rather than on every rebuild — but still
+   re-verified below, so a cached mistake corrects itself instead of persisting. */
+const cachedMap = (history.meta && history.meta.symbol_map) || {};
+Object.keys(cachedMap).forEach(s => {
+  if (!YAHOO_SYMBOLS[s]) YAHOO_SYMBOLS[s] = cachedMap[s];
+});
+
+/* Symbols with no known listing yet. Their candidates all get fetched, and
+   resolveSymbols() picks the one that agrees with the brokerage's own price. */
+const unresolved = Array.from(needed).filter(s => !YAHOO_SYMBOLS[s]);
+const candidates = {};
+unresolved.forEach(s => { candidates[s] = candidatesFor(s); });
 
 const anyUsd = history.snapshots.some(s =>
   Object.keys(s.positions).some(k => s.positions[k].currency === 'USD'));
 
-const fetchList = Array.from(needed).map(s => YAHOO_SYMBOLS[s]);
+const fetchList = Array.from(needed).filter(s => YAHOO_SYMBOLS[s]).map(s => YAHOO_SYMBOLS[s]);
+unresolved.forEach(s => { candidates[s].forEach(c => fetchList.push(c)); });
 fetchList.push(YAHOO_SYMBOLS[BENCHMARK] || BENCHMARK);
 if (anyUsd) fetchList.push(FX_SYMBOL);
 
@@ -321,6 +363,119 @@ async function fetchPrices() {
   return out;
 }
 
+/* ------------------------------------------------ 3b. identify unknown symbols */
+
+/* Symbols no listing could be found for. Carried flat at the brokerage's last
+   price and reported, rather than dropped. Deliberately NOT written back into
+   history.snapshots as `flat`, so a later run with a working feed still gets to
+   resolve them properly instead of inheriting today's failure forever. */
+const flatCarry = new Set();
+
+/* The brokerage's own last price is the only independent price this script has,
+   and it is already recorded per position per snapshot. Use it to CHOOSE the
+   listing rather than merely to sanity-check one: a ticker that exists on Yahoo
+   as a DIFFERENT security prices plausibly, and that is the failure mode worse
+   than not pricing at all, because it misstates every return without a symptom. */
+function resolveSymbols(prices) {
+  const closeAtOrBefore = (series, date) => {
+    let px = null;
+    for (let i = 0; i < series.length; i++) {
+      if (series[i].date <= date) px = series[i].close; else break;
+    }
+    return px;
+  };
+
+  /* Most recent snapshot that actually held it, for a same-day comparison. */
+  const reference = sym => {
+    for (let i = history.snapshots.length - 1; i >= 0; i--) {
+      const pos = history.snapshots[i].positions[sym];
+      if (pos && !pos.flat && pos.last_price != null) {
+        return { date: history.snapshots[i].date, price: pos.last_price };
+      }
+    }
+    return null;
+  };
+
+  /* Cached resolutions are re-checked too — their series is already being
+     fetched, so verification is free, and a ticker quietly reassigned to another
+     company would otherwise keep pricing against the cache forever. Overrides are
+     hand-written and exempt; PROXIED symbols carry a deliberate basis (GC=F trades
+     at a premium to spot) that anchoring corrects later, so they cannot be judged
+     on price agreement at all. */
+  const work = unresolved.map(s => ({ sym: s, cands: candidates[s], cached: false }))
+    .concat(Array.from(needed)
+      .filter(s => cachedMap[s] && !SYMBOL_OVERRIDES[s] && !PROXIED[s])
+      .map(s => ({ sym: s, cands: [cachedMap[s]], cached: true })));
+
+  const resolvedNow = {};
+  const report = [];
+
+  work.forEach(({ sym, cands, cached }) => {
+    const ref = reference(sym);
+    const scored = [];
+    cands.forEach(c => {
+      const series = prices[c];
+      if (!series || !series.length) return;
+      const px = ref ? closeAtOrBefore(series, ref.date) : series[series.length - 1].close;
+      if (px == null) return;
+      scored.push({ candidate: c, close: px, delta: ref ? Math.abs(px - ref.price) / ref.price : 0 });
+    });
+
+    /* Nothing quoted anywhere — a delisted historical holding, or a feed outage.
+       Neither is a reason to refuse to build the series. */
+    if (!scored.length) {
+      flatCarry.add(sym);
+      report.push('  ' + sym + ' -> no listing quoted; carried flat at $' +
+        (ref ? ref.price : '?') + ' and reported as approximated');
+      return;
+    }
+
+    /* No recorded brokerage price means there is nothing to tell the candidates
+       apart with. Take the symbol as the brokerage writes it and say so. */
+    if (!ref) {
+      resolvedNow[sym] = sym;
+      report.push('  ' + sym + ' -> ' + sym + ' (unverified: no brokerage price recorded)');
+      return;
+    }
+
+    scored.sort((a, b) => a.delta - b.delta);
+    const best = scored[0];
+    if (best.delta > MATCH_TOLERANCE) {
+      die('cannot identify ' + sym + ' on Yahoo.\n' +
+        '  Brokerage last price $' + ref.price + ' on ' + ref.date + ', but:\n' +
+        scored.map(s => '    ' + s.candidate + '  $' + s.close + '  off by ' +
+          (s.delta * 100).toFixed(1) + '%').join('\n') + '\n' +
+        (cached
+          ? '  The cached mapping in history.meta.symbol_map no longer matches this\n' +
+            '  security. Delete that entry, or pin the right listing in SYMBOL_OVERRIDES.'
+          : '  Every candidate looks like a different security. Add the right listing\n' +
+            '  to SYMBOL_OVERRIDES — pricing it wrong would misstate every return.'));
+    }
+    resolvedNow[sym] = best.candidate;
+    if (!cached) {
+      report.push('  ' + sym + ' -> ' + best.candidate + '  ($' + best.close +
+        ' vs brokerage $' + ref.price + ', ' + (best.delta * 100).toFixed(2) + '% off)');
+    }
+  });
+
+  Object.keys(resolvedNow).forEach(s => { YAHOO_SYMBOLS[s] = resolvedNow[s]; });
+
+  if (report.length) {
+    console.log('symbol resolution');
+    report.forEach(r => console.log(r));
+    const promote = Object.keys(resolvedNow).filter(s => resolvedNow[s] !== s);
+    if (promote.length) {
+      console.log('  pin these in SYMBOL_OVERRIDES to skip the candidate fetches next run:');
+      promote.forEach(s => console.log("    '" + s + "': '" + resolvedNow[s] + "',"));
+    }
+  }
+
+  /* Everything actually used, so the next run can skip rediscovery. */
+  const map = {};
+  Array.from(needed).forEach(s => { if (YAHOO_SYMBOLS[s]) map[s] = YAHOO_SYMBOLS[s]; });
+  return map;
+}
+
 /* ------------------------------------------------------ 4. reconstruct daily */
 
 function buildSeries(prices) {
@@ -398,17 +553,25 @@ function buildSeries(prices) {
     Object.keys(snap.positions).forEach(sym => {
       const pos = snap.positions[sym];
       let px;
-      if (pos.flat) {
-        px = pos.last_price;                        // options: carried flat
+      if (pos.flat || flatCarry.has(sym)) {
+        px = pos.last_price;                        // options, and anything unquoted
         approximated.add(sym);
       } else {
         px = lastClose[YAHOO_SYMBOLS[sym]];
+        /* A gap in an otherwise-resolved series used to drop the whole day, which
+           truncated the curve with no error anywhere — the same visible symptom
+           as a missing mapping. Fall back to the brokerage's own last price and
+           declare it instead of losing the day. */
+        if (px == null && pos.last_price != null) {
+          px = pos.last_price;
+          approximated.add(sym);
+        }
         if (px == null) { priced = false; return; }
       }
       const native = pos.qty * px * (pos.multiplier || 1);
       value += pos.currency === 'USD' ? native * fx : native;
     });
-    if (!priced) return;                            // not enough data for this day yet
+    if (!priced) return;                            // genuinely nothing to value it with
 
     daily.push({ date: date, value: r2(value), net_flow: r2(flowByDate[date] || 0) });
   });
@@ -426,7 +589,7 @@ function buildSeries(prices) {
     let value = 0, ok = true;
     Object.keys(latest.positions).forEach(sym => {
       const pos = latest.positions[sym];
-      if (pos.flat) return;                        // options excluded, not carried flat backwards
+      if (pos.flat || flatCarry.has(sym)) return;  // excluded, not carried flat backwards
       const px = hypLast[YAHOO_SYMBOLS[sym]];
       if (px == null) { ok = false; return; }
       const native = pos.qty * px * (pos.multiplier || 1);
@@ -442,6 +605,7 @@ function buildSeries(prices) {
 
 (async () => {
   const prices = await fetchPrices();
+  const symbolMap = resolveSymbols(prices);
   const { daily, hyp, approximated, map } = buildSeries(prices);
 
   if (!daily.length) die('reconstruction produced no days — check the price data');
@@ -497,6 +661,9 @@ function buildSeries(prices) {
       as_of: daily[daily.length - 1].date,
       price_source: OFFLINE ? 'cached' : 'yahoo via market-proxy',
       approximated: approximated,
+      /* What each holding was actually priced against, so the next run skips
+         rediscovery and so a wrong series can be traced to a wrong listing. */
+      symbol_map: symbolMap,
       note: 'Holdings are assumed constant between snapshots, so a trade is ' +
         'recognised at the next refresh rather than on its trade date.',
       /* Cleared on every successful full reprice — Object.assign otherwise
