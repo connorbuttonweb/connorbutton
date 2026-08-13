@@ -1,9 +1,9 @@
 {
-  "as_of": "2026-08-12",
+  "as_of": "2026-08-13",
   "accounts": [
     {
       "positions": [
-        {"id":"3b1d440e-055a-4b82-09f1-76881e491f80","instrument":"SPY18AUG26P769.00","qty":1,"side":"buy","avgPrice":2.09},
+        {"id":"3b1d440e-055a-4b82-09f1-76881e491f80","instrument":"SPY18AUG26P769.00","qty":2,"side":"buy","avgPrice":1.57},
         {"id":"79830f1a-0957-4902-0a52-560ea15a0503","instrument":"DRAM","qty":10,"side":"buy","avgPrice":51.73},
         {"id":"181f3121-241f-4842-0e5e-d1a41e0ea54f","instrument":"SPCX","qty":7,"side":"buy","avgPrice":134.1753},
         {"id":"07101a1a-691b-4782-0ee3-00866d4e0e82","instrument":"BEPC","qty":25,"side":"buy","avgPrice":33.889},
@@ -14,16 +14,18 @@
         {"id":"08284e81-1330-4812-0586-032980451817","instrument":"XEQT.TO","qty":100,"side":"buy","avgPrice":44.1751}
       ],
       "balances": {
-        "maxBuyingPower": {"cad":"$217.28","usd":"$1,327.59","combinedCad":"$2,025.27","combinedUsd":"$1,480.19"},
-        "totalBuyingPower": {"cad":"$217.28","usd":"$1,327.59","combinedCad":"$2,025.27","combinedUsd":"$1,480.19"},
-        "buyingPower": {"cad":"$217.28","usd":"$1,327.59","combinedCad":"$2,025.27","combinedUsd":"$1,480.19"},
-        "totalEquity": {"cad":"$12,114.28","usd":"$6,684.68","combinedCad":"$21,422.70","combinedUsd":"$15,384.34"},
-        "marketValue": {"cad":"$11,897.00","usd":"$5,357.09","combinedCad":"$19,356.75","combinedUsd":"$13,900.72"},
-        "cash": {"cad":"$217.28","usd":"$1,327.59","combinedCad":"$2,065.95","combinedUsd":"$1,483.62"},
+        "balances": {
+          "maxBuyingPower": {"cad":"$217.28","usd":"$1,222.56","combinedCad":"$1,884.06","combinedUsd":"$1,374.99"},
+          "totalBuyingPower": {"cad":"$217.28","usd":"$1,222.56","combinedCad":"$1,884.06","combinedUsd":"$1,374.99"},
+          "buyingPower": {"cad":"$217.28","usd":"$1,222.56","combinedCad":"$1,884.06","combinedUsd":"$1,374.99"},
+          "totalEquity": {"cad":"$12,158.68","usd":"$6,523.93","combinedCad":"$21,253.23","combinedUsd":"$15,245.89"},
+          "marketValue": {"cad":"$11,941.40","usd":"$5,301.37","combinedCad":"$19,331.67","combinedUsd":"$13,867.47"},
+          "cash": {"cad":"$217.28","usd":"$1,222.56","combinedCad":"$1,921.56","combinedUsd":"$1,378.42"}
+        },
         "profit": {
-          "dayPnl": {"cad":"$81.03","usd":"$252.99","combinedCad":"$433.32","combinedUsd":"$311.18"},
-          "closedPnl": {"cad":"$89.05","usd":"$66.60","combinedCad":"$181.79","combinedUsd":"$130.55"},
-          "openPnl": {"cad":"$600.06","usd":"$305.88","combinedCad":"$1,026.00","combinedUsd":"$736.80"}
+          "dayPnl": {"cad":"$44.40","usd":"-$169.87","combinedCad":"-$192.40","combinedUsd":"-$138.02"},
+          "closedPnl": {"cad":"$89.05","usd":"$72.32","combinedCad":"$189.86","combinedUsd":"$136.20"},
+          "openPnl": {"cad":"$644.46","usd":"$145.16","combinedCad":"$846.81","combinedUsd":"$607.46"}
         }
       }
     },
@@ -36,33 +38,42 @@
         {"id":"1e251804-0f12-4e62-0a7d-348ba26a076c","instrument":"CHAT","qty":10,"side":"buy","avgPrice":86.7237}
       ],
       "balances": {
-        "maxBuyingPower": {"cad":"$98.40","usd":"$6.65","combinedCad":"$107.45","combinedUsd":"$75.76"},
-        "totalBuyingPower": {"cad":"$98.40","usd":"$6.65","combinedCad":"$107.45","combinedUsd":"$75.76"},
-        "buyingPower": {"cad":"$98.40","usd":"$6.65","combinedCad":"$107.45","combinedUsd":"$75.76"},
-        "totalEquity": {"cad":"$10,350.90","usd":"$2,702.90","combinedCad":"$14,114.68","combinedUsd":"$10,136.22"},
-        "marketValue": {"cad":"$10,252.50","usd":"$2,696.25","combinedCad":"$14,007.03","combinedUsd":"$10,058.91"},
-        "cash": {"cad":"$98.40","usd":"$6.65","combinedCad":"$107.66","combinedUsd":"$77.31"},
+        "balances": {
+          "maxBuyingPower": {"cad":"$98.40","usd":"$6.64","combinedCad":"$107.45","combinedUsd":"$75.67"},
+          "totalBuyingPower": {"cad":"$98.40","usd":"$6.64","combinedCad":"$107.45","combinedUsd":"$75.67"},
+          "buyingPower": {"cad":"$98.40","usd":"$6.64","combinedCad":"$107.45","combinedUsd":"$75.67"},
+          "totalEquity": {"cad":"$10,389.80","usd":"$2,687.52","combinedCad":"$14,136.28","combinedUsd":"$10,140.59"},
+          "marketValue": {"cad":"$10,291.40","usd":"$2,680.88","combinedCad":"$14,028.63","combinedUsd":"$10,063.36"},
+          "cash": {"cad":"$98.40","usd":"$6.64","combinedCad":"$107.65","combinedUsd":"$77.23"}
+        },
         "profit": {
-          "dayPnl": {"cad":"$62.83","usd":"$166.59","combinedCad":"$294.81","combinedUsd":"$211.71"},
-          "closedPnl": {"cad":"$35.37","usd":"$116.16","combinedCad":"$197.12","combinedUsd":"$141.56"},
-          "openPnl": {"cad":"$510.75","usd":"$66.39","combinedCad":"$603.20","combinedUsd":"$433.18"}
+          "dayPnl": {"cad":"$38.90","usd":"-$7.17","combinedCad":"$28.91","combinedUsd":"$20.74"},
+          "closedPnl": {"cad":"$35.37","usd":"$116.49","combinedCad":"$197.75","combinedUsd":"$141.86"},
+          "openPnl": {"cad":"$549.65","usd":"$51.02","combinedCad":"$620.78","combinedUsd":"$445.31"}
         }
       }
     }
   ],
   "quotes": [
-    {"securityUuid":"79830f1a-0957-4902-0a52-560ea15a0503","symbol":"DRAM","currency":"USD","bidPrice":54.78,"bidSize":200,"askPrice":54.82,"askSize":100,"lastPrice":54.8,"quoteTime":"2026-08-12T22:41:09Z","lastTradeTime":"2026-08-12T22:41:04Z","lastTradeSize":120,"tick":"Up","volume":53259851,"openPrice":54.605,"highPrice":55.2099,"lowPrice":53.85,"highPrice52Weeks":81.34,"lowPrice52Weeks":26.14,"volumeWeightedAveragePrice":54.737882,"priceChangeAmount":3.91,"priceChangePercent":0.076832,"afterHourPriceChangeAmount":0,"afterHourPriceChangePercent":0,"isTradingHour":false,"marketSector":"amex","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Post-market","peRatio":0,"dividendYield":0},
-    {"securityUuid":"181f3121-241f-4842-0e5e-d1a41e0ea54f","symbol":"SPCX","currency":"USD","bidPrice":145.9,"bidSize":1400,"askPrice":145.93,"askSize":500,"lastPrice":145.9001,"quoteTime":"2026-08-12T22:41:10Z","lastTradeTime":"2026-08-12T22:41:09Z","lastTradeSize":1200,"tick":"Up","volume":166655434,"openPrice":135.045,"highPrice":149.6,"lowPrice":134.01,"highPrice52Weeks":225.64,"lowPrice52Weeks":104.83,"volumeWeightedAveragePrice":143.092319,"priceChangeAmount":12.86,"priceChangePercent":0.096481,"afterHourPriceChangeAmount":-0.2499,"afterHourPriceChangePercent":-0.00171,"isTradingHour":false,"marketSector":"nasdaq","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Post-market","peRatio":0,"dividendYield":0},
-    {"securityUuid":"07101a1a-691b-4782-0ee3-00866d4e0e82","symbol":"BEPC","currency":"USD","bidPrice":34.6,"bidSize":100,"askPrice":35.45,"askSize":100,"lastPrice":35,"quoteTime":"2026-08-12T22:28:55Z","lastTradeTime":"2026-08-12T20:00:06Z","lastTradeSize":707,"tick":"Down","volume":3113364,"openPrice":35.15,"highPrice":35.16,"lowPrice":34.545,"highPrice52Weeks":45.18,"lowPrice52Weeks":31.82,"volumeWeightedAveragePrice":34.892181,"priceChangeAmount":0.21,"priceChangePercent":0.006036,"afterHourPriceChangeAmount":0,"afterHourPriceChangePercent":0,"isTradingHour":false,"marketSector":"nyse","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Post-market","peRatio":0,"dividendYield":0.0472},
-    {"securityUuid":"6b051285-0bbb-4b42-02d8-a5a11a423d49","symbol":"FINN.TO","currency":"CAD","bidPrice":32.82,"bidSize":20,"askPrice":33.04,"askSize":1,"lastPrice":32.89,"quoteTime":"2026-08-12T21:30:00Z","lastTradeTime":"2026-08-12T19:59:59Z","lastTradeSize":100,"tick":null,"volume":111086,"openPrice":32.95,"highPrice":33.2,"lowPrice":32.74,"highPrice52Weeks":33.93,"lowPrice52Weeks":20.82,"volumeWeightedAveragePrice":32.838788,"priceChangeAmount":0.14,"priceChangePercent":0.004275,"afterHourPriceChangeAmount":0,"afterHourPriceChangePercent":0,"isTradingHour":false,"marketSector":"neo","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Closed","peRatio":0,"dividendYield":0},
-    {"securityUuid":"1e251804-0f12-4e62-0a7d-348ba26a076c","symbol":"CHAT","currency":"USD","bidPrice":92.6,"bidSize":500,"askPrice":94,"askSize":200,"lastPrice":93.5368,"quoteTime":"2026-08-12T22:28:16Z","lastTradeTime":"2026-08-12T21:29:18Z","lastTradeSize":200,"tick":"Down","volume":380113,"openPrice":92.08,"highPrice":92.94,"lowPrice":91.38,"highPrice52Weeks":105.2,"lowPrice52Weeks":50.73,"volumeWeightedAveragePrice":92.423583,"priceChangeAmount":4.37,"priceChangePercent":0.049479,"afterHourPriceChangeAmount":0.8468,"afterHourPriceChangePercent":0.009136,"isTradingHour":false,"marketSector":"amex","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Post-market","peRatio":0,"dividendYield":0.019125},
-    {"securityUuid":"62311c1b-0f6e-4252-0d0c-1c6c338d005d","symbol":"GOLD.QM","currency":"USD","bidPrice":4399.67,"bidSize":100,"askPrice":4400.71,"askSize":100,"lastPrice":4399.67,"quoteTime":"2026-08-12T22:41:11Z","lastTradeTime":"2026-08-12T22:41:11Z","lastTradeSize":null,"tick":"Up","volume":null,"openPrice":4407.47,"highPrice":4411.69,"lowPrice":4397.78,"highPrice52Weeks":null,"lowPrice52Weeks":null,"volumeWeightedAveragePrice":null,"priceChangeAmount":28.05994614,"priceChangePercent":0.006419,"afterHourPriceChangeAmount":null,"afterHourPriceChangePercent":null,"isTradingHour":true,"marketSector":"otcpm","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Open","peRatio":0,"dividendYield":0},
-    {"securityUuid":"06007f2f-2653-4612-0981-079d6f491810","symbol":"VDY.TO","currency":"CAD","bidPrice":78.08,"bidSize":1,"askPrice":78.27,"askSize":11,"lastPrice":78.15,"quoteTime":"2026-08-12T20:59:03Z","lastTradeTime":"2026-08-12T19:59:45Z","lastTradeSize":100,"tick":"Down","volume":188621,"openPrice":77.64,"highPrice":78.26,"lowPrice":77.5,"highPrice52Weeks":79.29,"lowPrice52Weeks":53.09,"volumeWeightedAveragePrice":78.00502,"priceChangeAmount":0.62,"priceChangePercent":0.007997,"afterHourPriceChangeAmount":0,"afterHourPriceChangePercent":0,"isTradingHour":false,"marketSector":"tsx","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Closed","peRatio":0,"dividendYield":0.028125},
-    {"securityUuid":"08284e81-1330-4812-0586-032980451817","symbol":"XEQT.TO","currency":"CAD","bidPrice":46.18,"bidSize":2,"askPrice":46.2,"askSize":2,"lastPrice":46.19,"quoteTime":"2026-08-12T20:59:26Z","lastTradeTime":"2026-08-12T19:59:41Z","lastTradeSize":800,"tick":"Down","volume":437299,"openPrice":46.22,"highPrice":46.24,"lowPrice":46.09,"highPrice52Weeks":46.48,"lowPrice52Weeks":36.77,"volumeWeightedAveragePrice":46.179299,"priceChangeAmount":0.25,"priceChangePercent":0.005442,"afterHourPriceChangeAmount":0,"afterHourPriceChangePercent":0,"isTradingHour":false,"marketSector":"tsx","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Closed","peRatio":0,"dividendYield":0.015599},
-    {"securityUuid":"23185041-063b-4362-0a0d-9d9c655a006c","symbol":"DLR.U.TO","currency":"USD","bidPrice":10.12,"bidSize":958,"askPrice":10.13,"askSize":10218,"lastPrice":10.12,"quoteTime":"2026-08-12T20:59:08Z","lastTradeTime":"2026-08-12T19:59:53Z","lastTradeSize":15400,"tick":"Down","volume":1121189,"openPrice":10.12,"highPrice":10.13,"lowPrice":10.12,"highPrice52Weeks":10.28,"lowPrice52Weeks":10.09,"volumeWeightedAveragePrice":10.124817,"priceChangeAmount":-0.005,"priceChangePercent":-0.000494,"afterHourPriceChangeAmount":0,"afterHourPriceChangePercent":0,"isTradingHour":false,"marketSector":"tsx","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Closed","peRatio":0,"dividendYield":0.028207},
-    {"securityUuid":"3b1d440e-055a-4b82-09f1-76881e491f80","symbol":"SPY18AUG26P769.00","currency":"USD","bidPrice":2.02,"bidSize":131,"askPrice":2.04,"askSize":50,"lastPrice":1.9,"quoteTime":"2026-08-12T20:14:59Z","lastTradeTime":"2026-08-12T20:05:08Z","lastTradeSize":8,"tick":"Down","volume":240,"openPrice":1.98,"highPrice":2.57,"lowPrice":1.88,"highPrice52Weeks":null,"lowPrice52Weeks":null,"volumeWeightedAveragePrice":null,"priceChangeAmount":-1.51,"priceChangePercent":-0.419444,"afterHourPriceChangeAmount":-0.19,"afterHourPriceChangePercent":-0.090909,"isTradingHour":false,"marketSector":"opra","snapDateTime":"2026-08-12T22:41:11Z","delay":false,"marketState":"Closed","peRatio":null,"dividendYield":null,"greeks":{"delta":null,"gamma":null,"theta":null,"vega":null,"rho":null,"impliedVolatility":null,"inTheMoneyProbability":null,"inTheMoney":null}}
+    {"securityUuid":"79830f1a-0957-4902-0a52-560ea15a0503","symbol":"DRAM","currency":"USD","bidPrice":57.82,"askPrice":57.84,"lastPrice":57.83,"lastTradeTime":"2026-08-13T22:44:18Z","marketState":"Post-market"},
+    {"securityUuid":"181f3121-241f-4842-0e5e-d1a41e0ea54f","symbol":"SPCX","currency":"USD","bidPrice":142.03,"askPrice":142.04,"lastPrice":142.03,"lastTradeTime":"2026-08-13T22:44:18Z","marketState":"Post-market"},
+    {"securityUuid":"07101a1a-691b-4782-0ee3-00866d4e0e82","symbol":"BEPC","currency":"USD","bidPrice":34.81,"askPrice":36,"lastPrice":35.87,"lastTradeTime":"2026-08-13T20:00:03Z","marketState":"Post-market","dividendYield":0.04507},
+    {"securityUuid":"6b051285-0bbb-4b42-02d8-a5a11a423d49","symbol":"FINN.TO","currency":"CAD","bidPrice":32.82,"askPrice":33.19,"lastPrice":33,"lastTradeTime":"2026-08-13T19:59:50Z","marketState":"Closed"},
+    {"securityUuid":"1e251804-0f12-4e62-0a7d-348ba26a076c","symbol":"CHAT","currency":"USD","bidPrice":93.61,"askPrice":95.98,"lastPrice":92,"lastTradeTime":"2026-08-13T21:54:20Z","marketState":"Post-market","dividendYield":0.01903},
+    {"securityUuid":"62311c1b-0f6e-4252-0d0c-1c6c338d005d","symbol":"GOLD.QM","currency":"USD","bidPrice":4360.46,"askPrice":4361.42,"lastPrice":4360.46,"lastTradeTime":"2026-08-13T22:44:20Z","marketState":"Open"},
+    {"securityUuid":"06007f2f-2653-4612-0981-079d6f491810","symbol":"VDY.TO","currency":"CAD","bidPrice":78.42,"askPrice":78.53,"lastPrice":78.48,"lastTradeTime":"2026-08-13T19:59:48Z","marketState":"Closed","dividendYield":0.028096},
+    {"securityUuid":"08284e81-1330-4812-0586-032980451817","symbol":"XEQT.TO","currency":"CAD","bidPrice":46.36,"askPrice":46.4,"lastPrice":46.37,"lastTradeTime":"2026-08-13T19:59:41Z","marketState":"Closed","dividendYield":0.015636},
+    {"securityUuid":"23185041-063b-4362-0a0d-9d9c655a006c","symbol":"DLR.U.TO","currency":"USD","bidPrice":10.12,"askPrice":10.13,"lastPrice":10.12,"lastTradeTime":"2026-08-13T19:51:40Z","marketState":"Closed","dividendYield":0.028227},
+    {"securityUuid":"3b1d440e-055a-4b82-09f1-76881e491f80","symbol":"SPY18AUG26P769.00","currency":"USD","bidPrice":0.72,"askPrice":0.74,"lastPrice":0.72,"lastTradeTime":"2026-08-13T19:59:30Z","marketState":"Closed","greeks":{"delta":-0.154891,"gamma":0.026524,"theta":-0.177283,"vega":0.237561,"rho":-0.019929,"impliedVolatility":0.09002,"inTheMoneyProbability":0.20801066,"inTheMoney":false}}
   ],
   "activities": [
+    {"transactionId":"7af527fe-4e52-4a35-91c2-58f9f074c592","transactionType":"Trades","description":"FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT","amount":328.2,"currency":"CAD","tradeDate":"2026-08-12"},
+    {"transactionId":"8e11dff9-ed80-4e89-8660-bd763f138502","transactionType":"Trades","description":"ROUNDHILL ETF TR ROUNDHILL MEMORY ETF WE ACTED AS AGENT","amount":-110.04,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"1df33589-13c6-4d34-96ba-d5cd735071d0","transactionType":"Trades","description":"VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT","amount":-78.09,"currency":"CAD","tradeDate":"2026-08-12"},
+    {"transactionId":"00a674da-0467-424c-a99d-544da5345ccb","transactionType":"Trades","description":"TESLA INC COMMON STOCK WE ACTED AS AGENT","amount":987.45,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"6163643b-dec7-405f-8d93-620649ffb6ca","transactionType":"Trades","description":"PUT SPY 08/18/26 769 STATE STREET SPDR S&P 500 ETF WE ACTED AS AGENT","amount":-209,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"4cdb7944-0811-49ed-bb2e-e7c3c19a0756","transactionType":"Trades","description":"FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT","amount":-32.85,"currency":"CAD","tradeDate":"2026-08-12"},
+    {"transactionId":"d0ba1461-36a6-4e95-80e0-2f37fc36f2f8","transactionType":"Trades","description":"TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS","amount":647.35,"currency":"USD","tradeDate":"2026-08-12"},
     {"transactionId":"3be54b4d-6b8a-4648-85d8-a6c07bfa8541","transactionType":"Trades","description":"BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT","amount":-344.6,"currency":"USD","tradeDate":"2026-08-11"},
     {"transactionId":"6b94b19d-de69-4f8a-ab17-b703f1c73d12","transactionType":"Trades","description":"BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT","amount":172.49,"currency":"USD","tradeDate":"2026-08-11"},
     {"transactionId":"fdb6bf74-4b55-4c24-a187-6d81988bd9ab","transactionType":"Trades","description":"ROUNDHILL ETF TR ROUNDHILL MEMORY ETF WE ACTED AS AGENT","amount":-407.26,"currency":"USD","tradeDate":"2026-08-11"},
@@ -77,13 +88,15 @@
     {"transactionId":"6c093f16-5f67-42d3-809c-33a2dd09c4e7","transactionType":"Other","description":"BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES JOURNAL POSITION FROM CAD BOOK VALUE: $437.29 CNV@ 1.4014","amount":0,"currency":"USD","tradeDate":"2026-08-07"},
     {"transactionId":"ab0620eb-dd17-4c71-9618-8087e97b3f75","transactionType":"Trades","description":"SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT","amount":757.24,"currency":"USD","tradeDate":"2026-08-07"},
     {"transactionId":"52f7927a-7d7e-4161-b6c1-74a32d63da6e","transactionType":"Trades","description":"BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS","amount":1107.9,"currency":"USD","tradeDate":"2026-08-07"},
+    {"transactionId":"fddccdac-3590-47fa-ad09-fa0aaf13b27f","transactionType":"Trades","description":"FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT","amount":98.4,"currency":"CAD","tradeDate":"2026-08-12"},
+    {"transactionId":"811f8740-6020-4630-b8a2-d513b4da7b54","transactionType":"Trades","description":"DIGITAL REALTY TRUST INC WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS","amount":-1769.62,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"b1b16a82-8273-460a-ba8f-fb5309aca49c","transactionType":"Trades","description":"GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT","amount":-1013,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"9c91838a-ca22-4674-a939-ed6552b65039","transactionType":"Trades","description":"TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS","amount":1764.2,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"43671fcf-1a1a-4ab9-bd19-126d88dc25ec","transactionType":"Trades","description":"GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT","amount":-749.62,"currency":"USD","tradeDate":"2026-08-12"},
+    {"transactionId":"552dc3e0-ef46-43c3-9496-452795619b4f","transactionType":"Trades","description":"DIGITAL REALTY TRUST INC WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS","amount":1769.25,"currency":"USD","tradeDate":"2026-08-12"},
     {"transactionId":"74778295-b696-43ef-afb6-111fb93299d9","transactionType":"Trades","description":"TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT","amount":-443.45,"currency":"USD","tradeDate":"2026-08-07"},
     {"transactionId":"c6e79aa2-f214-4386-93a5-2ff24be0fcad","transactionType":"Trades","description":"SNOWFLAKE INC COMMON STOCK WE ACTED AS AGENT","amount":326.17,"currency":"USD","tradeDate":"2026-08-07"},
     {"transactionId":"b0fd86c1-58ad-4a06-a920-67cb36999fcc","transactionType":"Trades","description":"GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL","amount":430.6,"currency":"USD","tradeDate":"2026-08-07"},
     {"transactionId":"5c387428-70cf-4376-975d-c7c964239396","transactionType":"Trades","description":"SNOWFLAKE INC COMMON STOCK WE ACTED AS AGENT","amount":-326.76,"currency":"USD","tradeDate":"2026-08-07"}
-  ],
-  "benchmark": {
-    "symbol": "VFV.TO",
-    "series": []
-  }
+  ]
 }
