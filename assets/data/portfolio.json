@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-13T22:49:01.754Z",
-  "as_of": "2026-08-13",
+  "generated_at": "2026-08-14T22:45:35.524Z",
+  "as_of": "2026-08-14",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.394
+   "USDCAD": 1.3931
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,7 +13,7 @@
  },
  "profile": {
   "blended_mer": 0.004,
-  "distribution_yield": 0.0139,
+  "distribution_yield": 0.0138,
   "holdings_count": 10,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 2029.21,
+   "cash": 2028.06,
    "currency": "CAD",
-   "buying_power": 1991.51
+   "buying_power": 1990.38
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 44.1272,
-   "price": 46.37,
+   "price": 46.19,
    "prev_close": 46.37,
-   "market_value": 9274,
-   "open_pnl": 448.56,
+   "market_value": 9238,
+   "open_pnl": 412.56,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 250,
    "avg_cost": 31.0893,
-   "price": 33,
+   "price": 32.75,
    "prev_close": 33,
-   "market_value": 8250,
-   "open_pnl": 477.67,
+   "market_value": 8187.5,
+   "open_pnl": 415.17,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 60,
    "avg_cost": 74.0148,
-   "price": 78.48,
+   "price": 78.86,
    "prev_close": 78.48,
-   "market_value": 4708.8,
-   "open_pnl": 267.91,
+   "market_value": 4731.6,
+   "open_pnl": 290.71,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 25,
    "avg_cost": 84.5744,
-   "price": 92,
-   "prev_close": 92,
-   "market_value": 2300,
-   "open_pnl": 185.64,
+   "price": 93.52,
+   "prev_close": 93.61,
+   "market_value": 2338,
+   "open_pnl": 223.64,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -102,7 +102,7 @@
    "quantity": 174,
    "avg_cost": 10.13,
    "price": 10.12,
-   "prev_close": 10.12,
+   "prev_close": 10.125,
    "market_value": 1760.88,
    "open_pnl": -1.74,
    "sector": null,
@@ -117,10 +117,10 @@
    "currency": "USD",
    "quantity": 0.3,
    "avg_cost": 4304.4437,
-   "price": 4360.46,
-   "prev_close": 4360.46,
-   "market_value": 1308.14,
-   "open_pnl": 16.8,
+   "price": 4376.16,
+   "prev_close": 4353.3103,
+   "market_value": 1312.85,
+   "open_pnl": 21.51,
    "sector": "Commodities",
    "geography": "Global",
    "market_cap_bucket": "n/a"
@@ -133,10 +133,10 @@
    "currency": "USD",
    "quantity": 7,
    "avg_cost": 134.1753,
-   "price": 142.03,
-   "prev_close": 142.03,
-   "market_value": 994.21,
-   "open_pnl": 54.98,
+   "price": 140.5603,
+   "prev_close": 141.8503,
+   "market_value": 983.92,
+   "open_pnl": 44.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "USD",
    "quantity": 25,
    "avg_cost": 33.889,
-   "price": 35.87,
-   "prev_close": 35.87,
-   "market_value": 896.75,
-   "open_pnl": 49.52,
+   "price": 34.83,
+   "prev_close": 35.2,
+   "market_value": 870.75,
+   "open_pnl": 23.52,
    "sector": "Utilities",
    "geography": "Canada",
    "market_cap_bucket": "Mid"
@@ -165,10 +165,10 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 51.73,
-   "price": 57.83,
-   "prev_close": 57.83,
-   "market_value": 578.3,
-   "open_pnl": 61,
+   "price": 57.5,
+   "prev_close": 57.11,
+   "market_value": 575,
+   "open_pnl": 57.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "USD",
    "quantity": 2,
    "avg_cost": 1.57,
-   "price": 0.72,
+   "price": 0.45,
    "prev_close": 0.72,
-   "market_value": 144,
-   "open_pnl": -170,
+   "market_value": 90,
+   "open_pnl": -224,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null,
@@ -18331,6 +18331,18 @@
  },
  "activities": [
   {
+   "uid": "t_3a259e68a6",
+   "date": "2026-08-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "PUT SPY 08/18/26 769 STATE STREET SPDR S&P 500 ETF WE ACTED AS AGENT",
+   "amount": -105,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_769c1be04a",
    "date": "2026-08-12",
    "type": "Trade",
@@ -21202,35 +21214,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.725,
+   "annual_rate_per_share": 0.7183,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.205,
+   "annual_rate_per_share": 2.1981,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7508,
+   "annual_rate_per_share": 1.6957,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "DLR.U.TO",
-   "annual_rate_per_share": 0.2857,
+   "annual_rate_per_share": 0.2855,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "BEPC",
-   "annual_rate_per_share": 1.6167,
+   "annual_rate_per_share": 1.5604,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21266,6 +21278,11 @@
    {
     "date": "2026-08-13",
     "value": 35389.31,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-08-14",
+    "value": 35234.39,
     "net_flow": 0
    }
   ],
