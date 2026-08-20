@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-17T22:46:34.931Z",
-  "as_of": "2026-08-17",
+  "generated_at": "2026-08-20T22:46:01.328Z",
+  "as_of": "2026-08-20",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3874
+   "USDCAD": 1.3808
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,8 +12,8 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0041,
-  "distribution_yield": 0.013,
+  "blended_mer": 0.0034,
+  "distribution_yield": 0.0156,
   "holdings_count": 10,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 2017.02,
+   "cash": 4579.22,
    "currency": "CAD",
-   "buying_power": 1977.91
+   "buying_power": 4579.01
   }
  ],
  "positions": [
@@ -35,12 +35,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 200,
-   "avg_cost": 44.1272,
-   "price": 46.08,
-   "prev_close": 46.19,
-   "market_value": 9216,
-   "open_pnl": 390.56,
+   "quantity": 165,
+   "avg_cost": 44.117,
+   "price": 45.34,
+   "prev_close": 45.605,
+   "market_value": 7481.1,
+   "open_pnl": 201.79,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,12 +51,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 250,
-   "avg_cost": 31.0893,
-   "price": 32.6,
-   "prev_close": 32.75,
-   "market_value": 8150,
-   "open_pnl": 377.67,
+   "quantity": 225,
+   "avg_cost": 31.2288,
+   "price": 31.66,
+   "prev_close": 31.99,
+   "market_value": 7123.5,
+   "open_pnl": 97.02,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -67,28 +67,28 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 80,
-   "avg_cost": 75.2486,
-   "price": 78.86,
-   "prev_close": 78.86,
-   "market_value": 6308.8,
-   "open_pnl": 288.91,
+   "quantity": 90,
+   "avg_cost": 75.7475,
+   "price": 76.49,
+   "prev_close": 76.89,
+   "market_value": 6884.1,
+   "open_pnl": 66.82,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "CHAT",
-   "name": "Roundhill Generative AI & Technology ETF",
+   "symbol": "DLR.U.TO",
+   "name": "DLR.U.TO",
    "account_id": "main",
-   "asset_type": "ETF",
+   "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 25,
-   "avg_cost": 84.5744,
-   "price": 94.97,
-   "prev_close": 94.09,
-   "market_value": 2374.25,
-   "open_pnl": 259.89,
+   "quantity": 301,
+   "avg_cost": 10.135,
+   "price": 10.14,
+   "prev_close": 10.14,
+   "market_value": 3052.14,
+   "open_pnl": 1.51,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,13 +101,29 @@
    "currency": "USD",
    "quantity": 0.3,
    "avg_cost": 4304.4437,
-   "price": 4412.57,
-   "prev_close": 4379.5299,
-   "market_value": 1323.77,
-   "open_pnl": 32.44,
+   "price": 4521.79,
+   "prev_close": 4525.6199,
+   "market_value": 1356.54,
+   "open_pnl": 65.2,
    "sector": "Commodities",
    "geography": "Global",
    "market_cap_bucket": "n/a"
+  },
+  {
+   "symbol": "CHAT",
+   "name": "Roundhill Generative AI & Technology ETF",
+   "account_id": "main",
+   "asset_type": "ETF",
+   "currency": "USD",
+   "quantity": 15,
+   "avg_cost": 85.5297,
+   "price": 88.36,
+   "prev_close": 88.33,
+   "market_value": 1325.4,
+   "open_pnl": 42.46,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
   },
   {
    "symbol": "SPCX",
@@ -115,12 +131,12 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 7,
+   "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 145.86,
-   "prev_close": 139.63,
-   "market_value": 1021.02,
-   "open_pnl": 81.79,
+   "price": 133.4107,
+   "prev_close": 139.0607,
+   "market_value": 667.05,
+   "open_pnl": -3.82,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -131,31 +147,15 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 25,
+   "quantity": 15,
    "avg_cost": 33.889,
-   "price": 35.1,
-   "prev_close": 35.5,
-   "market_value": 877.5,
-   "open_pnl": 30.27,
+   "price": 33.44,
+   "prev_close": 34.06,
+   "market_value": 501.6,
+   "open_pnl": -6.74,
    "sector": "Utilities",
    "geography": "Canada",
    "market_cap_bucket": "Mid"
-  },
-  {
-   "symbol": "MDA.TO",
-   "name": "MDA.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 15,
-   "avg_cost": 50.42,
-   "price": 48.89,
-   "prev_close": 48.86,
-   "market_value": 733.35,
-   "open_pnl": -22.95,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
   },
   {
    "symbol": "DRAM",
@@ -163,12 +163,12 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 10,
+   "quantity": 5,
    "avg_cost": 51.73,
-   "price": 60.96,
-   "prev_close": 57.89,
-   "market_value": 609.6,
-   "open_pnl": 92.3,
+   "price": 57.54,
+   "prev_close": 55.1,
+   "market_value": 287.7,
+   "open_pnl": 29.05,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "CAD",
    "quantity": 15,
    "avg_cost": 12.14,
-   "price": 12.11,
-   "prev_close": 12.34,
-   "market_value": 181.65,
-   "open_pnl": -0.45,
+   "price": 11.28,
+   "prev_close": 11.53,
+   "market_value": 169.2,
+   "open_pnl": -12.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18330,6 +18330,378 @@
  },
  "activities": [
   {
+   "uid": "t_595ece696d",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": -264.22,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_20ac69dab2",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+   "amount": 127.75,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_0867b39231",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": 2394,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_f29d5fbe6c",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT",
+   "amount": 874.83,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_c36c9254e5",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": -387.9,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_c0c38e4b6b",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+   "amount": 1594.95,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_bb0601f62a",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": -3040.5,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_868318bc57",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+   "amount": 73,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_504ba6816f",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "ROUNDHILL ETF TR ROUNDHILL MEMORY ETF WE ACTED AS AGENT",
+   "amount": 274.9,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_aa3e07cfb8",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+   "amount": 365,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_c3878ec3cf",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": -320.2,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_a2fef24fdb",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": 264.99,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_79091192c7",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+   "amount": 341.62,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_cd641e6edb",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": -10.14,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_47991a7c82",
+   "date": "2026-08-19",
+   "type": "FX",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CONVERSION - CAD/USD",
+   "amount": 5.94,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_0044a02ec3",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+   "amount": 278.01,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_cf29202d13",
+   "date": "2026-08-19",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+   "amount": 705.75,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_a14011d8fd",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": 391.9,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_443d62a3ee",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+   "amount": -181.5,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_69cb7936d4",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+   "amount": 2235.32,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_2652c48d52",
+   "date": "2026-08-18",
+   "type": "Deposit",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Contribution",
+   "amount": 2000,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_1b061d1d1c",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+   "amount": -327.5,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_702a91bcb5",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": -784.1,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_9411152f40",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+   "amount": -2261.17,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_5d295b9522",
+   "date": "2026-08-18",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": -1286.4,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_726db1e4fe",
+   "date": "2026-08-17",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "PUT SPY 08/18/26 769 STATE STREET SPDR S&P 500 ETF WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": 51.99,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_7028410835",
+   "date": "2026-08-17",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": -1579,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_4df9560a2d",
+   "date": "2026-08-17",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": 1038.22,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_c8013bf325",
+   "date": "2026-08-17",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BLACKBERRY LTD COM WE ACTED AS AGENT",
+   "amount": -182.1,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_730bbdc8a2",
+   "date": "2026-08-17",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+   "amount": -756.3,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_3a731ddf32",
+   "date": "2026-08-17",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": 1403,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_fdebeae520",
    "date": "2026-08-14",
    "type": "Other",
@@ -21237,28 +21609,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7138,
+   "annual_rate_per_share": 0.7125,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1888,
+   "annual_rate_per_share": 2.0982,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
+   "symbol": "DLR.U.TO",
+   "annual_rate_per_share": 0.2868,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7051,
+   "annual_rate_per_share": 1.6686,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "BEPC",
-   "annual_rate_per_share": 1.5343,
+   "annual_rate_per_share": 1.5643,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21305,21 +21684,46 @@
     "date": "2026-08-17",
     "value": 35217.22,
     "net_flow": 0
+   },
+   {
+    "date": "2026-08-20",
+    "value": 36165.67,
+    "net_flow": 2000
    }
   ],
   "benchmarks": {
    "SPX": [
     {
-     "date": "2026-08-02",
-     "level": 186.3
+     "date": "2026-08-11",
+     "level": 190.87
     },
     {
-     "date": "2026-08-09",
-     "level": 191.82
+     "date": "2026-08-12",
+     "level": 191.68
     },
     {
-     "date": "2026-08-16",
+     "date": "2026-08-13",
+     "level": 192.7
+    },
+    {
+     "date": "2026-08-14",
      "level": 191.7
+    },
+    {
+     "date": "2026-08-17",
+     "level": 190.73
+    },
+    {
+     "date": "2026-08-18",
+     "level": 189.7
+    },
+    {
+     "date": "2026-08-19",
+     "level": 188.93
+    },
+    {
+     "date": "2026-08-20",
+     "level": 187.08
     }
    ]
   }
