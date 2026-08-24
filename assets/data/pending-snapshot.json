@@ -1,0 +1,761 @@
+{
+  "as_of": "2026-08-24",
+  "accounts": [
+    {
+      "positions": [
+        {
+          "instrument": "DRAM",
+          "qty": 5,
+          "side": "buy",
+          "avgPrice": 51.73
+        },
+        {
+          "instrument": "SPCX",
+          "qty": 5,
+          "side": "buy",
+          "avgPrice": 134.1753
+        },
+        {
+          "instrument": "BEPC",
+          "qty": 15,
+          "side": "buy",
+          "avgPrice": 33.889
+        },
+        {
+          "instrument": "FINN.TO",
+          "qty": 125,
+          "side": "buy",
+          "avgPrice": 31.3662
+        },
+        {
+          "instrument": "CHAT",
+          "qty": 5,
+          "side": "buy",
+          "avgPrice": 83.1416
+        },
+        {
+          "instrument": "GOLD.QM",
+          "qty": 0.3,
+          "side": "buy",
+          "avgPrice": 4304.4437
+        },
+        {
+          "instrument": "VDY.TO",
+          "qty": 40,
+          "side": "buy",
+          "avgPrice": 75.2544
+        },
+        {
+          "instrument": "XEQT.TO",
+          "qty": 65,
+          "side": "buy",
+          "avgPrice": 44.1751
+        }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {
+            "cad": "$4,260.61",
+            "usd": "-$0.02",
+            "combinedCad": "$4,260.59",
+            "combinedUsd": "$3,026.55"
+          },
+          "totalBuyingPower": {
+            "cad": "$4,260.61",
+            "usd": "-$0.02",
+            "combinedCad": "$4,260.59",
+            "combinedUsd": "$3,026.55"
+          },
+          "buyingPower": {
+            "cad": "$4,260.61",
+            "usd": "-$0.02",
+            "combinedCad": "$4,260.59",
+            "combinedUsd": "$3,026.55"
+          },
+          "totalEquity": {
+            "cad": "$14,243.91",
+            "usd": "$3,259.44",
+            "combinedCad": "$18,731.37",
+            "combinedUsd": "$13,605.40"
+          },
+          "marketValue": {
+            "cad": "$9,983.30",
+            "usd": "$3,259.45",
+            "combinedCad": "$14,470.78",
+            "combinedUsd": "$10,510.75"
+          },
+          "cash": {
+            "cad": "$4,260.61",
+            "usd": "-$0.02",
+            "combinedCad": "$4,260.59",
+            "combinedUsd": "$3,094.65"
+          }
+        },
+        "profit": {
+          "dayPnl": {
+            "cad": "$5.20",
+            "usd": "-$34.55",
+            "combinedCad": "-$42.36",
+            "combinedUsd": "-$30.77"
+          },
+          "closedPnl": {
+            "cad": "$213.25",
+            "usd": "$144.42",
+            "combinedCad": "$412.07",
+            "combinedUsd": "$299.31"
+          },
+          "openPnl": {
+            "cad": "$180.96",
+            "usd": "$114.55",
+            "combinedCad": "$338.67",
+            "combinedUsd": "$245.99"
+          }
+        }
+      }
+    },
+    {
+      "positions": [
+        {
+          "instrument": "BB.TO",
+          "qty": 15,
+          "side": "buy",
+          "avgPrice": 12.14
+        },
+        {
+          "instrument": "FINN.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 31.057
+        },
+        {
+          "instrument": "XEQT.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 44.0793
+        },
+        {
+          "instrument": "VDY.TO",
+          "qty": 50,
+          "side": "buy",
+          "avgPrice": 76.142
+        },
+        {
+          "instrument": "CHAT",
+          "qty": 10,
+          "side": "buy",
+          "avgPrice": 86.7237
+        }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {
+            "cad": "$727.97",
+            "usd": "$6.64",
+            "combinedCad": "$736.91",
+            "combinedUsd": "$523.76"
+          },
+          "totalBuyingPower": {
+            "cad": "$727.97",
+            "usd": "$6.64",
+            "combinedCad": "$736.91",
+            "combinedUsd": "$523.76"
+          },
+          "buyingPower": {
+            "cad": "$727.97",
+            "usd": "$6.64",
+            "combinedCad": "$736.91",
+            "combinedUsd": "$523.76"
+          },
+          "totalEquity": {
+            "cad": "$12,436.77",
+            "usd": "$851.74",
+            "combinedCad": "$13,609.41",
+            "combinedUsd": "$9,885.10"
+          },
+          "marketValue": {
+            "cad": "$11,708.80",
+            "usd": "$845.10",
+            "combinedCad": "$12,872.30",
+            "combinedUsd": "$9,349.71"
+          },
+          "cash": {
+            "cad": "$727.97",
+            "usd": "$6.64",
+            "combinedCad": "$737.11",
+            "combinedUsd": "$535.39"
+          }
+        },
+        "profit": {
+          "dayPnl": {
+            "cad": "-$15.05",
+            "usd": "-$34.90",
+            "combinedCad": "-$63.10",
+            "combinedUsd": "-$45.83"
+          },
+          "closedPnl": {
+            "cad": "$35.37",
+            "usd": "$116.49",
+            "combinedCad": "$195.74",
+            "combinedUsd": "$142.18"
+          },
+          "openPnl": {
+            "cad": "$205.95",
+            "usd": "-$22.14",
+            "combinedCad": "$175.47",
+            "combinedUsd": "$127.45"
+          }
+        }
+      }
+    }
+  ],
+  "quotes": [
+    {
+      "securityUuid": "181f3121-241f-4842-0e5e-d1a41e0ea54f",
+      "symbol": "SPCX",
+      "currency": "USD",
+      "bidPrice": 135.06,
+      "bidSize": 4700,
+      "askPrice": 135.1,
+      "askSize": 1000,
+      "lastPrice": 135.0776,
+      "quoteTime": "2026-08-24T22:40:15Z",
+      "lastTradeTime": "2026-08-24T22:39:12Z",
+      "lastTradeSize": 100,
+      "tick": "Down",
+      "volume": 60093771,
+      "openPrice": 134.355,
+      "highPrice": 138.33,
+      "lowPrice": 133.1,
+      "highPrice52Weeks": 225.64,
+      "lowPrice52Weeks": 104.83,
+      "volumeWeightedAveragePrice": 135.736947,
+      "priceChangeAmount": -1.97,
+      "priceChangePercent": -0.014383,
+      "marketSector": "nasdaq",
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "08284e81-1330-4812-0586-032980451817",
+      "symbol": "XEQT.TO",
+      "currency": "CAD",
+      "bidPrice": 45.67,
+      "bidSize": 1,
+      "askPrice": 45.7,
+      "askSize": 2,
+      "lastPrice": 45.67,
+      "quoteTime": "2026-08-24T20:59:03Z",
+      "lastTradeTime": "2026-08-24T19:59:41Z",
+      "lastTradeSize": 100,
+      "tick": "Down",
+      "volume": 535660,
+      "openPrice": 45.65,
+      "highPrice": 45.72,
+      "lowPrice": 45.53,
+      "highPrice52Weeks": 46.48,
+      "lowPrice52Weeks": 36.96,
+      "volumeWeightedAveragePrice": 45.640933,
+      "priceChangeAmount": 0.09,
+      "priceChangePercent": 0.001975,
+      "marketSector": "tsx",
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.015843
+    },
+    {
+      "securityUuid": "79830f1a-0957-4902-0a52-560ea15a0503",
+      "symbol": "DRAM",
+      "currency": "USD",
+      "bidPrice": 54.03,
+      "bidSize": 100,
+      "askPrice": 54.07,
+      "askSize": 600,
+      "lastPrice": 54.0362,
+      "quoteTime": "2026-08-24T22:41:15Z",
+      "lastTradeTime": "2026-08-24T22:41:12Z",
+      "lastTradeSize": 300,
+      "tick": "Down",
+      "volume": 44614104,
+      "openPrice": 55.59,
+      "highPrice": 55.61,
+      "lowPrice": 53.13,
+      "highPrice52Weeks": 81.34,
+      "lowPrice52Weeks": 26.14,
+      "volumeWeightedAveragePrice": 54.062678,
+      "priceChangeAmount": -3.4,
+      "priceChangePercent": -0.058946,
+      "marketSector": "amex",
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "07101a1a-691b-4782-0ee3-00866d4e0e82",
+      "symbol": "BEPC",
+      "currency": "USD",
+      "bidPrice": 32.5,
+      "bidSize": 100,
+      "askPrice": 33.7,
+      "askSize": 100,
+      "lastPrice": 32.88,
+      "quoteTime": "2026-08-24T22:30:39Z",
+      "lastTradeTime": "2026-08-24T20:00:03Z",
+      "lastTradeSize": 153,
+      "tick": "Down",
+      "volume": 1040311,
+      "openPrice": 33.14,
+      "highPrice": 33.17,
+      "lowPrice": 32.47,
+      "highPrice52Weeks": 45.18,
+      "lowPrice52Weeks": 31.82,
+      "volumeWeightedAveragePrice": 32.887274,
+      "priceChangeAmount": -0.37,
+      "priceChangePercent": -0.011128,
+      "marketSector": "nyse",
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0.04689
+    },
+    {
+      "securityUuid": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+      "symbol": "FINN.TO",
+      "currency": "CAD",
+      "bidPrice": 31.55,
+      "bidSize": 1,
+      "askPrice": 31.93,
+      "askSize": 1,
+      "lastPrice": 31.75,
+      "quoteTime": "2026-08-24T21:30:00Z",
+      "lastTradeTime": "2026-08-24T19:59:54Z",
+      "lastTradeSize": 300,
+      "tick": null,
+      "volume": 219658,
+      "openPrice": 31.75,
+      "highPrice": 31.86,
+      "lowPrice": 31.55,
+      "highPrice52Weeks": 33.93,
+      "lowPrice52Weeks": 21.11,
+      "volumeWeightedAveragePrice": 31.753539,
+      "priceChangeAmount": -0.08,
+      "priceChangePercent": -0.002513,
+      "marketSector": "neo",
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "1e251804-0f12-4e62-0a7d-348ba26a076c",
+      "symbol": "CHAT",
+      "currency": "USD",
+      "bidPrice": 84.51,
+      "bidSize": 100,
+      "askPrice": 90,
+      "askSize": 100,
+      "lastPrice": 84.51,
+      "quoteTime": "2026-08-24T21:56:28Z",
+      "lastTradeTime": "2026-08-24T20:10:42Z",
+      "lastTradeSize": 106,
+      "tick": "Up",
+      "volume": 303265,
+      "openPrice": 86.2,
+      "highPrice": 86.29,
+      "lowPrice": 84.4,
+      "highPrice52Weeks": 105.2,
+      "lowPrice52Weeks": 52,
+      "volumeWeightedAveragePrice": 85.314229,
+      "priceChangeAmount": -2.42,
+      "priceChangePercent": -0.0275,
+      "marketSector": "amex",
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0.019142
+    },
+    {
+      "securityUuid": "62311c1b-0f6e-4252-0d0c-1c6c338d005d",
+      "symbol": "GOLD.QM",
+      "currency": "USD",
+      "bidPrice": 4660.303,
+      "bidSize": 100,
+      "askPrice": 4660.587,
+      "askSize": 100,
+      "lastPrice": 4660.303,
+      "quoteTime": "2026-08-24T22:41:16Z",
+      "lastTradeTime": "2026-08-24T22:41:16Z",
+      "lastTradeSize": null,
+      "tick": "Up",
+      "volume": null,
+      "openPrice": 4650.44,
+      "highPrice": 4661.15,
+      "lowPrice": 4650.44,
+      "highPrice52Weeks": null,
+      "lowPrice52Weeks": null,
+      "volumeWeightedAveragePrice": null,
+      "priceChangeAmount": 53.64316096,
+      "priceChangePercent": 0.011645,
+      "marketSector": "otcpm",
+      "marketState": "Open",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "06007f2f-2653-4612-0981-079d6f491810",
+      "symbol": "VDY.TO",
+      "currency": "CAD",
+      "bidPrice": 76.06,
+      "bidSize": 2,
+      "askPrice": 76.2,
+      "askSize": 35,
+      "lastPrice": 76.15,
+      "quoteTime": "2026-08-24T20:01:57Z",
+      "lastTradeTime": "2026-08-24T19:59:45Z",
+      "lastTradeSize": 100,
+      "tick": "Down",
+      "volume": 233625,
+      "openPrice": 76.08,
+      "highPrice": 76.36,
+      "lowPrice": 75.83,
+      "highPrice52Weeks": 79.29,
+      "lowPrice52Weeks": 54.32,
+      "volumeWeightedAveragePrice": 76.105409,
+      "priceChangeAmount": -0.18,
+      "priceChangePercent": -0.002358,
+      "marketSector": "tsx",
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.028177
+    },
+    {
+      "securityUuid": "6d0c1a10-075f-4d82-0cdd-3697555c0d8c",
+      "symbol": "BB.TO",
+      "currency": "CAD",
+      "bidPrice": 10.59,
+      "bidSize": 31,
+      "askPrice": 10.63,
+      "askSize": 3,
+      "lastPrice": 10.62,
+      "quoteTime": "2026-08-24T20:31:17Z",
+      "lastTradeTime": "2026-08-24T20:00:00Z",
+      "lastTradeSize": 1500,
+      "tick": "Up",
+      "volume": 2629275,
+      "openPrice": 10.98,
+      "highPrice": 11,
+      "lowPrice": 10.54,
+      "highPrice52Weeks": 18.45,
+      "lowPrice52Weeks": 4.35,
+      "volumeWeightedAveragePrice": 10.658103,
+      "priceChangeAmount": -0.47,
+      "priceChangePercent": -0.042381,
+      "marketSector": "tsx",
+      "marketState": "Closed",
+      "peRatio": 80.57143,
+      "dividendYield": 0
+    }
+  ],
+  "activities": [
+    {
+      "transactionId": "6bdcc3a2-a0bd-4014-891e-630ecbbb07cb",
+      "transactionType": "Other",
+      "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION FROM USD BOOK VALUE: $4206.62 CNV@ 1.3789",
+      "amount": 0,
+      "currency": "CAD",
+      "tradeDate": "2026-08-21"
+    },
+    {
+      "transactionId": "f30335ea-4284-4c9d-a40f-cefc7d1b5651",
+      "transactionType": "Withdrawals",
+      "description": "Deregistration",
+      "amount": -3800,
+      "currency": "CAD",
+      "tradeDate": "2026-08-21"
+    },
+    {
+      "transactionId": "9eae51e4-4f96-49a9-becb-1cd54010cf8d",
+      "transactionType": "Other",
+      "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION TO CAD",
+      "amount": 0,
+      "currency": "USD",
+      "tradeDate": "2026-08-21"
+    },
+    {
+      "transactionId": "8e78bbf0-06ce-4d4a-a985-4aa5697c7625",
+      "transactionType": "Trades",
+      "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+      "amount": -264.22,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "cefe7b96-8b32-4baa-ad74-b269a08676f3",
+      "transactionType": "Trades",
+      "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+      "amount": 127.75,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "686e611c-b1d9-4745-ae89-46a8980d0216",
+      "transactionType": "Trades",
+      "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+      "amount": 2394,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "a033ef7b-e7bb-4b79-848b-6557d946ff03",
+      "transactionType": "Trades",
+      "description": "TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT",
+      "amount": 874.83,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "78f4a6c8-113f-4ee1-87a7-042d277df932",
+      "transactionType": "Trades",
+      "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+      "amount": -387.9,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "dd3f8e0f-1912-40de-bdf0-e80d6452a020",
+      "transactionType": "Trades",
+      "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+      "amount": 1594.95,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "b21cfb51-6776-4b12-8214-8299b5e080aa",
+      "transactionType": "Trades",
+      "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+      "amount": -3040.5,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "a1bc7061-6a63-4d32-971d-684582f9fb2c",
+      "transactionType": "Trades",
+      "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+      "amount": 73,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "a6e3292f-814c-4d10-8776-a931ea1e9a7f",
+      "transactionType": "Trades",
+      "description": "ROUNDHILL ETF TR ROUNDHILL MEMORY ETF WE ACTED AS AGENT",
+      "amount": 274.9,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "5fb3d7c0-31ff-479e-8fb6-0c9021a9786c",
+      "transactionType": "Trades",
+      "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+      "amount": 365,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "4d9bf18c-e79a-43f2-abd9-58d4d21619c9",
+      "transactionType": "Trades",
+      "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+      "amount": -320.2,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "79e90c2c-4549-49a4-a02d-9f566334106b",
+      "transactionType": "Trades",
+      "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+      "amount": 264.99,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "f271ed17-46db-49f2-af3e-d3c1b36c1e9e",
+      "transactionType": "Trades",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+      "amount": 341.62,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "ed40b1ec-97d4-4675-86a6-74d6cd27a9f5",
+      "transactionType": "Trades",
+      "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+      "amount": -10.14,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "8f95904f-54a8-4768-b30e-32acd0239749",
+      "transactionType": "FX conversion",
+      "description": "CONVERSION - CAD/USD",
+      "amount": 5.94,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "b9c164e4-913f-4a56-8204-c74497fe3517",
+      "transactionType": "Trades",
+      "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+      "amount": 278.01,
+      "currency": "USD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "74483efd-184e-48fb-8ee4-10772b8357a9",
+      "transactionType": "Trades",
+      "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+      "amount": 391.9,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "aa15e0a9-052f-4a2e-b583-303ce834803d",
+      "transactionType": "Trades",
+      "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+      "amount": -181.5,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "133385c6-655b-452a-af36-207440d9f5a3",
+      "transactionType": "Trades",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+      "amount": 2235.32,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "cbcc0e4b-b907-4859-9461-659c0da6eb83",
+      "transactionType": "Deposits",
+      "description": "Contribution",
+      "amount": 2000,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "55ffc5b7-d536-4aa5-ad36-4cdd297d378e",
+      "transactionType": "Trades",
+      "description": "HONEY BADGER SILVER INC COM NEW WE ACTED AS AGENT",
+      "amount": -327.5,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "0d4a282d-af41-494a-a406-883e1566ed2b",
+      "transactionType": "Trades",
+      "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+      "amount": -784.1,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "92945222-27ce-4d61-b711-fcb904848a14",
+      "transactionType": "Trades",
+      "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+      "amount": -2261.17,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "e2f8a672-41b2-4600-b21f-f9a3a28c83d4",
+      "transactionType": "Trades",
+      "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+      "amount": -1286.4,
+      "currency": "CAD",
+      "tradeDate": "2026-08-18"
+    },
+    {
+      "transactionId": "4d6468e9-802c-46d0-b795-cd14b1507202",
+      "transactionType": "Trades",
+      "description": "PUT SPY 08/18/26 769 STATE STREET SPDR S&P 500 ETF WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+      "amount": 51.99,
+      "currency": "USD",
+      "tradeDate": "2026-08-17"
+    },
+    {
+      "transactionId": "83e36ad6-8ef6-4bc9-83e2-52c1ac44b706",
+      "transactionType": "Trades",
+      "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+      "amount": 705.75,
+      "currency": "CAD",
+      "tradeDate": "2026-08-19"
+    },
+    {
+      "transactionId": "9f375729-5b00-4a78-8159-d4a705ef966a",
+      "transactionType": "Trades",
+      "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+      "amount": -1579,
+      "currency": "CAD",
+      "tradeDate": "2026-08-17"
+    },
+    {
+      "transactionId": "647b5847-58d7-4e2e-b1ed-edabad609dfe",
+      "transactionType": "Trades",
+      "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+      "amount": 1038.22,
+      "currency": "CAD",
+      "tradeDate": "2026-08-17"
+    },
+    {
+      "transactionId": "bc736bbf-36aa-4119-9ef2-12fbff7a2518",
+      "transactionType": "Trades",
+      "description": "BLACKBERRY LTD COM WE ACTED AS AGENT",
+      "amount": -182.1,
+      "currency": "CAD",
+      "tradeDate": "2026-08-17"
+    },
+    {
+      "transactionId": "5a584e4d-2c40-45db-a17e-850265a0a8aa",
+      "transactionType": "Trades",
+      "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+      "amount": -756.3,
+      "currency": "CAD",
+      "tradeDate": "2026-08-17"
+    },
+    {
+      "transactionId": "67a64578-d488-4fa8-b855-dfbdc79ab12c",
+      "transactionType": "Trades",
+      "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+      "amount": 1403,
+      "currency": "CAD",
+      "tradeDate": "2026-08-17"
+    }
+  ],
+  "benchmark": {
+    "symbol": "VFV.TO",
+    "series": [
+      { "date": "2026-03-01", "level": 166.62 },
+      { "date": "2026-03-08", "level": 162.72 },
+      { "date": "2026-03-15", "level": 161.8 },
+      { "date": "2026-03-22", "level": 158.73 },
+      { "date": "2026-03-29", "level": 156.7 },
+      { "date": "2026-04-05", "level": 162.41 },
+      { "date": "2026-04-12", "level": 167.26 },
+      { "date": "2026-04-19", "level": 172.99 },
+      { "date": "2026-04-26", "level": 173.6 },
+      { "date": "2026-05-03", "level": 174.29 },
+      { "date": "2026-05-10", "level": 179.42 },
+      { "date": "2026-05-17", "level": 180.84 },
+      { "date": "2026-05-24", "level": 183.2 },
+      { "date": "2026-05-31", "level": 185.61 },
+      { "date": "2026-06-07", "level": 182.9 },
+      { "date": "2026-06-14", "level": 184.62 },
+      { "date": "2026-06-21", "level": 188.36 },
+      { "date": "2026-06-28", "level": 184.37 },
+      { "date": "2026-07-05", "level": 189.34 },
+      { "date": "2026-07-12", "level": 190.09 },
+      { "date": "2026-07-19", "level": 185.25 },
+      { "date": "2026-07-26", "level": 185.28 },
+      { "date": "2026-08-02", "level": 186.3 },
+      { "date": "2026-08-09", "level": 191.82 },
+      { "date": "2026-08-16", "level": 191.7 },
+      { "date": "2026-08-23", "level": 187.6 }
+    ]
+  }
+}
