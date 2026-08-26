@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-25T22:46:31.153Z",
-  "as_of": "2026-08-25",
+  "generated_at": "2026-08-26T22:46:09.791Z",
+  "as_of": "2026-08-26",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3844
+   "USDCAD": 1.3839
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0043,
-  "distribution_yield": 0.0138,
-  "holdings_count": 9,
+  "blended_mer": 0.0038,
+  "distribution_yield": 0.0127,
+  "holdings_count": 8,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 797.75,
+   "cash": 5009.98,
    "currency": "CAD",
-   "buying_power": 797.55
+   "buying_power": 4994.69
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 165,
    "avg_cost": 44.117,
-   "price": 45.89,
-   "prev_close": 45.67,
-   "market_value": 7571.85,
-   "open_pnl": 292.54,
+   "price": 45.91,
+   "prev_close": 45.89,
+   "market_value": 7575.15,
+   "open_pnl": 295.84,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 225,
    "avg_cost": 31.2288,
-   "price": 32.07,
-   "prev_close": 31.75,
-   "market_value": 7215.75,
-   "open_pnl": 189.27,
+   "price": 32.13,
+   "prev_close": 32.07,
+   "market_value": 7229.25,
+   "open_pnl": 202.78,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7475,
-   "price": 76.6,
-   "prev_close": 76.15,
-   "market_value": 6894,
-   "open_pnl": 76.72,
+   "price": 76.97,
+   "prev_close": 76.6,
+   "market_value": 6927.3,
+   "open_pnl": 110.02,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 0.3,
    "avg_cost": 4304.4437,
-   "price": 4669.78,
-   "prev_close": 4654.6903,
-   "market_value": 1400.93,
-   "open_pnl": 109.6,
+   "price": 4609.13,
+   "prev_close": 4661.2602,
+   "market_value": 1382.74,
+   "open_pnl": 91.41,
    "sector": "Commodities",
    "geography": "Global",
    "market_cap_bucket": "n/a"
@@ -101,10 +101,26 @@
    "currency": "USD",
    "quantity": 15,
    "avg_cost": 85.5297,
-   "price": 86.1724,
-   "prev_close": 84.5324,
-   "market_value": 1292.59,
-   "open_pnl": 9.64,
+   "price": 88.37,
+   "prev_close": 88.08,
+   "market_value": 1325.55,
+   "open_pnl": 42.61,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "MDA.TO",
+   "name": "MDA.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 20,
+   "avg_cost": 41.685,
+   "price": 41.08,
+   "prev_close": 40.73,
+   "market_value": 821.6,
+   "open_pnl": -12.1,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,29 +133,13 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 138,
-   "prev_close": 135.05,
-   "market_value": 690,
-   "open_pnl": 19.12,
+   "price": 140.5238,
+   "prev_close": 138.8438,
+   "market_value": 702.62,
+   "open_pnl": 31.74,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
-  },
-  {
-   "symbol": "BEPC",
-   "name": "Brookfield Renewable Corporation",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 15,
-   "avg_cost": 33.889,
-   "price": 33.39,
-   "prev_close": 32.88,
-   "market_value": 500.85,
-   "open_pnl": -7.49,
-   "sector": "Utilities",
-   "geography": "Canada",
-   "market_cap_bucket": "Mid"
   },
   {
    "symbol": "DRAM",
@@ -149,26 +149,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 51.73,
-   "price": 56.28,
-   "prev_close": 54.32,
-   "market_value": 281.4,
-   "open_pnl": 22.75,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "BB.TO",
-   "name": "BB.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 15,
-   "avg_cost": 12.14,
-   "price": 10.79,
-   "prev_close": 10.62,
-   "market_value": 161.85,
-   "open_pnl": -20.25,
+   "price": 58.82,
+   "prev_close": 58.67,
+   "market_value": 294.1,
+   "open_pnl": 35.45,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18338,6 +18322,30 @@
    "price": null
   },
   {
+   "uid": "t_8cc5cb5df0",
+   "date": "2026-08-24",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": 4204.5,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_be1564351c",
+   "date": "2026-08-24",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": 14.01,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_d45e7ea565",
    "date": "2026-08-21",
    "type": "Other",
@@ -18363,6 +18371,42 @@
   },
   {
    "uid": "t_8c821837f1",
+   "date": "2026-08-21",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION TO CAD",
+   "amount": 0,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_91883f462f",
+   "date": "2026-08-21",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION FROM USD BOOK VALUE: $4206.62 CNV@ 1.3789",
+   "amount": 0,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_4bf111c6a8",
+   "date": "2026-08-21",
+   "type": "Withdrawal",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Deregistration",
+   "amount": -3800,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_282125ff98",
    "date": "2026-08-21",
    "type": "Other",
    "account_id": "main",
@@ -21653,28 +21697,21 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7232,
+   "annual_rate_per_share": 0.7221,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1629,
+   "annual_rate_per_share": 2.1785,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.6458,
-   "frequency": "quarterly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  },
-  {
-   "symbol": "BEPC",
-   "annual_rate_per_share": 1.5746,
+   "annual_rate_per_share": 1.7355,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21740,6 +21777,11 @@
    {
     "date": "2026-08-25",
     "value": 28408.29,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-08-26",
+    "value": 32690.64,
     "net_flow": 0
    }
   ],
@@ -21807,7 +21849,7 @@
     },
     {
      "date": "2026-08-23",
-     "level": 188.13
+     "level": 188.48
     }
    ]
   }
