@@ -1,6 +1,6 @@
 {
  "meta": {
-  "generated_at": "2026-08-27T16:00:35.426Z",
+  "generated_at": "2026-08-27T22:44:40.102Z",
   "as_of": "2026-08-27",
   "base_currency": "CAD",
   "fx": {
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 165,
    "avg_cost": 44.117,
-   "price": 45.96,
+   "price": 46,
    "prev_close": 45.91,
-   "market_value": 7583.4,
-   "open_pnl": 304.09,
+   "market_value": 7590,
+   "open_pnl": 310.69,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7475,
-   "price": 76.27,
+   "price": 76.57,
    "prev_close": 76.97,
-   "market_value": 6864.3,
-   "open_pnl": 47.02,
+   "market_value": 6891.3,
+   "open_pnl": 74.02,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 32.56,
+   "price": 32.79,
    "prev_close": 32.13,
-   "market_value": 6837.6,
-   "open_pnl": 281.62,
+   "market_value": 6885.9,
+   "open_pnl": 329.92,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 227,
    "avg_cost": 10.14,
-   "price": 10.13,
+   "price": 10.14,
    "prev_close": 10.14,
-   "market_value": 2299.51,
-   "open_pnl": -2.27,
+   "market_value": 2301.78,
+   "open_pnl": 0,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 18,
    "avg_cost": 69.05,
-   "price": 68.77,
+   "price": 69.03,
    "prev_close": 68.93,
-   "market_value": 1237.86,
-   "open_pnl": -5.04,
+   "market_value": 1242.54,
+   "open_pnl": -0.36,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "CAD",
    "quantity": 23,
    "avg_cost": 45.5,
-   "price": 45.58,
+   "price": 45.76,
    "prev_close": 45.86,
-   "market_value": 1048.34,
-   "open_pnl": 1.84,
+   "market_value": 1052.48,
+   "open_pnl": 5.98,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 86.7237,
-   "price": 89.03,
+   "price": 89.49,
    "prev_close": 87.51,
-   "market_value": 890.3,
-   "open_pnl": 23.06,
+   "market_value": 894.9,
+   "open_pnl": 27.66,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "CAD",
    "quantity": 55,
    "avg_cost": 15.58,
-   "price": 15.49,
+   "price": 15.52,
    "prev_close": 15.38,
-   "market_value": 851.95,
-   "open_pnl": -4.95,
+   "market_value": 853.6,
+   "open_pnl": -3.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +165,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 41.685,
-   "price": 41.84,
+   "price": 42.1,
    "prev_close": 41.08,
-   "market_value": 836.8,
-   "open_pnl": 3.1,
+   "market_value": 842,
+   "open_pnl": 8.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 141.05,
-   "prev_close": 139.63,
-   "market_value": 705.25,
-   "open_pnl": 34.37,
+   "price": 140.42,
+   "prev_close": 139.18,
+   "market_value": 702.1,
+   "open_pnl": 31.22,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -197,10 +197,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 21.01,
-   "price": 21.04,
+   "price": 21.03,
    "prev_close": 21.01,
-   "market_value": 420.8,
-   "open_pnl": 0.6,
+   "market_value": 420.6,
+   "open_pnl": 0.4,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -213,10 +213,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 51.73,
-   "price": 56.3176,
-   "prev_close": 56.39,
-   "market_value": 281.59,
-   "open_pnl": 22.94,
+   "price": 56.34,
+   "prev_close": 55.9,
+   "market_value": 281.7,
+   "open_pnl": 23.05,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18422,6 +18422,30 @@
    "price": null
   },
   {
+   "uid": "t_a3e188b1b4",
+   "date": "2026-08-26",
+   "type": "Withdrawal",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Withdrawal",
+   "amount": -4200,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_7ea879deab",
+   "date": "2026-08-26",
+   "type": "Deposit",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Contribution",
+   "amount": 4200,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_26345b5a9a",
    "date": "2026-08-24",
    "type": "Trade",
@@ -21761,42 +21785,42 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7194,
+   "annual_rate_per_share": 0.72,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.146,
+   "annual_rate_per_share": 2.1545,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "DLR.U.TO",
-   "annual_rate_per_share": 0.2878,
+   "annual_rate_per_share": 0.2881,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.5032,
+   "annual_rate_per_share": 2.5127,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7156,
+   "annual_rate_per_share": 1.7245,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1422,
+   "annual_rate_per_share": 1.1417,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21871,7 +21895,7 @@
    },
    {
     "date": "2026-08-27",
-    "value": 32722.26,
+    "value": 32824.94,
     "net_flow": 0
    }
   ],
@@ -21939,7 +21963,7 @@
     },
     {
      "date": "2026-08-23",
-     "level": 189.05
+     "level": 190.14
     }
    ]
   }
