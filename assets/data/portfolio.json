@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-26T22:46:09.791Z",
-  "as_of": "2026-08-26",
+  "generated_at": "2026-08-27T16:00:35.426Z",
+  "as_of": "2026-08-27",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3839
+   "USDCAD": 1.3876
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0038,
-  "distribution_yield": 0.0127,
-  "holdings_count": 8,
+  "blended_mer": 0.0035,
+  "distribution_yield": 0.0157,
+  "holdings_count": 12,
   "etf_count": 4,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 5009.98,
+   "cash": 1245.69,
    "currency": "CAD",
-   "buying_power": 4994.69
+   "buying_power": 1245.48
   }
  ],
  "positions": [
@@ -37,26 +37,10 @@
    "currency": "CAD",
    "quantity": 165,
    "avg_cost": 44.117,
-   "price": 45.91,
-   "prev_close": 45.89,
-   "market_value": 7575.15,
-   "open_pnl": 295.84,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "FINN.TO",
-   "name": "Fidelity Global Innovators ETF (Series L)",
-   "account_id": "main",
-   "asset_type": "ETF",
-   "currency": "CAD",
-   "quantity": 225,
-   "avg_cost": 31.2288,
-   "price": 32.13,
-   "prev_close": 32.07,
-   "market_value": 7229.25,
-   "open_pnl": 202.78,
+   "price": 45.96,
+   "prev_close": 45.91,
+   "market_value": 7583.4,
+   "open_pnl": 304.09,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,29 +53,77 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7475,
-   "price": 76.97,
-   "prev_close": 76.6,
-   "market_value": 6927.3,
-   "open_pnl": 110.02,
+   "price": 76.27,
+   "prev_close": 76.97,
+   "market_value": 6864.3,
+   "open_pnl": 47.02,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "GOLD.QM",
-   "name": "Gold (ounce)",
+   "symbol": "FINN.TO",
+   "name": "Fidelity Global Innovators ETF (Series L)",
    "account_id": "main",
-   "asset_type": "Commodity",
+   "asset_type": "ETF",
+   "currency": "CAD",
+   "quantity": 210,
+   "avg_cost": 31.219,
+   "price": 32.56,
+   "prev_close": 32.13,
+   "market_value": 6837.6,
+   "open_pnl": 281.62,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "DLR.U.TO",
+   "name": "DLR.U.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 0.3,
-   "avg_cost": 4304.4437,
-   "price": 4609.13,
-   "prev_close": 4661.2602,
-   "market_value": 1382.74,
-   "open_pnl": 91.41,
-   "sector": "Commodities",
-   "geography": "Global",
-   "market_cap_bucket": "n/a"
+   "quantity": 227,
+   "avg_cost": 10.14,
+   "price": 10.13,
+   "prev_close": 10.14,
+   "market_value": 2299.51,
+   "open_pnl": -2.27,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "CNQ.TO",
+   "name": "CNQ.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 18,
+   "avg_cost": 69.05,
+   "price": 68.77,
+   "prev_close": 68.93,
+   "market_value": 1237.86,
+   "open_pnl": -5.04,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "BEPC.TO",
+   "name": "BEPC.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 23,
+   "avg_cost": 45.5,
+   "price": 45.58,
+   "prev_close": 45.86,
+   "market_value": 1048.34,
+   "open_pnl": 1.84,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
   },
   {
    "symbol": "CHAT",
@@ -99,12 +131,28 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "USD",
-   "quantity": 15,
-   "avg_cost": 85.5297,
-   "price": 88.37,
-   "prev_close": 88.08,
-   "market_value": 1325.55,
-   "open_pnl": 42.61,
+   "quantity": 10,
+   "avg_cost": 86.7237,
+   "price": 89.03,
+   "prev_close": 87.51,
+   "market_value": 890.3,
+   "open_pnl": 23.06,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "NXE.TO",
+   "name": "NXE.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 55,
+   "avg_cost": 15.58,
+   "price": 15.49,
+   "prev_close": 15.38,
+   "market_value": 851.95,
+   "open_pnl": -4.95,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +165,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 41.685,
-   "price": 41.08,
-   "prev_close": 40.73,
-   "market_value": 821.6,
-   "open_pnl": -12.1,
+   "price": 41.84,
+   "prev_close": 41.08,
+   "market_value": 836.8,
+   "open_pnl": 3.1,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +181,26 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 140.5238,
-   "prev_close": 138.8438,
-   "market_value": 702.62,
-   "open_pnl": 31.74,
+   "price": 141.05,
+   "prev_close": 139.63,
+   "market_value": 705.25,
+   "open_pnl": 34.37,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "REI.UN.TO",
+   "name": "REI.UN.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 20,
+   "avg_cost": 21.01,
+   "price": 21.04,
+   "prev_close": 21.01,
+   "market_value": 420.8,
+   "open_pnl": 0.6,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +213,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 51.73,
-   "price": 58.82,
-   "prev_close": 58.67,
-   "market_value": 294.1,
-   "open_pnl": 35.45,
+   "price": 56.3176,
+   "prev_close": 56.39,
+   "market_value": 281.59,
+   "open_pnl": 22.94,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18298,6 +18362,66 @@
  },
  "activities": [
   {
+   "uid": "t_73aec5123b",
+   "date": "2026-08-26",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+   "amount": 495.49,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_1bf3ec344b",
+   "date": "2026-08-26",
+   "type": "Withdrawal",
+   "account_id": "main",
+   "symbol": null,
+   "description": "TFSA Withdrawal",
+   "amount": -4200,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_49372140d8",
+   "date": "2026-08-26",
+   "type": "Deposit",
+   "account_id": "main",
+   "symbol": null,
+   "description": "FHSA Contribution",
+   "amount": 4200,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_051b9f9e1f",
+   "date": "2026-08-26",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BLACKBERRY LTD COM WE ACTED AS AGENT",
+   "amount": 160.2,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_83c687ebc2",
+   "date": "2026-08-26",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -833.7,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_26345b5a9a",
    "date": "2026-08-24",
    "type": "Trade",
@@ -21637,21 +21761,42 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7221,
+   "annual_rate_per_share": 0.7194,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1785,
+   "annual_rate_per_share": 2.146,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
+   "symbol": "DLR.U.TO",
+   "annual_rate_per_share": 0.2878,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
+   "symbol": "CNQ.TO",
+   "annual_rate_per_share": 2.5032,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7355,
+   "annual_rate_per_share": 1.7156,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
+   "symbol": "REI.UN.TO",
+   "annual_rate_per_share": 1.1422,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21723,6 +21868,11 @@
     "date": "2026-08-26",
     "value": 32690.64,
     "net_flow": 0
+   },
+   {
+    "date": "2026-08-27",
+    "value": 32722.26,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
@@ -21789,7 +21939,7 @@
     },
     {
      "date": "2026-08-23",
-     "level": 188.48
+     "level": 189.05
     }
    ]
   }
