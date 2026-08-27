@@ -590,8 +590,27 @@ function buildSeries(prices) {
      account's inception rather than at the first snapshot. */
   const hypDates = allDates.filter(d => d >= HYP_FROM && d <= TO);
 
+  /* Recognise a flow on the first snapshot date at or after it, not on its own
+     date. A flow dated to a day with no snapshot would otherwise be subtracted
+     from a value carried forward from the previous snapshot -- a value taken
+     before the money moved -- which reads as a large fake loss and then a
+     matching fake gain once the next snapshot catches up. The 2026-08-18
+     deposit of $2,000 did exactly that (-7.37% then +5.23%) because the 08-18
+     and 08-19 snapshot runs had failed and left no snapshot to land on.
+
+     This is the same rule holdings already follow, stated in meta.note: a trade
+     is recognised at the next refresh rather than on its trade date.
+     history.flows keeps the true date for auditing; only the curve shifts. */
+  const snapshotDates = history.snapshots.map(s => s.date);
+  const recogniseOn = d => {
+    for (let i = 0; i < snapshotDates.length; i++) if (snapshotDates[i] >= d) return snapshotDates[i];
+    return d;
+  };
   const flowByDate = {};
-  history.flows.forEach(f => { flowByDate[f.date] = (flowByDate[f.date] || 0) + f.amount; });
+  history.flows.forEach(f => {
+    const d = recogniseOn(f.date);
+    flowByDate[d] = (flowByDate[d] || 0) + f.amount;
+  });
 
   /* Carry the last observed close forward across holidays and halts rather than
      dropping the day — a gap would read as a price move. */

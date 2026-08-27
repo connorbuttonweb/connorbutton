@@ -58,7 +58,8 @@
    "DRAM": "DRAM",
    "DLR.U.TO": "DLR-U.TO",
    "BB.TO": "BB.TO"
-  }
+  },
+  "reprice_pending": "2026-08-26"
  },
  "snapshots": [
   {
@@ -3646,7 +3647,7 @@
   },
   {
    "date": "2026-08-21",
-   "amount": -7600
+   "amount": -3800
   }
  ],
  "daily": [

@@ -128,7 +128,22 @@ if (!fs.existsSync(portPath)) {
     '  because history.portfolio and etfs cannot be rebuilt from the brokerage feed.');
 }
 
-const snap = JSON.parse(fs.readFileSync(snapPath, 'utf8'));
+/* 2026-08-19's pull arrived base64-encoded and JSON.parse died on it, losing
+   the day. The payload itself was valid -- only the encoding was wrong -- so
+   decode it and carry on rather than throwing the pull away. */
+function readSnapshot(p) {
+  const raw = fs.readFileSync(p, 'utf8').trim();
+  if (raw.charAt(0) === '{') return JSON.parse(raw);
+  let decoded = '';
+  try { decoded = Buffer.from(raw, 'base64').toString('utf8').trim(); } catch (e) { /* not base64 */ }
+  if (decoded.charAt(0) === '{') {
+    console.warn('  snapshot was base64-encoded -- decoded it');
+    return JSON.parse(decoded);
+  }
+  die('snapshot at ' + p + ' is neither JSON nor base64-encoded JSON');
+}
+
+const snap = readSnapshot(snapPath);
 const prev = JSON.parse(fs.readFileSync(portPath, 'utf8'));
 
 const AS_OF = snap.as_of || new Date().toISOString().slice(0, 10);
@@ -140,10 +155,18 @@ if (!/^\d{4}-\d{2}-\d{2}$/.test(AS_OF)) die('snapshot as_of must be YYYY-MM-DD, 
    broker actually applied can be recovered rather than guessed:
    combinedCad = cad + usd * fx. Accounts are cross-checked against each other;
    a disagreement means the parse is wrong, not that the rate moved. */
+/* The routine writes account.balances two ways: sometimes the raw MCP envelope
+   ({ balances: {...}, profit: {...} }), sometimes the unwrapped inner object.
+   Both are valid pulls -- only the nesting differs -- and reading one shape
+   blindly cost 2026-08-12 and 2026-08-18 a full day each at the merge step. */
+function balancesOf(a) {
+  return (a && a.balances && a.balances.balances) || (a && a.balances) || {};
+}
+
 function deriveFx(accounts) {
   const rates = [];
   accounts.forEach(a => {
-    const eq = (a.balances && a.balances.balances && a.balances.balances.totalEquity) || null;
+    const eq = balancesOf(a).totalEquity || null;
     if (!eq) return;
     const cad = parseMoney(eq.cad);
     const usd = parseMoney(eq.usd);
@@ -171,7 +194,7 @@ const USDCAD = deriveFx(accountsIn);
 
 let cash = 0, buyingPower = 0, reportedEquity = 0, reportedMarketValue = 0;
 accountsIn.forEach(a => {
-  const b = (a.balances && a.balances.balances) || {};
+  const b = balancesOf(a);
   cash += parseMoney(b.cash && b.cash.combinedCad);
   buyingPower += parseMoney(b.buyingPower && b.buyingPower.combinedCad);
   reportedEquity += parseMoney(b.totalEquity && b.totalEquity.combinedCad);
@@ -335,14 +358,23 @@ const seenIncoming = new Map();
   if (merged.has(a.uid)) { merged.set(a.uid, a); return; }   // already keyed by uid
 
   /* The refresh window deliberately overlaps, so an incoming row may already be
-     stored under a legacy content key. Match it to the nth occurrence of the
-     same content and upgrade that slot in place rather than duplicating it. */
+     stored under a different key: a legacy content key, or a uid derived from a
+     transactionId the feed has since stopped sending. Match it to the nth
+     occurrence of the same content and refresh that slot in place.
+
+     The slot index -- not the key format -- is what keeps two genuinely
+     identical rows apart (the same distribution paid into both accounts).
+     Restricting this to 'c' keys never added safety: on 2026-08-26 the feed
+     returned five rows with no transactionId, so each fell back to a content
+     hash, missed its own 't' key, and was appended as a duplicate. That
+     double-counted a $3,800 withdrawal and overstated return by 11pp.
+
+     The stored key is kept rather than the incoming one, so a uid never churns
+     when the feed's transactionId flickers. */
   const arr = slots.get(comp) || [];
-  const legacyKey = arr[n];
-  if (legacyKey && merged.has(legacyKey) && legacyKey.charAt(0) === 'c') {
-    merged.delete(legacyKey);
-    arr[n] = a.uid;
-    merged.set(a.uid, a);
+  const existingKey = arr[n];
+  if (existingKey && merged.has(existingKey)) {
+    merged.set(existingKey, Object.assign({}, a, { uid: existingKey }));
     return;
   }
 

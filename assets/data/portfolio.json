@@ -18322,30 +18322,6 @@
    "price": null
   },
   {
-   "uid": "t_8cc5cb5df0",
-   "date": "2026-08-24",
-   "type": "Trade",
-   "account_id": "main",
-   "symbol": null,
-   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
-   "amount": 4204.5,
-   "currency": "CAD",
-   "quantity": null,
-   "price": null
-  },
-  {
-   "uid": "t_be1564351c",
-   "date": "2026-08-24",
-   "type": "Trade",
-   "account_id": "main",
-   "symbol": null,
-   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
-   "amount": 14.01,
-   "currency": "CAD",
-   "quantity": null,
-   "price": null
-  },
-  {
    "uid": "t_d45e7ea565",
    "date": "2026-08-21",
    "type": "Other",
@@ -18371,42 +18347,6 @@
   },
   {
    "uid": "t_8c821837f1",
-   "date": "2026-08-21",
-   "type": "Other",
-   "account_id": "main",
-   "symbol": null,
-   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION TO CAD",
-   "amount": 0,
-   "currency": "USD",
-   "quantity": null,
-   "price": null
-  },
-  {
-   "uid": "t_91883f462f",
-   "date": "2026-08-21",
-   "type": "Other",
-   "account_id": "main",
-   "symbol": null,
-   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION FROM USD BOOK VALUE: $4206.62 CNV@ 1.3789",
-   "amount": 0,
-   "currency": "CAD",
-   "quantity": null,
-   "price": null
-  },
-  {
-   "uid": "t_4bf111c6a8",
-   "date": "2026-08-21",
-   "type": "Withdrawal",
-   "account_id": "main",
-   "symbol": null,
-   "description": "Deregistration",
-   "amount": -3800,
-   "currency": "CAD",
-   "quantity": null,
-   "price": null
-  },
-  {
-   "uid": "t_282125ff98",
    "date": "2026-08-21",
    "type": "Other",
    "account_id": "main",
