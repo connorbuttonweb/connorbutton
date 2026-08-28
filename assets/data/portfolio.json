@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-08-27T22:44:40.102Z",
-  "as_of": "2026-08-27",
+  "generated_at": "2026-08-28T22:46:10.052Z",
+  "as_of": "2026-08-28",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3876
+   "USDCAD": 1.3857
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -23,7 +23,7 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 1245.69,
+   "cash": 1245.68,
    "currency": "CAD",
    "buying_power": 1245.48
   }
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 165,
    "avg_cost": 44.117,
-   "price": 46,
-   "prev_close": 45.91,
-   "market_value": 7590,
-   "open_pnl": 310.69,
+   "price": 45.92,
+   "prev_close": 46,
+   "market_value": 7576.8,
+   "open_pnl": 297.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7475,
-   "price": 76.57,
-   "prev_close": 76.97,
-   "market_value": 6891.3,
-   "open_pnl": 74.02,
+   "price": 76.6,
+   "prev_close": 76.57,
+   "market_value": 6894,
+   "open_pnl": 76.72,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 32.79,
-   "prev_close": 32.13,
-   "market_value": 6885.9,
-   "open_pnl": 329.92,
+   "price": 32.58,
+   "prev_close": 32.79,
+   "market_value": 6841.8,
+   "open_pnl": 285.82,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 227,
    "avg_cost": 10.14,
-   "price": 10.14,
+   "price": 10.15,
    "prev_close": 10.14,
-   "market_value": 2301.78,
-   "open_pnl": 0,
+   "market_value": 2304.05,
+   "open_pnl": 2.27,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 18,
    "avg_cost": 69.05,
-   "price": 69.03,
-   "prev_close": 68.93,
-   "market_value": 1242.54,
-   "open_pnl": -0.36,
+   "price": 68.14,
+   "prev_close": 69.03,
+   "market_value": 1226.52,
+   "open_pnl": -16.38,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "CAD",
    "quantity": 23,
    "avg_cost": 45.5,
-   "price": 45.76,
-   "prev_close": 45.86,
-   "market_value": 1052.48,
-   "open_pnl": 5.98,
+   "price": 44.87,
+   "prev_close": 45.76,
+   "market_value": 1032.01,
+   "open_pnl": -14.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,26 +133,10 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 86.7237,
-   "price": 89.49,
-   "prev_close": 87.51,
-   "market_value": 894.9,
-   "open_pnl": 27.66,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "NXE.TO",
-   "name": "NXE.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 55,
-   "avg_cost": 15.58,
-   "price": 15.52,
-   "prev_close": 15.38,
-   "market_value": 853.6,
-   "open_pnl": -3.3,
+   "price": 87.04,
+   "prev_close": 89.49,
+   "market_value": 870.4,
+   "open_pnl": 3.16,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +149,26 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 41.685,
-   "price": 42.1,
-   "prev_close": 41.08,
-   "market_value": 842,
-   "open_pnl": 8.3,
+   "price": 40.11,
+   "prev_close": 42.1,
+   "market_value": 802.2,
+   "open_pnl": -31.5,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "NXE.TO",
+   "name": "NXE.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 55,
+   "avg_cost": 15.58,
+   "price": 14.44,
+   "prev_close": 15.52,
+   "market_value": 794.2,
+   "open_pnl": -62.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 140.42,
-   "prev_close": 139.18,
-   "market_value": 702.1,
-   "open_pnl": 31.22,
+   "price": 140.9019,
+   "prev_close": 140.2719,
+   "market_value": 704.51,
+   "open_pnl": 33.63,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -197,10 +197,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 21.01,
-   "price": 21.03,
-   "prev_close": 21.01,
-   "market_value": 420.6,
-   "open_pnl": 0.4,
+   "price": 20.94,
+   "prev_close": 21.03,
+   "market_value": 418.8,
+   "open_pnl": -1.4,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -213,10 +213,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 51.73,
-   "price": 56.34,
-   "prev_close": 55.9,
-   "market_value": 281.7,
-   "open_pnl": 23.05,
+   "price": 55.61,
+   "prev_close": 56.61,
+   "market_value": 278.05,
+   "open_pnl": 19.4,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18362,6 +18362,138 @@
  },
  "activities": [
   {
+   "uid": "t_ded79218a6",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED ALL/PART AS PRINCIPAL",
+   "amount": -2028,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_f6218e8fa7",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": -273.78,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_7448ee7d31",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": 162.65,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_fc5b5c414d",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "TIDAL TR II ROUNDHILL GENERATIVE AI & TECHNOLOGY ETF WE ACTED AS AGENT",
+   "amount": 444.66,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_38115e6fc6",
+   "date": "2026-08-27",
+   "type": "FX",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CONVERSION - CAD/USD",
+   "amount": 0.11,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_7ebbfe94e5",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "GOLD OUNCE WE ACTED ALL/PART AS PRINCIPAL",
+   "amount": 1361.54,
+   "currency": "USD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_338f20ff0b",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": 325.4,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_368355118f",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": -420.2,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_d72c778875",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CANADIAN NATURAL RESOURCES LTD WE ACTED AS AGENT",
+   "amount": -1242.9,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_7a384f7ba3",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES WE ACTED AS AGENT",
+   "amount": -1046.5,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
+   "uid": "t_d6dfa1349c",
+   "date": "2026-08-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": null,
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": -856.9,
+   "currency": "CAD",
+   "quantity": null,
+   "price": null
+  },
+  {
    "uid": "t_73aec5123b",
    "date": "2026-08-26",
    "type": "Trade",
@@ -21785,42 +21917,42 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.72,
+   "annual_rate_per_share": 0.7185,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1545,
+   "annual_rate_per_share": 2.145,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "DLR.U.TO",
-   "annual_rate_per_share": 0.2881,
+   "annual_rate_per_share": 0.2873,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.5127,
+   "annual_rate_per_share": 2.4713,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CHAT",
-   "annual_rate_per_share": 1.7245,
+   "annual_rate_per_share": 1.6717,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1417,
+   "annual_rate_per_share": 1.1541,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21897,10 +22029,19 @@
     "date": "2026-08-27",
     "value": 32824.94,
     "net_flow": 0
+   },
+   {
+    "date": "2026-08-28",
+    "value": 32592.38,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-05-03",
+     "level": 179.42
+    },
     {
      "date": "2026-05-10",
      "level": 180.84
