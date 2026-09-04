@@ -78,6 +78,22 @@ Notes:
   Left as-is the fund would contribute more than its own market value to the look-through
   and break value conservation, so the parser scales the weights back to 100% and records
   the published figure in the markdown.
+- **Swap rows carry the contract, not the company.** A swap-based fund publishes total
+  return swaps with the contract in the `Ticker` column
+  (`6450267 TRS 052427 GS`) and the underlying decorated into the `Name`
+  (`SK HYNIX INC-SWAP-GOLD-L`, `MICRON TECHNOLOGY INC SWAP NM`). The parser strips the
+  decoration and resolves the row by name, so the weight lands on the company the swap
+  references. This matters more than it sounds: DRAM reaches Micron almost entirely through
+  swaps, and treating those rows as derivatives to be dropped reported Micron at 1.03%
+  instead of 25.35%, with the difference handed to *Unresolved*.
+- **Collateral is not a holding.** A swap-based fund parks the notional in Treasury bills
+  and a government money market fund — 37.9% of DRAM across `912797VB0` and `FGXXX`,
+  offset by −37.7% `Cash&Other`. Those are excluded by `isNonEquity`; counted as
+  constituents the T-bill outranks every real name in the fund.
+- **Cash and FX rows are identified by the `Identifier` column**, which reads `CASHKRW`,
+  `CASHCNY`, `CASHTWD`. The `Ticker` is just the currency code and the `Name` is the
+  currency in words (`SOUTH KOREA WON`), neither of which any name-based rule catches
+  reliably, so the parser flags the asset class from the identifier instead.
 
 ---
 

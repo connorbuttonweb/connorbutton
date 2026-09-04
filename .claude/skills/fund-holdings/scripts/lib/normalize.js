@@ -87,8 +87,11 @@ const TICKER_ALIASES = {
   '2330': 'TSM',
   // Samsung Electronics
   '005930': '005930.KS',
-  // SK hynix
-  '000660': '000660.KS',
+  // SK hynix: local line and the unsponsored US ADR
+  '000660': '000660.KS', 'SKHY': '000660.KS',
+  // Samsung Electronics preferred (005935) is the same company as the ordinary
+  // line; DRAM lists both, and they are one exposure.
+  '005935': '005930.KS',
   // Canadian tickers arrive bare from iShares/Vanguard; the portfolio holds the
   // .TO listings, so normalize onto those for direct-holding overlap.
   'RY': 'RY.TO', 'TD': 'TD.TO', 'BMO': 'BMO.TO', 'BNS': 'BNS.TO', 'CM': 'CM.TO',
@@ -124,6 +127,10 @@ const NAME_TO_TICKER = {
   'sk hynix': '000660.KS',
   'samsung electronics': '005930.KS',
   'micron technology': 'MU',
+  // As published on DRAM's swap rows, once the swap decoration is stripped.
+  'micron technology inc': 'MU',
+  'micron technology, inc.': 'MU',
+  'sk hynix inc': '000660.KS',
   'western digital': 'WDC',
   'applovin corporation': 'APP',
   'roblox corporation': 'RBLX',
@@ -202,7 +209,19 @@ const SECTOR_BY_TICKER = {
   BP: 'Energy', SN: 'Consumer Discretionary', RL: 'Consumer Discretionary',
   PHM: 'Consumer Discretionary', KBH: 'Consumer Discretionary',
   LEN: 'Consumer Discretionary', PFE: 'Health Care',
-  '000660.KS': 'Technology', '005930.KS': 'Technology'
+  '000660.KS': 'Technology', '005930.KS': 'Technology',
+  // DRAM's memory and storage constituents; Roundhill publishes no sector.
+  '2337': 'Technology', '2344': 'Technology', '2408': 'Technology',
+  '285A': 'Technology', '603986': 'Technology', '8299': 'Technology',
+  '~CXMT-CORPORATION': 'Technology'
+};
+
+/* Countries for holdings whose own row cannot supply one. A swap row names a
+   contract, not an exchange, so an underlying with no listing of its own has
+   nowhere else to get its country from. */
+const GEOGRAPHY_BY_TICKER = {
+  // ChangXin Memory Technologies — Hefei, China; DRAM holds it only via swap.
+  '~CXMT-CORPORATION': 'China'
 };
 
 /* Resolve a vendor row to a canonical ticker.
@@ -210,9 +229,16 @@ const SECTOR_BY_TICKER = {
    key and will not be treated as the same holding as any other fund's row. */
 function canonicalTicker(rawTicker, name) {
   if (rawTicker) {
-    const { base } = splitExchange(rawTicker);
+    const { base, country } = splitExchange(rawTicker);
     const up = base.toUpperCase().replace(/\s+/g, '');
-    if (TICKER_ALIASES[up]) return { ticker: TICKER_ALIASES[up], matched: true };
+    const alias = TICKER_ALIASES[up];
+    /* The bare-ticker aliases above are all Canadian, and several collide with
+       a foreign symbol: Schneider Electric is "SU FP" in Roundhill's file and
+       must not fold onto Suncor's SU.TO. Where the row's own exchange code says
+       the listing is not Canadian, the alias does not apply. */
+    if (alias && !(country && country !== 'Canada' && /\.TO$/.test(alias))) {
+      return { ticker: alias, matched: true };
+    }
     if (up && up !== 'CASH&OTHER' && up !== '-') return { ticker: up, matched: true };
   }
   if (name) {
@@ -234,6 +260,10 @@ function sectorFor(ticker, raw) {
   return SECTOR_BY_TICKER[ticker] || null;
 }
 
+function geographyFor(ticker, raw) {
+  return geography(raw) || GEOGRAPHY_BY_TICKER[ticker] || null;
+}
+
 /* Rows that are cash, FX or derivatives rather than a company. These are
    excluded from the constituent list; the weight they represent shows up in the
    Unresolved bucket, which is the honest place for it. */
@@ -241,10 +271,15 @@ function isNonEquity(name, assetClass) {
   const n = String(name || '').toLowerCase();
   const a = String(assetClass || '').toLowerCase();
   if (/cash|futures|money market|margin|^fx$/.test(a)) return true;
-  return /\bcash\b|spot cc|currency|money market|^euro$|dollar$|zloty|\bnet other assets\b/.test(n);
+  if (/\bcash\b|spot cc|currency|money market|^euro$|dollar$|zloty|\bnet other assets\b/.test(n)) return true;
+  /* Collateral, not a constituent. A swap-based fund parks most of its cash in
+     bills and a government money market fund against the swap notional — DRAM
+     holds 38% that way. Counted as holdings they crowd out every real name. */
+  return /\btreasury bill\b|\bt-bill\b|government obligations fund/.test(n);
 }
 
 module.exports = {
-  sector, sectorFor, geography, splitExchange, canonicalTicker, isNonEquity,
-  COUNTRIES, EXCHANGE_COUNTRY, TICKER_ALIASES, NAME_TO_TICKER, SECTOR_BY_TICKER
+  sector, sectorFor, geography, geographyFor, splitExchange, canonicalTicker,
+  isNonEquity, COUNTRIES, EXCHANGE_COUNTRY, TICKER_ALIASES, NAME_TO_TICKER,
+  SECTOR_BY_TICKER, GEOGRAPHY_BY_TICKER
 };

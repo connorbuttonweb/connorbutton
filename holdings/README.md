@@ -9,16 +9,17 @@ edited by hand.
 |---|---|---|---:|---|
 | `XEQT.TO.md` | iShares Core Equity ETF Portfolio | 1,797 | 93.84% | 2026-08-03 |
 | `FINN.TO.md` | Fidelity Global Innovators ETF | 105 | 98.84% | 2026-03-31 |
-| `VDY.TO.md` | Vanguard FTSE Canadian High Dividend Yield Index ETF | 60 | 99.48% | 2026-06-30 |
+| `VDY.TO.md` | Vanguard FTSE Canadian High Dividend Yield Index ETF | 60 | 99.68% | 2026-07-31 |
 | `CHAT.md` | Roundhill Generative AI & Technology ETF | 50 | 100.00% | 2026-08-04 |
+| `DRAM.md` | Roundhill Memory ETF | 13 | 100.00% | 2026-08-31 |
 
 ## Why these exist
 
 Brokerage feeds report that you own XEQT. They do not report that XEQT owns NVIDIA. Without
-these files the dashboard can only say "four ETFs"; with them it can say the portfolio is
-28% technology, that 125 companies are held through more than one fund, and that Brookfield
-Renewable is a 10% single-name concentration once its Toronto and New York listings are
-counted together.
+these files the dashboard can only say "five ETFs"; with them it can say the portfolio is
+19% technology, that 127 companies are held through more than one fund, and that Micron is
+one 1.45% exposure arriving through four funds at once rather than four unrelated
+positions.
 
 ## Reading a file
 
@@ -35,6 +36,12 @@ The body notes what was excluded and why, then a table:
 **Coverage is not always 100%, and that is correct.** Cash, futures and sub-0.01% tail
 positions are excluded; the shortfall appears on the dashboard as an explicit *Unresolved*
 bucket rather than being silently redistributed.
+
+**Some funds hold their exposure synthetically.** DRAM reaches most of its Micron, Samsung
+and SK hynix position through total return swaps rather than shares. Those rows count
+against the company each swap references — that is the exposure a look-through exists to
+measure — and the file states how much of the fund is held that way. The collateral backing
+them, a Treasury bill and a government money market fund, is excluded like any other cash.
 
 ## Updating
 

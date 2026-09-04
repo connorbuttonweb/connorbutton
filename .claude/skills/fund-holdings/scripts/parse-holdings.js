@@ -108,19 +108,47 @@ const VENDORS = {
   },
 
   /* Roundhill: Ticker,Name,Identifier,Weight,Shares,Market Value.
-     Tickers are Bloomberg-style ("2330 TT"); there is no sector column. */
+     Tickers are Bloomberg-style ("2330 TT"); there is no sector column.
+
+     Two row types are not what the Ticker column makes them look like.
+
+     Cash and FX carry an identifier of "CASH<CCY>" ("CASHKRW") and a ticker
+     that is just the currency code, which no name-based rule catches; the
+     identifier is the reliable tell, so it sets the asset class.
+
+     A swap-based fund holds much of its exposure through total return swaps,
+     published with the contract in the Ticker column ("6450267 TRS 052427 GS")
+     and the underlying decorated into the Name ("SK HYNIX INC-SWAP-GOLD-L").
+     That is real long exposure to the company named — DRAM reaches Micron
+     almost entirely this way, and dropping the rows as derivatives would
+     understate it by an order of magnitude and hand the weight to Unresolved.
+     So the decoration comes off and the row resolves by name like any other.
+     The contract is not a ticker and its counterparty is not a country, so both
+     are left empty for the fold and the ticker maps to supply. */
   roundhill(text) {
     const rows = parseCSV(text);
     const H = rows[0];
-    const iT = H.indexOf('Ticker'), iN = H.indexOf('Name'), iW = H.indexOf('Weight');
+    const iT = H.indexOf('Ticker'), iN = H.indexOf('Name'),
+          iI = H.indexOf('Identifier'), iW = H.indexOf('Weight');
     return rows.slice(1)
       .filter(r => r.length > iW && r[iT] && r[iT].trim())
       .map(r => {
-        const { country } = N.splitExchange(r[iT]);
+        const rawTicker = r[iT].trim();
+        const name = (r[iN] || '').trim();
+        if (/\bSWAP\b/i.test(name) || /\bTRS\b/.test(rawTicker)) {
+          return {
+            ticker: null, name: name.replace(/[\s-]*\bSWAP\b.*$/i, '').trim(),
+            weightPct: num(r[iW]), sector: null,
+            geography: null, currency: null, synthetic: true
+          };
+        }
+        const ident = iI >= 0 ? (r[iI] || '').trim() : '';
+        const { country } = N.splitExchange(rawTicker);
         return {
-          ticker: r[iT].trim(), name: (r[iN] || '').trim(),
+          ticker: rawTicker, name: name,
           weightPct: num(r[iW]), sector: null,
-          geography: country || 'United States', currency: null
+          geography: country || 'United States', currency: null,
+          assetClass: /^CASH/i.test(ident) ? 'Cash' : null
         };
       });
   },
@@ -171,6 +199,17 @@ parsed.forEach(r => {
   const prev = byTicker.get(ticker);
   if (prev) {
     prev.weightPct += r.weightPct;
+    /* Rows for one company rarely carry the same detail — a swap row names no
+       exchange and no sector, the underlying's own row does. Take the first
+       non-empty value for each rather than whichever row happened to be first. */
+    if (!prev.sector) prev.sector = N.sectorFor(ticker, r.sector);
+    if (!prev.geography) prev.geography = N.geographyFor(ticker, r.geography);
+    if (!prev.currency) prev.currency = r.currency;
+    /* A swap row carries the underlying in the counterparty's house style
+       ("MICRON TECHNOLOGY, INC.-SWAP-GOLD-L"); the company's own row names it
+       properly, so let that win when the fund lists both. */
+    if (prev.synthetic && !r.synthetic && r.name) prev.name = r.name;
+    if (r.synthetic) prev.synthetic = true;
     prev.aliases.add(r.ticker || r.name);
   } else {
     byTicker.set(ticker, {
@@ -178,9 +217,10 @@ parsed.forEach(r => {
       name: r.name || ticker,
       weightPct: r.weightPct,
       sector: N.sectorFor(ticker, r.sector),
-      geography: N.geography(r.geography),
+      geography: N.geographyFor(ticker, r.geography),
       currency: r.currency,
       matched: matched,
+      synthetic: !!r.synthetic,
       aliases: new Set([r.ticker || r.name])
     });
   }
@@ -207,6 +247,8 @@ const esc = s => String(s == null ? '' : s).replace(/\|/g, '\\|').trim();
 const pct = n => n.toFixed(4);
 
 const nonEquityWeight = excludedNonEquity.reduce((a, r) => a + (r.weightPct || 0), 0);
+const syntheticWeight = holdings.filter(h => h.synthetic).reduce((a, h) => a + h.weightPct, 0);
+const syntheticNames = holdings.filter(h => h.synthetic).map(h => h.ticker);
 const droppedWeight = dropped.reduce((a, r) => a + (r.weightPct || 0), 0);
 
 const md = [
@@ -226,11 +268,15 @@ const md = [
   'Holdings as published by the fund, as at **' + AS_OF + '**.',
   '',
   '- **' + holdings.length + '** constituents listed, covering **' + (coverage * 100).toFixed(2) + '%** of net assets.',
-  nonEquityWeight ? '- ' + nonEquityWeight.toFixed(2) + '% is cash, FX or derivatives and is excluded — it surfaces in the dashboard as *Unresolved*.' : null,
+  nonEquityWeight ? '- ' + nonEquityWeight.toFixed(2) + '% is cash, FX or collateral and is excluded — it surfaces in the dashboard as *Unresolved*.' : null,
+  syntheticWeight ? '- ' + syntheticWeight.toFixed(2) + '% is held synthetically through total return swaps rather than as shares (' +
+    syntheticNames.join(', ') + '). The exposure is counted against the company each swap references, which is what the look-through is measuring.' : null,
   rescaled ? '- The fund publishes **' + rescaled.toFixed(2) + '%** in securities against negative cash. Weights below are scaled by ' +
     (100 / rescaled).toFixed(6) + ' to total 100%, so this fund contributes exactly its own market value to the look-through.' : null,
   dropped.length ? '- ' + dropped.length + ' holdings below the ' + MIN_WEIGHT + '% reporting floor (' + droppedWeight.toFixed(2) + '% combined) are omitted.' : null,
-  unmatched ? '- ' + unmatched + ' constituents could not be resolved to a ticker and are keyed by name (prefixed `~`). They contribute to sector and geography totals but never match another fund\'s holding.' : null,
+  unmatched ? '- ' + unmatched + (unmatched === 1 ? ' constituent could' : ' constituents could') +
+    ' not be resolved to a ticker and ' + (unmatched === 1 ? 'is' : 'are') +
+    ' keyed by name (prefixed `~`). They contribute to sector and geography totals but never match another fund\'s holding.' : null,
   '',
   '> Edit this file to correct a ticker, sector or weight, then re-run',
   '> `apply-holdings.js` to push the change into the dashboard. This file is the',
@@ -258,6 +304,7 @@ fs.writeFileSync(outPath, md.join('\n'));
 console.log('wrote ' + outPath);
 console.log('  constituents   ' + holdings.length + (unmatched ? '   (' + unmatched + ' unmatched to a ticker)' : ''));
 console.log('  coverage       ' + (coverage * 100).toFixed(2) + '%');
-if (nonEquityWeight) console.log('  cash/derivs    ' + nonEquityWeight.toFixed(2) + '% excluded');
+if (nonEquityWeight) console.log('  cash/collat    ' + nonEquityWeight.toFixed(2) + '% excluded');
+if (syntheticWeight) console.log('  via swaps      ' + syntheticWeight.toFixed(2) + '%   (' + syntheticNames.join(', ') + ')');
 if (dropped.length) console.log('  below floor    ' + dropped.length + ' rows, ' + droppedWeight.toFixed(2) + '%');
 if (coverage > 1.001) console.log('  WARNING: listed weights exceed 100% — check for double-counted rows.');
