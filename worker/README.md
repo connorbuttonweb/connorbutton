@@ -12,7 +12,7 @@ Browsers can't call Yahoo Finance directly — it sends no CORS headers — so t
 | `/ticker-quote?symbol=XEQT.TO` | [`assets/js/ticker.js`](../assets/js/ticker.js), the scrolling ticker on `/search/` | `{ symbol, price, change, pct }` |
 | `/history?symbols=A,B&from=&to=&interval=1d` | the portfolio history rebuild | `{ "A": [{ date, close }], … }` |
 
-`/history` accepts up to 25 symbols, `interval` of `1d`/`1wk`/`1mo`, and returns
+`/history` accepts up to 60 symbols, `interval` of `1d`/`1wk`/`1mo`, and returns
 **dividend- and split-adjusted** closes so the series is total-return. A symbol that fails
 is reported under `_errors` rather than failing the whole request.
 
@@ -53,8 +53,15 @@ $ curl -s '.../ticker-quote?symbol=XEQT.TO'
 {"symbol":"XEQT.TO","price":45.9,"change":-0.07000000000000028,"pct":-0.15227322166630472}
 ```
 
-`/history` currently returns **404** on the deployed worker — it only exists in this file
-until the worker is redeployed.
+~~`/history` currently returns **404** on the deployed worker.~~ **No longer true.**
+Verified against the live worker on 2026-09-09: `/history` is deployed and serving, and it
+returned the exact `"At most 25 symbols per request"` string from this file — so the repo
+copy tracks what is running more closely than this README assumed. Still copy the live
+source down and diff before deploying; that is evidence, not proof.
+
+The 25-symbol cap is why the portfolio rebuild spent months on the Yahoo fallback: the
+fetch list is every symbol ever held (37 and growing), so *every* request was rejected.
+The caller now chunks its requests, and the cap here is 60.
 
 ## Deploy
 

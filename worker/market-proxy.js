@@ -10,7 +10,7 @@
  *       `${q.pct.toFixed(2)}%`, so pct is a PERCENT, not a fraction.
  *
  *   /history?symbols=A,B&from=YYYY-MM-DD&to=YYYY-MM-DD&interval=1d
- *       Daily closes for up to 25 symbols, dividend- and split-adjusted so the
+ *       Daily closes for up to 60 symbols, dividend- and split-adjusted so the
  *       series is total-return. Used to rebuild the portfolio's daily value
  *       series in .claude/skills/refresh-portfolio/scripts/rebuild-history.js.
  *
@@ -68,6 +68,14 @@ async function handleTickerQuote(url, corsHeaders) {
 }
 
 // --- HISTORY (daily closes for many symbols, for the portfolio dashboard) ---
+
+/* Was 25. The dashboard's rebuild asks for every symbol ever held — 37 and
+   growing — so a 25-symbol cap rejected EVERY request it ever made, and the
+   caller silently fell back to scraping Yahoo directly for months. The caller
+   now chunks (see rebuild-history.js WORKER_CHUNK), so this limit is a guard
+   against an absurd request rather than something a normal run can hit. */
+const MAX_SYMBOLS = 60;
+
 async function handleHistory(url, corsHeaders) {
     const json = (body, maxAge) => new Response(JSON.stringify(body), {
         status: 200,
@@ -81,7 +89,9 @@ async function handleHistory(url, corsHeaders) {
     const interval = url.searchParams.get("interval") || "1d";
 
     if (!symbols.length) return json({ error: "No symbols" });
-    if (symbols.length > 25) return json({ error: "At most 25 symbols per request" });
+    if (symbols.length > MAX_SYMBOLS) {
+        return json({ error: `At most ${MAX_SYMBOLS} symbols per request` });
+    }
     if (!/^\d{4}-\d{2}-\d{2}$/.test(from || "") || !/^\d{4}-\d{2}-\d{2}$/.test(to || "")) {
         return json({ error: "from and to must be YYYY-MM-DD" });
     }

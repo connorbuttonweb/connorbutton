@@ -79,10 +79,19 @@ function candidatesFor(sym) {
 }
 
 /* How far a candidate's close may sit from the brokerage's last price before it
-   is judged a different security. Post-market drift against the same day's close
-   runs 1-2% on volatile names; a wrong listing is out by tens of percent, or is
-   quoted in the other currency, so the two cases separate cleanly. */
-const MATCH_TOLERANCE = 0.05;
+   is judged a different security. A wrong listing is out by tens of percent, or
+   is quoted in the other currency, so it still separates cleanly from ordinary
+   price disagreement.
+
+   Was 0.05, on the reasoning that "post-market drift against the same day's
+   close runs 1-2% on volatile names". That understated it. The reference is
+   Questrade's after-hours mark compared against Yahoo's ADJUSTED close, and
+   closeAtOrBefore() will happily return the PREVIOUS session's close when Yahoo
+   has no bar for the reference date yet — so the band has to absorb a whole
+   day's move on a volatile name, not just quote noise. IREN (5.8% off) and
+   SPCX (5.9% off) each killed a nightly reprice at 0.05 while being correctly
+   identified. */
+const MATCH_TOLERANCE = 0.12;
 
 /* Statement-confirmed net flows, keyed by date, in CAD. These replace the
    derived value for that date entirely.
@@ -115,6 +124,42 @@ const FLOW_OVERRIDES = {
      on 06-05 = 11,521.85 securities at market, no cash out that day.
      Derived book value was 11,474.48 (understated by 47.37). */
   '2026-06-08': 11521.85
+};
+
+/* Cash in flight BETWEEN the two accounts at snapshot time, keyed by date, in
+   CAD. It had left the source and had not yet landed at the destination, so the
+   snapshot understates the portfolio by the amount in transit for exactly one
+   day. Added back to that day's value.
+
+   These are not flows. An internal transfer is not a contribution, and the feed
+   already records both sides — history.flows correctly carries 0 for 2026-08-26
+   and 2026-09-02. The bug is not the flow, it is that the VALUE for the
+   preceding day is missing money the portfolio still owned. twrIndex() reads
+   that as a real ~12% loss and the rebound as a real gain, which then
+   propagates into max drawdown, volatility, Sharpe, beta and worst-day.
+
+   Each figure is the arithmetic gap, confirmed against the offsetting
+   withdrawal/deposit pair the feed posts on the FOLLOWING day. Same rationale
+   as FLOW_OVERRIDES for living in code: commit befd6ef hand-edited history.json
+   and the next pipeline run silently reverted it.
+
+   KNOWN GAP: this is a hand-maintained list of two known dates, with no
+   detector. The next internal transfer that straddles a snapshot will produce
+   the same fake V-notch, silently, until someone adds it here. That trade-off
+   was made deliberately; if these recur, automate the detection instead of
+   growing this list. */
+const IN_FLIGHT = {
+  /* TFSA -> FHSA. Cash was 4,997.70 on 08-24 and 797.75 on 08-25 with no
+     activity posted that day at all; the feed records -4200 / +4200 on 08-26.
+     Gap 4,199.95 — reconciles to the round figure within five cents. */
+  '2026-08-25': 4199.95,
+  /* TFSA -> FHSA. Cash 1,264.72 on 08-31 plus 3,284.76 of net posted activity
+     on 09-01 implies 4,549.48; the snapshot shows 749.45. The feed records
+     -3800 / +3800 on 09-02. Gap 3,800.03 — within three cents.
+     The DLR.U.TO position that vanishes on 09-01 is NOT the cause: it was
+     genuinely sold that day (Norbert's Gambit, proceeds 2,818.00 + 380.43) and
+     is already inside that 3,284.76. */
+  '2026-09-01': 3800.03
 };
 
 /* Symbols priced off a proxy rather than the instrument itself. The proxy
@@ -379,6 +424,38 @@ async function yahooDirect(symbol) {
   return out;
 }
 
+/* The worker caps /history at a fixed number of symbols per request. The fetch
+   list is every symbol ever held — 37 and growing — so sending it as ONE request
+   made the worker reject every single call with { error: "At most 25 symbols per
+   request" }, and every run silently fell through to scraping Yahoo directly.
+   Chunking keeps the worker (and its edge cache) on the fast path. Deliberately
+   at or below the worker's own limit, so raising that limit is an optimisation
+   and never a correctness dependency. */
+const WORKER_CHUNK = 25;
+
+async function fetchWorkerChunk(group) {
+  const url = WORKER + '/history?symbols=' + encodeURIComponent(group.join(',')) +
+    '&from=' + FETCH_FROM + '&to=' + TO + '&interval=1d';
+  const res = await fetch(url);
+  if (!res.ok) throw new Error('HTTP ' + res.status);
+  const data = await res.json().catch(() => null);
+  if (!data) throw new Error('unparseable response');
+  /* The worker reports failures as HTTP 200 with an { error } body rather than a
+     4xx, so a non-ok status is not the signal — without this check an error
+     payload would be treated as a price map and blow up downstream. */
+  if (data.error) throw new Error(data.error);
+  if (data._errors) {
+    console.warn('  upstream could not price: ' + JSON.stringify(data._errors));
+    delete data._errors;
+  }
+  /* Guard the shape too: every value must be an array of candles. */
+  const keys = Object.keys(data);
+  if (!keys.length || !keys.every(k => Array.isArray(data[k]))) {
+    throw new Error('unexpected response shape');
+  }
+  return data;
+}
+
 async function fetchPrices() {
   if (OFFLINE) {
     if (!history.prices) die('--offline needs prices already cached in history.json');
@@ -386,42 +463,36 @@ async function fetchPrices() {
   }
 
   const symbols = Array.from(new Set(fetchList));
+  const out = {};
 
   if (!DIRECT) {
-    const url = WORKER + '/history?symbols=' + encodeURIComponent(symbols.join(',')) +
-      '&from=' + FETCH_FROM + '&to=' + TO + '&interval=1d';
-    const res = await fetch(url);
-    let data = null;
-    if (res.ok) {
-      data = await res.json().catch(() => null);
-      /* The worker reports failures as HTTP 200 with an { error } body rather
-         than a 4xx, so a non-ok status is not the signal — without this check an
-         error payload would be treated as a price map and blow up downstream. */
-      if (data && data.error) {
-        console.warn('  worker /history returned an error: ' + data.error);
-        data = null;
-      }
-      if (data && data._errors) {
-        console.warn('  upstream could not price: ' + JSON.stringify(data._errors));
-        delete data._errors;
-      }
-      /* Guard the shape too: every value must be an array of candles. */
-      if (data && Object.keys(data).length &&
-        Object.keys(data).every(k => Array.isArray(data[k]))) {
-        return data;
-      }
-      if (data) console.warn('  worker /history returned an unexpected shape — ignoring it.');
+    const groups = [];
+    for (let i = 0; i < symbols.length; i += WORKER_CHUNK) {
+      groups.push(symbols.slice(i, i + WORKER_CHUNK));
     }
-    console.warn('  worker /history unavailable (HTTP ' + res.status + ') — falling back to ' +
-      'Yahoo directly. Deploy the /history route to use it; see worker/README.md.');
+    const settled = await Promise.allSettled(groups.map(fetchWorkerChunk));
+    settled.forEach((r, i) => {
+      if (r.status === 'fulfilled') { Object.assign(out, r.value); return; }
+      /* A failed chunk falls back to Yahoo for ITS symbols only. One bad group
+         must not discard the worker's results for all the others — which is
+         exactly what the previous single-request version did, on every run. */
+      console.warn('  worker /history chunk ' + (i + 1) + '/' + groups.length +
+        ' failed (' + (r.reason ? r.reason.message : 'unknown') + ') — falling ' +
+        'back to Yahoo for its ' + groups[i].length + ' symbol(s).');
+    });
   }
 
-  const results = await Promise.allSettled(symbols.map(yahooDirect));
-  const out = {};
+  /* An empty array means the worker found no candles for that symbol, which is
+     worth one direct attempt rather than accepting as final. */
+  const missing = symbols.filter(s => !out[s] || !out[s].length);
+  if (!missing.length) return out;
+  if (!DIRECT) console.warn('  pricing ' + missing.length + ' symbol(s) directly from Yahoo.');
+
+  const results = await Promise.allSettled(missing.map(yahooDirect));
   const failed = [];
   results.forEach((r, i) => {
-    if (r.status === 'fulfilled' && r.value.length) out[symbols[i]] = r.value;
-    else failed.push(symbols[i] + ' (' + (r.reason ? r.reason.message : 'no data') + ')');
+    if (r.status === 'fulfilled' && r.value.length) out[missing[i]] = r.value;
+    else failed.push(missing[i] + ' (' + (r.reason ? r.reason.message : 'no data') + ')');
   });
   if (failed.length) console.warn('  could not price: ' + failed.join(', '));
   if (!Object.keys(out).length) die('no price series could be fetched from any source');
@@ -435,6 +506,15 @@ async function fetchPrices() {
    history.snapshots as `flat`, so a later run with a working feed still gets to
    resolve them properly instead of inheriting today's failure forever. */
 const flatCarry = new Set();
+
+/* Symbols whose only candidate listing IS the symbol itself, but whose price
+   disagrees with the brokerage mark by more than MATCH_TOLERANCE. Reported, not
+   fatal, and deliberately kept OUT of `approximated`: these DO have a real
+   daily series from Yahoo, whereas the dashboard tells the reader that anything
+   in `approximated` "has no dependable daily price series and is carried flat"
+   (assets/js/dashboard/sections/performance.js). Folding them together would
+   publish a false statement about them. */
+const identityMismatch = new Set();
 
 /* The brokerage's own last price is the only independent price this script has,
    and it is already recorded per position per snapshot. Use it to CHOOSE the
@@ -505,7 +585,19 @@ function resolveSymbols(prices) {
 
     scored.sort((a, b) => a.delta - b.delta);
     const best = scored[0];
-    if (best.delta > MATCH_TOLERANCE) {
+    /* A symbol that resolves to ITSELF as the only candidate has nothing to be
+       confused with — there is no other listing to switch to, so failing here
+       cannot prevent a misidentification, it can only kill the run. That is
+       exactly what IREN and SPCX did. Warn and price it anyway; keep die() for
+       the genuine multi-candidate case, where choosing wrong really would
+       misstate every return. */
+    if (best.delta > MATCH_TOLERANCE && best.candidate === sym && scored.length === 1) {
+      console.warn('  ' + sym + ' prices ' + (best.delta * 100).toFixed(1) + '% away from ' +
+        'the brokerage mark ($' + best.close + ' vs $' + ref.price + ' on ' + ref.date + ').');
+      console.warn('    Only one listing exists and it is the symbol itself, so this is a ' +
+        'price disagreement, not a mistaken identity. Pricing it against that listing.');
+      identityMismatch.add(sym);
+    } else if (best.delta > MATCH_TOLERANCE) {
       die('cannot identify ' + sym + ' on Yahoo.\n' +
         '  Brokerage last price $' + ref.price + ' on ' + ref.date + ', but:\n' +
         scored.map(s => '    ' + s.candidate + '  $' + s.close + '  off by ' +
@@ -616,6 +708,7 @@ function buildSeries(prices) {
      dropping the day — a gap would read as a price move. */
   const lastClose = {};
   const approximated = new Set();
+  const inFlightApplied = [];
   const daily = [];
 
   dates.forEach(date => {
@@ -657,6 +750,14 @@ function buildSeries(prices) {
     });
     if (!priced) return;                            // genuinely nothing to value it with
 
+    /* Add back money that was mid-transfer between accounts when the snapshot
+       was taken — see IN_FLIGHT. Applied to the value only; net_flow is
+       untouched, because an internal transfer is not a flow. */
+    if (IN_FLIGHT[date]) {
+      value += IN_FLIGHT[date];
+      inFlightApplied.push(date + ' +$' + IN_FLIGHT[date].toFixed(2));
+    }
+
     daily.push({ date: date, value: r2(value), net_flow: r2(flowByDate[date] || 0) });
   });
 
@@ -681,6 +782,11 @@ function buildSeries(prices) {
     });
     if (ok && value > 0) hyp.push({ date: date, value: r2(value) });
   });
+
+  if (inFlightApplied.length) {
+    console.log('in-flight cash   ' + inFlightApplied.join('; ') +
+      '   (added back to value; internal transfers, not flows)');
+  }
 
   return { daily: daily, hyp: hyp, approximated: Array.from(approximated), map: map };
 }
@@ -712,9 +818,14 @@ function buildSeries(prices) {
       const v = p.qty * p.last_price * (p.multiplier || 1);
       expect += p.currency === 'USD' ? v * reconFx : v;
     });
+    /* Compare like-for-like: the snapshot genuinely lacked the in-flight cash,
+       and daily[].value deliberately adds it back, so leaving it in would make
+       this check report the correction itself as a $4,200 pricing error. */
+    const recon = d.value - (IN_FLIGHT[s.date] || 0);
     checks.push({
-      date: s.date, recon: d.value, snapshot: r2(expect), diff: r2(d.value - expect),
-      fxRecon: r6(reconFx), fxBroker: portfolio.meta.fx.USDCAD
+      date: s.date, recon: recon, snapshot: r2(expect), diff: r2(recon - expect),
+      fxRecon: r6(reconFx), fxBroker: portfolio.meta.fx.USDCAD,
+      inFlight: IN_FLIGHT[s.date] || 0
     });
   });
 
@@ -772,12 +883,19 @@ function buildSeries(prices) {
   if (approximated.length) {
     console.log('carried flat     ' + approximated.join(', ') + '   (no dependable daily series)');
   }
+  if (identityMismatch.size) {
+    console.log('price disagreed  ' + Array.from(identityMismatch).join(', ') +
+      '   (priced against their own listing; brokerage mark differs by more than ' +
+      (MATCH_TOLERANCE * 100).toFixed(0) + '%)');
+  }
   console.log('\nsnapshot reconciliation (like-for-like FX):');
   checks.forEach(c => console.log('  ' + c.date + '   recon $' +
     (c.recon != null ? c.recon.toFixed(2) : '—') + '   snapshot $' +
     (c.snapshot != null ? c.snapshot.toFixed(2) : '—') +
     (c.diff != null ? '   diff $' + c.diff.toFixed(2) +
-      '   fx ' + c.fxRecon + ' vs broker ' + c.fxBroker : '   ' + c.status)));
+      '   fx ' + c.fxRecon + ' vs broker ' + c.fxBroker +
+      (c.inFlight ? '   [+$' + c.inFlight.toFixed(2) + ' in flight, excluded here]' : '')
+      : '   ' + c.status)));
 
   /* Closing prices vs the brokerage's last trade differ by a few basis points;
      0.1% of the portfolio is the line between that and a genuinely wrong price. */

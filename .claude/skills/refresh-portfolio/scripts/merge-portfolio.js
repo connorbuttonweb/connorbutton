@@ -320,8 +320,16 @@ function normalizeActivity(a) {
     description: description,
     amount: a.amount,
     currency: a.currency,
-    quantity: a.quantity === undefined ? null : a.quantity,
-    price: a.price === undefined ? null : a.price
+    quantity: a.quantity === undefined || a.quantity === null ? null : r6(a.quantity),
+    /* Rounded for the same reason as the position price above, and missed when
+       that fix was made: Questrade reports average-price fills to 8+ decimals
+       (IREN at 38.94693333 on 2026-09-02), and a fractional tail that long is
+       an unbroken run of digits, which the account-number guard at the end of
+       this script rejects. That killed the refresh every day from 2026-09-04
+       on, and could not self-heal: the activity window is anchored to the last
+       SUCCESSFUL merge, so each new pull re-included the same row. Four
+       decimals is finer than any price this portfolio trades at. */
+    price: a.price === undefined || a.price === null ? null : r4(a.price)
   };
 }
 
