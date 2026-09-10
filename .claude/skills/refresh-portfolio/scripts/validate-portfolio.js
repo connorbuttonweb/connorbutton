@@ -199,6 +199,20 @@ console.log('\n5. Reconciliation and field sanity');
     latest ? Math.abs(latest.value - total) < 1 : false,
     latest ? latest.value.toFixed(2) + ' vs ' + total.toFixed(2) : 'no history');
 
+  /* One row per security. The merge builds positions from a Map keyed on symbol,
+     so it cannot emit a duplicate — but a GIT MERGE of two branches that both
+     refreshed the data can, by textually interleaving two pretty-printed arrays.
+     That happened on 2026-09-10 (commit 2c67f79): a stale IREN(20) row survived
+     alongside the current IREN(10), overstating the portfolio by ~$1,285 CAD.
+     Nothing else caught it, because every other check passed on the corrupted
+     file — the totals were internally consistent, just wrong. */
+  const symbolCounts = {};
+  (d.positions || []).forEach(p => { symbolCounts[p.symbol] = (symbolCounts[p.symbol] || 0) + 1; });
+  const dupSymbols = Object.keys(symbolCounts).filter(k => symbolCounts[k] > 1);
+  check('one position row per symbol (catches a bad git merge)',
+    dupSymbols.length === 0,
+    dupSymbols.map(k => k + ' appears ' + symbolCounts[k] + ' times').join('; '));
+
   check('every position has finite price / prev_close / quantity / avg_cost',
     (d.positions || []).every(p =>
       isFinite(p.price) && isFinite(p.prev_close) && isFinite(p.quantity) && isFinite(p.avg_cost)));
