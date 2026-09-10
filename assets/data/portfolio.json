@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-09T19:34:48.868Z",
-  "as_of": "2026-09-08",
+  "generated_at": "2026-09-09T22:49:32.198Z",
+  "as_of": "2026-09-09",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3838
+   "USDCAD": 1.3784
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,8 +13,8 @@
  },
  "profile": {
   "blended_mer": 0.0032,
-  "distribution_yield": 0.013,
-  "holdings_count": 10,
+  "distribution_yield": 0.0169,
+  "holdings_count": 11,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 5371.5,
+   "cash": 3946.2,
    "currency": "CAD",
-   "buying_power": 5359.72
+   "buying_power": 3937.32
   }
  ],
  "positions": [
@@ -69,10 +69,26 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 32.26,
-   "prev_close": 32.4,
-   "market_value": 6774.6,
-   "open_pnl": 218.62,
+   "price": 32.11,
+   "prev_close": 32.26,
+   "market_value": 6743.1,
+   "open_pnl": 187.12,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "REI.UN.TO",
+   "name": "REI.UN.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 80,
+   "avg_cost": 20.95,
+   "price": 20.92,
+   "prev_close": 20.83,
+   "market_value": 1673.6,
+   "open_pnl": -2.4,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +133,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 41.685,
-   "price": 41.63,
-   "prev_close": 40.84,
-   "market_value": 832.6,
-   "open_pnl": -1.1,
+   "price": 39.84,
+   "prev_close": 41.63,
+   "market_value": 796.8,
+   "open_pnl": -36.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +149,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 152.7707,
-   "prev_close": 147.2507,
-   "market_value": 763.85,
-   "open_pnl": 92.98,
+   "price": 146.97,
+   "prev_close": 152.89,
+   "market_value": 734.85,
+   "open_pnl": 63.97,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +165,26 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 70.17,
-   "prev_close": 69.78,
-   "market_value": 701.7,
-   "open_pnl": 11.2,
+   "price": 70.91,
+   "prev_close": 70.17,
+   "market_value": 709.1,
+   "open_pnl": 18.6,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "GO.U.TO",
+   "name": "GO.U.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 70,
+   "avg_cost": 8.255,
+   "price": 8.15,
+   "prev_close": 8.39,
+   "market_value": 570.5,
+   "open_pnl": -7.35,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,26 +197,26 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 26.73,
-   "price": 27.54,
-   "prev_close": 27.74,
-   "market_value": 550.8,
-   "open_pnl": 16.2,
+   "price": 27.79,
+   "prev_close": 27.54,
+   "market_value": 555.8,
+   "open_pnl": 21.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "REI.UN.TO",
-   "name": "REI.UN.TO",
+   "symbol": "IREN",
+   "name": "IREN",
    "account_id": "main",
    "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 20,
-   "avg_cost": 21.01,
-   "price": 20.83,
-   "prev_close": 20.86,
-   "market_value": 416.6,
-   "open_pnl": -3.6,
+   "currency": "USD",
+   "quantity": 10,
+   "avg_cost": 38.9469,
+   "price": 45.06,
+   "prev_close": 46.62,
+   "market_value": 450.6,
+   "open_pnl": 61.13,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18096,6 +18128,30 @@
  },
  "activities": [
   {
+   "uid": "t_610981cfdd",
+   "date": "2026-09-08",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Securities lending int payment as of August Symbol-BEPC",
+   "amount": 0.01,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
+   "uid": "t_75c8e7b776",
+   "date": "2026-09-08",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": "REI.UN",
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS DIST ON 20 SHS REC 08/31/26 PAY 09/08/26",
+   "amount": 1.93,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0.09
+  },
+  {
    "uid": "t_b98099f6c9",
    "date": "2026-09-03",
    "type": "Trade",
@@ -18129,7 +18185,7 @@
    "amount": 416.24,
    "currency": "USD",
    "quantity": -10,
-   "price": 41.6251
+   "price": 41.62505
   },
   {
    "uid": "t_624b76cb22",
@@ -18137,7 +18193,7 @@
    "type": "Withdrawal",
    "account_id": "main",
    "symbol": null,
-   "description": "TFSA Withdrawal",
+   "description": "Withdrawal",
    "amount": -3800,
    "currency": "CAD",
    "quantity": 0,
@@ -18173,7 +18229,7 @@
    "type": "Deposit",
    "account_id": "main",
    "symbol": null,
-   "description": "FHSA Contribution",
+   "description": "Contribution",
    "amount": 3800,
    "currency": "CAD",
    "quantity": 0,
@@ -21855,28 +21911,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.713,
+   "annual_rate_per_share": 0.7081,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1346,
+   "annual_rate_per_share": 2.1303,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
-   "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.4865,
+   "symbol": "REI.UN.TO",
+   "annual_rate_per_share": 1.1613,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
-   "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1686,
+   "symbol": "CNQ.TO",
+   "annual_rate_per_share": 2.5404,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
+   "symbol": "GO.U.TO",
+   "annual_rate_per_share": 0.6275,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -21985,13 +22048,57 @@
     "net_flow": 0
    },
    {
-    "date": "2026-09-08",
-    "value": 32951.01,
+    "date": "2026-09-09",
+    "value": 32720.35,
     "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-05-10",
+     "level": 180.84
+    },
+    {
+     "date": "2026-05-17",
+     "level": 183.2
+    },
+    {
+     "date": "2026-05-24",
+     "level": 185.61
+    },
+    {
+     "date": "2026-05-31",
+     "level": 182.9
+    },
+    {
+     "date": "2026-06-07",
+     "level": 184.62
+    },
+    {
+     "date": "2026-06-14",
+     "level": 188.36
+    },
+    {
+     "date": "2026-06-21",
+     "level": 184.37
+    },
+    {
+     "date": "2026-06-28",
+     "level": 189.34
+    },
+    {
+     "date": "2026-07-05",
+     "level": 190.09
+    },
+    {
+     "date": "2026-07-12",
+     "level": 185.25
+    },
+    {
+     "date": "2026-07-19",
+     "level": 185.28
+    },
     {
      "date": "2026-07-26",
      "level": 186.3
@@ -22013,8 +22120,12 @@
      "level": 190.38
     },
     {
-     "date": "2026-09-01",
-     "level": 188.33
+     "date": "2026-08-30",
+     "level": 189.54
+    },
+    {
+     "date": "2026-09-06",
+     "level": 187.76
     }
    ]
   }

@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-09-09T19:34:52.832Z",
-  "as_of": "2026-09-08",
+  "generated_at": "2026-09-10T01:04:00.276Z",
+  "as_of": "2026-09-09",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -60,7 +60,8 @@
    "CNQ.TO": "CNQ.TO",
    "NXE.TO": "NXE.TO",
    "REI.UN.TO": "REI-UN.TO",
-   "ARIS.TO": "ARIS.TO"
+   "ARIS.TO": "ARIS.TO",
+   "GO.U.TO": "GO-U.TO"
   }
  },
  "snapshots": [
@@ -4120,68 +4121,74 @@
    }
   },
   {
-   "date": "2026-09-08",
-   "cash": 5371.5,
+   "date": "2026-09-09",
+   "cash": 3946.2,
    "positions": {
     "XEQT.TO": {
      "qty": 164,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 45.46
+     "last_price": 45.2
     },
     "VDY.TO": {
      "qty": 90,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 77.23
+     "last_price": 76.82
     },
     "FINN.TO": {
      "qty": 210,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 32.26
+     "last_price": 32.11
+    },
+    "REI.UN.TO": {
+     "qty": 80,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.92
     },
     "NXE.TO": {
      "qty": 105,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 14.76
-    },
-    "IREN": {
-     "qty": 20,
-     "currency": "USD",
-     "multiplier": 1,
-     "last_price": 46.62
+     "last_price": 14.75
     },
     "MDA.TO": {
      "qty": 20,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 41.63
+     "last_price": 39.84
     },
     "SPCX": {
      "qty": 5,
      "currency": "USD",
      "multiplier": 1,
-     "last_price": 152.7707
+     "last_price": 146.97
     },
     "CNQ.TO": {
      "qty": 10,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 70.17
+     "last_price": 70.91
+    },
+    "GO.U.TO": {
+     "qty": 70,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.15
     },
     "ARIS.TO": {
      "qty": 20,
      "currency": "CAD",
      "multiplier": 1,
-     "last_price": 27.54
+     "last_price": 27.79
     },
-    "REI.UN.TO": {
-     "qty": 20,
-     "currency": "CAD",
+    "IREN": {
+     "qty": 10,
+     "currency": "USD",
      "multiplier": 1,
-     "last_price": 20.83
+     "last_price": 45.06
     }
    }
   }
@@ -4646,7 +4653,12 @@
   },
   {
    "date": "2026-09-08",
-   "value": 32985.47,
+   "value": 32952.1,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-09-09",
+   "value": 32779.34,
    "net_flow": 0
   }
  ],
@@ -4970,248 +4982,256 @@
   {
    "date": "2026-09-08",
    "level": 187.76
+  },
+  {
+   "date": "2026-09-09",
+   "level": 187.27
   }
  ],
  "hypothetical": [
   {
    "date": "2026-06-12",
-   "value": 27241.25
+   "value": 28716.51
   },
   {
    "date": "2026-06-15",
-   "value": 28269.62
+   "value": 29718.36
   },
   {
    "date": "2026-06-16",
-   "value": 28244.19
+   "value": 29711.82
   },
   {
    "date": "2026-06-17",
-   "value": 28106.04
+   "value": 29567.43
   },
   {
    "date": "2026-06-18",
-   "value": 28360.18
+   "value": 29797.71
   },
   {
    "date": "2026-06-19",
-   "value": 28489.45
+   "value": 29946.78
   },
   {
    "date": "2026-06-22",
-   "value": 28113.94
+   "value": 29580.01
   },
   {
    "date": "2026-06-23",
-   "value": 27736.39
+   "value": 29228.16
   },
   {
    "date": "2026-06-24",
-   "value": 27391.39
+   "value": 28946.22
   },
   {
    "date": "2026-06-25",
-   "value": 27257.69
+   "value": 28861.93
   },
   {
    "date": "2026-06-26",
-   "value": 27207.85
+   "value": 28819.89
   },
   {
    "date": "2026-06-29",
-   "value": 27445.06
+   "value": 29063.72
   },
   {
    "date": "2026-06-30",
-   "value": 27657.93
+   "value": 29297.99
   },
   {
    "date": "2026-07-02",
-   "value": 27326.73
+   "value": 29042.04
   },
   {
    "date": "2026-07-03",
-   "value": 27559.67
+   "value": 29305.02
   },
   {
    "date": "2026-07-06",
-   "value": 27724.45
+   "value": 29390.7
   },
   {
    "date": "2026-07-07",
-   "value": 27368.24
+   "value": 29095.19
   },
   {
    "date": "2026-07-08",
-   "value": 27240.52
+   "value": 28907.78
   },
   {
    "date": "2026-07-09",
-   "value": 27365.36
+   "value": 29033.47
   },
   {
    "date": "2026-07-10",
-   "value": 27335.2
+   "value": 28998.69
   },
   {
    "date": "2026-07-13",
-   "value": 26912.51
+   "value": 28616.97
   },
   {
    "date": "2026-07-14",
-   "value": 27040.87
+   "value": 28743.23
   },
   {
    "date": "2026-07-15",
-   "value": 27123.78
+   "value": 28828.54
   },
   {
    "date": "2026-07-16",
-   "value": 26697.66
+   "value": 28478.84
   },
   {
    "date": "2026-07-17",
-   "value": 26410.36
+   "value": 28222.37
   },
   {
    "date": "2026-07-20",
-   "value": 26452.48
+   "value": 28161.49
   },
   {
    "date": "2026-07-21",
-   "value": 26909.98
+   "value": 28604.98
   },
   {
    "date": "2026-07-22",
-   "value": 26873.81
+   "value": 28579.82
   },
   {
    "date": "2026-07-23",
-   "value": 26591.09
+   "value": 28280.73
   },
   {
    "date": "2026-07-24",
-   "value": 26437.59
+   "value": 28205.07
   },
   {
    "date": "2026-07-27",
-   "value": 26429.22
+   "value": 28207.23
   },
   {
    "date": "2026-07-28",
-   "value": 26408.75
+   "value": 28233.34
   },
   {
    "date": "2026-07-29",
-   "value": 25834.22
+   "value": 27710.43
   },
   {
    "date": "2026-07-30",
-   "value": 26530.42
+   "value": 28266.46
   },
   {
    "date": "2026-07-31",
-   "value": 26530.08
+   "value": 28279.55
   },
   {
    "date": "2026-08-04",
-   "value": 27390.8
+   "value": 29066.57
   },
   {
    "date": "2026-08-05",
-   "value": 27170.09
+   "value": 28872.61
   },
   {
    "date": "2026-08-06",
-   "value": 27187.25
+   "value": 28889.86
   },
   {
    "date": "2026-08-07",
-   "value": 27511.36
+   "value": 29186.59
   },
   {
    "date": "2026-08-10",
-   "value": 27480.25
+   "value": 29171.82
   },
   {
    "date": "2026-08-11",
-   "value": 27468.88
+   "value": 29069.08
   },
   {
    "date": "2026-08-12",
-   "value": 27857.42
+   "value": 29356.35
   },
   {
    "date": "2026-08-13",
-   "value": 27885.16
+   "value": 29405.01
   },
   {
    "date": "2026-08-14",
-   "value": 27812.48
+   "value": 29322.61
   },
   {
    "date": "2026-08-17",
-   "value": 27898.54
+   "value": 29401.06
   },
   {
    "date": "2026-08-18",
-   "value": 27504.96
+   "value": 29037.27
   },
   {
    "date": "2026-08-19",
-   "value": 27348.73
+   "value": 28866.16
   },
   {
    "date": "2026-08-20",
-   "value": 27078
+   "value": 28604.34
   },
   {
    "date": "2026-08-21",
-   "value": 27248.51
+   "value": 28750.7
   },
   {
    "date": "2026-08-24",
-   "value": 27181.74
+   "value": 28721.79
   },
   {
    "date": "2026-08-25",
-   "value": 27364.12
+   "value": 28845.05
   },
   {
    "date": "2026-08-26",
-   "value": 27387.13
+   "value": 28870.59
   },
   {
    "date": "2026-08-27",
-   "value": 27451.32
+   "value": 28924.34
   },
   {
    "date": "2026-08-28",
-   "value": 27208.94
+   "value": 28769.11
   },
   {
    "date": "2026-08-31",
-   "value": 27214.3
+   "value": 28734.04
   },
   {
    "date": "2026-09-01",
-   "value": 26949.81
+   "value": 28430.5
   },
   {
    "date": "2026-09-02",
-   "value": 27106.69
+   "value": 28601.82
   },
   {
    "date": "2026-09-03",
-   "value": 27535.16
+   "value": 28998.45
   },
   {
    "date": "2026-09-04",
-   "value": 27620.48
+   "value": 29057.12
   },
   {
    "date": "2026-09-08",
-   "value": 27613.97
+   "value": 28992.98
+  },
+  {
+   "date": "2026-09-09",
+   "value": 28833.14
   }
  ],
  "in_kind": [
