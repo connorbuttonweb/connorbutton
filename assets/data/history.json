@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-09-11T01:05:39.137Z",
-  "as_of": "2026-09-10",
+  "generated_at": "2026-09-11T22:45:19.481Z",
+  "as_of": "2026-09-11",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -22,7 +22,8 @@
    "AGI15JAN27C34.00",
    "PXT21AUG26C24.00.MX",
    "SPCX15JAN27C200.00",
-   "SPY18AUG26P769.00"
+   "SPY18AUG26P769.00",
+   "NXE15JAN27C14.50.MX"
   ],
   "note": "Holdings are assumed constant between snapshots, so a trade is recognised at the next refresh rather than on its trade date.",
   "symbol_map": {
@@ -4263,6 +4264,84 @@
      "last_price": 43.45
     }
    }
+  },
+  {
+   "date": "2026-09-11",
+   "cash": 374.8,
+   "positions": {
+    "XEQT.TO": {
+     "qty": 189,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 45.29
+    },
+    "VDY.TO": {
+     "qty": 105,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.72
+    },
+    "FINN.TO": {
+     "qty": 210,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 32.13
+    },
+    "REI.UN.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.63
+    },
+    "NXE.TO": {
+     "qty": 105,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 13.63
+    },
+    "GO.U.TO": {
+     "qty": 104,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 8.22
+    },
+    "MDA.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 40.12
+    },
+    "SPCX": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 150.7
+    },
+    "CNQ.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 69.32
+    },
+    "ARIS.TO": {
+     "qty": 20,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 27.08
+    },
+    "IREN": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 43.76
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 1.7
+    }
+   }
   }
  ],
  "flows": [
@@ -4735,7 +4814,12 @@
   },
   {
    "date": "2026-09-10",
-   "value": 32458.83,
+   "value": 32502.54,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-09-11",
+   "value": 32118.14,
    "net_flow": 0
   }
  ],
@@ -5067,6 +5151,10 @@
   {
    "date": "2026-09-10",
    "level": 186.5
+  },
+  {
+   "date": "2026-09-11",
+   "level": 188.58
   }
  ],
  "hypothetical": [
@@ -5316,7 +5404,11 @@
   },
   {
    "date": "2026-09-10",
-   "value": 31571.08
+   "value": 31614.79
+  },
+  {
+   "date": "2026-09-11",
+   "value": 31738.24
   }
  ],
  "in_kind": [

@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-10T22:44:47.445Z",
-  "as_of": "2026-09-10",
+  "generated_at": "2026-09-11T22:45:18.667Z",
+  "as_of": "2026-09-11",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3805
+   "USDCAD": 1.3834
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0033,
-  "distribution_yield": 0.0185,
-  "holdings_count": 11,
+  "blended_mer": 0.0034,
+  "distribution_yield": 0.0187,
+  "holdings_count": 12,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 887.75,
+   "cash": 374.8,
    "currency": "CAD",
-   "buying_power": 887.57
+   "buying_power": 374.61
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 189,
    "avg_cost": 44.215,
-   "price": 44.85,
-   "prev_close": 45.2,
-   "market_value": 8476.65,
-   "open_pnl": 120.01,
+   "price": 45.29,
+   "prev_close": 44.845,
+   "market_value": 8559.81,
+   "open_pnl": 203.17,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 105,
    "avg_cost": 75.855,
-   "price": 76.57,
-   "prev_close": 76.82,
-   "market_value": 8039.85,
-   "open_pnl": 75.08,
+   "price": 76.72,
+   "prev_close": 76.555,
+   "market_value": 8055.6,
+   "open_pnl": 90.83,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 31.84,
-   "prev_close": 32.11,
-   "market_value": 6686.4,
-   "open_pnl": 130.42,
+   "price": 32.13,
+   "prev_close": 31.84,
+   "market_value": 6747.3,
+   "open_pnl": 191.32,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.66,
-   "prev_close": 20.92,
-   "market_value": 2066,
-   "open_pnl": -24.2,
+   "price": 20.63,
+   "prev_close": 20.66,
+   "market_value": 2063,
+   "open_pnl": -27.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 105,
    "avg_cost": 14.8276,
-   "price": 14.16,
-   "prev_close": 14.75,
-   "market_value": 1486.8,
-   "open_pnl": -70.1,
+   "price": 13.63,
+   "prev_close": 14.16,
+   "market_value": 1431.15,
+   "open_pnl": -125.75,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "USD",
    "quantity": 104,
    "avg_cost": 8.1716,
-   "price": 7.98,
-   "prev_close": 8.15,
-   "market_value": 829.92,
-   "open_pnl": -19.93,
+   "price": 8.22,
+   "prev_close": 7.98,
+   "market_value": 854.88,
+   "open_pnl": 5.03,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 41.685,
-   "price": 39.94,
-   "prev_close": 39.84,
-   "market_value": 798.8,
-   "open_pnl": -34.9,
+   "price": 40.12,
+   "prev_close": 39.94,
+   "market_value": 802.4,
+   "open_pnl": -31.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 148.07,
-   "prev_close": 147.44,
-   "market_value": 740.35,
-   "open_pnl": 69.47,
+   "price": 150.7,
+   "prev_close": 147.67,
+   "market_value": 753.5,
+   "open_pnl": 82.62,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +165,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 70.25,
-   "prev_close": 70.91,
-   "market_value": 702.5,
-   "open_pnl": 12,
+   "price": 69.32,
+   "prev_close": 70.25,
+   "market_value": 693.2,
+   "open_pnl": 2.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 26.73,
-   "price": 26.83,
-   "prev_close": 27.79,
-   "market_value": 536.6,
-   "open_pnl": 2,
+   "price": 27.08,
+   "prev_close": 26.83,
+   "market_value": 541.6,
+   "open_pnl": 7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -197,10 +197,26 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 38.9469,
-   "price": 43.45,
-   "prev_close": 45.18,
-   "market_value": 434.5,
-   "open_pnl": 45.03,
+   "price": 43.76,
+   "prev_close": 43.57,
+   "market_value": 437.6,
+   "open_pnl": 48.13,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "NXE15JAN27C14.50.MX",
+   "name": "NXE15JAN27C14.50.MX",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 3,
+   "avg_cost": 1.7,
+   "price": 1.7,
+   "prev_close": 2.25,
+   "market_value": 5.1,
+   "open_pnl": 0,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18112,6 +18128,54 @@
  },
  "activities": [
   {
+   "uid": "t_036bcd6929",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "GONYF",
+   "description": "GO RESIDENTIAL REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": -272,
+   "currency": "USD",
+   "quantity": 34,
+   "price": 8
+  },
+  {
+   "uid": "t_a0c4a795d7",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "REI.UN.TO",
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": -414.2,
+   "currency": "CAD",
+   "quantity": 20,
+   "price": 20.71
+  },
+  {
+   "uid": "t_45c57f2337",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "XEQT.TO",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+   "amount": -1121.5,
+   "currency": "CAD",
+   "quantity": 25,
+   "price": 44.86
+  },
+  {
+   "uid": "t_103da244c5",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": -1147.5,
+   "currency": "CAD",
+   "quantity": 15,
+   "price": 76.5
+  },
+  {
    "uid": "t_31fefecf1e",
    "date": "2026-09-09",
    "type": "Trade",
@@ -21943,35 +22007,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7087,
+   "annual_rate_per_share": 0.7197,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1368,
+   "annual_rate_per_share": 2.1525,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1485,
+   "annual_rate_per_share": 1.1419,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6078,
+   "annual_rate_per_share": 0.6445,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.5028,
+   "annual_rate_per_share": 2.4439,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22088,157 +22152,66 @@
     "date": "2026-09-10",
     "value": 32448.93,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-11",
+    "value": 32104.37,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
     {
-     "date": "2025-12-28",
-     "level": 167
+     "date": "2026-08-25",
+     "level": 188.48
     },
     {
-     "date": "2026-01-04",
-     "level": 171.9
+     "date": "2026-08-26",
+     "level": 189.05
     },
     {
-     "date": "2026-01-11",
-     "level": 171.34
+     "date": "2026-08-27",
+     "level": 190.14
     },
     {
-     "date": "2026-01-18",
-     "level": 168.07
-    },
-    {
-     "date": "2026-01-25",
-     "level": 167.64
-    },
-    {
-     "date": "2026-02-01",
-     "level": 168.09
-    },
-    {
-     "date": "2026-02-08",
-     "level": 165.25
-    },
-    {
-     "date": "2026-02-15",
-     "level": 167.1
-    },
-    {
-     "date": "2026-02-22",
-     "level": 166.62
-    },
-    {
-     "date": "2026-03-01",
-     "level": 162.72
-    },
-    {
-     "date": "2026-03-08",
-     "level": 161.8
-    },
-    {
-     "date": "2026-03-15",
-     "level": 158.73
-    },
-    {
-     "date": "2026-03-22",
-     "level": 156.7
-    },
-    {
-     "date": "2026-03-29",
-     "level": 162.41
-    },
-    {
-     "date": "2026-04-05",
-     "level": 167.26
-    },
-    {
-     "date": "2026-04-12",
-     "level": 172.99
-    },
-    {
-     "date": "2026-04-19",
-     "level": 173.6
-    },
-    {
-     "date": "2026-04-26",
-     "level": 174.29
-    },
-    {
-     "date": "2026-05-03",
-     "level": 179.42
-    },
-    {
-     "date": "2026-05-10",
-     "level": 180.84
-    },
-    {
-     "date": "2026-05-17",
-     "level": 183.2
-    },
-    {
-     "date": "2026-05-24",
-     "level": 185.61
-    },
-    {
-     "date": "2026-05-31",
-     "level": 182.9
-    },
-    {
-     "date": "2026-06-07",
-     "level": 184.62
-    },
-    {
-     "date": "2026-06-14",
-     "level": 188.36
-    },
-    {
-     "date": "2026-06-21",
-     "level": 184.37
-    },
-    {
-     "date": "2026-06-28",
-     "level": 189.34
-    },
-    {
-     "date": "2026-07-05",
-     "level": 190.09
-    },
-    {
-     "date": "2026-07-12",
-     "level": 185.25
-    },
-    {
-     "date": "2026-07-19",
-     "level": 185.28
-    },
-    {
-     "date": "2026-07-26",
-     "level": 186.3
-    },
-    {
-     "date": "2026-08-02",
-     "level": 191.82
-    },
-    {
-     "date": "2026-08-09",
-     "level": 191.7
-    },
-    {
-     "date": "2026-08-16",
-     "level": 187.6
-    },
-    {
-     "date": "2026-08-23",
+     "date": "2026-08-28",
      "level": 190.38
     },
     {
-     "date": "2026-08-30",
+     "date": "2026-08-31",
+     "level": 189.15
+    },
+    {
+     "date": "2026-09-01",
+     "level": 188.33
+    },
+    {
+     "date": "2026-09-02",
+     "level": 188.39
+    },
+    {
+     "date": "2026-09-03",
+     "level": 189.61
+    },
+    {
+     "date": "2026-09-04",
      "level": 189.54
     },
     {
-     "date": "2026-09-06",
+     "date": "2026-09-08",
+     "level": 187.76
+    },
+    {
+     "date": "2026-09-09",
      "level": 187.3
+    },
+    {
+     "date": "2026-09-10",
+     "level": 186.5
+    },
+    {
+     "date": "2026-09-11",
+     "level": 188.52
     }
    ]
   }
