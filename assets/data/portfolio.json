@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-11T22:45:18.667Z",
-  "as_of": "2026-09-11",
+  "generated_at": "2026-09-14T22:45:33.752Z",
+  "as_of": "2026-09-14",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3834
+   "USDCAD": 1.3872
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,8 +12,8 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0034,
-  "distribution_yield": 0.0187,
+  "blended_mer": 0.0033,
+  "distribution_yield": 0.0179,
   "holdings_count": 12,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 374.8,
+   "cash": 299.66,
    "currency": "CAD",
-   "buying_power": 374.61
+   "buying_power": 299.42
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 189,
    "avg_cost": 44.215,
-   "price": 45.29,
-   "prev_close": 44.845,
-   "market_value": 8559.81,
-   "open_pnl": 203.17,
+   "price": 45.17,
+   "prev_close": 45.29,
+   "market_value": 8537.13,
+   "open_pnl": 180.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,12 +51,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 105,
-   "avg_cost": 75.855,
-   "price": 76.72,
-   "prev_close": 76.555,
-   "market_value": 8055.6,
-   "open_pnl": 90.83,
+   "quantity": 90,
+   "avg_cost": 75.7934,
+   "price": 76.91,
+   "prev_close": 76.72,
+   "market_value": 6921.9,
+   "open_pnl": 100.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,26 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 32.13,
-   "prev_close": 31.84,
-   "market_value": 6747.3,
-   "open_pnl": 191.32,
+   "price": 32.3,
+   "prev_close": 32.13,
+   "market_value": 6783,
+   "open_pnl": 227.02,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "NXE.TO",
+   "name": "NXE.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 200,
+   "avg_cost": 13.9547,
+   "price": 13.17,
+   "prev_close": 13.63,
+   "market_value": 2634,
+   "open_pnl": -156.94,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,26 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.63,
-   "prev_close": 20.66,
-   "market_value": 2063,
-   "open_pnl": -27.2,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "NXE.TO",
-   "name": "NXE.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 105,
-   "avg_cost": 14.8276,
-   "price": 13.63,
-   "prev_close": 14.16,
-   "market_value": 1431.15,
-   "open_pnl": -125.75,
+   "price": 20.71,
+   "prev_close": 20.63,
+   "market_value": 2071,
+   "open_pnl": -19.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "USD",
    "quantity": 104,
    "avg_cost": 8.1716,
-   "price": 8.22,
-   "prev_close": 7.98,
-   "market_value": 854.88,
-   "open_pnl": 5.03,
+   "price": 8.35,
+   "prev_close": 8.22,
+   "market_value": 868.4,
+   "open_pnl": 18.55,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 41.685,
-   "price": 40.12,
-   "prev_close": 39.94,
-   "market_value": 802.4,
-   "open_pnl": -31.3,
+   "price": 40.14,
+   "prev_close": 40.12,
+   "market_value": 802.8,
+   "open_pnl": -30.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 150.7,
-   "prev_close": 147.67,
-   "market_value": 753.5,
-   "open_pnl": 82.62,
+   "price": 148.53,
+   "prev_close": 151.59,
+   "market_value": 742.65,
+   "open_pnl": 71.77,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +165,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 69.32,
-   "prev_close": 70.25,
-   "market_value": 693.2,
-   "open_pnl": 2.7,
+   "price": 69.94,
+   "prev_close": 69.32,
+   "market_value": 699.4,
+   "open_pnl": 8.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "CAD",
    "quantity": 20,
    "avg_cost": 26.73,
-   "price": 27.08,
-   "prev_close": 26.83,
-   "market_value": 541.6,
-   "open_pnl": 7,
+   "price": 25.97,
+   "prev_close": 27.08,
+   "market_value": 519.4,
+   "open_pnl": -15.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -196,11 +196,11 @@
    "asset_type": "Stock",
    "currency": "USD",
    "quantity": 10,
-   "avg_cost": 38.9469,
-   "price": 43.76,
-   "prev_close": 43.57,
-   "market_value": 437.6,
-   "open_pnl": 48.13,
+   "avg_cost": 41.9062,
+   "price": 43.2397,
+   "prev_close": 43.8997,
+   "market_value": 432.4,
+   "open_pnl": 13.34,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -214,7 +214,7 @@
    "quantity": 3,
    "avg_cost": 1.7,
    "price": 1.7,
-   "prev_close": 2.25,
+   "prev_close": 1.7,
    "market_value": 5.1,
    "open_pnl": 0,
    "sector": null,
@@ -18128,6 +18128,18 @@
  },
  "activities": [
   {
+   "uid": "t_7c42b053dd",
+   "date": "2026-09-11",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE15JAN27C14.50.MX",
+   "description": "CALL .NXE 01/15/27 14.50 NEXGEN ENERGY LTD WE ACTED AS AGENT",
+   "amount": -512.97,
+   "currency": "CAD",
+   "quantity": 3,
+   "price": 1.7
+  },
+  {
    "uid": "t_036bcd6929",
    "date": "2026-09-10",
    "type": "Trade",
@@ -22007,35 +22019,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7197,
+   "annual_rate_per_share": 0.7235,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1525,
+   "annual_rate_per_share": 2.1652,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1419,
+   "annual_rate_per_share": 1.1608,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6445,
+   "annual_rate_per_share": 0.6686,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.4439,
+   "annual_rate_per_share": 2.489,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22157,10 +22169,19 @@
     "date": "2026-09-11",
     "value": 32104.37,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-14",
+    "value": 32108.06,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-08-24",
+     "level": 188.13
+    },
     {
      "date": "2026-08-25",
      "level": 188.48
