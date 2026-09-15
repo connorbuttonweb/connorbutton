@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-09T22:49:32.198Z",
-  "as_of": "2026-09-09",
+  "generated_at": "2026-09-15T22:46:29.439Z",
+  "as_of": "2026-09-15",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3784
+   "USDCAD": 1.3901
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,8 +13,8 @@
  },
  "profile": {
   "blended_mer": 0.0032,
-  "distribution_yield": 0.0169,
-  "holdings_count": 11,
+  "distribution_yield": 0.0172,
+  "holdings_count": 12,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 3946.2,
+   "cash": 29.61,
    "currency": "CAD",
-   "buying_power": 3937.32
+   "buying_power": 28.35
   }
  ],
  "positions": [
@@ -36,11 +36,11 @@
    "asset_type": "ETF",
    "currency": "CAD",
    "quantity": 164,
-   "avg_cost": 44.1167,
-   "price": 45.2,
-   "prev_close": 45.46,
-   "market_value": 7412.8,
-   "open_pnl": 177.66,
+   "avg_cost": 44.2119,
+   "price": 45.01,
+   "prev_close": 45.17,
+   "market_value": 7381.64,
+   "open_pnl": 130.88,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -52,11 +52,11 @@
    "asset_type": "ETF",
    "currency": "CAD",
    "quantity": 90,
-   "avg_cost": 75.7475,
-   "price": 76.82,
-   "prev_close": 77.23,
-   "market_value": 6913.8,
-   "open_pnl": 96.52,
+   "avg_cost": 75.7934,
+   "price": 77.21,
+   "prev_close": 76.91,
+   "market_value": 6948.9,
+   "open_pnl": 127.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,26 +69,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 32.11,
-   "prev_close": 32.26,
-   "market_value": 6743.1,
-   "open_pnl": 187.12,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "REI.UN.TO",
-   "name": "REI.UN.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 80,
-   "avg_cost": 20.95,
-   "price": 20.92,
-   "prev_close": 20.83,
-   "market_value": 1673.6,
-   "open_pnl": -2.4,
+   "price": 32.22,
+   "prev_close": 32.3,
+   "market_value": 6766.2,
+   "open_pnl": 210.22,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -99,12 +83,28 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 105,
-   "avg_cost": 14.8276,
-   "price": 14.75,
-   "prev_close": 14.76,
-   "market_value": 1548.75,
-   "open_pnl": -8.15,
+   "quantity": 200,
+   "avg_cost": 13.9547,
+   "price": 13.15,
+   "prev_close": 13.17,
+   "market_value": 2630,
+   "open_pnl": -160.94,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "REI.UN.TO",
+   "name": "REI.UN.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 100,
+   "avg_cost": 20.902,
+   "price": 20.38,
+   "prev_close": 20.71,
+   "market_value": 2038,
+   "open_pnl": -52.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -115,28 +115,44 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 20,
-   "avg_cost": 41.685,
-   "price": 39.84,
-   "prev_close": 41.63,
-   "market_value": 796.8,
-   "open_pnl": -36.9,
+   "quantity": 40,
+   "avg_cost": 40.9225,
+   "price": 40.25,
+   "prev_close": 40.14,
+   "market_value": 1610,
+   "open_pnl": -26.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "SPCX",
-   "name": "SPCX",
+   "symbol": "ARIS.TO",
+   "name": "ARIS.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 45,
+   "avg_cost": 26.03,
+   "price": 25.78,
+   "prev_close": 25.97,
+   "market_value": 1160.1,
+   "open_pnl": -11.25,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "GO.U.TO",
+   "name": "GO.U.TO",
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 5,
-   "avg_cost": 134.1753,
-   "price": 146.97,
-   "prev_close": 152.89,
-   "market_value": 734.85,
-   "open_pnl": 63.97,
+   "quantity": 100,
+   "avg_cost": 8.1683,
+   "price": 8.6,
+   "prev_close": 8.35,
+   "market_value": 860,
+   "open_pnl": 43.17,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,42 +165,26 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 70.91,
-   "prev_close": 70.17,
-   "market_value": 709.1,
-   "open_pnl": 18.6,
+   "price": 71.7,
+   "prev_close": 69.94,
+   "market_value": 717,
+   "open_pnl": 26.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "GO.U.TO",
-   "name": "GO.U.TO",
+   "symbol": "SPCX",
+   "name": "SPCX",
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 70,
-   "avg_cost": 8.255,
-   "price": 8.15,
-   "prev_close": 8.39,
-   "market_value": 570.5,
-   "open_pnl": -7.35,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "ARIS.TO",
-   "name": "ARIS.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 20,
-   "avg_cost": 26.73,
-   "price": 27.79,
-   "prev_close": 27.54,
-   "market_value": 555.8,
-   "open_pnl": 21.2,
+   "quantity": 5,
+   "avg_cost": 134.1753,
+   "price": 143.0624,
+   "prev_close": 147.7224,
+   "market_value": 715.31,
+   "open_pnl": 44.44,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -196,11 +196,27 @@
    "asset_type": "Stock",
    "currency": "USD",
    "quantity": 10,
-   "avg_cost": 38.9469,
-   "price": 45.06,
-   "prev_close": 46.62,
-   "market_value": 450.6,
-   "open_pnl": 61.13,
+   "avg_cost": 41.9062,
+   "price": 41.4612,
+   "prev_close": 43.0512,
+   "market_value": 414.61,
+   "open_pnl": -4.45,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "NXE15JAN27C14.50.MX",
+   "name": "NXE15JAN27C14.50.MX",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 3,
+   "avg_cost": 1.7,
+   "price": 1.7,
+   "prev_close": 1.7,
+   "market_value": 5.1,
+   "open_pnl": 0,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18112,6 +18128,162 @@
  },
  "activities": [
   {
+   "uid": "t_3d020eaa27",
+   "date": "2026-09-14",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE.TO",
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": -1234.05,
+   "currency": "CAD",
+   "quantity": 95,
+   "price": 12.99
+  },
+  {
+   "uid": "t_61ac044ef9",
+   "date": "2026-09-14",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "IREN",
+   "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -867.72,
+   "currency": "USD",
+   "quantity": 20,
+   "price": 43.3859
+  },
+  {
+   "uid": "t_081fd93532",
+   "date": "2026-09-14",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": 1155.75,
+   "currency": "CAD",
+   "quantity": -15,
+   "price": 77.05
+  },
+  {
+   "uid": "t_af95e56121",
+   "date": "2026-09-14",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "IREN",
+   "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT",
+   "amount": 869.98,
+   "currency": "USD",
+   "quantity": -20,
+   "price": 43.5001
+  },
+  {
+   "uid": "t_7c42b053dd",
+   "date": "2026-09-11",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE15JAN27C14.50.MX",
+   "description": "CALL .NXE 01/15/27 14.50 NEXGEN ENERGY LTD WE ACTED AS AGENT",
+   "amount": -512.97,
+   "currency": "CAD",
+   "quantity": 3,
+   "price": 1.7
+  },
+  {
+   "uid": "t_036bcd6929",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "GONYF",
+   "description": "GO RESIDENTIAL REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": -272,
+   "currency": "USD",
+   "quantity": 34,
+   "price": 8
+  },
+  {
+   "uid": "t_a0c4a795d7",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "REI.UN.TO",
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": -414.2,
+   "currency": "CAD",
+   "quantity": 20,
+   "price": 20.71
+  },
+  {
+   "uid": "t_45c57f2337",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "XEQT.TO",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+   "amount": -1121.5,
+   "currency": "CAD",
+   "quantity": 25,
+   "price": 44.86
+  },
+  {
+   "uid": "t_103da244c5",
+   "date": "2026-09-10",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": -1147.5,
+   "currency": "CAD",
+   "quantity": 15,
+   "price": 76.5
+  },
+  {
+   "uid": "t_31fefecf1e",
+   "date": "2026-09-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "GONYF",
+   "description": "GO RESIDENTIAL REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -577.85,
+   "currency": "USD",
+   "quantity": 70,
+   "price": 8.255
+  },
+  {
+   "uid": "t_7d8332dde1",
+   "date": "2026-09-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "REI.UN.TO",
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": -1255.8,
+   "currency": "CAD",
+   "quantity": 60,
+   "price": 20.93
+  },
+  {
+   "uid": "t_48d63a155b",
+   "date": "2026-09-09",
+   "type": "FX",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CONVERSION - CAD/USD",
+   "amount": 14.29,
+   "currency": "USD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
+   "uid": "t_167c794e0e",
+   "date": "2026-09-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "IREN",
+   "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT",
+   "amount": 454.99,
+   "currency": "USD",
+   "quantity": -10,
+   "price": 45.5
+  },
+  {
    "uid": "t_610981cfdd",
    "date": "2026-09-08",
    "type": "Other",
@@ -21895,35 +22067,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7081,
+   "annual_rate_per_share": 0.721,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1303,
+   "annual_rate_per_share": 2.1737,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1613,
-   "frequency": "quarterly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  },
-  {
-   "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.5404,
+   "annual_rate_per_share": 1.1423,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6275,
+   "annual_rate_per_share": 0.6886,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
+   "symbol": "CNQ.TO",
+   "annual_rate_per_share": 2.5516,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22035,81 +22207,33 @@
     "date": "2026-09-09",
     "value": 32720.35,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-10",
+    "value": 32448.93,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-09-11",
+    "value": 32104.37,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-09-14",
+    "value": 32108.06,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-09-15",
+    "value": 32052.74,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
     {
-     "date": "2026-05-10",
-     "level": 180.84
-    },
-    {
-     "date": "2026-05-17",
-     "level": 183.2
-    },
-    {
-     "date": "2026-05-24",
-     "level": 185.61
-    },
-    {
-     "date": "2026-05-31",
-     "level": 182.9
-    },
-    {
-     "date": "2026-06-07",
-     "level": 184.62
-    },
-    {
-     "date": "2026-06-14",
-     "level": 188.36
-    },
-    {
-     "date": "2026-06-21",
-     "level": 184.37
-    },
-    {
-     "date": "2026-06-28",
-     "level": 189.34
-    },
-    {
-     "date": "2026-07-05",
-     "level": 190.09
-    },
-    {
-     "date": "2026-07-12",
-     "level": 185.25
-    },
-    {
-     "date": "2026-07-19",
-     "level": 185.28
-    },
-    {
-     "date": "2026-07-26",
-     "level": 186.3
-    },
-    {
-     "date": "2026-08-02",
-     "level": 191.82
-    },
-    {
-     "date": "2026-08-09",
-     "level": 191.7
-    },
-    {
-     "date": "2026-08-16",
-     "level": 187.6
-    },
-    {
-     "date": "2026-08-23",
-     "level": 190.38
-    },
-    {
-     "date": "2026-08-30",
-     "level": 189.54
-    },
-    {
-     "date": "2026-09-06",
-     "level": 187.76
+     "date": "2026-09-15",
+     "level": 187.56
     }
    ]
   }
