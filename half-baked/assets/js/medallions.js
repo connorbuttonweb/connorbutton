@@ -107,9 +107,20 @@ function makeCapTexture(THREE, title) {
   ctx.arc(c, c, 220, (5 * Math.PI) / 4 - 0.8, (5 * Math.PI) / 4 + 0.8);
   ctx.stroke();
 
-  // Engraved title.
-  const fontSize = title.length > 6 ? 92 : 116;
-  const font = `700 ${fontSize}px "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif`;
+  // Engraved title. Start big and shrink until the word clears the rim
+  // band (inner edge at r=198, so ~396px across; leave margin). Measured
+  // rather than keyed off character count -- "PORTDUEL" at a fixed 92px
+  // ran wider than the texture itself.
+  const MAX_TITLE_WIDTH = 340;
+  const fontFor = (px) => `700 ${px}px "Segoe UI", -apple-system, BlinkMacSystemFont, Roboto, sans-serif`;
+  let fontSize = 116;
+  if ('letterSpacing' in ctx) ctx.letterSpacing = '8px';
+  ctx.font = fontFor(fontSize);
+  while (fontSize > 40 && ctx.measureText(title).width > MAX_TITLE_WIDTH) {
+    fontSize -= 4;
+    ctx.font = fontFor(fontSize);
+  }
+  const font = fontFor(fontSize);
   const applyType = (context) => {
     context.font = font;
     context.textAlign = 'center';
@@ -148,10 +159,10 @@ function makeCapTexture(THREE, title) {
   const texture = new THREE.CanvasTexture(canvas);
   // After the disk geometry's rotateX (cylinder axis -> +Z), the cap's
   // UV axes land 90 degrees off: canvas-horizontal runs down the screen.
-  // Counter-rotate the texture -- by -PI/2 rather than +PI/2, so the
-  // engraving reads upright at the end of the autopilot flight (the
-  // canonical approach: the boot -> antipode flight somersaults the
-  // sphere top-over-bottom, which lands a +PI/2 engraving upside down).
+  // Counter-rotate the texture by -PI/2: the engraving then reads upright
+  // whenever the disk's local -Y points screen-up. autopilot.js relies on
+  // exactly that convention when it rolls the ball on arrival -- change
+  // one and the other must follow.
   texture.center.set(0.5, 0.5);
   texture.rotation = -Math.PI / 2;
   return texture;

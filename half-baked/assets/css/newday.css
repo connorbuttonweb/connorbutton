@@ -182,10 +182,200 @@ body.nd-departing .nd-coins-hotspot {
   transform: scale(0.985);
 }
 
-/* Fabricated-steel PODS wordmark (inline SVG in pods/index.html).
-   Scales with the viewport; the viewBox keeps the aspect ratio. */
-.nd-wordmark {
-  display: block;
-  width: min(88vw, 880px);
-  height: auto;
+/* ==========================================================
+   Notepad board -- the default body of every project page, driven
+   by board.js. A large fixed-size surface that pans by drag and
+   zooms via the slider / ctrl+wheel; starts zoomed out so the page
+   reads as a big sheet with room to fill. Notes are absolutely
+   placed on the board via --x/--y so adding one is one more
+   <section class="nd-note">.
+   ========================================================== */
+
+/* Zoom control: top centre, clear of the back-link hotspot (160px
+   wide, top-left). Same faint holographic treatment as the nav links. */
+.nd-zoom {
+  position: fixed;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 24px 20px;
+  animation: nd-ui-in 0.9s ease;
+  transition: opacity 0.35s ease;
+}
+
+body.nd-departing .nd-zoom {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.nd-zoom-readout {
+  min-width: 3.4em;
+  color: #dceeff;
+  font-size: 12px;
+  font-weight: 200;
+  letter-spacing: 0.22em;
+  font-variant-numeric: tabular-nums;
+  text-shadow:
+    0 0 8px rgba(159, 208, 255, 0.8),
+    0 0 22px rgba(159, 208, 255, 0.35);
+  opacity: 0.6;
+}
+
+.nd-zoom-slider {
+  -webkit-appearance: none;
+  appearance: none;
+  width: min(200px, 34vw);
+  height: 18px;
+  margin: 0;
+  background: transparent;
+  cursor: pointer;
+  opacity: 0.55;
+  transition: opacity 0.35s ease;
+}
+
+.nd-zoom:hover .nd-zoom-slider,
+.nd-zoom-slider:focus-visible {
+  opacity: 1;
+  outline: none;
+}
+
+.nd-zoom-slider::-webkit-slider-runnable-track {
+  height: 1px;
+  background: rgba(159, 208, 255, 0.55);
+  box-shadow: 0 0 6px rgba(159, 208, 255, 0.5);
+}
+
+.nd-zoom-slider::-moz-range-track {
+  height: 1px;
+  background: rgba(159, 208, 255, 0.55);
+  box-shadow: 0 0 6px rgba(159, 208, 255, 0.5);
+}
+
+.nd-zoom-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 10px;
+  height: 10px;
+  margin-top: -4.5px;
+  border: 1px solid #dceeff;
+  border-radius: 50%;
+  background: #0b0f14;
+  box-shadow: 0 0 8px rgba(159, 208, 255, 0.8);
+}
+
+.nd-zoom-slider::-moz-range-thumb {
+  width: 8px;
+  height: 8px;
+  border: 1px solid #dceeff;
+  border-radius: 50%;
+  background: #0b0f14;
+  box-shadow: 0 0 8px rgba(159, 208, 255, 0.8);
+}
+
+/* Viewport clips the board; the board itself is transformed by JS. */
+.nd-board-viewport {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  touch-action: none;
+  user-select: none;
+  cursor: grab;
+}
+
+.nd-board-viewport.nd-board-grabbing {
+  cursor: grabbing;
+}
+
+.nd-board {
+  position: relative;
+  width: 3200px;
+  height: 2000px;
+  transform-origin: 0 0;
+  will-change: transform;
+  /* Sheet edge + a coarser grid than the body's, so the zoom-out reads
+     as a bounded page rather than an infinite field. */
+  border: 1px solid rgba(159, 208, 255, 0.16);
+  box-shadow: 0 0 40px rgba(159, 208, 255, 0.06);
+  background-image:
+    linear-gradient(rgba(159, 208, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(159, 208, 255, 0.05) 1px, transparent 1px);
+  background-size: 120px 120px;
+}
+
+.nd-note {
+  position: absolute;
+  left: var(--x, 0px);
+  top: var(--y, 0px);
+  box-sizing: border-box;
+  width: 380px;
+  padding: 26px 28px 22px;
+  border: 1px solid rgba(159, 208, 255, 0.35);
+  border-radius: 6px;
+  background: rgba(11, 15, 20, 0.82);
+  box-shadow:
+    0 0 18px rgba(159, 208, 255, 0.12),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.5);
+  color: #dceeff;
+  cursor: default;
+}
+
+.nd-note h1 {
+  margin: 0 0 14px;
+  font-size: 18px;
+  font-weight: 200;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  text-shadow:
+    0 0 8px rgba(159, 208, 255, 0.8),
+    0 0 22px rgba(159, 208, 255, 0.35);
+}
+
+.nd-note p {
+  margin: 0 0 14px;
+  font-size: 14px;
+  font-weight: 300;
+  line-height: 1.55;
+  color: rgba(220, 238, 255, 0.85);
+}
+
+.nd-note-hint {
+  margin-bottom: 0 !important;
+  font-size: 11px !important;
+  letter-spacing: 0.08em;
+  color: rgba(220, 238, 255, 0.45) !important;
+}
+
+.nd-note-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin: 0 0 16px;
+}
+
+/* Inert for now -- no handler, no href. Styled as a link-chip anyway so
+   the intent reads; cursor stays default to signal nothing happens. */
+.nd-chip {
+  padding: 8px 16px;
+  border: 1px solid rgba(159, 208, 255, 0.55);
+  border-radius: 999px;
+  background: transparent;
+  color: #dceeff;
+  font: inherit;
+  font-size: 12px;
+  font-weight: 300;
+  letter-spacing: 0.14em;
+  text-shadow: 0 0 8px rgba(159, 208, 255, 0.5);
+  cursor: default;
+  transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.nd-chip:hover,
+.nd-chip:focus-visible {
+  border-color: #dceeff;
+  box-shadow: 0 0 12px rgba(159, 208, 255, 0.45);
+  outline: none;
 }

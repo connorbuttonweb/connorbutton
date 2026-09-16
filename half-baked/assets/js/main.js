@@ -18,7 +18,8 @@ const { vertices, edges, faces } = createGeometry(THREE);
 
 // Aim the camera through vertex 0 -- (0, 1, PHI) normalized -- so it's the
 // unique nearest vertex and its antipode (index 3, PODS) starts on the
-// far, hidden side of the sphere. See projects.js for the index mapping.
+// far, hidden side of the sphere. Other projects may sit on the visible
+// hemisphere on purpose (PORTDUEL, index 8). See projects.js.
 const CAMERA_DISTANCE = 6;
 camera.position.copy(vertices[0]).normalize().multiplyScalar(CAMERA_DISTANCE);
 camera.lookAt(0, 0, 0);
