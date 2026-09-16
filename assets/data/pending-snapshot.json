@@ -1,0 +1,866 @@
+{
+  "as_of": "2026-09-16",
+  "accounts": [
+    {
+      "positions": [
+        {
+          "id": "1d00561e-0320-4d02-04e3-2c890b540e02",
+          "instrument": "GO.U.TO",
+          "qty": 34,
+          "side": "buy",
+          "avgPrice": 8
+        },
+        {
+          "id": "181f3121-241f-4842-0e5e-d1a41e0ea54f",
+          "instrument": "SPCX",
+          "qty": 5,
+          "side": "buy",
+          "avgPrice": 134.1753
+        },
+        {
+          "id": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+          "instrument": "FINN.TO",
+          "qty": 110,
+          "side": "buy",
+          "avgPrice": 31.3662
+        },
+        {
+          "id": "06007f2f-2653-4612-0981-079d6f491810",
+          "instrument": "VDY.TO",
+          "qty": 40,
+          "side": "buy",
+          "avgPrice": 75.2544
+        },
+        {
+          "id": "08284e81-1330-4812-0586-032980451817",
+          "instrument": "XEQT.TO",
+          "qty": 64,
+          "side": "buy",
+          "avgPrice": 44.1751
+        }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {
+            "cad": "$0.89",
+            "usd": "$6.14",
+            "combinedCad": "$9.26",
+            "combinedUsd": "$6.77"
+          },
+          "totalBuyingPower": {
+            "cad": "$0.89",
+            "usd": "$6.14",
+            "combinedCad": "$9.26",
+            "combinedUsd": "$6.77"
+          },
+          "buyingPower": {
+            "cad": "$0.89",
+            "usd": "$6.14",
+            "combinedCad": "$9.26",
+            "combinedUsd": "$6.77"
+          },
+          "totalEquity": {
+            "cad": "$9,514.67",
+            "usd": "$1,042.24",
+            "combinedCad": "$10,965.68",
+            "combinedUsd": "$7,876.51"
+          },
+          "marketValue": {
+            "cad": "$9,513.78",
+            "usd": "$1,036.10",
+            "combinedCad": "$10,956.24",
+            "combinedUsd": "$7,869.73"
+          },
+          "cash": {
+            "cad": "$0.89",
+            "usd": "$6.14",
+            "combinedCad": "$9.44",
+            "combinedUsd": "$6.78"
+          }
+        },
+        "profit": {
+          "dayPnl": {
+            "cad": "$0.54",
+            "usd": "$25.92",
+            "combinedCad": "$36.63",
+            "combinedUsd": "$26.31"
+          },
+          "closedPnl": {
+            "cad": "$215.57",
+            "usd": "$6.17",
+            "combinedCad": "$224.16",
+            "combinedUsd": "$161.01"
+          },
+          "openPnl": {
+            "cad": "$226.11",
+            "usd": "$93.22",
+            "combinedCad": "$355.90",
+            "combinedUsd": "$255.64"
+          }
+        }
+      }
+    },
+    {
+      "positions": [
+        {
+          "id": "0c5b012e-165e-4c82-05e0-469c83650e81",
+          "instrument": "NXE15JAN27C14.50.MX",
+          "qty": 3,
+          "side": "buy",
+          "avgPrice": 1.7
+        },
+        {
+          "id": "1d00561e-0320-4d02-04e3-2c890b540e02",
+          "instrument": "GO.U.TO",
+          "qty": 66,
+          "side": "buy",
+          "avgPrice": 8.255
+        },
+        {
+          "id": "7217055d-0d69-4242-0979-2a8717190748",
+          "instrument": "IREN",
+          "qty": 10,
+          "side": "buy",
+          "avgPrice": 41.9062
+        },
+        {
+          "id": "2919136b-114b-4962-0448-c19b0c641469",
+          "instrument": "ARIS.TO",
+          "qty": 45,
+          "side": "buy",
+          "avgPrice": 26.03
+        },
+        {
+          "id": "13040b87-5206-4332-0b67-339e3f5b0636",
+          "instrument": "NXE.TO",
+          "qty": 200,
+          "side": "buy",
+          "avgPrice": 13.9547
+        },
+        {
+          "id": "1b328f54-1446-4b72-03f9-959f35531f78",
+          "instrument": "REI.UN.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 20.902
+        },
+        {
+          "id": "1a283835-094a-4a02-088d-9b880b48080c",
+          "instrument": "CNQ.TO",
+          "qty": 10,
+          "side": "buy",
+          "avgPrice": 69.05
+        },
+        {
+          "id": "663b0f14-2e58-4692-08ca-989e25980c9b",
+          "instrument": "MDA.TO",
+          "qty": 40,
+          "side": "buy",
+          "avgPrice": 40.9225
+        },
+        {
+          "id": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+          "instrument": "FINN.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 31.057
+        },
+        {
+          "id": "08284e81-1330-4812-0586-032980451817",
+          "instrument": "XEQT.TO",
+          "qty": 100,
+          "side": "buy",
+          "avgPrice": 44.2355
+        },
+        {
+          "id": "06007f2f-2653-4612-0981-079d6f491810",
+          "instrument": "VDY.TO",
+          "qty": 50,
+          "side": "buy",
+          "avgPrice": 76.2246
+        }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {
+            "cad": "$0.00",
+            "usd": "$14.24",
+            "combinedCad": "$19.39",
+            "combinedUsd": "$14.24"
+          },
+          "totalBuyingPower": {
+            "cad": "$0.00",
+            "usd": "$14.24",
+            "combinedCad": "$19.39",
+            "combinedUsd": "$14.24"
+          },
+          "buyingPower": {
+            "cad": "$0.00",
+            "usd": "$14.24",
+            "combinedCad": "$19.39",
+            "combinedUsd": "$14.24"
+          },
+          "totalEquity": {
+            "cad": "$20,237.80",
+            "usd": "$986.05",
+            "combinedCad": "$21,610.58",
+            "combinedUsd": "$15,522.61"
+          },
+          "marketValue": {
+            "cad": "$20,237.80",
+            "usd": "$971.81",
+            "combinedCad": "$21,590.75",
+            "combinedUsd": "$15,508.37"
+          },
+          "cash": {
+            "cad": "$0.00",
+            "usd": "$14.24",
+            "combinedCad": "$19.83",
+            "combinedUsd": "$14.24"
+          }
+        },
+        "profit": {
+          "dayPnl": {
+            "cad": "$226.20",
+            "usd": "-$12.23",
+            "combinedCad": "$209.18",
+            "combinedUsd": "$150.25"
+          },
+          "closedPnl": {
+            "cad": "$88.90",
+            "usd": "$124.17",
+            "combinedCad": "$261.77",
+            "combinedUsd": "$188.03"
+          },
+          "openPnl": {
+            "cad": "$7.41",
+            "usd": "$7.92",
+            "combinedCad": "$18.43",
+            "combinedUsd": "$13.24"
+          }
+        }
+      }
+    }
+  ],
+  "quotes": [
+    {
+      "securityUuid": "181f3121-241f-4842-0e5e-d1a41e0ea54f",
+      "symbol": "SPCX",
+      "currency": "USD",
+      "bidPrice": 151.77,
+      "bidSize": 5800,
+      "askPrice": 151.8,
+      "askSize": 200,
+      "lastPrice": 151.77,
+      "quoteTime": "2026-09-16T22:41:22Z",
+      "lastTradeTime": "2026-09-16T22:41:25Z",
+      "lastTradeSize": 4500,
+      "tick": "Down",
+      "volume": 108449564,
+      "openPrice": 144.88,
+      "highPrice": 153.01,
+      "lowPrice": 144.36,
+      "highPrice52Weeks": 225.64,
+      "lowPrice52Weeks": 104.83,
+      "volumeWeightedAveragePrice": 150.539122,
+      "priceChangeAmount": 7.39,
+      "priceChangePercent": 0.051502,
+      "afterHourPriceChangeAmount": 0.89,
+      "afterHourPriceChangePercent": 0.005899,
+      "isTradingHour": false,
+      "marketSector": "nasdaq",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "1a283835-094a-4a02-088d-9b880b48080c",
+      "symbol": "CNQ.TO",
+      "currency": "CAD",
+      "bidPrice": 70.02,
+      "bidSize": 1,
+      "askPrice": 70.18,
+      "askSize": 60,
+      "lastPrice": 70.08,
+      "quoteTime": "2026-09-16T20:59:23Z",
+      "lastTradeTime": "2026-09-16T20:00:00Z",
+      "lastTradeSize": 1400,
+      "tick": "Down",
+      "volume": 17947637,
+      "openPrice": 71,
+      "highPrice": 71.2,
+      "lowPrice": 69.49,
+      "highPrice52Weeks": 72.35,
+      "lowPrice52Weeks": 41.67,
+      "volumeWeightedAveragePrice": 70.60175,
+      "priceChangeAmount": -1.62,
+      "priceChangePercent": -0.022594,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 12.05862,
+      "dividendYield": 0.035744
+    },
+    {
+      "securityUuid": "1d00561e-0320-4d02-04e3-2c890b540e02",
+      "symbol": "GO.U.TO",
+      "currency": "USD",
+      "bidPrice": 8.15,
+      "bidSize": 5,
+      "askPrice": 8.32,
+      "askSize": 5,
+      "lastPrice": 8.15,
+      "quoteTime": "2026-09-16T20:00:11Z",
+      "lastTradeTime": "2026-09-16T20:00:00Z",
+      "lastTradeSize": 400,
+      "tick": "Down",
+      "volume": 283657,
+      "openPrice": 8.25,
+      "highPrice": 8.35,
+      "lowPrice": 8.1,
+      "highPrice52Weeks": 12.95,
+      "lowPrice52Weeks": 7.77,
+      "volumeWeightedAveragePrice": 8.264489,
+      "priceChangeAmount": -0.45,
+      "priceChangePercent": -0.052326,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.076526
+    },
+    {
+      "securityUuid": "6b051285-0bbb-4b42-02d8-a5a11a423d49",
+      "symbol": "FINN.TO",
+      "currency": "CAD",
+      "bidPrice": 32.14,
+      "bidSize": 1,
+      "askPrice": 32.52,
+      "askSize": 1,
+      "lastPrice": 32.35,
+      "quoteTime": "2026-09-16T21:00:01Z",
+      "lastTradeTime": "2026-09-16T19:59:30Z",
+      "lastTradeSize": 300,
+      "tick": null,
+      "volume": 161644,
+      "openPrice": 32.47,
+      "highPrice": 32.57,
+      "lowPrice": 32.07,
+      "highPrice52Weeks": 33.93,
+      "lowPrice52Weeks": 21.67,
+      "volumeWeightedAveragePrice": 32.446531,
+      "priceChangeAmount": 0.13,
+      "priceChangePercent": 0.004035,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "neo",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "06007f2f-2653-4612-0981-079d6f491810",
+      "symbol": "VDY.TO",
+      "currency": "CAD",
+      "bidPrice": 76.67,
+      "bidSize": 1,
+      "askPrice": 76.99,
+      "askSize": 1,
+      "lastPrice": 76.85,
+      "quoteTime": "2026-09-16T20:00:06Z",
+      "lastTradeTime": "2026-09-16T19:58:00Z",
+      "lastTradeSize": 4000,
+      "tick": "Down",
+      "volume": 168319,
+      "openPrice": 77.46,
+      "highPrice": 77.46,
+      "lowPrice": 76.36,
+      "highPrice52Weeks": 79.29,
+      "lowPrice52Weeks": 56.38,
+      "volumeWeightedAveragePrice": 77.014919,
+      "priceChangeAmount": -0.36,
+      "priceChangePercent": -0.004663,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.028023
+    },
+    {
+      "securityUuid": "08284e81-1330-4812-0586-032980451817",
+      "symbol": "XEQT.TO",
+      "currency": "CAD",
+      "bidPrice": 45.02,
+      "bidSize": 40,
+      "askPrice": 45.06,
+      "askSize": 12,
+      "lastPrice": 45.02,
+      "quoteTime": "2026-09-16T20:55:25Z",
+      "lastTradeTime": "2026-09-16T19:59:46Z",
+      "lastTradeSize": 100,
+      "tick": "Down",
+      "volume": 591792,
+      "openPrice": 45.26,
+      "highPrice": 45.32,
+      "lowPrice": 44.74,
+      "highPrice52Weeks": 46.48,
+      "lowPrice52Weeks": 38.1,
+      "volumeWeightedAveragePrice": 45.069669,
+      "priceChangeAmount": 0.01,
+      "priceChangePercent": 0.000222,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0.015903
+    },
+    {
+      "securityUuid": "0c5b012e-165e-4c82-05e0-469c83650e81",
+      "symbol": "NXE15JAN27C14.50.MX",
+      "currency": "CAD",
+      "bidPrice": 0.9,
+      "bidSize": 20,
+      "askPrice": 1.28,
+      "askSize": 25,
+      "lastPrice": 1.7,
+      "quoteTime": "2026-09-16T19:57:09Z",
+      "lastTradeTime": "2026-09-11T13:57:30Z",
+      "lastTradeSize": null,
+      "tick": null,
+      "volume": null,
+      "openPrice": null,
+      "highPrice": null,
+      "lowPrice": null,
+      "highPrice52Weeks": null,
+      "lowPrice52Weeks": null,
+      "volumeWeightedAveragePrice": null,
+      "priceChangeAmount": 0,
+      "priceChangePercent": 0,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "mx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": null,
+      "dividendYield": null,
+      "greeks": {
+        "delta": 0.436274,
+        "gamma": 0.098749,
+        "theta": -0.006678,
+        "vega": 0.029828,
+        "rho": 0.01546,
+        "impliedVolatility": 0.526603,
+        "inTheMoneyProbability": 0.36576227,
+        "inTheMoney": false
+      }
+    },
+    {
+      "securityUuid": "7217055d-0d69-4242-0979-2a8717190748",
+      "symbol": "IREN",
+      "currency": "USD",
+      "bidPrice": 43.4,
+      "bidSize": 100,
+      "askPrice": 43.45,
+      "askSize": 300,
+      "lastPrice": 43.45,
+      "quoteTime": "2026-09-16T22:41:18Z",
+      "lastTradeTime": "2026-09-16T22:41:27Z",
+      "lastTradeSize": 125,
+      "tick": "Down",
+      "volume": 33683872,
+      "openPrice": 42.45,
+      "highPrice": 43.915,
+      "lowPrice": 41.55,
+      "highPrice52Weeks": 76.87,
+      "lowPrice52Weeks": 28.93,
+      "volumeWeightedAveragePrice": 42.880429,
+      "priceChangeAmount": 1.04,
+      "priceChangePercent": 0.025012,
+      "afterHourPriceChangeAmount": 0.83,
+      "afterHourPriceChangePercent": 0.019474,
+      "isTradingHour": false,
+      "marketSector": "nasdaq",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Post-market",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "2919136b-114b-4962-0448-c19b0c641469",
+      "symbol": "ARIS.TO",
+      "currency": "CAD",
+      "bidPrice": 24.93,
+      "bidSize": 7,
+      "askPrice": 25.67,
+      "askSize": 2,
+      "lastPrice": 25.46,
+      "quoteTime": "2026-09-16T20:12:08Z",
+      "lastTradeTime": "2026-09-16T20:00:00Z",
+      "lastTradeSize": 400,
+      "tick": "Down",
+      "volume": 635602,
+      "openPrice": 26.47,
+      "highPrice": 26.48,
+      "lowPrice": 24.98,
+      "highPrice52Weeks": 31.47,
+      "lowPrice52Weeks": 12.25,
+      "volumeWeightedAveragePrice": 25.439593,
+      "priceChangeAmount": -0.32,
+      "priceChangePercent": -0.012413,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "13040b87-5206-4332-0b67-339e3f5b0636",
+      "symbol": "NXE.TO",
+      "currency": "CAD",
+      "bidPrice": 13.06,
+      "bidSize": 5,
+      "askPrice": 13.14,
+      "askSize": 24,
+      "lastPrice": 13.13,
+      "quoteTime": "2026-09-16T20:12:20Z",
+      "lastTradeTime": "2026-09-16T20:00:00Z",
+      "lastTradeSize": 500,
+      "tick": "Up",
+      "volume": 1312272,
+      "openPrice": 13.41,
+      "highPrice": 13.45,
+      "lowPrice": 12.97,
+      "highPrice52Weeks": 18.91,
+      "lowPrice52Weeks": 10.36,
+      "volumeWeightedAveragePrice": 13.148074,
+      "priceChangeAmount": -0.02,
+      "priceChangePercent": -0.001521,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 0,
+      "dividendYield": 0
+    },
+    {
+      "securityUuid": "1b328f54-1446-4b72-03f9-959f35531f78",
+      "symbol": "REI.UN.TO",
+      "currency": "CAD",
+      "bidPrice": 20.43,
+      "bidSize": 3,
+      "askPrice": 20.55,
+      "askSize": 1,
+      "lastPrice": 20.51,
+      "quoteTime": "2026-09-16T20:12:22Z",
+      "lastTradeTime": "2026-09-16T20:00:00Z",
+      "lastTradeSize": 300,
+      "tick": "Up",
+      "volume": 936329,
+      "openPrice": 20.4,
+      "highPrice": 20.61,
+      "lowPrice": 20.31,
+      "highPrice52Weeks": 23.25,
+      "lowPrice52Weeks": 18.06,
+      "volumeWeightedAveragePrice": 20.451574,
+      "priceChangeAmount": 0.13,
+      "priceChangePercent": 0.006379,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 23.8046,
+      "dividendYield": 0.055915
+    },
+    {
+      "securityUuid": "663b0f14-2e58-4692-08ca-989e25980c9b",
+      "symbol": "MDA.TO",
+      "currency": "CAD",
+      "bidPrice": 40.53,
+      "bidSize": 2,
+      "askPrice": 40.7,
+      "askSize": 3,
+      "lastPrice": 40.62,
+      "quoteTime": "2026-09-16T20:59:02Z",
+      "lastTradeTime": "2026-09-16T20:00:00Z",
+      "lastTradeSize": 200,
+      "tick": "Down",
+      "volume": 2077067,
+      "openPrice": 41.01,
+      "highPrice": 41.8,
+      "lowPrice": 40.1,
+      "highPrice52Weeks": 67.9,
+      "lowPrice52Weeks": 20.85,
+      "volumeWeightedAveragePrice": 40.734356,
+      "priceChangeAmount": 0.37,
+      "priceChangePercent": 0.009193,
+      "afterHourPriceChangeAmount": 0,
+      "afterHourPriceChangePercent": 0,
+      "isTradingHour": false,
+      "marketSector": "tsx",
+      "snapDateTime": "2026-09-16T22:41:29Z",
+      "delay": false,
+      "marketState": "Closed",
+      "peRatio": 45.61364,
+      "dividendYield": 0
+    }
+  ],
+  "activities": [
+    {
+      "transactionId": "f84c2f15-b26c-4d71-aa7c-1f38a8d9d5c1",
+      "transactionType": "Trades",
+      "description": "ARIS MNG CORP COM WE ACTED AS AGENT",
+      "amount": -636.75,
+      "currency": "CAD",
+      "symbol": "ARIS.TO",
+      "quantity": 25,
+      "price": 25.47,
+      "commission": 0,
+      "tradeDate": "2026-09-15",
+      "action": "Buy",
+      "settlementDate": "2026-09-16",
+      "gross": {
+        "currencyCode": "CAD",
+        "amount": -636.75
+      }
+    },
+    {
+      "transactionId": "2c916799-9b72-401d-8794-8fd1af99fadc",
+      "transactionType": "Trades",
+      "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+      "amount": -803.2,
+      "currency": "CAD",
+      "symbol": "MDA.TO",
+      "quantity": 20,
+      "price": 40.16,
+      "commission": 0,
+      "tradeDate": "2026-09-15",
+      "action": "Buy",
+      "settlementDate": "2026-09-16",
+      "gross": {
+        "currencyCode": "CAD",
+        "amount": -803.2
+      }
+    },
+    {
+      "transactionId": "bbef10c4-8734-430c-b027-e8ce1842c655",
+      "transactionType": "Trades",
+      "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+      "amount": 1124,
+      "currency": "CAD",
+      "symbol": "XEQT.TO",
+      "quantity": -25,
+      "price": 44.96,
+      "commission": 0,
+      "tradeDate": "2026-09-15",
+      "action": "Sell",
+      "settlementDate": "2026-09-16",
+      "gross": {
+        "currencyCode": "CAD",
+        "amount": 1124
+      }
+    },
+    {
+      "transactionId": "315839fe-a9e5-47ac-9404-4bfcaa666f28",
+      "transactionType": "Trades",
+      "description": "GO RESIDENTIAL REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+      "amount": 33,
+      "currency": "USD",
+      "symbol": "GONYF",
+      "quantity": -4,
+      "price": 8.25,
+      "commission": 0,
+      "tradeDate": "2026-09-15",
+      "action": "Sell",
+      "settlementDate": "2026-09-16",
+      "gross": {
+        "currencyCode": "USD",
+        "amount": 33
+      }
+    },
+    {
+      "transactionId": "d59671df-e878-406f-ad79-1c3b3652ec0b",
+      "transactionType": "FX conversion",
+      "description": "CONVERSION - USD/CAD",
+      "amount": -21.01,
+      "currency": "USD",
+      "quantity": 0,
+      "price": 0,
+      "commission": 0,
+      "tradeDate": "2026-09-15",
+      "action": "FXT",
+      "settlementDate": "2026-09-15",
+      "gross": {
+        "currencyCode": "USD",
+        "amount": 0
+      },
+      "fx": {
+        "baseCurrency": {
+          "currencyCode": "CAD",
+          "amount": 28.82
+        },
+        "averageRate": 0.7290076335877863
+      }
+    },
+    {
+      "transactionId": "23f70665-9549-43a4-b95f-bf3ff76b5175",
+      "transactionType": "Trades",
+      "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+      "amount": -1234.05,
+      "currency": "CAD",
+      "symbol": "NXE.TO",
+      "quantity": 95,
+      "price": 12.99,
+      "commission": 0,
+      "tradeDate": "2026-09-14",
+      "action": "Buy",
+      "settlementDate": "2026-09-15",
+      "gross": {
+        "currencyCode": "CAD",
+        "amount": -1234.05
+      }
+    },
+    {
+      "transactionId": "4fac863d-aabc-4220-ab87-2ed40db146b6",
+      "transactionType": "Trades",
+      "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+      "amount": -867.72,
+      "currency": "USD",
+      "symbol": "IREN",
+      "quantity": 20,
+      "price": 43.38585,
+      "commission": 0,
+      "tradeDate": "2026-09-14",
+      "action": "Buy",
+      "settlementDate": "2026-09-15",
+      "gross": {
+        "currencyCode": "USD",
+        "amount": -867.72
+      }
+    },
+    {
+      "transactionId": "de07cd2f-3462-43e2-a75c-88a12bf7adf6",
+      "transactionType": "Trades",
+      "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+      "amount": 1155.75,
+      "currency": "CAD",
+      "symbol": "VDY.TO",
+      "quantity": -15,
+      "price": 77.05,
+      "commission": 0,
+      "tradeDate": "2026-09-14",
+      "action": "Sell",
+      "settlementDate": "2026-09-15",
+      "gross": {
+        "currencyCode": "CAD",
+        "amount": 1155.75
+      }
+    },
+    {
+      "transactionId": "10bd237d-bd6b-42a3-8fff-67519a0ddac9",
+      "transactionType": "Trades",
+      "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT",
+      "amount": 869.98,
+      "currency": "USD",
+      "symbol": "IREN",
+      "quantity": -20,
+      "price": 43.5001,
+      "commission": -0.02,
+      "tradeDate": "2026-09-14",
+      "action": "Sell",
+      "settlementDate": "2026-09-15",
+      "gross": {
+        "currencyCode": "USD",
+        "amount": 870
+      }
+    },
+    {
+      "transactionId": "e1ee9e1e-d1b5-4a1c-870a-6c813d217d59",
+      "transactionType": "Trades",
+      "description": "CALL .NXE 01/15/27 14.50 NEXGEN ENERGY LTD WE ACTED AS AGENT",
+      "amount": -512.97,
+      "currency": "CAD",
+      "symbol": "NXE15JAN27C14.50.MX",
+      "quantity": 3,
+      "price": 1.7,
+      "commission": -2.97,
+      "tradeDate": "2026-09-11",
+      "action": "Buy",
+      "settlementDate": "2026-09-14",
+      "gross": {
+        "currencyCode": "CAD",
+        "amount": -510
+      }
+    }
+  ],
+  "benchmark": {
+    "symbol": "VFV.TO",
+    "series": [
+      {
+        "date": "2026-07-26",
+        "level": 186.3
+      },
+      {
+        "date": "2026-08-02",
+        "level": 191.82
+      },
+      {
+        "date": "2026-08-09",
+        "level": 191.7
+      },
+      {
+        "date": "2026-08-16",
+        "level": 187.6
+      },
+      {
+        "date": "2026-08-23",
+        "level": 190.38
+      },
+      {
+        "date": "2026-08-30",
+        "level": 189.54
+      },
+      {
+        "date": "2026-09-06",
+        "level": 188.52
+      },
+      {
+        "date": "2026-09-13",
+        "level": 187.56
+      }
+    ]
+  }
+}
