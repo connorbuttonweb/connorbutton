@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-17T22:46:38.954Z",
-  "as_of": "2026-09-17",
+  "generated_at": "2026-09-18T22:50:50.728Z",
+  "as_of": "2026-09-18",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3989
+   "USDCAD": 1.3992
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,7 +13,7 @@
  },
  "profile": {
   "blended_mer": 0.0033,
-  "distribution_yield": 0.0167,
+  "distribution_yield": 0.0168,
   "holdings_count": 12,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,7 +23,7 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 29.41,
+   "cash": 29.42,
    "currency": "CAD",
    "buying_power": 28.79
   }
@@ -37,26 +37,10 @@
    "currency": "CAD",
    "quantity": 164,
    "avg_cost": 44.2119,
-   "price": 45.51,
-   "prev_close": 45.02,
-   "market_value": 7463.64,
-   "open_pnl": 212.88,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "VDY.TO",
-   "name": "Vanguard FTSE Canadian High Dividend Yield Index ETF",
-   "account_id": "main",
-   "asset_type": "ETF",
-   "currency": "CAD",
-   "quantity": 90,
-   "avg_cost": 75.7934,
-   "price": 77.42,
-   "prev_close": 76.85,
-   "market_value": 6967.8,
-   "open_pnl": 146.39,
+   "price": 45.41,
+   "prev_close": 45.51,
+   "market_value": 7447.24,
+   "open_pnl": 196.48,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +53,26 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 33.04,
-   "prev_close": 32.35,
-   "market_value": 6938.4,
-   "open_pnl": 382.42,
+   "price": 33.12,
+   "prev_close": 33.04,
+   "market_value": 6955.2,
+   "open_pnl": 399.22,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "VDY.TO",
+   "name": "Vanguard FTSE Canadian High Dividend Yield Index ETF",
+   "account_id": "main",
+   "asset_type": "ETF",
+   "currency": "CAD",
+   "quantity": 90,
+   "avg_cost": 75.7934,
+   "price": 77.17,
+   "prev_close": 77.42,
+   "market_value": 6945.3,
+   "open_pnl": 123.89,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 13.9547,
-   "price": 13.23,
-   "prev_close": 13.13,
-   "market_value": 2646,
-   "open_pnl": -144.94,
+   "price": 13.08,
+   "prev_close": 13.23,
+   "market_value": 2616,
+   "open_pnl": -174.94,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.59,
-   "prev_close": 20.51,
-   "market_value": 2059,
-   "open_pnl": -31.2,
+   "price": 20.62,
+   "prev_close": 20.59,
+   "market_value": 2062,
+   "open_pnl": -28.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "CAD",
    "quantity": 40,
    "avg_cost": 40.9225,
-   "price": 42.41,
-   "prev_close": 40.62,
-   "market_value": 1696.4,
-   "open_pnl": 59.5,
+   "price": 42.05,
+   "prev_close": 42.41,
+   "market_value": 1682,
+   "open_pnl": 45.1,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "CAD",
    "quantity": 45,
    "avg_cost": 26.03,
-   "price": 26.5,
-   "prev_close": 25.46,
-   "market_value": 1192.5,
-   "open_pnl": 21.15,
+   "price": 27.12,
+   "prev_close": 26.5,
+   "market_value": 1220.4,
+   "open_pnl": 49.05,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "USD",
    "quantity": 100,
    "avg_cost": 8.1683,
-   "price": 8.18,
-   "prev_close": 8.15,
-   "market_value": 818,
-   "open_pnl": 1.17,
+   "price": 7.8,
+   "prev_close": 8.18,
+   "market_value": 780,
+   "open_pnl": -36.83,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +165,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 155,
-   "prev_close": 151.07,
-   "market_value": 775,
-   "open_pnl": 104.12,
+   "price": 152.46,
+   "prev_close": 154.56,
+   "market_value": 762.3,
+   "open_pnl": 91.42,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 70.83,
-   "prev_close": 70.08,
-   "market_value": 708.3,
-   "open_pnl": 17.8,
+   "price": 69.37,
+   "prev_close": 70.83,
+   "market_value": 693.7,
+   "open_pnl": 3.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -197,10 +197,10 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 41.9062,
-   "price": 43.3,
-   "prev_close": 42.44,
-   "market_value": 433,
-   "open_pnl": 13.94,
+   "price": 46.4362,
+   "prev_close": 43.2362,
+   "market_value": 464.36,
+   "open_pnl": 45.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18193,7 +18193,7 @@
    "type": "Trade",
    "account_id": "main",
    "symbol": "NXE.TO",
-   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "description": "NEXGEN ENGRGY LTD COM WE ACTED AS AGENT",
    "amount": -1234.05,
    "currency": "CAD",
    "quantity": 95,
@@ -22127,35 +22127,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7263,
+   "annual_rate_per_share": 0.7246,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.2041,
+   "annual_rate_per_share": 2.2072,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1699,
+   "annual_rate_per_share": 1.1642,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6078,
+   "annual_rate_per_share": 0.6116,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.4696,
+   "annual_rate_per_share": 2.475,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22297,38 +22297,15 @@
     "date": "2026-09-17",
     "value": 32540.72,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-18",
+    "value": 32464.08,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
-    {
-     "date": "2026-05-10",
-     "level": 180.84
-    },
-    {
-     "date": "2026-05-17",
-     "level": 183.2
-    },
-    {
-     "date": "2026-05-24",
-     "level": 185.61
-    },
-    {
-     "date": "2026-05-31",
-     "level": 182.9
-    },
-    {
-     "date": "2026-06-07",
-     "level": 184.62
-    },
-    {
-     "date": "2026-06-14",
-     "level": 188.36
-    },
-    {
-     "date": "2026-06-21",
-     "level": 184.37
-    },
     {
      "date": "2026-06-28",
      "level": 189.34
@@ -22375,7 +22352,7 @@
     },
     {
      "date": "2026-09-13",
-     "level": 187.77
+     "level": 189.84
     }
    ]
   }
