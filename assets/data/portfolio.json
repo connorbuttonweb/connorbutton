@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-18T22:50:50.728Z",
-  "as_of": "2026-09-18",
+  "generated_at": "2026-09-21T22:45:25.131Z",
+  "as_of": "2026-09-21",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3992
+   "USDCAD": 1.3984
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,7 +13,7 @@
  },
  "profile": {
   "blended_mer": 0.0033,
-  "distribution_yield": 0.0168,
+  "distribution_yield": 0.0165,
   "holdings_count": 12,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 29.42,
+   "cash": 53.4,
    "currency": "CAD",
-   "buying_power": 28.79
+   "buying_power": 52.77
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 164,
    "avg_cost": 44.2119,
-   "price": 45.41,
-   "prev_close": 45.51,
-   "market_value": 7447.24,
-   "open_pnl": 196.48,
+   "price": 46.05,
+   "prev_close": 45.41,
+   "market_value": 7552.2,
+   "open_pnl": 301.44,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 33.12,
-   "prev_close": 33.04,
-   "market_value": 6955.2,
-   "open_pnl": 399.22,
+   "price": 34,
+   "prev_close": 33.12,
+   "market_value": 7140,
+   "open_pnl": 584.02,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7934,
-   "price": 77.17,
-   "prev_close": 77.42,
-   "market_value": 6945.3,
-   "open_pnl": 123.89,
+   "price": 77.41,
+   "prev_close": 77.17,
+   "market_value": 6966.9,
+   "open_pnl": 145.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -84,11 +84,11 @@
    "asset_type": "Stock",
    "currency": "CAD",
    "quantity": 200,
-   "avg_cost": 13.9547,
-   "price": 13.08,
-   "prev_close": 13.23,
-   "market_value": 2616,
-   "open_pnl": -174.94,
+   "avg_cost": 13.5,
+   "price": 13.78,
+   "prev_close": 13.08,
+   "market_value": 2756,
+   "open_pnl": 56,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.62,
-   "prev_close": 20.59,
-   "market_value": 2062,
-   "open_pnl": -28.2,
+   "price": 20.65,
+   "prev_close": 20.62,
+   "market_value": 2065,
+   "open_pnl": -25.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "CAD",
    "quantity": 40,
    "avg_cost": 40.9225,
-   "price": 42.05,
-   "prev_close": 42.41,
-   "market_value": 1682,
-   "open_pnl": 45.1,
+   "price": 44.65,
+   "prev_close": 42.05,
+   "market_value": 1786,
+   "open_pnl": 149.1,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "CAD",
    "quantity": 45,
    "avg_cost": 26.03,
-   "price": 27.12,
-   "prev_close": 26.5,
-   "market_value": 1220.4,
-   "open_pnl": 49.05,
+   "price": 26.67,
+   "prev_close": 27.12,
+   "market_value": 1200.15,
+   "open_pnl": 28.8,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "USD",
    "quantity": 100,
    "avg_cost": 8.1683,
-   "price": 7.8,
-   "prev_close": 8.18,
-   "market_value": 780,
-   "open_pnl": -36.83,
+   "price": 7.85,
+   "prev_close": 7.8,
+   "market_value": 785,
+   "open_pnl": -31.83,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -166,7 +166,7 @@
    "quantity": 5,
    "avg_cost": 134.1753,
    "price": 152.46,
-   "prev_close": 154.56,
+   "prev_close": 153.32,
    "market_value": 762.3,
    "open_pnl": 91.42,
    "sector": null,
@@ -181,10 +181,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 69.37,
-   "prev_close": 70.83,
-   "market_value": 693.7,
-   "open_pnl": 3.2,
+   "price": 67.82,
+   "prev_close": 69.37,
+   "market_value": 678.2,
+   "open_pnl": -12.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -197,10 +197,10 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 41.9062,
-   "price": 46.4362,
-   "prev_close": 43.2362,
-   "market_value": 464.36,
-   "open_pnl": 45.3,
+   "price": 47.41,
+   "prev_close": 46.86,
+   "market_value": 474.1,
+   "open_pnl": 55.04,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18193,7 +18193,7 @@
    "type": "Trade",
    "account_id": "main",
    "symbol": "NXE.TO",
-   "description": "NEXGEN ENGRGY LTD COM WE ACTED AS AGENT",
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
    "amount": -1234.05,
    "currency": "CAD",
    "quantity": 95,
@@ -22127,35 +22127,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7246,
+   "annual_rate_per_share": 0.7269,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.2072,
+   "annual_rate_per_share": 2.1977,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1642,
+   "annual_rate_per_share": 1.1614,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6116,
+   "annual_rate_per_share": 0.6132,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.475,
+   "annual_rate_per_share": 2.3937,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22302,6 +22302,11 @@
     "date": "2026-09-18",
     "value": 32464.08,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-21",
+    "value": 33029.68,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
@@ -22352,7 +22357,7 @@
     },
     {
      "date": "2026-09-13",
-     "level": 189.84
+     "level": 190.07
     }
    ]
   }
