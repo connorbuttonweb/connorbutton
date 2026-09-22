@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-09-22T01:36:33.229Z",
-  "as_of": "2026-09-21",
+  "generated_at": "2026-09-22T22:45:01.640Z",
+  "as_of": "2026-09-22",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -4811,6 +4811,84 @@
      "last_price": 1.7
     }
    }
+  },
+  {
+   "date": "2026-09-22",
+   "cash": 53.5,
+   "positions": {
+    "XEQT.TO": {
+     "qty": 164,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 46.28
+    },
+    "FINN.TO": {
+     "qty": 210,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 34.14
+    },
+    "VDY.TO": {
+     "qty": 90,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 76.88
+    },
+    "NXE.TO": {
+     "qty": 200,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 14.07
+    },
+    "REI.UN.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.73
+    },
+    "MDA.TO": {
+     "qty": 40,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 44.09
+    },
+    "ARIS.TO": {
+     "qty": 45,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 27.95
+    },
+    "GO.U.TO": {
+     "qty": 100,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 7.96
+    },
+    "SPCX": {
+     "qty": 5,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 154.3005
+    },
+    "CNQ.TO": {
+     "qty": 10,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 67.29
+    },
+    "IREN": {
+     "qty": 10,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 48.3986
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 1.7
+    }
+   }
   }
  ],
  "flows": [
@@ -5318,7 +5396,12 @@
   },
   {
    "date": "2026-09-21",
-   "value": 33024.1,
+   "value": 33032.77,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-09-22",
+   "value": 33198.37,
    "net_flow": 0
   }
  ],
@@ -5678,6 +5761,10 @@
   {
    "date": "2026-09-21",
    "level": 193.63
+  },
+  {
+   "date": "2026-09-22",
+   "level": 194.08
   }
  ],
  "hypothetical": [
@@ -5955,7 +6042,11 @@
   },
   {
    "date": "2026-09-21",
-   "value": 32965.6
+   "value": 32974.27
+  },
+  {
+   "date": "2026-09-22",
+   "value": 33139.77
   }
  ],
  "in_kind": [
