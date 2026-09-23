@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-22T22:45:00.786Z",
-  "as_of": "2026-09-22",
+  "generated_at": "2026-09-23T22:45:02.325Z",
+  "as_of": "2026-09-23",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4035
+   "USDCAD": 1.4064
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 53.5,
+   "cash": 53.56,
    "currency": "CAD",
-   "buying_power": 52.87
+   "buying_power": 52.93
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 164,
    "avg_cost": 44.2119,
-   "price": 46.28,
-   "prev_close": 46.05,
-   "market_value": 7589.92,
-   "open_pnl": 339.16,
+   "price": 45.78,
+   "prev_close": 46.28,
+   "market_value": 7507.92,
+   "open_pnl": 257.16,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 34.14,
-   "prev_close": 34,
-   "market_value": 7169.4,
-   "open_pnl": 613.42,
+   "price": 33.95,
+   "prev_close": 34.14,
+   "market_value": 7129.5,
+   "open_pnl": 573.52,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7934,
-   "price": 76.88,
-   "prev_close": 77.41,
-   "market_value": 6919.2,
-   "open_pnl": 97.79,
+   "price": 76.01,
+   "prev_close": 76.88,
+   "market_value": 6840.9,
+   "open_pnl": 19.49,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 13.5,
-   "price": 14.07,
-   "prev_close": 13.78,
-   "market_value": 2814,
-   "open_pnl": 114,
+   "price": 13.59,
+   "prev_close": 14.07,
+   "market_value": 2718,
+   "open_pnl": 18,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.73,
-   "prev_close": 20.65,
-   "market_value": 2073,
-   "open_pnl": -17.2,
+   "price": 20.72,
+   "prev_close": 20.73,
+   "market_value": 2072,
+   "open_pnl": -18.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "CAD",
    "quantity": 40,
    "avg_cost": 40.9225,
-   "price": 44.09,
-   "prev_close": 44.65,
-   "market_value": 1763.6,
-   "open_pnl": 126.7,
+   "price": 44.61,
+   "prev_close": 44.09,
+   "market_value": 1784.4,
+   "open_pnl": 147.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "CAD",
    "quantity": 45,
    "avg_cost": 26.03,
-   "price": 27.95,
-   "prev_close": 26.67,
-   "market_value": 1257.75,
-   "open_pnl": 86.4,
+   "price": 26.59,
+   "prev_close": 27.95,
+   "market_value": 1196.55,
+   "open_pnl": 25.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +149,10 @@
    "currency": "USD",
    "quantity": 100,
    "avg_cost": 8.1683,
-   "price": 7.96,
-   "prev_close": 7.85,
-   "market_value": 796,
-   "open_pnl": -20.83,
+   "price": 7.8,
+   "prev_close": 7.96,
+   "market_value": 780,
+   "open_pnl": -36.83,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +165,10 @@
    "currency": "USD",
    "quantity": 5,
    "avg_cost": 134.1753,
-   "price": 154.3005,
-   "prev_close": 151.4305,
-   "market_value": 771.5,
-   "open_pnl": 100.63,
+   "price": 148.845,
+   "prev_close": 155.205,
+   "market_value": 744.23,
+   "open_pnl": 73.35,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +181,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 67.29,
-   "prev_close": 67.82,
-   "market_value": 672.9,
-   "open_pnl": -17.6,
+   "price": 67.12,
+   "prev_close": 67.29,
+   "market_value": 671.2,
+   "open_pnl": -19.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -197,10 +197,10 @@
    "currency": "USD",
    "quantity": 10,
    "avg_cost": 41.9062,
-   "price": 48.3986,
-   "prev_close": 47.0786,
-   "market_value": 483.99,
-   "open_pnl": 64.92,
+   "price": 46.99,
+   "prev_close": 48.49,
+   "market_value": 469.9,
+   "open_pnl": 50.84,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -22151,35 +22151,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7341,
+   "annual_rate_per_share": 0.7161,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1898,
+   "annual_rate_per_share": 2.1583,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1642,
+   "annual_rate_per_share": 1.1619,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6521,
+   "annual_rate_per_share": 0.6349,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.425,
+   "annual_rate_per_share": 2.4742,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22336,10 +22336,43 @@
     "date": "2026-09-22",
     "value": 33197.64,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-23",
+    "value": 32783.67,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-05-10",
+     "level": 180.84
+    },
+    {
+     "date": "2026-05-17",
+     "level": 183.2
+    },
+    {
+     "date": "2026-05-24",
+     "level": 185.61
+    },
+    {
+     "date": "2026-05-31",
+     "level": 182.9
+    },
+    {
+     "date": "2026-06-07",
+     "level": 184.62
+    },
+    {
+     "date": "2026-06-14",
+     "level": 188.36
+    },
+    {
+     "date": "2026-06-21",
+     "level": 184.37
+    },
     {
      "date": "2026-06-28",
      "level": 189.34
@@ -22387,6 +22420,10 @@
     {
      "date": "2026-09-13",
      "level": 190.07
+    },
+    {
+     "date": "2026-09-20",
+     "level": 194.08
     }
    ]
   }
