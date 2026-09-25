@@ -2,7 +2,7 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-09-24T22:45:26.560Z",
+  "generated_at": "2026-09-25T01:30:07.430Z",
   "as_of": "2026-09-24",
   "price_source": "yahoo via market-proxy",
   "approximated": [
@@ -5562,7 +5562,7 @@
   },
   {
    "date": "2026-09-24",
-   "value": 32731.63,
+   "value": 32739.48,
    "net_flow": 0
   }
  ],
@@ -6215,7 +6215,7 @@
   },
   {
    "date": "2026-09-24",
-   "value": 32672.88
+   "value": 32680.73
   }
  ],
  "in_kind": [
