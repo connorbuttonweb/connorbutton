@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-25T22:45:51.468Z",
-  "as_of": "2026-09-25",
+  "generated_at": "2026-09-28T22:42:48.567Z",
+  "as_of": "2026-09-28",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4138
+   "USDCAD": 1.4142
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,8 +13,8 @@
  },
  "profile": {
   "blended_mer": 0.0033,
-  "distribution_yield": 0.0168,
-  "holdings_count": 12,
+  "distribution_yield": 0.0143,
+  "holdings_count": 10,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 53.72,
+   "cash": 134.84,
    "currency": "CAD",
-   "buying_power": 53.08
+   "buying_power": 129.76
   }
  ],
  "positions": [
@@ -35,12 +35,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 164,
-   "avg_cost": 44.2119,
-   "price": 45.97,
+   "quantity": 167,
+   "avg_cost": 44.2399,
+   "price": 45.71,
    "prev_close": 45.71,
-   "market_value": 7539.08,
-   "open_pnl": 288.32,
+   "market_value": 7633.57,
+   "open_pnl": 245.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 34.42,
-   "prev_close": 34.38,
-   "market_value": 7228.2,
-   "open_pnl": 672.22,
+   "price": 34.16,
+   "prev_close": 34.16,
+   "market_value": 7173.6,
+   "open_pnl": 617.62,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7934,
-   "price": 76.39,
-   "prev_close": 76.06,
-   "market_value": 6875.1,
-   "open_pnl": 53.69,
+   "price": 76.23,
+   "prev_close": 76.23,
+   "market_value": 6860.7,
+   "open_pnl": 39.29,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 13.5,
-   "price": 13.02,
-   "prev_close": 13.11,
-   "market_value": 2604,
-   "open_pnl": -96,
+   "price": 12.75,
+   "prev_close": 12.75,
+   "market_value": 2550,
+   "open_pnl": -150,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.7,
-   "prev_close": 20.39,
-   "market_value": 2070,
-   "open_pnl": -20.2,
+   "price": 20.85,
+   "prev_close": 20.85,
+   "market_value": 2085,
+   "open_pnl": -5.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,26 @@
    "currency": "CAD",
    "quantity": 40,
    "avg_cost": 40.9225,
-   "price": 44.58,
-   "prev_close": 44.54,
-   "market_value": 1783.2,
-   "open_pnl": 146.3,
+   "price": 43.94,
+   "prev_close": 43.94,
+   "market_value": 1757.6,
+   "open_pnl": 120.7,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "SPCX",
+   "name": "SPCX",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 12,
+   "avg_cost": 141.6436,
+   "price": 145.99,
+   "prev_close": 145.99,
+   "market_value": 1751.88,
+   "open_pnl": 52.16,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,42 +149,10 @@
    "currency": "CAD",
    "quantity": 45,
    "avg_cost": 26.03,
-   "price": 26.8,
-   "prev_close": 26.37,
-   "market_value": 1206,
-   "open_pnl": 34.65,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "GO.U.TO",
-   "name": "GO.U.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 100,
-   "avg_cost": 8.1683,
-   "price": 7.9,
-   "prev_close": 7.9,
-   "market_value": 790,
-   "open_pnl": -26.83,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "SPCX",
-   "name": "SPCX",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 5,
-   "avg_cost": 134.1753,
-   "price": 148.65,
-   "prev_close": 148,
-   "market_value": 743.25,
-   "open_pnl": 72.37,
+   "price": 24.8,
+   "prev_close": 24.8,
+   "market_value": 1116,
+   "open_pnl": -55.35,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,26 +165,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 67.17,
-   "prev_close": 67.82,
-   "market_value": 671.7,
-   "open_pnl": -18.8,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "IREN",
-   "name": "IREN",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 10,
-   "avg_cost": 41.9062,
-   "price": 44.16,
-   "prev_close": 46.185,
-   "market_value": 441.6,
-   "open_pnl": 22.54,
+   "price": 67.38,
+   "prev_close": 67.38,
+   "market_value": 673.8,
+   "open_pnl": -16.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18128,6 +18096,30 @@
  },
  "activities": [
   {
+   "uid": "t_98a3d6605d",
+   "date": "2026-09-25",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT DIST ON 40 SHS REC 09/18/26 PAY 09/25/26",
+   "amount": 7.45,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0.18
+  },
+  {
+   "uid": "t_1fc9219332",
+   "date": "2026-09-25",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT DIST ON 50 SHS REC 09/18/26 PAY 09/25/26",
+   "amount": 9.31,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0.18
+  },
+  {
    "uid": "t_334d912306",
    "date": "2026-09-21",
    "type": "Trade",
@@ -22151,35 +22143,28 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7233,
+   "annual_rate_per_share": 0.7203,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.209,
+   "annual_rate_per_share": 2.203,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1569,
-   "frequency": "quarterly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  },
-  {
-   "symbol": "GO.U.TO",
-   "annual_rate_per_share": 0.6472,
+   "annual_rate_per_share": 1.1841,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.5018,
+   "annual_rate_per_share": 2.4838,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22351,89 +22336,18 @@
     "date": "2026-09-25",
     "value": 32828.14,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-28",
+    "value": 32467.72,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
     {
-     "date": "2026-05-10",
-     "level": 180.84
-    },
-    {
-     "date": "2026-05-17",
-     "level": 183.2
-    },
-    {
-     "date": "2026-05-24",
-     "level": 185.61
-    },
-    {
-     "date": "2026-05-31",
-     "level": 182.9
-    },
-    {
-     "date": "2026-06-07",
-     "level": 184.62
-    },
-    {
-     "date": "2026-06-14",
-     "level": 188.36
-    },
-    {
-     "date": "2026-06-21",
-     "level": 184.37
-    },
-    {
-     "date": "2026-06-28",
-     "level": 189.34
-    },
-    {
-     "date": "2026-07-05",
-     "level": 190.09
-    },
-    {
-     "date": "2026-07-12",
-     "level": 185.25
-    },
-    {
-     "date": "2026-07-19",
-     "level": 185.28
-    },
-    {
-     "date": "2026-07-26",
-     "level": 186.3
-    },
-    {
-     "date": "2026-08-02",
-     "level": 191.82
-    },
-    {
-     "date": "2026-08-09",
-     "level": 191.7
-    },
-    {
-     "date": "2026-08-16",
-     "level": 187.6
-    },
-    {
-     "date": "2026-08-23",
-     "level": 190.38
-    },
-    {
-     "date": "2026-08-30",
-     "level": 189.54
-    },
-    {
-     "date": "2026-09-06",
-     "level": 188.52
-    },
-    {
-     "date": "2026-09-13",
-     "level": 190.07
-    },
-    {
-     "date": "2026-09-20",
-     "level": 193.52
+     "date": "2026-09-28",
+     "level": 193.05
     }
    ]
   }
