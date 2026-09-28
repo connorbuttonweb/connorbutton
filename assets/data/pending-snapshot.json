@@ -1,0 +1,82 @@
+{
+  "as_of": "2026-09-28",
+  "accounts": [
+    {
+      "positions": [
+        {"id":"181f3121-241f-4842-0e5e-d1a41e0ea54f","instrument":"SPCX","qty":6,"side":"buy","avgPrice":136.2673},
+        {"id":"6b051285-0bbb-4b42-02d8-a5a11a423d49","instrument":"FINN.TO","qty":110,"side":"buy","avgPrice":31.3662},
+        {"id":"06007f2f-2653-4612-0981-079d6f491810","instrument":"VDY.TO","qty":40,"side":"buy","avgPrice":75.2544},
+        {"id":"08284e81-1330-4812-0586-032980451817","instrument":"XEQT.TO","qty":67,"side":"buy","avgPrice":44.2465}
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {"cad":"-$128.97","usd":"$113.40","combinedCad":"$27.86","combinedUsd":"$20.15"},
+          "totalBuyingPower": {"cad":"-$128.97","usd":"$113.40","combinedCad":"$27.86","combinedUsd":"$20.15"},
+          "buyingPower": {"cad":"-$128.97","usd":"$113.40","combinedCad":"$27.86","combinedUsd":"$20.15"},
+          "totalEquity": {"cad":"$9,740.40","usd":"$989.28","combinedCad":"$11,139.41","combinedUsd":"$7,876.99"},
+          "marketValue": {"cad":"$9,869.37","usd":"$875.88","combinedCad":"$11,108.01","combinedUsd":"$7,854.79"},
+          "cash": {"cad":"-$128.97","usd":"$113.40","combinedCad":"$31.39","combinedUsd":"$22.20"}
+        },
+        "profit": {
+          "dayPnl": {"cad":"-$51.82","usd":"-$32.27","combinedCad":"-$97.45","combinedUsd":"-$68.91"},
+          "closedPnl": {"cad":"$215.57","usd":"-$11.85","combinedCad":"$198.81","combinedUsd":"$140.58"},
+          "openPnl": {"cad":"$444.39","usd":"$58.28","combinedCad":"$526.80","combinedUsd":"$372.52"}
+        }
+      }
+    },
+    {
+      "positions": [
+        {"id":"181f3121-241f-4842-0e5e-d1a41e0ea54f","instrument":"SPCX","qty":6,"side":"buy","avgPrice":147.0199},
+        {"id":"0c5b012e-165e-4c82-05e0-469c83650e81","instrument":"NXE15JAN27C14.50.MX","qty":3,"side":"buy","avgPrice":1.7},
+        {"id":"2919136b-114b-4962-0448-c19b0c641469","instrument":"ARIS.TO","qty":45,"side":"buy","avgPrice":26.03},
+        {"id":"13040b87-5206-4332-0b67-339e3f5b0636","instrument":"NXE.TO","qty":200,"side":"buy","avgPrice":13.5},
+        {"id":"1b328f54-1446-4b72-03f9-959f35531f78","instrument":"REI.UN.TO","qty":100,"side":"buy","avgPrice":20.902},
+        {"id":"1a283835-094a-4a02-088d-9b880b48080c","instrument":"CNQ.TO","qty":10,"side":"buy","avgPrice":69.05},
+        {"id":"663b0f14-2e58-4692-08ca-989e25980c9b","instrument":"MDA.TO","qty":40,"side":"buy","avgPrice":40.9225},
+        {"id":"6b051285-0bbb-4b42-02d8-a5a11a423d49","instrument":"FINN.TO","qty":100,"side":"buy","avgPrice":31.057},
+        {"id":"08284e81-1330-4812-0586-032980451817","instrument":"XEQT.TO","qty":100,"side":"buy","avgPrice":44.2355},
+        {"id":"06007f2f-2653-4612-0981-079d6f491810","instrument":"VDY.TO","qty":50,"side":"buy","avgPrice":76.2246}
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": {"cad":"$33.31","usd":"$49.60","combinedCad":"$101.90","combinedUsd":"$72.63"},
+          "totalBuyingPower": {"cad":"$33.31","usd":"$49.60","combinedCad":"$101.90","combinedUsd":"$72.63"},
+          "buyingPower": {"cad":"$33.31","usd":"$49.60","combinedCad":"$101.90","combinedUsd":"$72.63"},
+          "totalEquity": {"cad":"$20,524.21","usd":"$925.48","combinedCad":"$21,832.99","combinedUsd":"$15,438.73"},
+          "marketValue": {"cad":"$20,490.90","usd":"$875.88","combinedCad":"$21,729.54","combinedUsd":"$15,365.58"},
+          "cash": {"cad":"$33.31","usd":"$49.60","combinedCad":"$103.45","combinedUsd":"$73.15"}
+        },
+        "profit": {
+          "dayPnl": {"cad":"$57.50","usd":"-$52.65","combinedCad":"-$16.96","combinedUsd":"-$11.99"},
+          "closedPnl": {"cad":"$21.95","usd":"$77.76","combinedCad":"$131.91","combinedUsd":"$93.28"},
+          "openPnl": {"cad":"$351.46","usd":"-$6.24","combinedCad":"$342.64","combinedUsd":"$242.29"}
+        }
+      }
+    }
+  ],
+  "quotes": [
+    {"securityUuid":"181f3121-241f-4842-0e5e-d1a41e0ea54f","symbol":"SPCX","currency":"USD","bidPrice":145.98,"askPrice":145.99,"lastPrice":145.99,"lastTradeTime":"2026-09-28T22:41:11Z","dividendYield":0},
+    {"securityUuid":"08284e81-1330-4812-0586-032980451817","symbol":"XEQT.TO","currency":"CAD","bidPrice":45.71,"askPrice":45.74,"lastPrice":45.71,"lastTradeTime":"2026-09-28T19:59:10Z","dividendYield":0.015759},
+    {"securityUuid":"1a283835-094a-4a02-088d-9b880b48080c","symbol":"CNQ.TO","currency":"CAD","bidPrice":67.36,"askPrice":67.68,"lastPrice":67.38,"lastTradeTime":"2026-09-28T20:00:00Z","peRatio":11.6931,"dividendYield":0.036862},
+    {"securityUuid":"663b0f14-2e58-4692-08ca-989e25980c9b","symbol":"MDA.TO","currency":"CAD","bidPrice":43.81,"askPrice":44.29,"lastPrice":43.94,"lastTradeTime":"2026-09-28T20:00:00Z","peRatio":50.61364,"dividendYield":0},
+    {"securityUuid":"6b051285-0bbb-4b42-02d8-a5a11a423d49","symbol":"FINN.TO","currency":"CAD","bidPrice":33.92,"askPrice":34.31,"lastPrice":34.16,"lastTradeTime":"2026-09-28T19:59:59Z","dividendYield":0},
+    {"securityUuid":"06007f2f-2653-4612-0981-079d6f491810","symbol":"VDY.TO","currency":"CAD","bidPrice":76.2,"askPrice":76.4,"lastPrice":76.23,"lastTradeTime":"2026-09-28T19:59:49Z","dividendYield":0.028899},
+    {"securityUuid":"0c5b012e-165e-4c82-05e0-469c83650e81","symbol":"NXE15JAN27C14.50.MX","currency":"CAD","bidPrice":0.84,"askPrice":0.91,"lastPrice":1.7,"lastTradeTime":"2026-09-11T13:57:30Z","dividendYield":null,"greeks":{"delta":0.392332,"gamma":0.104176,"theta":-0.00666,"vega":0.026964,"rho":0.012474,"impliedVolatility":0.525832,"inTheMoneyProbability":0.32452022,"inTheMoney":false}},
+    {"securityUuid":"2919136b-114b-4962-0448-c19b0c641469","symbol":"ARIS.TO","currency":"CAD","bidPrice":24.77,"askPrice":25,"lastPrice":24.8,"lastTradeTime":"2026-09-28T20:00:00Z","dividendYield":0},
+    {"securityUuid":"13040b87-5206-4332-0b67-339e3f5b0636","symbol":"NXE.TO","currency":"CAD","bidPrice":12.71,"askPrice":12.85,"lastPrice":12.75,"lastTradeTime":"2026-09-28T20:00:00Z","dividendYield":0},
+    {"securityUuid":"1b328f54-1446-4b72-03f9-959f35531f78","symbol":"REI.UN.TO","currency":"CAD","bidPrice":20.74,"askPrice":20.96,"lastPrice":20.85,"lastTradeTime":"2026-09-28T20:00:00Z","peRatio":23.43678,"dividendYield":0.056792},
+    {"securityUuid":"0701002c-2754-4712-0a90-069e6c4a1911","symbol":"VFV.TO","currency":"CAD","bidPrice":193.03,"askPrice":193.16,"lastPrice":193.05,"lastTradeTime":"2026-09-28T19:59:23Z","dividendYield":0}
+  ],
+  "activities": [
+    {"transactionId":"29e2001b-65fd-4056-9c59-e6dcb93ac26d","transactionType":"Dividends","description":"VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT DIST ON 40 SHS REC 09/18/26 PAY 09/25/26","amount":7.45,"currency":"CAD","symbol":"VDY.TO","quantity":0,"price":0.18,"commission":0,"tradeDate":"2026-09-25","settlementDate":"2026-09-25"},
+    {"transactionId":"dbddd0b8-fcb8-444d-ab7b-a631205888be","transactionType":"Dividends","description":"VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT DIST ON 50 SHS REC 09/18/26 PAY 09/25/26","amount":9.31,"currency":"CAD","symbol":"VDY.TO","quantity":0,"price":0.18,"commission":0,"tradeDate":"2026-09-25","settlementDate":"2026-09-25"},
+    {"transactionId":"61322ee7-787f-4263-a6ba-b51f73ddb3ee","transactionType":"Trades","description":"NEXGEN ENERGY LTD COM WE ACTED AS AGENT","amount":2724,"currency":"CAD","symbol":"NXE.TO","quantity":-200,"price":13.62,"commission":0,"tradeDate":"2026-09-21","action":"Sell","settlementDate":"2026-09-22"},
+    {"transactionId":"b2876d54-03e7-45ad-a4b7-e5fd3cdcb745","transactionType":"Trades","description":"NEXGEN ENERGY LTD COM WE ACTED AS AGENT","amount":-2700,"currency":"CAD","symbol":"NXE.TO","quantity":200,"price":13.5,"commission":0,"tradeDate":"2026-09-21","action":"Buy","settlementDate":"2026-09-22"}
+  ],
+  "benchmark": {
+    "symbol": "VFV.TO",
+    "series": [
+      {"date": "2026-09-28", "level": 193.05}
+    ]
+  }
+}
