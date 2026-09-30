@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-09-29T22:45:28.445Z",
-  "as_of": "2026-09-29",
+  "generated_at": "2026-09-30T22:45:21.079Z",
+  "as_of": "2026-09-30",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4175
+   "USDCAD": 1.4189
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,7 +12,7 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0033,
+  "blended_mer": 0.0034,
   "distribution_yield": 0.0141,
   "holdings_count": 10,
   "etf_count": 3,
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 133.46,
+   "cash": 162.79,
    "currency": "CAD",
-   "buying_power": 131.26
+   "buying_power": 160.59
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 167,
    "avg_cost": 44.2399,
-   "price": 45.64,
-   "prev_close": 45.715,
-   "market_value": 7621.88,
-   "open_pnl": 233.81,
+   "price": 45.57,
+   "prev_close": 45.64,
+   "market_value": 7610.19,
+   "open_pnl": 222.12,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 210,
    "avg_cost": 31.219,
-   "price": 34.26,
-   "prev_close": 34.16,
-   "market_value": 7194.6,
-   "open_pnl": 638.62,
+   "price": 34.42,
+   "prev_close": 34.26,
+   "market_value": 7228.2,
+   "open_pnl": 672.22,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7934,
-   "price": 75.74,
-   "prev_close": 76.23,
-   "market_value": 6816.6,
-   "open_pnl": -4.81,
+   "price": 75.3,
+   "prev_close": 75.74,
+   "market_value": 6777,
+   "open_pnl": -44.41,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 13.5,
-   "price": 12.81,
-   "prev_close": 12.75,
-   "market_value": 2562,
-   "open_pnl": -138,
+   "price": 12.97,
+   "prev_close": 12.81,
+   "market_value": 2594,
+   "open_pnl": -106,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.75,
-   "prev_close": 20.85,
-   "market_value": 2075,
-   "open_pnl": -15.2,
+   "price": 20.73,
+   "prev_close": 20.75,
+   "market_value": 2073,
+   "open_pnl": -17.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "USD",
    "quantity": 12,
    "avg_cost": 141.6436,
-   "price": 149.3,
-   "prev_close": 145.53,
-   "market_value": 1791.6,
-   "open_pnl": 91.88,
+   "price": 150.8,
+   "prev_close": 149.18,
+   "market_value": 1809.6,
+   "open_pnl": 109.88,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -134,7 +134,7 @@
    "quantity": 40,
    "avg_cost": 40.9225,
    "price": 42.15,
-   "prev_close": 43.94,
+   "prev_close": 42.15,
    "market_value": 1686,
    "open_pnl": 49.1,
    "sector": null,
@@ -149,10 +149,10 @@
    "currency": "CAD",
    "quantity": 45,
    "avg_cost": 26.03,
-   "price": 25.2,
-   "prev_close": 24.8,
-   "market_value": 1134,
-   "open_pnl": -37.35,
+   "price": 24.77,
+   "prev_close": 25.2,
+   "market_value": 1114.65,
+   "open_pnl": -56.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +165,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 66.91,
-   "prev_close": 67.38,
-   "market_value": 669.1,
-   "open_pnl": -21.4,
+   "price": 66.93,
+   "prev_close": 66.91,
+   "market_value": 669.3,
+   "open_pnl": -21.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18096,6 +18096,42 @@
  },
  "activities": [
   {
+   "uid": "t_ab7089f1e9",
+   "date": "2026-09-29",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": "XEQT",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS DIST ON 64 SHS REC 09/24/26 PAY 09/29/26",
+   "amount": 6.53,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0.1
+  },
+  {
+   "uid": "t_6786524d58",
+   "date": "2026-09-29",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": ".BEPC",
+   "description": "BROOKFIELD RENEWABLE CORP NEW CL A EXCHANGEABLE SUBORDINATE VOTING SHARES CASH DIV ON 23 SHS REC 08/31/26 PAY 09/29/26",
+   "amount": 12.5,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
+   "uid": "t_9225577284",
+   "date": "2026-09-29",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": "XEQT",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS DIST ON 100 SHS REC 09/24/26 PAY 09/29/26",
+   "amount": 10.2,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0.1
+  },
+  {
    "uid": "t_155a002849",
    "date": "2026-09-28",
    "type": "Trade",
@@ -22227,28 +22263,28 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7152,
+   "annual_rate_per_share": 0.718,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1793,
+   "annual_rate_per_share": 2.1713,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1608,
+   "annual_rate_per_share": 1.1513,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.4903,
+   "annual_rate_per_share": 2.4833,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22430,10 +22466,31 @@
     "date": "2026-09-29",
     "value": 32437.33,
     "net_flow": 0
+   },
+   {
+    "date": "2026-09-30",
+    "value": 32487.87,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-03-29",
+     "level": 162.41
+    },
+    {
+     "date": "2026-04-05",
+     "level": 167.26
+    },
+    {
+     "date": "2026-04-12",
+     "level": 172.99
+    },
+    {
+     "date": "2026-04-19",
+     "level": 173.6
+    },
     {
      "date": "2026-04-26",
      "level": 174.29
@@ -22524,7 +22581,7 @@
     },
     {
      "date": "2026-09-27",
-     "level": 193.05
+     "level": 192.82
     }
    ]
   }
