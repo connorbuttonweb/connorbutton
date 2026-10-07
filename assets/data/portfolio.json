@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-01T22:45:46.798Z",
-  "as_of": "2026-10-01",
+  "generated_at": "2026-10-07T16:23:12.211Z",
+  "as_of": "2026-10-07",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4233
+   "USDCAD": 1.421
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0034,
-  "distribution_yield": 0.0142,
-  "holdings_count": 10,
+  "blended_mer": 0.0032,
+  "distribution_yield": 0.0153,
+  "holdings_count": 11,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 163.1,
+   "cash": 435.61,
    "currency": "CAD",
-   "buying_power": 160.88
+   "buying_power": 434.95
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 167,
    "avg_cost": 44.2399,
-   "price": 45.46,
-   "prev_close": 45.57,
-   "market_value": 7591.82,
-   "open_pnl": 203.75,
+   "price": 45.9,
+   "prev_close": 46.195,
+   "market_value": 7665.3,
+   "open_pnl": 277.23,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,12 +51,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 210,
-   "avg_cost": 31.219,
-   "price": 34.44,
-   "prev_close": 34.42,
-   "market_value": 7232.4,
-   "open_pnl": 676.42,
+   "quantity": 200,
+   "avg_cost": 31.2116,
+   "price": 34.9,
+   "prev_close": 35.13,
+   "market_value": 6980,
+   "open_pnl": 737.68,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7934,
-   "price": 75.27,
-   "prev_close": 75.3,
-   "market_value": 6774.3,
-   "open_pnl": -47.11,
+   "price": 74.67,
+   "prev_close": 75.69,
+   "market_value": 6720.3,
+   "open_pnl": -101.11,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 13.5,
-   "price": 12.63,
-   "prev_close": 12.97,
-   "market_value": 2526,
-   "open_pnl": -174,
+   "price": 12.72,
+   "prev_close": 13.41,
+   "market_value": 2544,
+   "open_pnl": -156,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,26 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.66,
-   "prev_close": 20.73,
-   "market_value": 2066,
-   "open_pnl": -24.2,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "SPCX",
-   "name": "SPCX",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 12,
-   "avg_cost": 141.6436,
-   "price": 148.7534,
-   "prev_close": 151.5434,
-   "market_value": 1785.04,
-   "open_pnl": 85.32,
+   "price": 20.29,
+   "prev_close": 20.38,
+   "market_value": 2029,
+   "open_pnl": -61.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +117,10 @@
    "currency": "CAD",
    "quantity": 40,
    "avg_cost": 40.9225,
-   "price": 41.15,
-   "prev_close": 42.15,
-   "market_value": 1646,
-   "open_pnl": 9.1,
+   "price": 40.94,
+   "prev_close": 42.91,
+   "market_value": 1637.6,
+   "open_pnl": 0.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -149,10 +133,42 @@
    "currency": "CAD",
    "quantity": 45,
    "avg_cost": 26.03,
-   "price": 24.59,
-   "prev_close": 24.77,
-   "market_value": 1106.55,
-   "open_pnl": -64.8,
+   "price": 24.29,
+   "prev_close": 25.1,
+   "market_value": 1093.05,
+   "open_pnl": -78.3,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "DLR.U.TO",
+   "name": "DLR.U.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 106,
+   "avg_cost": 10.0952,
+   "price": 10.1,
+   "prev_close": 10.1,
+   "market_value": 1070.6,
+   "open_pnl": 0.51,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "SPCX",
+   "name": "SPCX",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 6,
+   "avg_cost": 136.2673,
+   "price": 169,
+   "prev_close": 171.92,
+   "market_value": 1014,
+   "open_pnl": 196.4,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +181,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 68.06,
-   "prev_close": 66.93,
-   "market_value": 680.6,
-   "open_pnl": -9.9,
+   "price": 67.92,
+   "prev_close": 68.48,
+   "market_value": 679.2,
+   "open_pnl": -11.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +197,10 @@
    "currency": "CAD",
    "quantity": 3,
    "avg_cost": 1.7,
-   "price": 1.7,
-   "prev_close": 1.7,
-   "market_value": 5.1,
-   "open_pnl": 0,
+   "price": 0.83,
+   "prev_close": 0.83,
+   "market_value": 2.49,
+   "open_pnl": -2.61,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18096,6 +18112,78 @@
  },
  "activities": [
   {
+   "uid": "t_a26fb3a991",
+   "date": "2026-10-05",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "FINN.TO",
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": 355,
+   "currency": "CAD",
+   "quantity": -10,
+   "price": 35.5
+  },
+  {
+   "uid": "t_de6d74ac2a",
+   "date": "2026-10-05",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "G036247",
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": -60.6,
+   "currency": "USD",
+   "quantity": 6,
+   "price": 10.1
+  },
+  {
+   "uid": "t_5c7166f466",
+   "date": "2026-10-05",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "G036247",
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT",
+   "amount": -1009.5,
+   "currency": "USD",
+   "quantity": 100,
+   "price": 10.095
+  },
+  {
+   "uid": "t_14a1bd9503",
+   "date": "2026-10-05",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "SPCX",
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": 1008.01,
+   "currency": "USD",
+   "quantity": -6,
+   "price": 168.0066
+  },
+  {
+   "uid": "t_9b85e50cc5",
+   "date": "2026-10-05",
+   "type": "FX",
+   "account_id": "main",
+   "symbol": null,
+   "description": "CONVERSION - CAD/USD",
+   "amount": 12.49,
+   "currency": "USD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
+   "uid": "t_a03233d8d0",
+   "date": "2026-10-02",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": ".CNQ",
+   "description": "CANADIAN NATURAL RESOURCES LTD CASH DIV ON 10 SHS REC 09/11/26 PAY 10/02/26",
+   "amount": 6.25,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
    "uid": "t_ab7089f1e9",
    "date": "2026-09-29",
    "type": "Dividend",
@@ -22263,28 +22351,35 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7175,
+   "annual_rate_per_share": 0.7157,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1844,
+   "annual_rate_per_share": 2.1739,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.153,
+   "annual_rate_per_share": 1.1597,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  },
+  {
+   "symbol": "DLR.U.TO",
+   "annual_rate_per_share": 0.2559,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.5429,
+   "annual_rate_per_share": 2.4633,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22476,130 +22571,15 @@
     "date": "2026-10-01",
     "value": 32332.52,
     "net_flow": 0
+   },
+   {
+    "date": "2026-10-07",
+    "value": 32748.77,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
-    {
-     "date": "2025-12-28",
-     "level": 167
-    },
-    {
-     "date": "2026-01-04",
-     "level": 171.9
-    },
-    {
-     "date": "2026-01-11",
-     "level": 171.34
-    },
-    {
-     "date": "2026-01-18",
-     "level": 168.07
-    },
-    {
-     "date": "2026-01-25",
-     "level": 167.64
-    },
-    {
-     "date": "2026-02-01",
-     "level": 168.09
-    },
-    {
-     "date": "2026-02-08",
-     "level": 165.25
-    },
-    {
-     "date": "2026-02-15",
-     "level": 167.1
-    },
-    {
-     "date": "2026-02-22",
-     "level": 166.62
-    },
-    {
-     "date": "2026-03-01",
-     "level": 162.72
-    },
-    {
-     "date": "2026-03-08",
-     "level": 161.8
-    },
-    {
-     "date": "2026-03-15",
-     "level": 158.73
-    },
-    {
-     "date": "2026-03-22",
-     "level": 156.7
-    },
-    {
-     "date": "2026-03-29",
-     "level": 162.41
-    },
-    {
-     "date": "2026-04-05",
-     "level": 167.26
-    },
-    {
-     "date": "2026-04-12",
-     "level": 172.99
-    },
-    {
-     "date": "2026-04-19",
-     "level": 173.6
-    },
-    {
-     "date": "2026-04-26",
-     "level": 174.29
-    },
-    {
-     "date": "2026-05-03",
-     "level": 179.42
-    },
-    {
-     "date": "2026-05-10",
-     "level": 180.84
-    },
-    {
-     "date": "2026-05-17",
-     "level": 183.2
-    },
-    {
-     "date": "2026-05-24",
-     "level": 185.61
-    },
-    {
-     "date": "2026-05-31",
-     "level": 182.9
-    },
-    {
-     "date": "2026-06-07",
-     "level": 184.62
-    },
-    {
-     "date": "2026-06-14",
-     "level": 188.36
-    },
-    {
-     "date": "2026-06-21",
-     "level": 184.37
-    },
-    {
-     "date": "2026-06-28",
-     "level": 189.34
-    },
-    {
-     "date": "2026-07-05",
-     "level": 190.09
-    },
-    {
-     "date": "2026-07-12",
-     "level": 185.25
-    },
-    {
-     "date": "2026-07-19",
-     "level": 185.28
-    },
     {
      "date": "2026-07-26",
      "level": 186.3
@@ -22638,7 +22618,11 @@
     },
     {
      "date": "2026-09-27",
-     "level": 193.24
+     "level": 195.08
+    },
+    {
+     "date": "2026-10-04",
+     "level": 197
     }
    ]
   }
