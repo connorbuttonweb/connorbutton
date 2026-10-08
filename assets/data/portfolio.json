@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-07T22:44:31.106Z",
-  "as_of": "2026-10-07",
+  "generated_at": "2026-10-08T22:43:34.252Z",
+  "as_of": "2026-10-08",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.421
+   "USDCAD": 1.4259
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,8 +13,8 @@
  },
  "profile": {
   "blended_mer": 0.0032,
-  "distribution_yield": 0.0153,
-  "holdings_count": 11,
+  "distribution_yield": 0.0146,
+  "holdings_count": 10,
   "etf_count": 3,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 435.61,
+   "cash": 1147.16,
    "currency": "CAD",
-   "buying_power": 434.95
+   "buying_power": 1146.5
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 167,
    "avg_cost": 44.2399,
-   "price": 45.91,
-   "prev_close": 46.195,
-   "market_value": 7666.97,
-   "open_pnl": 278.9,
+   "price": 45.65,
+   "prev_close": 45.65,
+   "market_value": 7623.55,
+   "open_pnl": 235.48,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 31.2116,
-   "price": 34.93,
-   "prev_close": 35.13,
-   "market_value": 6986,
-   "open_pnl": 743.68,
+   "price": 34.26,
+   "prev_close": 34.26,
+   "market_value": 6852,
+   "open_pnl": 609.68,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 90,
    "avg_cost": 75.7934,
-   "price": 74.3,
-   "prev_close": 75.69,
-   "market_value": 6687,
-   "open_pnl": -134.41,
+   "price": 74.63,
+   "prev_close": 74.63,
+   "market_value": 6716.7,
+   "open_pnl": -104.71,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 13.5,
-   "price": 12.81,
-   "prev_close": 13.41,
-   "market_value": 2562,
-   "open_pnl": -138,
+   "price": 12.33,
+   "prev_close": 12.33,
+   "market_value": 2466,
+   "open_pnl": -234,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,26 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.39,
-   "prev_close": 20.38,
-   "market_value": 2039,
-   "open_pnl": -51.2,
+   "price": 20.5,
+   "prev_close": 20.5,
+   "market_value": 2050,
+   "open_pnl": -40.2,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "ARIS.TO",
+   "name": "ARIS.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 80,
+   "avg_cost": 24.9362,
+   "price": 23.86,
+   "prev_close": 23.86,
+   "market_value": 1908.8,
+   "open_pnl": -86.1,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,42 +133,10 @@
    "currency": "CAD",
    "quantity": 40,
    "avg_cost": 40.9225,
-   "price": 41.34,
-   "prev_close": 42.91,
-   "market_value": 1653.6,
-   "open_pnl": 16.7,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "ARIS.TO",
-   "name": "ARIS.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 45,
-   "avg_cost": 26.03,
-   "price": 24.28,
-   "prev_close": 25.1,
-   "market_value": 1092.6,
-   "open_pnl": -78.75,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "DLR.U.TO",
-   "name": "DLR.U.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "USD",
-   "quantity": 106,
-   "avg_cost": 10.0952,
-   "price": 10.1,
-   "prev_close": 10.1,
-   "market_value": 1070.6,
-   "open_pnl": 0.51,
+   "price": 38.81,
+   "prev_close": 38.81,
+   "market_value": 1552.4,
+   "open_pnl": -84.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -165,10 +149,10 @@
    "currency": "USD",
    "quantity": 6,
    "avg_cost": 136.2673,
-   "price": 168.22,
-   "prev_close": 172.54,
-   "market_value": 1009.32,
-   "open_pnl": 191.72,
+   "price": 165.1467,
+   "prev_close": 165.1467,
+   "market_value": 990.88,
+   "open_pnl": 173.28,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -181,10 +165,10 @@
    "currency": "CAD",
    "quantity": 10,
    "avg_cost": 69.05,
-   "price": 67.8,
-   "prev_close": 68.48,
-   "market_value": 678,
-   "open_pnl": -12.5,
+   "price": 69.84,
+   "prev_close": 69.84,
+   "market_value": 698.4,
+   "open_pnl": 7.9,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18112,6 +18096,42 @@
  },
  "activities": [
   {
+   "uid": "t_70fec2c27f",
+   "date": "2026-10-07",
+   "type": "Dividend",
+   "account_id": "main",
+   "symbol": "REI.UN",
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS DIST ON 100 SHS REC 09/30/26 PAY 10/07/26",
+   "amount": 9.65,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0.09
+  },
+  {
+   "uid": "t_b8ef8fc7ca",
+   "date": "2026-10-07",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": "DLR",
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION TO CAD",
+   "amount": 0,
+   "currency": "USD",
+   "quantity": -106,
+   "price": 0
+  },
+  {
+   "uid": "t_4cbbd173ee",
+   "date": "2026-10-07",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": "DLR",
+   "description": "GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION FROM USD BOOK VALUE: $1520.61 CNV@ 1.4210",
+   "amount": 0,
+   "currency": "CAD",
+   "quantity": 106,
+   "price": 0
+  },
+  {
    "uid": "t_a26fb3a991",
    "date": "2026-10-05",
    "type": "Trade",
@@ -22351,35 +22371,28 @@
  "dividends_projected": [
   {
    "symbol": "XEQT.TO",
-   "annual_rate_per_share": 0.7158,
+   "annual_rate_per_share": 0.7118,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.1631,
+   "annual_rate_per_share": 2.1673,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1654,
-   "frequency": "quarterly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  },
-  {
-   "symbol": "DLR.U.TO",
-   "annual_rate_per_share": 0.2559,
+   "annual_rate_per_share": 1.1648,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "CNQ.TO",
-   "annual_rate_per_share": 2.459,
+   "annual_rate_per_share": 2.5496,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22576,69 +22589,18 @@
     "date": "2026-10-07",
     "value": 32758.84,
     "net_flow": 0
+   },
+   {
+    "date": "2026-10-08",
+    "value": 32430.4,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
     {
-     "date": "2026-07-05",
-     "level": 189.34
-    },
-    {
-     "date": "2026-07-12",
-     "level": 190.09
-    },
-    {
-     "date": "2026-07-19",
-     "level": 185.25
-    },
-    {
-     "date": "2026-07-26",
-     "level": 185.28
-    },
-    {
-     "date": "2026-08-02",
-     "level": 186.3
-    },
-    {
-     "date": "2026-08-09",
-     "level": 191.82
-    },
-    {
-     "date": "2026-08-16",
-     "level": 191.7
-    },
-    {
-     "date": "2026-08-23",
-     "level": 187.6
-    },
-    {
-     "date": "2026-08-30",
-     "level": 190.38
-    },
-    {
-     "date": "2026-09-06",
-     "level": 189.54
-    },
-    {
-     "date": "2026-09-13",
-     "level": 188.52
-    },
-    {
-     "date": "2026-09-20",
-     "level": 190.07
-    },
-    {
-     "date": "2026-09-27",
-     "level": 194.55
-    },
-    {
-     "date": "2026-10-04",
-     "level": 195.08
-    },
-    {
-     "date": "2026-10-07",
-     "level": 197
+     "date": "2026-10-08",
+     "level": 195.78
     }
    ]
   }
