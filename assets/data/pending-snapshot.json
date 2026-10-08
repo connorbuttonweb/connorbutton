@@ -1,0 +1,87 @@
+{
+  "as_of": "2026-10-08",
+  "accounts": [
+    {
+      "positions": [
+        {"id":"181f3121-241f-4842-0e5e-d1a41e0ea54f","instrument":"SPCX","qty":6,"side":"buy","avgPrice":136.2673},
+        {"id":"6b051285-0bbb-4b42-02d8-a5a11a423d49","instrument":"FINN.TO","qty":100,"side":"buy","avgPrice":31.3662},
+        {"id":"06007f2f-2653-4612-0981-079d6f491810","instrument":"VDY.TO","qty":40,"side":"buy","avgPrice":75.2544},
+        {"id":"08284e81-1330-4812-0586-032980451817","instrument":"XEQT.TO","qty":67,"side":"buy","avgPrice":44.2465}
+      ],
+      "balances": {
+        "accountId": null,
+        "balances": {
+          "maxBuyingPower": {"cad":"$361.53","usd":"$21.06","combinedCad":"$390.90","combinedUsd":"$269.01"},
+          "totalBuyingPower": {"cad":"$361.53","usd":"$21.06","combinedCad":"$390.90","combinedUsd":"$269.01"},
+          "buyingPower": {"cad":"$361.53","usd":"$21.06","combinedCad":"$390.90","combinedUsd":"$269.01"},
+          "totalEquity": {"cad":"$9,831.28","usd":"$1,011.84","combinedCad":"$11,274.11","combinedUsd":"$7,906.38"},
+          "marketValue": {"cad":"$9,469.75","usd":"$990.78","combinedCad":"$10,882.55","combinedUsd":"$7,631.79"},
+          "cash": {"cad":"$361.53","usd":"$21.06","combinedCad":"$391.56","combinedUsd":"$274.59"}
+        },
+        "profit": {
+          "dayPnl": {"cad":"-$71.22","usd":"-$14.82","combinedCad":"-$92.35","combinedUsd":"-$64.77"},
+          "closedPnl": {"cad":"$256.91","usd":"$6.17","combinedCad":"$265.70","combinedUsd":"$186.33"},
+          "openPnl": {"cad":"$358.43","usd":"$173.18","combinedCad":"$605.37","combinedUsd":"$424.54"}
+        }
+      }
+    },
+    {
+      "positions": [
+        {"id":"0c5b012e-165e-4c82-05e0-469c83650e81","instrument":"NXE15JAN27C14.50.MX","qty":3,"side":"buy","avgPrice":1.7},
+        {"id":"2919136b-114b-4962-0448-c19b0c641469","instrument":"ARIS.TO","qty":80,"side":"buy","avgPrice":24.9362},
+        {"id":"13040b87-5206-4332-0b67-339e3f5b0636","instrument":"NXE.TO","qty":200,"side":"buy","avgPrice":13.5},
+        {"id":"1b328f54-1446-4b72-03f9-959f35531f78","instrument":"REI.UN.TO","qty":100,"side":"buy","avgPrice":20.902},
+        {"id":"1a283835-094a-4a02-088d-9b880b48080c","instrument":"CNQ.TO","qty":10,"side":"buy","avgPrice":69.05},
+        {"id":"663b0f14-2e58-4692-08ca-989e25980c9b","instrument":"MDA.TO","qty":40,"side":"buy","avgPrice":40.9225},
+        {"id":"6b051285-0bbb-4b42-02d8-a5a11a423d49","instrument":"FINN.TO","qty":100,"side":"buy","avgPrice":31.057},
+        {"id":"08284e81-1330-4812-0586-032980451817","instrument":"XEQT.TO","qty":100,"side":"buy","avgPrice":44.2355},
+        {"id":"06007f2f-2653-4612-0981-079d6f491810","instrument":"VDY.TO","qty":50,"side":"buy","avgPrice":76.2246}
+      ],
+      "balances": {
+        "accountId": null,
+        "balances": {
+          "maxBuyingPower": {"cad":"$755.61","usd":"-$0.01","combinedCad":"$755.60","combinedUsd":"$518.23"},
+          "totalBuyingPower": {"cad":"$755.61","usd":"-$0.01","combinedCad":"$755.60","combinedUsd":"$518.23"},
+          "buyingPower": {"cad":"$755.61","usd":"-$0.01","combinedCad":"$755.60","combinedUsd":"$518.23"},
+          "totalEquity": {"cad":"$21,402.71","usd":"-$0.01","combinedCad":"$21,402.70","combinedUsd":"$15,009.43"},
+          "marketValue": {"cad":"$20,647.10","usd":"$0.00","combinedCad":"$20,647.10","combinedUsd":"$14,479.54"},
+          "cash": {"cad":"$755.61","usd":"-$0.01","combinedCad":"$755.60","combinedUsd":"$529.89"}
+        },
+        "profit": {
+          "dayPnl": {"cad":"-$223.18","usd":"$0.00","combinedCad":"-$223.18","combinedUsd":"-$156.51"},
+          "closedPnl": {"cad":"$21.42","usd":"$0.00","combinedCad":"$21.42","combinedUsd":"$15.02"},
+          "openPnl": {"cad":"-$315.89","usd":"$0.00","combinedCad":"-$315.89","combinedUsd":"-$221.53"}
+        }
+      }
+    }
+  ],
+  "quotes": [
+    {"securityUuid":"181f3121-241f-4842-0e5e-d1a41e0ea54f","symbol":"SPCX","currency":"USD","bidPrice":165.05,"askPrice":165.15,"lastPrice":165.1467,"lastTradeTime":"2026-10-08T22:41:18Z","openPrice":167.465,"highPrice":167.6,"lowPrice":160,"highPrice52Weeks":225.64,"lowPrice52Weeks":104.83,"peRatio":0,"dividendYield":0},
+    {"securityUuid":"6b051285-0bbb-4b42-02d8-a5a11a423d49","symbol":"FINN.TO","currency":"CAD","bidPrice":34.02,"askPrice":34.44,"lastPrice":34.26,"lastTradeTime":"2026-10-08T19:59:31Z","openPrice":34.61,"highPrice":34.61,"lowPrice":34.13,"highPrice52Weeks":35.82,"lowPrice52Weeks":21.67,"peRatio":0,"dividendYield":0},
+    {"securityUuid":"06007f2f-2653-4612-0981-079d6f491810","symbol":"VDY.TO","currency":"CAD","bidPrice":74.58,"askPrice":74.8,"lastPrice":74.63,"lastTradeTime":"2026-10-08T19:59:36Z","openPrice":74.26,"highPrice":74.97,"lowPrice":74.16,"highPrice52Weeks":79.29,"lowPrice52Weeks":57.32,"peRatio":0,"dividendYield":0.02904},
+    {"securityUuid":"08284e81-1330-4812-0586-032980451817","symbol":"XEQT.TO","currency":"CAD","bidPrice":45.63,"askPrice":45.68,"lastPrice":45.65,"lastTradeTime":"2026-10-08T19:59:42Z","openPrice":45.74,"highPrice":45.8,"lowPrice":45.55,"highPrice52Weeks":46.48,"lowPrice52Weeks":38.55,"peRatio":0,"dividendYield":0.015593},
+    {"securityUuid":"0c5b012e-165e-4c82-05e0-469c83650e81","symbol":"NXE15JAN27C14.50.MX","currency":"CAD","bidPrice":0.55,"askPrice":0.66,"lastPrice":0.83,"lastTradeTime":"2026-10-02T17:20:39Z","openPrice":null,"highPrice":null,"lowPrice":null,"highPrice52Weeks":null,"lowPrice52Weeks":null,"peRatio":null,"dividendYield":null,"greeks":{"delta":0.324364,"gamma":0.110008,"theta":-0.006055,"vega":0.023238,"rho":0.009313,"impliedVolatility":0.505921,"inTheMoneyProbability":0.27335263,"inTheMoney":false}},
+    {"securityUuid":"2919136b-114b-4962-0448-c19b0c641469","symbol":"ARIS.TO","currency":"CAD","bidPrice":23.57,"askPrice":24,"lastPrice":23.86,"lastTradeTime":"2026-10-08T20:00:00Z","openPrice":24.04,"highPrice":24.04,"lowPrice":22.99,"highPrice52Weeks":31.47,"lowPrice52Weeks":12.25,"peRatio":0,"dividendYield":0},
+    {"securityUuid":"13040b87-5206-4332-0b67-339e3f5b0636","symbol":"NXE.TO","currency":"CAD","bidPrice":12.26,"askPrice":12.43,"lastPrice":12.33,"lastTradeTime":"2026-10-08T20:00:00Z","openPrice":12.67,"highPrice":12.7,"lowPrice":12.15,"highPrice52Weeks":18.91,"lowPrice52Weeks":10.36,"peRatio":0,"dividendYield":0},
+    {"securityUuid":"1b328f54-1446-4b72-03f9-959f35531f78","symbol":"REI.UN.TO","currency":"CAD","bidPrice":20.46,"askPrice":20.51,"lastPrice":20.5,"lastTradeTime":"2026-10-08T20:00:00Z","openPrice":20.33,"highPrice":20.54,"lowPrice":20.29,"highPrice52Weeks":23.25,"lowPrice52Weeks":18.06,"peRatio":23.42529,"dividendYield":0.05682},
+    {"securityUuid":"1a283835-094a-4a02-088d-9b880b48080c","symbol":"CNQ.TO","currency":"CAD","bidPrice":69.7,"askPrice":69.91,"lastPrice":69.84,"lastTradeTime":"2026-10-08T20:00:00Z","openPrice":68.8,"highPrice":69.94,"lowPrice":68.7,"highPrice52Weeks":72.35,"lowPrice52Weeks":41.67,"peRatio":11.8069,"dividendYield":0.036507},
+    {"securityUuid":"663b0f14-2e58-4692-08ca-989e25980c9b","symbol":"MDA.TO","currency":"CAD","bidPrice":38.75,"askPrice":39,"lastPrice":38.81,"lastTradeTime":"2026-10-08T20:00:00Z","openPrice":40.65,"highPrice":40.65,"lowPrice":38.48,"highPrice52Weeks":67.9,"lowPrice52Weeks":20.85,"peRatio":48.76136,"dividendYield":0}
+  ],
+  "activities": [
+    {"transactionId":"655904ac-9d4c-49ae-887c-87db90a0935b","transactionType":"Trades","description":"FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT","amount":355,"currency":"CAD","symbol":"FINN.TO","quantity":-10,"price":35.5,"commission":0,"tradeDate":"2026-10-05","action":"Sell","settlementDate":"2026-10-06","gross":{"currencyCode":"CAD","amount":355}},
+    {"transactionId":"312fd153-7a3a-4dfe-b0f3-024ee48cf992","transactionType":"Dividends","description":"RIOCAN REAL ESTATE INVESTMENT TRUST UNITS DIST ON 100 SHS REC 09/30/26 PAY 10/07/26","amount":9.65,"currency":"CAD","symbol":"REI.UN","quantity":0,"price":0.09,"commission":0,"tradeDate":"2026-10-07","settlementDate":"2026-10-07","gross":{"currencyCode":"CAD","amount":0}},
+    {"transactionId":"65ddbd31-ce74-44f9-bf2f-f75034271774","transactionType":"Other","description":"GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION TO CAD","amount":0,"currency":"USD","symbol":"DLR","quantity":-106,"price":0,"commission":0,"tradeDate":"2026-10-07","action":"BRW","settlementDate":"2026-10-07","gross":{"currencyCode":"USD","amount":0}},
+    {"transactionId":"d37e5d35-00e7-4b05-86fe-a5abd5048b56","transactionType":"Other","description":"GLOBAL X US DLR CURRENCY ETF UNIT CL A JOURNAL POSITION FROM USD BOOK VALUE: $1520.61 CNV@ 1.4210","amount":0,"currency":"CAD","symbol":"DLR","quantity":106,"price":0,"commission":0,"tradeDate":"2026-10-07","action":"BRW","settlementDate":"2026-10-07","gross":{"currencyCode":"CAD","amount":0}},
+    {"transactionId":"94ec4cb5-ecf3-4894-a95a-a23bfef0e1e8","transactionType":"Trades","description":"GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT","amount":-60.6,"currency":"USD","symbol":"G036247","quantity":6,"price":10.1,"commission":0,"tradeDate":"2026-10-05","action":"Buy","settlementDate":"2026-10-06","gross":{"currencyCode":"USD","amount":-60.6}},
+    {"transactionId":"c77a52ac-f7c6-4a20-ba60-bbdb0d3754dc","transactionType":"Trades","description":"GLOBAL X US DLR CURRENCY ETF UNIT CL A WE ACTED AS AGENT","amount":-1009.5,"currency":"USD","symbol":"G036247","quantity":100,"price":10.095,"commission":0,"tradeDate":"2026-10-05","action":"Buy","settlementDate":"2026-10-06","gross":{"currencyCode":"USD","amount":-1009.5}},
+    {"transactionId":"0d1fc444-55b0-4b23-ae6f-1199f6bb4274","transactionType":"Trades","description":"SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS","amount":1008.01,"currency":"USD","symbol":"SPCX","quantity":-6,"price":168.0066,"commission":-0.03,"tradeDate":"2026-10-05","action":"Sell","settlementDate":"2026-10-06","gross":{"currencyCode":"USD","amount":1008.04}},
+    {"transactionId":"b4e3054a-5cce-403f-81c5-7215d33ea539","transactionType":"FX conversion","description":"CONVERSION - CAD/USD","amount":12.49,"currency":"USD","quantity":0,"price":0,"commission":0,"tradeDate":"2026-10-05","action":"FXT","settlementDate":"2026-10-05","gross":{"currencyCode":"USD","amount":0},"fx":{"baseCurrency":{"currencyCode":"CAD","amount":-18.09},"averageRate":0.6904367053620785}},
+    {"transactionId":"a5a2a6bf-f392-4f04-844e-63783dfcf990","transactionType":"Dividends","description":"CANADIAN NATURAL RESOURCES LTD CASH DIV ON 10 SHS REC 09/11/26 PAY 10/02/26","amount":6.25,"currency":"CAD","symbol":".CNQ","quantity":0,"price":0,"commission":0,"tradeDate":"2026-10-02","action":"DIV","settlementDate":"2026-10-02","gross":{"currencyCode":"CAD","amount":0}}
+  ],
+  "benchmark": {
+    "symbol": "VFV.TO",
+    "series": [
+      {"date": "2026-10-08", "level": 195.78}
+    ]
+  }
+}
