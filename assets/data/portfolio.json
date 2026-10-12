@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-09T22:44:37.916Z",
+  "generated_at": "2026-10-12T22:45:19.113Z",
   "as_of": "2026-10-09",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4225
+   "USDCAD": 1.4256
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -13,7 +13,7 @@
  },
  "profile": {
   "blended_mer": 0.0026,
-  "distribution_yield": 0.0095,
+  "distribution_yield": 0.0094,
   "holdings_count": 8,
   "etf_count": 2,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 8724.36,
+   "cash": 8724.43,
    "currency": "CAD",
-   "buying_power": 8723.71
+   "buying_power": 8723.77
   }
  ],
  "positions": [
@@ -38,7 +38,7 @@
    "quantity": 200,
    "avg_cost": 31.2116,
    "price": 34.97,
-   "prev_close": 34.26,
+   "prev_close": 34.97,
    "market_value": 6994,
    "open_pnl": 751.68,
    "sector": null,
@@ -54,7 +54,7 @@
    "quantity": 400,
    "avg_cost": 13.1,
    "price": 12.51,
-   "prev_close": 12.33,
+   "prev_close": 12.51,
    "market_value": 5004,
    "open_pnl": -236,
    "sector": null,
@@ -70,7 +70,7 @@
    "quantity": 50,
    "avg_cost": 76.2246,
    "price": 75.34,
-   "prev_close": 74.63,
+   "prev_close": 75.34,
    "market_value": 3767,
    "open_pnl": -44.23,
    "sector": null,
@@ -86,7 +86,7 @@
    "quantity": 100,
    "avg_cost": 24.915,
    "price": 24.76,
-   "prev_close": 23.86,
+   "prev_close": 24.76,
    "market_value": 2476,
    "open_pnl": -15.5,
    "sector": null,
@@ -102,7 +102,7 @@
    "quantity": 60,
    "avg_cost": 40.7316,
    "price": 40.18,
-   "prev_close": 38.81,
+   "prev_close": 40.18,
    "market_value": 2410.8,
    "open_pnl": -33.1,
    "sector": null,
@@ -118,7 +118,7 @@
    "quantity": 100,
    "avg_cost": 20.902,
    "price": 20.51,
-   "prev_close": 20.5,
+   "prev_close": 20.51,
    "market_value": 2051,
    "open_pnl": -39.2,
    "sector": null,
@@ -133,10 +133,10 @@
    "currency": "USD",
    "quantity": 6,
    "avg_cost": 136.2673,
-   "price": 162.78,
-   "prev_close": 160.78,
-   "market_value": 976.68,
-   "open_pnl": 159.08,
+   "price": 163.4476,
+   "prev_close": 162.5976,
+   "market_value": 980.69,
+   "open_pnl": 163.08,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -150,7 +150,7 @@
    "quantity": 3,
    "avg_cost": 1.7,
    "price": 0.72,
-   "prev_close": 0.83,
+   "prev_close": 0.72,
    "market_value": 2.16,
    "open_pnl": -2.94,
    "sector": null,
@@ -18064,6 +18064,102 @@
  },
  "activities": [
   {
+   "uid": "t_f9ccae4409",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": 3009.2,
+   "currency": "CAD",
+   "quantity": -40,
+   "price": 75.23
+  },
+  {
+   "uid": "t_e890d5f764",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "XEQT.TO",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+   "amount": 3091.38,
+   "currency": "CAD",
+   "quantity": -67,
+   "price": 46.14
+  },
+  {
+   "uid": "t_f083787334",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "XEQT.TO",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+   "amount": 2306,
+   "currency": "CAD",
+   "quantity": -50,
+   "price": 46.12
+  },
+  {
+   "uid": "t_f9f08ba68b",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "ARIS.TO",
+   "description": "ARIS MNG CORP COM WE ACTED AS AGENT",
+   "amount": -496.6,
+   "currency": "CAD",
+   "quantity": 20,
+   "price": 24.83
+  },
+  {
+   "uid": "t_2208d4c6d5",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE.TO",
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -2540,
+   "currency": "CAD",
+   "quantity": 200,
+   "price": 12.7
+  },
+  {
+   "uid": "t_3efe0b348b",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "MDA.TO",
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+   "amount": -807,
+   "currency": "CAD",
+   "quantity": 20,
+   "price": 40.35
+  },
+  {
+   "uid": "t_6e55141f6a",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "XEQT.TO",
+   "description": "ISHARES CORE EQUITY ETF PORTFOLIO UNITS WE ACTED AS AGENT",
+   "amount": 2306.5,
+   "currency": "CAD",
+   "quantity": -50,
+   "price": 46.13
+  },
+  {
+   "uid": "t_52b87ad35a",
+   "date": "2026-10-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "CNQ.TO",
+   "description": "CANADIAN NATURAL RESOURCES LTD WE ACTED AS AGENT",
+   "amount": 707.8,
+   "currency": "CAD",
+   "quantity": -10,
+   "price": 70.78
+  },
+  {
    "uid": "t_91ea9e205b",
    "date": "2026-10-08",
    "type": "Trade",
@@ -22375,14 +22471,14 @@
  "dividends_projected": [
   {
    "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.2289,
+   "annual_rate_per_share": 2.219,
    "frequency": "monthly",
    "next_ex_date": null,
    "next_pay_date": null
   },
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1648,
+   "annual_rate_per_share": 1.1585,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22587,7 +22683,7 @@
    },
    {
     "date": "2026-10-09",
-    "value": 32818.65,
+    "value": 32827.46,
     "net_flow": 0
    }
   ],
