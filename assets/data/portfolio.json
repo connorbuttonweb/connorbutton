@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-12T22:45:19.113Z",
-  "as_of": "2026-10-09",
+  "generated_at": "2026-10-13T22:45:12.998Z",
+  "as_of": "2026-10-13",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4256
+   "USDCAD": 1.4282
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,10 +12,10 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0026,
-  "distribution_yield": 0.0094,
-  "holdings_count": 8,
-  "etf_count": 2,
+  "blended_mer": 0.0035,
+  "distribution_yield": 0.0044,
+  "holdings_count": 7,
+  "etf_count": 1,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
  "accounts": [
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 8724.43,
+   "cash": 6293.58,
    "currency": "CAD",
-   "buying_power": 8723.77
+   "buying_power": 6292.92
   }
  ],
  "positions": [
@@ -35,12 +35,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 200,
-   "avg_cost": 31.2116,
-   "price": 34.97,
+   "quantity": 300,
+   "avg_cost": 32.2977,
+   "price": 34.47,
    "prev_close": 34.97,
-   "market_value": 6994,
-   "open_pnl": 751.68,
+   "market_value": 10341,
+   "open_pnl": 651.69,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,28 +51,28 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 400,
-   "avg_cost": 13.1,
-   "price": 12.51,
+   "quantity": 500,
+   "avg_cost": 12.895,
+   "price": 12.07,
    "prev_close": 12.51,
-   "market_value": 5004,
-   "open_pnl": -236,
+   "market_value": 6035,
+   "open_pnl": -412.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "VDY.TO",
-   "name": "Vanguard FTSE Canadian High Dividend Yield Index ETF",
+   "symbol": "MDA.TO",
+   "name": "MDA.TO",
    "account_id": "main",
-   "asset_type": "ETF",
+   "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 50,
-   "avg_cost": 76.2246,
-   "price": 75.34,
-   "prev_close": 75.34,
-   "market_value": 3767,
-   "open_pnl": -44.23,
+   "quantity": 100,
+   "avg_cost": 40.603,
+   "price": 40.62,
+   "prev_close": 40.18,
+   "market_value": 4062,
+   "open_pnl": 1.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,26 +85,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 24.915,
-   "price": 24.76,
+   "price": 24.11,
    "prev_close": 24.76,
-   "market_value": 2476,
-   "open_pnl": -15.5,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "MDA.TO",
-   "name": "MDA.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 60,
-   "avg_cost": 40.7316,
-   "price": 40.18,
-   "prev_close": 40.18,
-   "market_value": 2410.8,
-   "open_pnl": -33.1,
+   "market_value": 2411,
+   "open_pnl": -80.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.51,
+   "price": 20.59,
    "prev_close": 20.51,
-   "market_value": 2051,
-   "open_pnl": -39.2,
+   "market_value": 2059,
+   "open_pnl": -31.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +117,10 @@
    "currency": "USD",
    "quantity": 6,
    "avg_cost": 136.2673,
-   "price": 163.4476,
-   "prev_close": 162.5976,
-   "market_value": 980.69,
-   "open_pnl": 163.08,
+   "price": 156.98,
+   "prev_close": 163.86,
+   "market_value": 941.88,
+   "open_pnl": 124.28,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -22470,15 +22454,8 @@
  ],
  "dividends_projected": [
   {
-   "symbol": "VDY.TO",
-   "annual_rate_per_share": 2.219,
-   "frequency": "monthly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  },
-  {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1585,
+   "annual_rate_per_share": 1.1625,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22684,6 +22661,11 @@
    {
     "date": "2026-10-09",
     "value": 32827.46,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-10-13",
+    "value": 32548.93,
     "net_flow": 0
    }
   ],
