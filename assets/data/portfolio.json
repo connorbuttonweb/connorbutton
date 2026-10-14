@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-13T22:45:12.998Z",
-  "as_of": "2026-10-13",
+  "generated_at": "2026-10-14T22:45:41.419Z",
+  "as_of": "2026-10-14",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4282
+   "USDCAD": 1.4216
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,8 +12,8 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0035,
-  "distribution_yield": 0.0044,
+  "blended_mer": 0.0052,
+  "distribution_yield": 0.0037,
   "holdings_count": 7,
   "etf_count": 1,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 6293.58,
+   "cash": 229.29,
    "currency": "CAD",
-   "buying_power": 6292.92
+   "buying_power": 228.64
   }
  ],
  "positions": [
@@ -35,12 +35,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 300,
-   "avg_cost": 32.2977,
-   "price": 34.47,
-   "prev_close": 34.97,
-   "market_value": 10341,
-   "open_pnl": 651.69,
+   "quantity": 445,
+   "avg_cost": 32.81,
+   "price": 33.81,
+   "prev_close": 34.47,
+   "market_value": 15045.45,
+   "open_pnl": 445.01,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,12 +51,12 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 500,
-   "avg_cost": 12.895,
-   "price": 12.07,
-   "prev_close": 12.51,
-   "market_value": 6035,
-   "open_pnl": -412.5,
+   "quantity": 600,
+   "avg_cost": 12.6675,
+   "price": 11.48,
+   "prev_close": 12.07,
+   "market_value": 6888,
+   "open_pnl": -712.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 40.603,
-   "price": 40.62,
-   "prev_close": 40.18,
-   "market_value": 4062,
-   "open_pnl": 1.7,
+   "price": 39.21,
+   "prev_close": 40.62,
+   "market_value": 3921,
+   "open_pnl": -139.3,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 24.915,
-   "price": 24.11,
-   "prev_close": 24.76,
-   "market_value": 2411,
-   "open_pnl": -80.5,
+   "price": 23.07,
+   "prev_close": 24.11,
+   "market_value": 2307,
+   "open_pnl": -184.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 20.902,
-   "price": 20.59,
-   "prev_close": 20.51,
-   "market_value": 2059,
-   "open_pnl": -31.2,
+   "price": 20.69,
+   "prev_close": 20.59,
+   "market_value": 2069,
+   "open_pnl": -21.2,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "USD",
    "quantity": 6,
    "avg_cost": 136.2673,
-   "price": 156.98,
-   "prev_close": 163.86,
-   "market_value": 941.88,
-   "open_pnl": 124.28,
+   "price": 150.13,
+   "prev_close": 154.51,
+   "market_value": 900.78,
+   "open_pnl": 83.18,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18048,6 +18048,66 @@
  },
  "activities": [
   {
+   "uid": "t_66e22fdfa7",
+   "date": "2026-10-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "FINN.TO",
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": -1723,
+   "currency": "CAD",
+   "quantity": 50,
+   "price": 34.46
+  },
+  {
+   "uid": "t_5b72c93b26",
+   "date": "2026-10-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "MDA.TO",
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+   "amount": -1616.4,
+   "currency": "CAD",
+   "quantity": 40,
+   "price": 40.41
+  },
+  {
+   "uid": "t_bcdd6a87a1",
+   "date": "2026-10-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE.TO",
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": -1207.5,
+   "currency": "CAD",
+   "quantity": 100,
+   "price": 12.075
+  },
+  {
+   "uid": "t_b59feb7e20",
+   "date": "2026-10-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "VDY.TO",
+   "description": "VANGUARD FTSE CDN HIGH DIVID YIELD INDEX ETF TR UNIT WE ACTED AS AGENT",
+   "amount": 3840,
+   "currency": "CAD",
+   "quantity": -50,
+   "price": 76.8
+  },
+  {
+   "uid": "t_dda0580953",
+   "date": "2026-10-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "FINN.TO",
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": -1724,
+   "currency": "CAD",
+   "quantity": 50,
+   "price": 34.48
+  },
+  {
    "uid": "t_f9ccae4409",
    "date": "2026-10-09",
    "type": "Trade",
@@ -22455,7 +22515,7 @@
  "dividends_projected": [
   {
    "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1625,
+   "annual_rate_per_share": 1.1682,
    "frequency": "quarterly",
    "next_ex_date": null,
    "next_pay_date": null
@@ -22666,6 +22726,11 @@
    {
     "date": "2026-10-13",
     "value": 32548.93,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-10-14",
+    "value": 31742.45,
     "net_flow": 0
    }
   ],
