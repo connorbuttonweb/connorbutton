@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-10-15T01:28:20.850Z",
-  "as_of": "2026-10-14",
+  "generated_at": "2026-10-15T22:45:17.599Z",
+  "as_of": "2026-10-15",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -5675,6 +5675,54 @@
      "last_price": 0.72
     }
    }
+  },
+  {
+   "date": "2026-10-15",
+   "cash": 229.34,
+   "positions": {
+    "FINN.TO": {
+     "qty": 445,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 33.83
+    },
+    "NXE.TO": {
+     "qty": 600,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 12.12
+    },
+    "MDA.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 40.59
+    },
+    "ARIS.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 24.6
+    },
+    "REI.UN.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.9
+    },
+    "SPCX": {
+     "qty": 6,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 148.96
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.72
+    }
+   }
   }
  ],
  "flows": [
@@ -6262,7 +6310,12 @@
   },
   {
    "date": "2026-10-14",
-   "value": 31797.22,
+   "value": 31759.49,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-10-15",
+   "value": 32436.74,
    "net_flow": 0
   }
  ],
@@ -6686,6 +6739,10 @@
   {
    "date": "2026-10-14",
    "level": 194.88
+  },
+  {
+   "date": "2026-10-15",
+   "level": 194.81
   }
  ],
  "hypothetical": [
@@ -7027,7 +7084,11 @@
   },
   {
    "date": "2026-10-14",
-   "value": 31565.77
+   "value": 31528.04
+  },
+  {
+   "date": "2026-10-15",
+   "value": 32205.24
   }
  ],
  "in_kind": [
