@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-10-17T01:19:25.265Z",
-  "as_of": "2026-10-16",
+  "generated_at": "2026-10-19T22:44:24.027Z",
+  "as_of": "2026-10-19",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -5771,6 +5771,54 @@
      "last_price": 0.72
     }
    }
+  },
+  {
+   "date": "2026-10-19",
+   "cash": 30.02,
+   "positions": {
+    "FINN.TO": {
+     "qty": 320,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 33.13
+    },
+    "NXE.TO": {
+     "qty": 600,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 11.99
+    },
+    "MDA.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 39.68
+    },
+    "ARIS.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 24.5
+    },
+    "REI.UN.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.74
+    },
+    "SPCX": {
+     "qty": 6,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 148.842
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.72
+    }
+   }
   }
  ],
  "flows": [
@@ -5868,7 +5916,7 @@
   },
   {
    "date": "2026-05-25",
-   "value": 11551.55,
+   "value": 11551.54,
    "net_flow": 0
   },
   {
@@ -5893,462 +5941,462 @@
   },
   {
    "date": "2026-06-01",
-   "value": 12464.8,
+   "value": 12462.57,
    "net_flow": 0
   },
   {
    "date": "2026-06-02",
-   "value": 12660.66,
+   "value": 12658.39,
    "net_flow": 0
   },
   {
    "date": "2026-06-03",
-   "value": 12573.14,
+   "value": 12570.87,
    "net_flow": 0
   },
   {
    "date": "2026-06-04",
-   "value": 12670.05,
+   "value": 12667.75,
    "net_flow": 0
   },
   {
    "date": "2026-06-05",
-   "value": 13529.39,
+   "value": 13527.11,
    "net_flow": 1183.41
   },
   {
    "date": "2026-06-08",
-   "value": 25098.82,
+   "value": 25091.8,
    "net_flow": 11521.85
   },
   {
    "date": "2026-06-09",
-   "value": 24972.4,
+   "value": 24964.01,
    "net_flow": 0
   },
   {
    "date": "2026-06-10",
-   "value": 24618.86,
+   "value": 24610.44,
    "net_flow": 0
   },
   {
    "date": "2026-06-11",
-   "value": 25360.73,
+   "value": 25352.24,
    "net_flow": 0
   },
   {
    "date": "2026-06-12",
-   "value": 25652.65,
+   "value": 25644.1,
    "net_flow": 0
   },
   {
    "date": "2026-06-15",
-   "value": 28520.99,
+   "value": 28512.46,
    "net_flow": 2500
   },
   {
    "date": "2026-06-16",
-   "value": 28341.64,
+   "value": 28333.11,
    "net_flow": 0
   },
   {
    "date": "2026-06-17",
-   "value": 28450.37,
+   "value": 28441.84,
    "net_flow": 0
   },
   {
    "date": "2026-06-18",
-   "value": 28797.6,
+   "value": 28789.06,
    "net_flow": 0
   },
   {
    "date": "2026-06-19",
-   "value": 28880.32,
+   "value": 28871.77,
    "net_flow": 0
   },
   {
    "date": "2026-06-22",
-   "value": 29176.28,
+   "value": 29167.7,
    "net_flow": 400
   },
   {
    "date": "2026-06-23",
-   "value": 28762.13,
+   "value": 28753.5,
    "net_flow": 0
   },
   {
    "date": "2026-06-24",
-   "value": 28822.1,
+   "value": 28813.55,
    "net_flow": 230
   },
   {
    "date": "2026-06-25",
-   "value": 29039.81,
+   "value": 29031.2,
    "net_flow": 0
   },
   {
    "date": "2026-06-26",
-   "value": 28921.21,
+   "value": 28912.63,
    "net_flow": 0
   },
   {
    "date": "2026-06-29",
-   "value": 29507.05,
+   "value": 29498.46,
    "net_flow": 0
   },
   {
    "date": "2026-06-30",
-   "value": 29735.87,
+   "value": 29727.27,
    "net_flow": 0
   },
   {
    "date": "2026-07-02",
-   "value": 30592.49,
+   "value": 30583.3,
    "net_flow": 1200
   },
   {
    "date": "2026-07-03",
-   "value": 30725.99,
+   "value": 30716.77,
    "net_flow": 0
   },
   {
    "date": "2026-07-06",
-   "value": 31114.23,
+   "value": 31104.96,
    "net_flow": 0
   },
   {
    "date": "2026-07-07",
-   "value": 30888.64,
+   "value": 30879.27,
    "net_flow": 0
   },
   {
    "date": "2026-07-08",
-   "value": 30846.82,
+   "value": 30837.51,
    "net_flow": 0
   },
   {
    "date": "2026-07-09",
-   "value": 31084.77,
+   "value": 31075.41,
    "net_flow": 0
   },
   {
    "date": "2026-07-10",
-   "value": 31115.66,
+   "value": 31106.25,
    "net_flow": 0
   },
   {
    "date": "2026-07-13",
-   "value": 30819.62,
+   "value": 30810.16,
    "net_flow": 0
   },
   {
    "date": "2026-07-14",
-   "value": 30870.28,
+   "value": 30860.78,
    "net_flow": 0
   },
   {
    "date": "2026-07-15",
-   "value": 30935.43,
+   "value": 30925.83,
    "net_flow": 0
   },
   {
    "date": "2026-07-16",
-   "value": 32109.36,
+   "value": 32099.76,
    "net_flow": 1500
   },
   {
    "date": "2026-07-17",
-   "value": 31860.54,
+   "value": 31850.95,
    "net_flow": 0
   },
   {
    "date": "2026-07-20",
-   "value": 31801.37,
+   "value": 31791.91,
    "net_flow": 0
   },
   {
    "date": "2026-07-21",
-   "value": 32296.24,
+   "value": 32286.72,
    "net_flow": 0
   },
   {
    "date": "2026-07-22",
-   "value": 32310.23,
+   "value": 32300.66,
    "net_flow": 0
   },
   {
    "date": "2026-07-23",
-   "value": 32080.07,
+   "value": 32070.54,
    "net_flow": 0
   },
   {
    "date": "2026-07-24",
-   "value": 31987.45,
+   "value": 31977.87,
    "net_flow": 0
   },
   {
    "date": "2026-07-27",
-   "value": 31996.12,
+   "value": 31986.58,
    "net_flow": 0
   },
   {
    "date": "2026-07-28",
-   "value": 31837.3,
+   "value": 31827.71,
    "net_flow": 0
   },
   {
    "date": "2026-07-29",
-   "value": 31302.26,
+   "value": 31292.79,
    "net_flow": 0
   },
   {
    "date": "2026-07-30",
-   "value": 32017.96,
+   "value": 32008.39,
    "net_flow": 0
   },
   {
    "date": "2026-07-31",
-   "value": 33903.95,
+   "value": 33894.4,
    "net_flow": 1500
   },
   {
    "date": "2026-08-04",
-   "value": 34374.84,
+   "value": 34365.34,
    "net_flow": 0
   },
   {
    "date": "2026-08-05",
-   "value": 34238.28,
+   "value": 34228.84,
    "net_flow": 0
   },
   {
    "date": "2026-08-06",
-   "value": 34489.36,
+   "value": 34479.92,
    "net_flow": 0
   },
   {
    "date": "2026-08-07",
-   "value": 35018.62,
+   "value": 35009.23,
    "net_flow": 0
   },
   {
    "date": "2026-08-10",
-   "value": 34939.23,
+   "value": 34929.8,
    "net_flow": 0
   },
   {
    "date": "2026-08-11",
-   "value": 34880.17,
+   "value": 34870.73,
    "net_flow": 0
   },
   {
    "date": "2026-08-12",
-   "value": 35498.8,
+   "value": 35489.28,
    "net_flow": 0
   },
   {
    "date": "2026-08-13",
-   "value": 35372.66,
+   "value": 35362.94,
    "net_flow": 0
   },
   {
    "date": "2026-08-14",
-   "value": 35194.55,
+   "value": 35184.79,
    "net_flow": 0
   },
   {
    "date": "2026-08-17",
-   "value": 35130.59,
+   "value": 35117.57,
    "net_flow": 0
   },
   {
    "date": "2026-08-18",
-   "value": 34539.19,
+   "value": 34526.22,
    "net_flow": 0
   },
   {
    "date": "2026-08-19",
-   "value": 34279.57,
+   "value": 34266.88,
    "net_flow": 0
   },
   {
    "date": "2026-08-20",
-   "value": 36081.04,
+   "value": 36066.84,
    "net_flow": 2000
   },
   {
    "date": "2026-08-21",
-   "value": 32426.63,
+   "value": 32412.42,
    "net_flow": -3800
   },
   {
    "date": "2026-08-24",
-   "value": 32367.72,
+   "value": 32353.54,
    "net_flow": 0
   },
   {
    "date": "2026-08-25",
-   "value": 32521.96,
+   "value": 32507.69,
    "net_flow": 0
   },
   {
    "date": "2026-08-26",
-   "value": 32629.5,
+   "value": 32615.16,
    "net_flow": 0
   },
   {
    "date": "2026-08-27",
-   "value": 32621.22,
+   "value": 32606.96,
    "net_flow": 0
   },
   {
    "date": "2026-08-28",
-   "value": 32534.8,
+   "value": 32520.54,
    "net_flow": 0
   },
   {
    "date": "2026-08-31",
-   "value": 32549.2,
+   "value": 32534.95,
    "net_flow": 0
   },
   {
    "date": "2026-09-01",
-   "value": 32322.26,
+   "value": 32307.98,
    "net_flow": 0
   },
   {
    "date": "2026-09-02",
-   "value": 32414.04,
+   "value": 32399.65,
    "net_flow": 0
   },
   {
    "date": "2026-09-03",
-   "value": 32865.16,
+   "value": 32850.64,
    "net_flow": 0
   },
   {
    "date": "2026-09-04",
-   "value": 32950.27,
+   "value": 32935.8,
    "net_flow": 0
   },
   {
    "date": "2026-09-08",
-   "value": 32910.62,
+   "value": 32896.24,
    "net_flow": 0
   },
   {
    "date": "2026-09-09",
-   "value": 32669.07,
+   "value": 32654.77,
    "net_flow": 0
   },
   {
    "date": "2026-09-10",
-   "value": 32440.43,
+   "value": 32423.79,
    "net_flow": 0
   },
   {
    "date": "2026-09-11",
-   "value": 32054.84,
+   "value": 32038.16,
    "net_flow": 0
   },
   {
    "date": "2026-09-14",
-   "value": 32056.41,
+   "value": 32042.09,
    "net_flow": 0
   },
   {
    "date": "2026-09-15",
-   "value": 32010.91,
+   "value": 31996.53,
    "net_flow": 0
   },
   {
    "date": "2026-09-16",
-   "value": 32016.78,
+   "value": 32002.47,
    "net_flow": 0
   },
   {
    "date": "2026-09-17",
-   "value": 32491.13,
+   "value": 32476.71,
    "net_flow": 0
   },
   {
    "date": "2026-09-18",
-   "value": 32434.99,
+   "value": 32420.59,
    "net_flow": 0
   },
   {
    "date": "2026-09-21",
-   "value": 32998.6,
+   "value": 32984.15,
    "net_flow": 0
   },
   {
    "date": "2026-09-22",
-   "value": 33145.26,
+   "value": 33130.9,
    "net_flow": 0
   },
   {
    "date": "2026-09-23",
-   "value": 32765.68,
+   "value": 32751.49,
    "net_flow": 0
   },
   {
    "date": "2026-09-24",
-   "value": 32715.29,
+   "value": 32701.09,
    "net_flow": 0
   },
   {
    "date": "2026-09-25",
-   "value": 32790.97,
+   "value": 32776.71,
    "net_flow": 0
   },
   {
    "date": "2026-09-28",
-   "value": 32489.79,
+   "value": 32475.56,
    "net_flow": 0
   },
   {
    "date": "2026-09-29",
-   "value": 32439.18,
+   "value": 32425.04,
    "net_flow": 0
   },
   {
    "date": "2026-09-30",
-   "value": 32497.4,
+   "value": 32483.34,
    "net_flow": 0
   },
   {
    "date": "2026-10-01",
-   "value": 32318.54,
+   "value": 32304.49,
    "net_flow": 0
   },
   {
    "date": "2026-10-02",
-   "value": 32839.59,
+   "value": 32825.45,
    "net_flow": 0
   },
   {
    "date": "2026-10-05",
-   "value": 33161.31,
+   "value": 33147.22,
    "net_flow": 0
   },
   {
    "date": "2026-10-06",
-   "value": 33242.26,
+   "value": 33228.13,
    "net_flow": 0
   },
   {
    "date": "2026-10-07",
-   "value": 32763.52,
+   "value": 32749.65,
    "net_flow": 0
   },
   {
    "date": "2026-10-08",
-   "value": 32384.87,
+   "value": 32370.94,
    "net_flow": 0
   },
   {
    "date": "2026-10-09",
-   "value": 32816.83,
+   "value": 32809.01,
    "net_flow": 0
   },
   {
@@ -6368,7 +6416,12 @@
   },
   {
    "date": "2026-10-16",
-   "value": 31767.36,
+   "value": 31750.3,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-10-19",
+   "value": 27571.97,
    "net_flow": 0
   }
  ],
@@ -6800,6 +6853,10 @@
   {
    "date": "2026-10-16",
    "level": 192.1
+  },
+  {
+   "date": "2026-10-19",
+   "level": 192.5
   }
  ],
  "hypothetical": [
@@ -7149,7 +7206,11 @@
   },
   {
    "date": "2026-10-16",
-   "value": 27427.22
+   "value": 27410.16
+  },
+  {
+   "date": "2026-10-19",
+   "value": 27539.79
   }
  ],
  "in_kind": [
