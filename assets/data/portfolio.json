@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-26T22:43:43.762Z",
-  "as_of": "2026-10-26",
+  "generated_at": "2026-10-27T22:45:57.791Z",
+  "as_of": "2026-10-27",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4009
+   "USDCAD": 1.4013
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0042,
-  "distribution_yield": 0.0042,
-  "holdings_count": 7,
+  "blended_mer": 0.0041,
+  "distribution_yield": 0,
+  "holdings_count": 6,
   "etf_count": 1,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 29.75,
+   "cash": 87.01,
    "currency": "CAD",
-   "buying_power": 29.1
+   "buying_power": 86.36
   }
  ],
  "positions": [
@@ -35,12 +35,12 @@
    "account_id": "main",
    "asset_type": "ETF",
    "currency": "CAD",
-   "quantity": 320,
-   "avg_cost": 32.7411,
-   "price": 32.95,
-   "prev_close": 32.79,
-   "market_value": 10544,
-   "open_pnl": 66.86,
+   "quantity": 315,
+   "avg_cost": 32.7436,
+   "price": 33.42,
+   "prev_close": 32.95,
+   "market_value": 10527.3,
+   "open_pnl": 213.08,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,26 @@
    "currency": "CAD",
    "quantity": 600,
    "avg_cost": 12.6675,
-   "price": 11.66,
-   "prev_close": 11.4,
-   "market_value": 6996,
-   "open_pnl": -604.5,
+   "price": 12.34,
+   "prev_close": 11.66,
+   "market_value": 7404,
+   "open_pnl": -196.5,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "ARIS.TO",
+   "name": "ARIS.TO",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 200,
+   "avg_cost": 23.735,
+   "price": 22.79,
+   "prev_close": 21.82,
+   "market_value": 4558,
+   "open_pnl": -189,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,42 +85,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 40.603,
-   "price": 39.81,
-   "prev_close": 38.64,
-   "market_value": 3981,
-   "open_pnl": -79.3,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "ARIS.TO",
-   "name": "ARIS.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 100,
-   "avg_cost": 24.915,
-   "price": 21.82,
-   "prev_close": 21.64,
-   "market_value": 2182,
-   "open_pnl": -309.5,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "REI.UN.TO",
-   "name": "REI.UN.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 100,
-   "avg_cost": 20.902,
-   "price": 21.34,
-   "prev_close": 21.44,
-   "market_value": 2134,
-   "open_pnl": 43.8,
+   "price": 41.1,
+   "prev_close": 39.81,
+   "market_value": 4110,
+   "open_pnl": 49.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +101,10 @@
    "currency": "USD",
    "quantity": 6,
    "avg_cost": 136.2673,
-   "price": 147.7,
-   "prev_close": 148.29,
-   "market_value": 886.2,
-   "open_pnl": 68.6,
+   "price": 148.9,
+   "prev_close": 147.22,
+   "market_value": 893.4,
+   "open_pnl": 75.8,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -22584,15 +22568,7 @@
    "price": null
   }
  ],
- "dividends_projected": [
-  {
-   "symbol": "REI.UN.TO",
-   "annual_rate_per_share": 1.1414,
-   "frequency": "quarterly",
-   "next_ex_date": null,
-   "next_pay_date": null
-  }
- ],
+ "dividends_projected": [],
  "history": {
   "portfolio": [
    {
@@ -22844,6 +22820,11 @@
     "date": "2026-10-26",
     "value": 27109.31,
     "net_flow": 0
+   },
+   {
+    "date": "2026-10-27",
+    "value": 27939.31,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
@@ -22915,6 +22896,10 @@
     {
      "date": "2026-10-18",
      "level": 189.36
+    },
+    {
+     "date": "2026-10-25",
+     "level": 190.89
     }
    ]
   }
