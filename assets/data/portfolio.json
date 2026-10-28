@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-10-27T22:45:57.791Z",
-  "as_of": "2026-10-27",
+  "generated_at": "2026-10-28T22:45:32.086Z",
+  "as_of": "2026-10-28",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4013
+   "USDCAD": 1.4052
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 87.01,
+   "cash": 87.09,
    "currency": "CAD",
-   "buying_power": 86.36
+   "buying_power": 86.44
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 315,
    "avg_cost": 32.7436,
-   "price": 33.42,
-   "prev_close": 32.95,
-   "market_value": 10527.3,
-   "open_pnl": 213.08,
+   "price": 33.59,
+   "prev_close": 33.42,
+   "market_value": 10580.85,
+   "open_pnl": 266.63,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 600,
    "avg_cost": 12.6675,
-   "price": 12.34,
-   "prev_close": 11.66,
-   "market_value": 7404,
-   "open_pnl": -196.5,
+   "price": 12.51,
+   "prev_close": 12.34,
+   "market_value": 7506,
+   "open_pnl": -94.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 23.735,
-   "price": 22.79,
-   "prev_close": 21.82,
-   "market_value": 4558,
-   "open_pnl": -189,
+   "price": 23.01,
+   "prev_close": 22.79,
+   "market_value": 4602,
+   "open_pnl": -145,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "CAD",
    "quantity": 100,
    "avg_cost": 40.603,
-   "price": 41.1,
-   "prev_close": 39.81,
-   "market_value": 4110,
-   "open_pnl": 49.7,
+   "price": 41.03,
+   "prev_close": 41.1,
+   "market_value": 4103,
+   "open_pnl": 42.7,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +101,10 @@
    "currency": "USD",
    "quantity": 6,
    "avg_cost": 136.2673,
-   "price": 148.9,
-   "prev_close": 147.22,
-   "market_value": 893.4,
-   "open_pnl": 75.8,
+   "price": 143.7,
+   "prev_close": 147.05,
+   "market_value": 862.2,
+   "open_pnl": 44.6,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18032,6 +18032,42 @@
  },
  "activities": [
   {
+   "uid": "t_8816638a4e",
+   "date": "2026-10-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "FINN.TO",
+   "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT",
+   "amount": 166.75,
+   "currency": "CAD",
+   "quantity": -5,
+   "price": 33.35
+  },
+  {
+   "uid": "t_3afb73fc71",
+   "date": "2026-10-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "ARIS.TO",
+   "description": "ARIS MNG CORP COM WE ACTED AS AGENT",
+   "amount": -2255.5,
+   "currency": "CAD",
+   "quantity": 100,
+   "price": 22.555
+  },
+  {
+   "uid": "t_237a869117",
+   "date": "2026-10-27",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "REI.UN.TO",
+   "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT",
+   "amount": 2146,
+   "currency": "CAD",
+   "quantity": -100,
+   "price": 21.46
+  },
+  {
    "uid": "t_1b7c5ef001",
    "date": "2026-10-19",
    "type": "Withdrawal",
@@ -22824,6 +22860,11 @@
    {
     "date": "2026-10-27",
     "value": 27939.31,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-10-28",
+    "value": 28091.58,
     "net_flow": 0
    }
   ],
