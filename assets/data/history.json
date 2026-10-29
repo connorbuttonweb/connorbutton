@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-10-29T02:26:43.282Z",
-  "as_of": "2026-10-28",
+  "generated_at": "2026-10-29T22:44:33.348Z",
+  "as_of": "2026-10-29",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -6143,6 +6143,48 @@
      "last_price": 0.36
     }
    }
+  },
+  {
+   "date": "2026-10-29",
+   "cash": 86.97,
+   "positions": {
+    "FINN.TO": {
+     "qty": 315,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 33.32
+    },
+    "NXE.TO": {
+     "qty": 600,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 12.06
+    },
+    "ARIS.TO": {
+     "qty": 200,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 22.17
+    },
+    "MDA.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 40.77
+    },
+    "SPCX": {
+     "qty": 6,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 140.3423
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.36
+    }
+   }
   }
  ],
  "flows": [
@@ -6244,7 +6286,7 @@
   },
   {
    "date": "2026-05-25",
-   "value": 11551.54,
+   "value": 11551.55,
    "net_flow": 0
   },
   {
@@ -6334,7 +6376,7 @@
   },
   {
    "date": "2026-06-18",
-   "value": 28789.07,
+   "value": 28789.06,
    "net_flow": 0
   },
   {
@@ -6784,7 +6826,12 @@
   },
   {
    "date": "2026-10-28",
-   "value": 28104.31,
+   "value": 28050.76,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-10-29",
+   "value": 27537.89,
    "net_flow": 0
   }
  ],
@@ -6831,7 +6878,7 @@
   },
   {
    "date": "2026-05-29",
-   "level": 184.8263
+   "level": 184.8264
   },
   {
    "date": "2026-06-01",
@@ -7248,6 +7295,10 @@
   {
    "date": "2026-10-28",
    "level": 192.28
+  },
+  {
+   "date": "2026-10-29",
+   "level": 191.57
   }
  ],
  "hypothetical": [
@@ -7629,7 +7680,11 @@
   },
   {
    "date": "2026-10-28",
-   "value": 28016.14
+   "value": 27962.59
+  },
+  {
+   "date": "2026-10-29",
+   "value": 27449.84
   }
  ],
  "in_kind": [
