@@ -1,0 +1,96 @@
+{
+  "as_of": "2026-11-02",
+  "accounts": [
+    {
+      "positions": [
+        { "instrument": "NXE.TO", "qty": 100, "avgPrice": 11.53, "side": "buy" },
+        { "instrument": "SPCX", "qty": 6, "avgPrice": 136.2673, "side": "buy" },
+        { "instrument": "FINN.TO", "qty": 125, "avgPrice": 32.9864, "side": "buy" }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": { "cad": "$0.00", "usd": "$21.06", "combinedCad": "$28.78", "combinedUsd": "$21.06" },
+          "totalBuyingPower": { "cad": "$0.00", "usd": "$21.06", "combinedCad": "$28.78", "combinedUsd": "$21.06" },
+          "buyingPower": { "cad": "$0.00", "usd": "$21.06", "combinedCad": "$28.78", "combinedUsd": "$21.06" },
+          "totalEquity": { "cad": "$5,063.00", "usd": "$841.41", "combinedCad": "$6,239.02", "combinedUsd": "$4,463.84" },
+          "marketValue": { "cad": "$5,063.00", "usd": "$820.35", "combinedCad": "$6,209.59", "combinedUsd": "$4,442.78" },
+          "cash": { "cad": "$0.00", "usd": "$21.06", "combinedCad": "$29.43", "combinedUsd": "$21.06" }
+        },
+        "profit": {
+          "dayPnl": { "cad": "-$113.50", "usd": "$12.03", "combinedCad": "-$96.69", "combinedUsd": "-$69.18" },
+          "closedPnl": { "cad": "$102.96", "usd": "$6.17", "combinedCad": "$111.58", "combinedUsd": "$79.83" },
+          "openPnl": { "cad": "-$213.31", "usd": "$2.75", "combinedCad": "-$209.47", "combinedUsd": "-$149.87" }
+        }
+      }
+    },
+    {
+      "positions": [
+        { "instrument": "NXE15JAN27C14.50.MX", "qty": 3, "avgPrice": 1.7, "side": "buy" },
+        { "instrument": "ARIS.TO", "qty": 200, "avgPrice": 23.735, "side": "buy" },
+        { "instrument": "NXE.TO", "qty": 500, "avgPrice": 12.895, "side": "buy" },
+        { "instrument": "MDA.TO", "qty": 100, "avgPrice": 40.603, "side": "buy" },
+        { "instrument": "FINN.TO", "qty": 190, "avgPrice": 32.5838, "side": "buy" }
+      ],
+      "balances": {
+        "balances": {
+          "maxBuyingPower": { "cad": "$57.51", "usd": "-$0.01", "combinedCad": "$57.50", "combinedUsd": "$40.24" },
+          "totalBuyingPower": { "cad": "$57.51", "usd": "-$0.01", "combinedCad": "$57.50", "combinedUsd": "$40.24" },
+          "buyingPower": { "cad": "$57.51", "usd": "-$0.01", "combinedCad": "$57.50", "combinedUsd": "$40.24" },
+          "totalEquity": { "cad": "$19,465.71", "usd": "-$0.01", "combinedCad": "$19,465.70", "combinedUsd": "$13,927.15" },
+          "marketValue": { "cad": "$19,408.20", "usd": "$0.00", "combinedCad": "$19,408.20", "combinedUsd": "$13,886.01" },
+          "cash": { "cad": "$57.51", "usd": "-$0.01", "combinedCad": "$57.50", "combinedUsd": "$41.14" }
+        },
+        "profit": {
+          "dayPnl": { "cad": "-$364.00", "usd": "$0.00", "combinedCad": "-$364.00", "combinedUsd": "-$260.43" },
+          "closedPnl": { "cad": "-$57.89", "usd": "$0.00", "combinedCad": "-$57.89", "combinedUsd": "-$41.42" },
+          "openPnl": { "cad": "-$2,547.54", "usd": "$0.00", "combinedCad": "-$2,547.54", "combinedUsd": "-$1,822.69" }
+        }
+      }
+    }
+  ],
+  "quotes": [
+    { "symbol": "NXE.TO", "currency": "CAD", "lastPrice": 11.03, "bidPrice": 11.01, "askPrice": 11.45, "lastTradeTime": "2026-11-02T21:00:00Z", "marketState": "Closed" },
+    { "symbol": "SPCX", "currency": "USD", "lastPrice": 136.8269, "bidPrice": 136.72, "askPrice": 136.83, "lastTradeTime": "2026-11-02T22:41:35Z", "marketState": "Post-market" },
+    { "symbol": "FINN.TO", "currency": "CAD", "lastPrice": 31.68, "bidPrice": 31.45, "askPrice": 31.85, "lastTradeTime": "2026-11-02T20:59:59Z", "marketState": "Closed" },
+    { "symbol": "NXE15JAN27C14.50.MX", "currency": "CAD", "lastPrice": 0.36, "bidPrice": 0.16, "askPrice": 0.2, "lastTradeTime": "2026-10-23T15:34:56Z", "marketState": "Closed" },
+    { "symbol": "ARIS.TO", "currency": "CAD", "lastPrice": 20.47, "bidPrice": 20.15, "askPrice": 20.86, "lastTradeTime": "2026-11-02T21:00:00Z", "marketState": "Closed" },
+    { "symbol": "MDA.TO", "currency": "CAD", "lastPrice": 36.72, "bidPrice": 36.68, "askPrice": 37.27, "lastTradeTime": "2026-11-02T21:00:00Z", "marketState": "Closed" }
+  ],
+  "activities": [
+    { "transactionType": "Trades", "description": "FIDELITY GLOBAL INNOVATORS ETF SER L UNIT WE ACTED AS AGENT", "amount": 166.75, "currency": "CAD", "symbol": "FINN.TO", "quantity": -5, "price": 33.35, "commission": 0, "tradeDate": "2026-10-27", "action": "Sell", "settlementDate": "2026-10-28" },
+    { "transactionType": "Trades", "description": "ARIS MNG CORP COM WE ACTED AS AGENT", "amount": -2255.5, "currency": "CAD", "symbol": "ARIS.TO", "quantity": 100, "price": 22.555, "commission": 0, "tradeDate": "2026-10-27", "action": "Buy", "settlementDate": "2026-10-28" },
+    { "transactionType": "Trades", "description": "RIOCAN REAL ESTATE INVESTMENT TRUST UNITS WE ACTED AS AGENT", "amount": 2146, "currency": "CAD", "symbol": "REI.UN.TO", "quantity": -100, "price": 21.46, "commission": 0, "tradeDate": "2026-10-27", "action": "Sell", "settlementDate": "2026-10-28" }
+  ],
+  "benchmark": {
+    "symbol": "VFV.TO",
+    "series": [
+      { "date": "2026-04-26", "level": 174.29 },
+      { "date": "2026-05-03", "level": 179.42 },
+      { "date": "2026-05-10", "level": 180.84 },
+      { "date": "2026-05-17", "level": 183.2 },
+      { "date": "2026-05-24", "level": 185.61 },
+      { "date": "2026-05-31", "level": 182.9 },
+      { "date": "2026-06-07", "level": 184.62 },
+      { "date": "2026-06-14", "level": 188.36 },
+      { "date": "2026-06-21", "level": 184.37 },
+      { "date": "2026-06-28", "level": 189.34 },
+      { "date": "2026-07-05", "level": 190.09 },
+      { "date": "2026-07-12", "level": 185.25 },
+      { "date": "2026-07-19", "level": 185.28 },
+      { "date": "2026-07-26", "level": 186.3 },
+      { "date": "2026-08-02", "level": 191.82 },
+      { "date": "2026-08-09", "level": 191.7 },
+      { "date": "2026-08-16", "level": 187.6 },
+      { "date": "2026-08-23", "level": 190.38 },
+      { "date": "2026-08-30", "level": 189.54 },
+      { "date": "2026-09-06", "level": 188.52 },
+      { "date": "2026-09-13", "level": 190.07 },
+      { "date": "2026-09-20", "level": 194.55 },
+      { "date": "2026-09-27", "level": 195.08 },
+      { "date": "2026-10-04", "level": 197.56 },
+      { "date": "2026-10-11", "level": 192.1 },
+      { "date": "2026-10-18", "level": 189.36 },
+      { "date": "2026-10-25", "level": 187.84 }
+    ]
+  }
+}
