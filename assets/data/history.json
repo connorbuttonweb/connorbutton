@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-10-31T02:22:22.325Z",
-  "as_of": "2026-10-30",
+  "generated_at": "2026-11-02T22:45:16.504Z",
+  "as_of": "2026-11-02",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -6227,6 +6227,48 @@
      "last_price": 0.36
     }
    }
+  },
+  {
+   "date": "2026-11-02",
+   "cash": 86.93,
+   "positions": {
+    "FINN.TO": {
+     "qty": 315,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 31.68
+    },
+    "NXE.TO": {
+     "qty": 600,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 11.03
+    },
+    "ARIS.TO": {
+     "qty": 200,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 20.47
+    },
+    "MDA.TO": {
+     "qty": 100,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 36.72
+    },
+    "SPCX": {
+     "qty": 6,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 136.8269
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.36
+    }
+   }
   }
  ],
  "flows": [
@@ -6418,12 +6460,12 @@
   },
   {
    "date": "2026-06-18",
-   "value": 28789.07,
+   "value": 28789.06,
    "net_flow": 0
   },
   {
    "date": "2026-06-19",
-   "value": 28871.78,
+   "value": 28871.77,
    "net_flow": 0
   },
   {
@@ -6880,6 +6922,11 @@
    "date": "2026-10-30",
    "value": 26101.26,
    "net_flow": 0
+  },
+  {
+   "date": "2026-11-02",
+   "value": 25595,
+   "net_flow": 0
   }
  ],
  "benchmark": [
@@ -6925,7 +6972,7 @@
   },
   {
    "date": "2026-05-29",
-   "level": 184.8263
+   "level": 184.8264
   },
   {
    "date": "2026-06-01",
@@ -7350,6 +7397,10 @@
   {
    "date": "2026-10-30",
    "level": 187.84
+  },
+  {
+   "date": "2026-11-02",
+   "level": 187.16
   }
  ],
  "hypothetical": [
@@ -7740,6 +7791,10 @@
   {
    "date": "2026-10-30",
    "value": 26013.22
+  },
+  {
+   "date": "2026-11-02",
+   "value": 25506.99
   }
  ],
  "in_kind": [
