@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-11-05T22:44:38.908Z",
-  "as_of": "2026-11-05",
+  "generated_at": "2026-11-11T00:59:15.319Z",
+  "as_of": "2026-11-10",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.3976
+   "USDCAD": 1.4118
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0042,
-  "distribution_yield": 0,
-  "holdings_count": 6,
+  "blended_mer": 0.0041,
+  "distribution_yield": 0.0002,
+  "holdings_count": 5,
   "etf_count": 1,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 86.93,
+   "cash": 4498.11,
    "currency": "CAD",
-   "buying_power": 86.28
+   "buying_power": 4493.44
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 315,
    "avg_cost": 32.7436,
-   "price": 31.83,
-   "prev_close": 33.5,
-   "market_value": 10026.45,
-   "open_pnl": -287.77,
+   "price": 32.63,
+   "prev_close": 32.89,
+   "market_value": 10278.45,
+   "open_pnl": -35.77,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 600,
    "avg_cost": 12.6675,
-   "price": 11.13,
-   "prev_close": 11.16,
-   "market_value": 6678,
-   "open_pnl": -922.5,
+   "price": 11.8,
+   "prev_close": 12.33,
+   "market_value": 7080,
+   "open_pnl": -520.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,42 +69,26 @@
    "currency": "CAD",
    "quantity": 200,
    "avg_cost": 23.735,
-   "price": 21.4,
-   "prev_close": 22.03,
-   "market_value": 4280,
-   "open_pnl": -467,
+   "price": 22.6,
+   "prev_close": 23.53,
+   "market_value": 4520,
+   "open_pnl": -227,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
   },
   {
-   "symbol": "MDA.TO",
-   "name": "MDA.TO",
-   "account_id": "main",
-   "asset_type": "Stock",
-   "currency": "CAD",
-   "quantity": 100,
-   "avg_cost": 40.603,
-   "price": 37.48,
-   "prev_close": 36.66,
-   "market_value": 3748,
-   "open_pnl": -312.3,
-   "sector": null,
-   "geography": null,
-   "market_cap_bucket": null
-  },
-  {
-   "symbol": "SPCX",
-   "name": "SPCX",
+   "symbol": "NVDA",
+   "name": "NVDA",
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "USD",
-   "quantity": 6,
-   "avg_cost": 136.2673,
-   "price": 122.91,
-   "prev_close": 135.21,
-   "market_value": 737.46,
-   "open_pnl": -80.14,
+   "quantity": 4,
+   "avg_cost": 173,
+   "price": 170.44,
+   "prev_close": 180.22,
+   "market_value": 681.76,
+   "open_pnl": -10.24,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18032,6 +18016,78 @@
  },
  "activities": [
   {
+   "uid": "t_48bb28b72e",
+   "date": "2026-11-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "SPCX",
+   "description": "SPACE EXPLORATION TECHNOLOGIES CORP CLASS A COMMON STOCK WE ACTED AS AGENT",
+   "amount": 821.14,
+   "currency": "USD",
+   "quantity": -6,
+   "price": 136.86
+  },
+  {
+   "uid": "t_8c7c863f9f",
+   "date": "2026-11-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NVDA",
+   "description": "NVIDIA CORP WE ACTED AS AGENT",
+   "amount": -692,
+   "currency": "USD",
+   "quantity": 4,
+   "price": 173
+  },
+  {
+   "uid": "t_cc8f198257",
+   "date": "2026-11-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "MDA.TO",
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+   "amount": 2145.5,
+   "currency": "CAD",
+   "quantity": -50,
+   "price": 42.91
+  },
+  {
+   "uid": "t_4d568b8c5b",
+   "date": "2026-11-09",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "MDA.TO",
+   "description": "MDA SPACE LTD COM WE ACTED AS AGENT",
+   "amount": 2083,
+   "currency": "CAD",
+   "quantity": -50,
+   "price": 41.66
+  },
+  {
+   "uid": "t_280927872d",
+   "date": "2026-11-06",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Securities lending int payment as of October Symbol-NXE",
+   "amount": 0.02,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
+   "uid": "t_5d3fcc6823",
+   "date": "2026-11-06",
+   "type": "Other",
+   "account_id": "main",
+   "symbol": null,
+   "description": "Securities lending int payment as of October Symbol-",
+   "amount": 0.03,
+   "currency": "CAD",
+   "quantity": 0,
+   "price": 0
+  },
+  {
    "uid": "t_8816638a4e",
    "date": "2026-10-27",
    "type": "Trade",
@@ -22604,7 +22660,15 @@
    "price": null
   }
  ],
- "dividends_projected": [],
+ "dividends_projected": [
+  {
+   "symbol": "NVDA",
+   "annual_rate_per_share": 0.913,
+   "frequency": "quarterly",
+   "next_ex_date": null,
+   "next_pay_date": null
+  }
+ ],
  "history": {
   "portfolio": [
    {
@@ -22896,6 +22960,11 @@
     "date": "2026-11-05",
     "value": 25851.13,
     "net_flow": 0
+   },
+   {
+    "date": "2026-11-10",
+    "value": 27340.15,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
@@ -23002,7 +23071,11 @@
     },
     {
      "date": "2026-11-01",
-     "level": 190.45
+     "level": 184.9
+    },
+    {
+     "date": "2026-11-08",
+     "level": 189.07
     }
    ]
   }
