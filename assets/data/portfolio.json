@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-11-12T22:44:19.399Z",
-  "as_of": "2026-11-12",
+  "generated_at": "2026-11-16T22:45:16.158Z",
+  "as_of": "2026-11-16",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4254
+   "USDCAD": 1.4269
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,9 +12,9 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0042,
+  "blended_mer": 0.0043,
   "distribution_yield": 0,
-  "holdings_count": 5,
+  "holdings_count": 6,
   "etf_count": 1,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 3387.26,
+   "cash": 2012.45,
    "currency": "CAD",
-   "buying_power": 1361.67
+   "buying_power": 11.93
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 315,
    "avg_cost": 32.7436,
-   "price": 32.62,
-   "prev_close": 32.87,
-   "market_value": 10275.3,
-   "open_pnl": -38.92,
+   "price": 32.1,
+   "prev_close": 32.71,
+   "market_value": 10111.5,
+   "open_pnl": -202.72,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,12 +51,12 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 600,
-   "avg_cost": 12.6675,
-   "price": 11.21,
-   "prev_close": 11.87,
-   "market_value": 6726,
-   "open_pnl": -874.5,
+   "quantity": 621.6746,
+   "avg_cost": 12.6041,
+   "price": 10.61,
+   "prev_close": 11.05,
+   "market_value": 6595.97,
+   "open_pnl": -1239.68,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,26 @@
    "currency": "CAD",
    "quantity": 300,
    "avg_cost": 22.4277,
-   "price": 21.08,
-   "prev_close": 22.13,
-   "market_value": 6324,
-   "open_pnl": -404.31,
+   "price": 20.17,
+   "prev_close": 21.01,
+   "market_value": 6051,
+   "open_pnl": -677.31,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "IREN",
+   "name": "IREN",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "USD",
+   "quantity": 44,
+   "avg_cost": 18.1688,
+   "price": 16.5,
+   "prev_close": 18.28,
+   "market_value": 726,
+   "open_pnl": -73.43,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -101,10 +117,10 @@
    "currency": "CAD",
    "quantity": -2,
    "avg_cost": 0.35,
-   "price": 0.35,
-   "prev_close": 0.32,
-   "market_value": -0.7,
-   "open_pnl": 0,
+   "price": 0.51,
+   "prev_close": 0.35,
+   "market_value": -1.02,
+   "open_pnl": -0.32,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18016,6 +18032,126 @@
  },
  "activities": [
   {
+   "uid": "t_6cd5db8c17",
+   "date": "2026-11-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "IREN",
+   "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT",
+   "amount": 8.55,
+   "currency": "USD",
+   "quantity": -0.4815,
+   "price": 17.7724
+  },
+  {
+   "uid": "t_e668806896",
+   "date": "2026-11-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "IREN",
+   "description": "IREN LIMITED ORDINARY SHARES WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -808.18,
+   "currency": "USD",
+   "quantity": 44.4815,
+   "price": 18.1689
+  },
+  {
+   "uid": "t_e57f8b8988",
+   "date": "2026-11-13",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE.TO",
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": -235.17,
+   "currency": "CAD",
+   "quantity": 21.6746,
+   "price": 10.85
+  },
+  {
+   "uid": "t_9e81570ba9",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NVDA",
+   "description": "NVIDIA CORP WE ACTED AS AGENT",
+   "amount": 657.94,
+   "currency": "USD",
+   "quantity": -4,
+   "price": 164.4908
+  },
+  {
+   "uid": "t_00690d12c6",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "ARIS.TO",
+   "description": "ARIS MNG CORP COM WE ACTED AS AGENT",
+   "amount": -2139,
+   "currency": "CAD",
+   "quantity": 100,
+   "price": 21.39
+  },
+  {
+   "uid": "t_49ccad013b",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NVDA",
+   "description": "NVIDIA CORP WE ACTED AS AGENT",
+   "amount": 329.31,
+   "currency": "USD",
+   "quantity": -2,
+   "price": 164.6618
+  },
+  {
+   "uid": "t_e04fb9c38c",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NVDA",
+   "description": "NVIDIA CORP WE ACTED AS AGENT",
+   "amount": -321.32,
+   "currency": "USD",
+   "quantity": 2,
+   "price": 160.66
+  },
+  {
+   "uid": "t_2215432ec0",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "ARIS.TO",
+   "description": "ARIS MNG CORP COM WE ACTED AS AGENT",
+   "amount": 2146,
+   "currency": "CAD",
+   "quantity": -100,
+   "price": 21.46
+  },
+  {
+   "uid": "t_b1f99a966c",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE15JAN27P10.00.MX",
+   "description": "PUT .NXE 01/15/27 10 NEXGEN ENERGY LTD WE ACTED AS AGENT",
+   "amount": 68.02,
+   "currency": "CAD",
+   "quantity": -2,
+   "price": 0.35
+  },
+  {
+   "uid": "t_c3767e55b6",
+   "date": "2026-11-12",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "ARIS.TO",
+   "description": "ARIS MNG CORP COM WE ACTED AS AGENT",
+   "amount": -2137,
+   "currency": "CAD",
+   "quantity": 100,
+   "price": 21.37
+  },
+  {
    "uid": "t_48bb28b72e",
    "date": "2026-11-09",
    "type": "Trade",
@@ -22966,6 +23102,11 @@
    {
     "date": "2026-11-12",
     "value": 26712.94,
+    "net_flow": 0
+   },
+   {
+    "date": "2026-11-16",
+    "value": 25806.91,
     "net_flow": 0
    }
   ],
