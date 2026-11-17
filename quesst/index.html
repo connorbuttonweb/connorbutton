@@ -70,6 +70,11 @@ table.sched{width:100%;min-width:820px;border-collapse:collapse;font-size:14px;l
 .sched td.ev small{display:block;color:var(--dim);font-size:13px}
 .sched tr.sub td.ev{padding-left:26px}
 .sched button.jump{flex:none;font-size:12px;font-weight:500;padding:2px 8px}
+.k-d{--k:#2f9e4f}.k-e{--k:#5d86c4}.k-t{--k:#8b9199}.k-x{--k:#f2cf1d}
+.sched td.ev{border-left:4px solid var(--k,transparent)}
+.sched tr.sec th{font:600 14px var(--display);letter-spacing:.12em;text-transform:uppercase;color:var(--accent);text-align:left;padding:16px 12px 6px;border-top:1px solid var(--line)}
+.legend{display:flex;flex-wrap:wrap;gap:6px 16px;font-size:13px;color:var(--dim)}
+.legend span::before{content:"";display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--k);margin-right:6px;vertical-align:-1px}
 @media (max-width:700px){
   table.sched{min-width:0}
   .sched thead{display:none}
@@ -78,6 +83,9 @@ table.sched{width:100%;min-width:820px;border-collapse:collapse;font-size:14px;l
   .sched td,.sched td.t,.sched td.ev,.sched td.loc,.sched td.who{display:block;width:auto;border:0;padding:2px 0}
   .sched tr.sub td.ev{padding-left:0}
   .sched td:empty{display:none}
+  .sched tr[class*="k-"]{border-left:4px solid var(--k)}
+  .sched td.ev{border-left:0}
+  .sched tr.sec th{display:block}
   .sched td.who::before{content:"Team · ";color:var(--dim)}
 }
 </style>
@@ -94,6 +102,7 @@ table.sched{width:100%;min-width:820px;border-collapse:collapse;font-size:14px;l
       <button id="sdSat" type="button" aria-pressed="true">Saturday</button>
       <button id="sdSun" type="button" aria-pressed="false">Sunday</button>
     </div>
+    <div class="legend" id="legend" aria-label="Row types"></div>
     <div class="sched-wrap"><table class="sched" id="sched"></table></div>
     <p class="note">The exec team's run sheet for the weekend. "Map" jumps the walkthrough to that moment.</p>
   </section>
@@ -159,7 +168,7 @@ Object.keys(ROLE).forEach((n,i)=>{
   EXEC.push(add({kind:'exec',name:n,ei:i,seat,fo:i<2?0:k<9?9:10,si:i%9,tip:`${n} · ${ROLE[n]}`}));
 });
 for(let i=0;i<9;i++)MEN.push(add({kind:'men',i,seat:ring(TB.M,20+i*40),fo:8,si:i,tip:`In-person mentor · Team ${i+1}`}));
-const SPK=[['opg','OPG','Speaker #1 · OPG'],['spk2','Speaker 2','Speaker #2 · TBD'],['spk3','S. Armstrong','Speaker #3 · Scott Armstrong, Entuitive']].map((s,i)=>add({kind:'spk',name:s[0],short:s[1],seat:ring(TB.D7,180+i*40),fo:0,si:6+i,tip:s[2]}));
+const SPK=[['opg','OPG','Speaker #1 · OPG'],['spk2','Martin','Speaker #2 · Martin'],['spk3','S. Armstrong','Speaker #3 · Scott Armstrong, Entuitive']].map((s,i)=>add({kind:'spk',name:s[0],short:s[1],seat:ring(TB.D7,180+i*40),fo:0,si:6+i,tip:s[2]}));
 for(let i=0;i<4;i++)JDG.push(add({kind:'jdg',name:'jr'+i,rm:'rc',i,seat:[728,1112+i*42],tip:'Judge · Rose Commons'}));
 for(let i=0;i<4;i++)JDG.push(add({kind:'jdg',name:'jm'+i,rm:'mmr',i,seat:[858,1792+i*34],tip:'Judge · MMR'}));
 [['kpr','KPR driver'],['qc1',"Queen's Catering"],['qc2',"Queen's Catering"],['bao','Miss Bao delivery']].forEach(v=>add({kind:'ven',name:v[0],tip:v[1]}));
@@ -197,7 +206,7 @@ function resetF(base){
   F={st:RT.map(()=>0),tp:RT.map(t=>[t.x,t.y]),mov:[],chairs:0,numbers:0,buffet:7,bufBottom:0,food:null,foodP:1,desks:0,signin:0,drinks:0,balloons:0,bags:0,screen:0,truck:null,van:null,judging:0,stacks:0,staged:0,lock:0,mmr:0,signs:0,ilcOpen:1,submitted:0,bub:[],carry:[],kprChairs:0,card:null};
   if(base=='empty'){F.buffet=0;F.stacks=1;F.ilcOpen=0}
   if(base=='set'){F.st.fill(2);F.chairs=1;F.numbers=1;F.balloons=1;F.bags=1;F.desks=1;F.drinks=1;F.signs=1}
-  if(base=='judging'){F.judging=1;F.stacks=1;F.staged=11;F.balloons=1;F.mmr=1;F.signs=1;F.screen=1;F.desks=1}
+  if(base=='judging'){F.judging=1;F.stacks=1;F.staged=0;F.balloons=1;F.mmr=1;F.signs=1;F.screen=1;F.desks=1}
   if(base=='reset'){F.buffet=0;F.stacks=1}
 }
 function put(a,p){a.x=p[0];a.y=p[1];a.vis=true;a.mv=0}
@@ -248,17 +257,28 @@ const SC=[];
 function S(day,title,t0,t1,dur,spec){const m=s=>{const[h,mm]=s.split(':');return +h*60+ +mm};SC.push({day,title,t0:m(t0),t1:m(t1),dur,spec,post:mkPost(spec),run:spec.run})}
 
 /* ---------- SATURDAY ---------- */
-S(0,'Open the building · rental delivery','13:15','14:00',12,{base:'empty',execDef:'hide',exec:{Connor:[85,175],...crewPost1},cam:[[0,VS]],
- notes:[['KPR truck at the Mitchell south entrance. Count 11 round tables + 10 chairs, then sign.','Connor'],['Open Rose Commons with key + fob at 1:30.','Connor'],['Roll tables and carry chairs into the room.','Chloe, Avery, Dani, Gavin, Marketing, Mentors, FYRs'],['Set the buffet tables in the hallway (no food in group rooms).','Connor']],
+S(0,'Open up · linens arrive','13:30','14:00',8,{base:'empty',execDef:'hide',exec:{Connor:[1040,1470],Brooke:[150,250],Ty:[150,450]},cam:[[0,VL]],
+ entry:a=>a.name=='Connor'?null:VEN,
+ win:a=>a.kind=='exec'?[.05,.3]:null,
+ notes:[['Open Rose Commons with key + fob.','Connor'],["1:30 Queen's Catering drops off 14 round linens + the buffet linens in the West Hallway.",'Co-Chairs & Logs'],['Then wait at the Mitchell Lot for the 2:00 furniture delivery.','Connor']],
  run(p){
-  F.lock=p<.3; F.buffet=Math.ceil(seg(p,.52,.95)*7); F.bufBottom=1;
+  F.lock=p<.15;
+  if(p>.03&&p<.75)F.van=[lerp(-400,105,ez(seg(p,.03,.12)))-lerp(0,500,ez(seg(p,.65,.75))),-70,"Queen's Catering"];
+  seq(X('qc1'),[[0,null,.3],[.25,[60,300],0],[.5,[60,300],0],[.65,null,0]],p); seq(X('qc2'),[[0,null,.35],[.27,[60,500],0],[.5,[60,500],0],[.65,null,0]],p);
+  seq(X('Connor'),[[0,null,0],[.15,[1010,870],0],[.55,[1010,870],0],[1,[1040,1470]]],p);
+  if(p>.15&&p<.35)bub([960,840],'1:30 Rose Commons open');
+  if(p>.35&&p<.62)bub([150,380],'Linens: 14 rounds + buffet');
+ }});
+S(0,'Furniture arrives · tables in','14:00','14:30',12,{base:'empty',execDef:'hide',exec:{Connor:[85,175],Brooke:[150,250],Ty:[150,450],...crewPost1},cam:[[0,VS]],
+ notes:[['2:00 Kingston Party Rentals at the Mitchell Lot: count 11 round tables + 10 folding chairs, then sign.','Co-Chairs & Logs (Connor signs)'],['Roll tables and carry chairs into the room.','Chloe, Avery, Dani, Gavin, Marketing, Mentors, FYRs'],['Set the buffet tables in the hallway (no food in group rooms).','Connor']],
+ run(p){
+  F.buffet=Math.ceil(seg(p,.52,.95)*7); F.bufBottom=1;
   F.truck=[lerp(1700,930,ez(seg(p,0,.1)))+lerp(0,900,ez(seg(p,.93,1))),1500,'KPR'];
   const kd=X('kpr'); if(p>.1&&p<.92)put(kd,[1010,1452]); else kd.vis=false;
   const c=X('Connor');
   if(p<.2)put(c,[1040,1470]); else if(p<.3)go(c,[[1040,1470],[1085,1412],[1085,1000],[1050,870],[1010,870]],seg(p,.2,.3));
   else if(p<.52)go(c,route([1010,870],[85,650]),seg(p,.32,.5)); else put(c,[85,lerp(650,175,seg(p,.52,.95))]);
   if(p>.2&&p<.3)bub([1040,1440],'11 tables, 10 chairs ✓ signed');
-  if(p>=.3&&p<.4)bub([960,840],'1:30 Rose Commons open');
   const tgt=i=>i<0?[905,1010]:[RT[i].x,RT[i].y], rt=i=>[[930,1480],[1085,1425],[1085,1000],[1050,870],[962,870],tgt(i)];
   const win=(k,n)=>n?[.62+.012*k,.82+.012*k]:[.30+.012*k,.5+.012*k];
   CREW1.forEach((n,ci)=>{const a=X(n),k=ci>>1,j=ci&1,off=j?30:-30,w0=win(k,0),w1=win(k,1),t0=k,t1=k<5?6+k:-1;let q;
@@ -269,51 +289,53 @@ S(0,'Open the building · rental delivery','13:15','14:00',12,{base:'empty',exec
   RT.forEach((t,i)=>{const w=win(i<6?i:i-6,i<6?0:1); if(p<w[0])F.st[i]=0; else{F.st[i]=1; if(p<w[1]){F.tp[i]=along(rt(i),seg(p,w[0],w[1]));F.mov[i]=1}}});
   const wc=win(5,1); if(p>wc[0]&&p<wc[1])F.carry.push({p:along(rt(-1),seg(p,wc[0],wc[1])),type:'chairs'}); if(p>=wc[1])F.kprChairs=1;
  }});
-S(0,'Table setup','14:00','14:30',8,{execDef:ws,exec:{Connor:[520,782],Chloe:PO.av,Brooke:PO.lect,Ty:PO.lect2,Ben:PO.desk[1]},cam:[[0,VR]],
- notes:[['Everyone else arrives. Full setup to the floor plan: 11 rounds, chairs out of the racks.','All exec, Connor leads'],['AV and slide run-through.','Chloe, Brooke, Ty'],['Sign-in desk and seating layout.','Ben']],
+S(0,'Table setup','14:30','14:45',8,{execDef:ws,exec:{Connor:[520,782],Chloe:PO.av,Brooke:PO.lect,Ty:PO.lect2,Ben:PO.desk[1]},cam:[[0,VR]],
+ notes:[['Everyone else arrives. Tables and chairs to the floor plan: 11 rounds, chairs out of the racks.','Ops & Outreach (Dani, Gavin); Connor leads'],['Audio, mic, projector and slide run-through.','Logs (Chloe), Brooke, Ty'],['Delegate sign-in desk, team numbers and name tags.','Ben + Marketing']],
  run(p){F.st.fill(1);F.chairs=seg(p,.15,.9);F.desks=p>.4?1:0;F.drinks=F.desks;F.screen=p>.55;F.stacks=p<.6;F.kprChairs=p<.3?1:0;if(p>.55)bub([930,1050],'Slides test')}});
-S(0,'Table setting','14:30','15:00',9,{base:'set',execDef:ws,exec:{Connor:[520,782],Chloe:PO.av,Brooke:PO.lect,Ty:PO.lect2,Ben:PO.desk[1],Victoria:PO.desk[2],Dani:[970,815],Gavin:PO.drinks,Charleigh:PO.raffle[0],Julia:PO.raffle[1],Sarah:PO.raffle[2],Lucas:[1085,480],Jorja:[640,1500],Avery:PO.buf[1],Khanyiso:[330,1850],Kaitlyn:[600,2040]},cam:[[0,VR]],
+S(0,'Table setting','14:45','15:00',9,{base:'set',execDef:ws,exec:{Connor:[520,782],Chloe:PO.av,Brooke:PO.lect,Ty:PO.lect2,Ben:PO.desk[1],Victoria:PO.desk[2],Dani:[970,815],Gavin:PO.drinks,Charleigh:PO.raffle[0],Julia:PO.raffle[1],Sarah:PO.raffle[2],Lucas:[1085,480],Jorja:[640,1500],Avery:PO.buf[1],Khanyiso:[330,1850],Kaitlyn:[600,2040]},cam:[[0,VR]],
  win:a=>['Khanyiso','Kaitlyn','Jorja','Lucas'].includes(a.name)?[.05,.6]:null,
  inset:{view:VI,label:'ILC · rooms unlocked at 3:00, door signs up'},
  notes:[['14 round linens on, table numbers out, garbage stations.','All exec'],['Balloons; drinks table set at the end of the buffet.','Dani, Gavin'],['Delegate bags, raffle display, sponsor materials.','Charleigh, Julia, Sarah'],['Wayfinding signs Mitchell → RC → ILC; name tags to the desk.','Lucas, Jorja, Victoria'],['ILC: mentor sign-in ready, 20 rooms checked.','Khanyiso, Kaitlyn']],
  run(p){RT.forEach((t,i)=>F.st[i]=p>.08+i*.06?2:1);F.numbers=p>.78;F.balloons=p>.5;F.bags=p>.6;F.signs=p>.5;F.ilcOpen=p>.7;F.screen=1;F.signin=p>.3}});
 S(0,'Delegates arrive and sign in','15:00','15:30',10,{base:'set',del:'seat',via:[900,905],exec:{Ben:PO.desk[0],Dani:PO.desk[1],Andrea:PO.desk[2],Julia:PO.desk[3],Gavin:PO.drinks,Anna:[1085,330],Lincoln:[1085,770],'FYR 3':[120,770],Victoria:[600,790],Brooke:PO.lect2,Ty:[790,1340],Chloe:PO.av,Khanyiso:[330,1850],Kaitlyn:[215,1760]},cam:[[0,VL],[.15,VL],[.6,VR],[1,VR]],
  win:a=>a.kind=='del'?[a.rnd*.6,a.rnd*.6+.32]:null,
- notes:[['Sign-in, name tags, AMS waiver QR, then to your team table.','Ben, Dani, Andrea, Julia'],['Drinks table.','Gavin'],['Wayfinding at the entrances.','Anna, Lincoln, FYR 3'],['Photos.','Victoria']],
+ notes:[['Sign-in, name tags, AMS waiver QR, then to your team table.','Ben, Dani, Andrea, Julia'],['3:15 Greet the Indigenous speaker, Al Doxtater.','Brooke, Ty, Dani (Al\'s main contact)'],['Drinks table.','Gavin'],['Wayfinding at the entrances.','Anna, Lincoln, FYR 3'],['Photos.','Victoria']],
  run(){F.screen=1;F.signin=1}});
 S(0,'Welcome and kickoff','15:30','16:00',5,{base:'set',del:'seat',exec:{Brooke:PO.lect,Ty:PO.lect2,Chloe:PO.av,Khanyiso:[330,1850],Kaitlyn:[215,1760]},cam:[[0,VR]],
- notes:[['Co-chair speeches and weekend overview.','Brooke, Ty'],['AV and slides.','Chloe'],['Sign-in table folded away now that everyone is in.','Ben'],['All other exec seated at the two exec tables.','All exec']],
- run(p){F.screen=1;F.signin=p<.2;bub([868,1250],'Welcome to QUESST 2026')}});
+ notes:[['3:30 Co-chair speeches and weekend overview.','Brooke, Ty'],['3:45 Speaker: Al Doxtater.',''],['AV and slides.','Chloe'],['Sign-in table folded away now that everyone is in.','Ben'],['All other exec seated at the two exec tables.','All exec']],
+ run(p){F.screen=1;F.signin=p<.2;bub([868,1250],p<.5?'Welcome to QUESST 2026':'Al Doxtater')}});
 S(0,'Walk to the ILC work rooms','16:00','16:15',12,{base:'set',del:'room',men:mSign,tags:1,work:1,exec:{Ben:[320,2040],Khanyiso:[330,1850],Kaitlyn:[215,1760],Anna:[640,2040],Lincoln:[640,2300],'FYR 3':[640,1560],Chloe:PO.av},cam:[[0,VR],[.12,VR],[.72,VI],[1,VI]],
  win:a=>a.kind=='del'?[.05+a.ord*.32,.58+a.ord*.32]:a.name=='Ben'?[0,.4]:a.kind=='men'?[.1,.45]:[0,.35],
- notes:[['Teams leave by the south exit and follow the Work Period route to the ILC.','Ben leads'],['Each team goes to its own room and keeps it all weekend.','FYR guides on 2nd + 3rd floor'],['Mentors sign in at the ILC entrance.','Khanyiso, Kaitlyn']]});
-S(0,'Work Period #1','16:15','18:00',9,{base:'set',del:'room',men:a=>mSpot(a.i,4),exec:{Ben:[320,2040],Khanyiso:[520,2300],Kaitlyn:[860,2040],Anna:PO.buf[1],Lincoln:PO.buf[2],'FYR 3':[300,790],Connor:PO.liaison,Avery:PO.buf[0],Dani:PO.drinks,Gavin:PO.drinks2,Chloe:PO.av},cam:[[0,VI]],cut:1,
- inset:{view:VL,label:'Rose Commons · reset for dinner, QC ETA, dietary tags'},
- notes:[['15 teams working in their rooms. Nine in-person mentors each stay with their one team; the other six teams have theirs online.','Ben, Khanyiso, Kaitlyn'],['Rose Commons reset for dinner; confirm Queen\'s Catering ETA; dietary tags ready.','Logistics, Ops & Out, FYRs']],
- run(p,sc,prev){mentorsCycle(p,prev,.1,1,4)}});
-S(0,'Catering arrives · speaker greeted · delegates return','18:00','18:30',13,{base:'set',del:'seat',men:'seat',spk:{opg:'seat'},exec:{Connor:PO.liaison,Avery:PO.buf[0],Anna:PO.buf[1],Lincoln:PO.buf[2],Alyssa:[900,1250],Mia:[835,1345],Ben:'seat',Chloe:PO.av,Dani:PO.drinks,Gavin:PO.drinks2},cam:[[0,VL],[.42,VL],[.58,VA],[.78,VA],[1,VR]],cut:1,
+ notes:[['Teams leave by the south exit and follow the Work Period route to the ILC.','Ben, Dani, Chloe, Sarah'],['Each team goes to its own room and keeps it all weekend.','FYR guides on 2nd + 3rd floor'],['Mentors sign in at the ILC entrance.','Khanyiso, Kaitlyn']]});
+S(0,'Work Period #1','16:15','18:00',9,{base:'set',del:'room',men:a=>mSpot(a.i,4),exec:{Ben:[320,2040],Khanyiso:[520,2300],Kaitlyn:[860,2040],Anna:PO.buf[1],Lincoln:PO.buf[2],'FYR 3':[300,790],Connor:PO.liaison,Avery:PO.buf[0],Dani:PO.drinks,Gavin:PO.drinks2,Chloe:PO.av},ven:{qc1:[60,300],qc2:[60,500]},cam:[[0,VI]],cut:1,
+ win:a=>a.kind=='ven'?[.41,.48]:null,
+ inset:{view:VL,label:"Rose Commons · Queen's Catering setting up in the West Hallway"},
+ notes:[['15 teams working in their rooms. Nine in-person mentors each stay with their one team; the other six teams have theirs online.','Mentors team + Ben stay in the ILC'],["5:00 Queen's Catering arrives to set up food and china in the West Hallway.",'Logs, Anna, Lincoln greet; Connor is QC point of contact to 6:30'],['Everyone else back in Rose Commons.','All other exec']],
+ run(p,sc,prev){mentorsCycle(p,prev,.1,1,4);
+  if(p>.36&&p<.56)F.van=[lerp(-400,105,ez(seg(p,.36,.41)))-lerp(0,500,ez(seg(p,.5,.56))),-70,"Queen's Catering"]}});
+S(0,'Dinner set-up · speaker greeted · delegates return','18:00','18:30',13,{base:'set',del:'seat',men:'seat',spk:{opg:'seat'},exec:{Connor:PO.liaison,Avery:PO.buf[0],Anna:PO.buf[1],Lincoln:PO.buf[2],Alyssa:[900,1250],Mia:[835,1345],Ben:'seat',Chloe:PO.av,Dani:PO.drinks,Gavin:PO.drinks2},ven:{qc1:[60,300],qc2:[60,500]},cam:[[0,VL],[.42,VL],[.58,VA],[.78,VA],[1,VR]],cut:1,
  win:a=>a.kind=='del'?[.42+a.ord*.18,.8+a.ord*.18]:a.kind=='men'||['Ben','Khanyiso','Kaitlyn'].includes(a.name)?[.5,.92]:null,
- notes:[['6:00 Queen\'s Catering drop-off. Buffet set with dietary tags.','Connor, Avery, Anna, Lincoln'],['6:15 Greet the OPG speaker, test their slides.','Alyssa, Mia, Chloe'],['6:15 to 6:25 Walk delegates back and sweep the ILC floors.','Ben, Khanyiso, Kaitlyn']],
+ notes:[["6:00 Set up dinner with Queen's Catering; dietary tags out.",'Logs, Anna, Lincoln'],['6:15 Greet the OPG speaker, test their slides.','Alyssa, Mia, Chloe'],['6:15 to 6:25 Walk delegates back and sweep the ILC floors.','Mentors team + Ben']],
  run(p){
-  F.food='Dinner';F.foodP=seg(p,.2,.4);F.screen=p>.6;
-  if(p>.03&&p<.5)F.van=[lerp(-400,105,ez(seg(p,.03,.1)))-lerp(0,500,ez(seg(p,.42,.5))),-70,"Queen's Catering"];
-  seq(X('qc1'),[[0,null,.3],[.25,[60,300],0],[.4,[60,300],0],[.5,null,0]],p); seq(X('qc2'),[[0,null,.35],[.27,[60,500],0],[.4,[60,500],0],[.5,null,0]],p);
+  F.food=null;F.screen=p>.6;
   seq(X('opg'),[[0,null,.6],[.42,[975,870],.2],[.55,X('opg').seat]],p);
   seq(X('Alyssa'),[[0,[900,1250],.6],[.3,PO.doorA,.6],[.55,[900,1250]]],p); seq(X('Mia'),[[0,[835,1345],.6],[.3,PO.doorB,.6],[.55,[835,1345]]],p);
   if(p>.36&&p<.46)bub([965,820],'Welcome, OPG'); if(p>.62&&p<.8)bub([930,1050],'Speaker slides test');
  }});
-S(0,'Speaker #1 · OPG','18:30','19:00',5,{base:'set',del:'seat',men:'seat',spk:{opg:PO.lect},exec:{Alyssa:PO.lect2,Chloe:PO.av},cam:[[0,VR]],
- notes:[['Intro, talk, thank-you and gift.','Alyssa, Mia'],['AV.','Chloe'],['All exec seated and engaged. Dinner is holding in the hallway.','All exec']],
- run(){F.food='Dinner';F.screen=1;bub([868,1250],'OPG talk')}});
-S(0,'Dinner · buffet loop through the hallway','19:00','20:00',14,{base:'set',del:'seat',men:'seat',spk:{opg:'seat'},food:1,exec:{Avery:PO.buf[0],Anna:PO.buf[1],Lincoln:PO.buf[2],'FYR 3':PO.buf[3],Dani:PO.drinks,Gavin:PO.drinks2,Connor:PO.liaison},cam:[[0,VL]],cut:1,
- notes:[['Tables go one at a time: out the North Entrance, around the hallway, down the buffet, back in by the East Entrance.','Avery + FYRs on the line'],['Drinks refills.','Dani, Gavin'],['QC liaison and china pickup time.','Connor']],
+S(0,'Speaker #1 · OPG · food arrives','18:30','19:00',5,{base:'set',del:'seat',men:'seat',spk:{opg:PO.lect},exec:{Alyssa:PO.lect2,Chloe:PO.av},ven:{qc1:[60,300],qc2:[60,500]},cam:[[0,VR]],
+ notes:[['Intro, talk, thank-you and gift.','Alyssa, Mia'],['AV.','Chloe'],['All exec seated, engaged and listening.','Everyone'],["6:30 Queen's Catering food arrives (dinner, dishes, cutlery); ready for service at 6:45.",'Logs, Anna, Lincoln']],
+ run(p){F.food='Dinner';F.foodP=seg(p,0,.5);F.screen=1;bub([868,1250],'OPG talk')}});
+S(0,'Dinner · buffet loop through the hallway','19:00','20:00',14,{base:'set',del:'seat',men:'seat',spk:{opg:'seat'},food:1,exec:{Avery:PO.buf[0],Anna:PO.buf[1],Lincoln:PO.buf[2],'FYR 3':PO.buf[3],Dani:PO.drinks,Gavin:PO.drinks2,Connor:PO.liaison},ven:{qc1:[60,300],qc2:[60,500]},cam:[[0,VL]],cut:1,
+ notes:[['Dietary restrictions eat first.','Logs ensure this'],['Then tables go one at a time: out the North Entrance, around the hallway, down the buffet, back in by the East Entrance.','Avery + FYRs on the line; QC server on the buffet'],['Drinks refills.','Dani, Gavin']],
  run(p,sc){F.food='Dinner';doLoops(p,agents.filter(a=>a.vis&&sc.post(a)===a.seat),.02,.058,.34)}});
 S(0,'Closing remarks · delegates head out','20:00','20:30',8,{base:'set',exec:{Brooke:PO.lect,Ty:PO.lect2,Chloe:PO.av},cam:[[0,VR],[.5,VR],[.8,VL],[1,VL]],
  win:a=>a.kind=='spk'?[0,.2]:a.kind=='exec'?null:[.45+a.rnd*.3,.67+a.rnd*.3],
- notes:[['Thanks and reminders for tomorrow.','Brooke, Ty'],['Sunday reminders posted in the delegate group chat.','Ben'],['Delegates may stay to 8:30.','']],
- run(p){F.food='Dinner';F.foodP=1;F.screen=1;if(p<.42)bub([868,1250],'Back here 9:15 tomorrow')}});
+ notes:[['Thanks and reminders for tomorrow.','Brooke, Ty'],['Sunday reminders posted in the delegate group chat.','Ben'],['Delegates may stay to 8:30.',''],["8:15 Queen's Catering takes away dirty linens and china.",'Logs survey and flag dirty linens']],
+ run(p){F.food='Dinner';F.foodP=1;F.screen=1;if(p<.42)bub([868,1250],'Back here 9:15 tomorrow');
+  seq(X('qc1'),[[0,[60,300],0],[.55,[60,300],0],[.8,null]],p); seq(X('qc2'),[[0,[60,500],0],[.58,[60,500],0],[.83,null]],p);
+  if(p>.5&&p<.75)bub([150,380],'QC clears china + linens')}});
 S(0,'Teardown and lock-up','20:30','21:30',8,{base:'set',execDef:'hide',cam:[[0,VL]],
- notes:[['Buffet cleared, garbage out, raffle and AV secured.','All exec'],['Connor is last out and locks every door by 9:30.','Connor'],['Open item: leave the room set overnight, or do the full DDQIC reset?','Needs an answer']],
+ notes:[['Hallway tables moved in, garbage cleared out, raffle and AV secured.','All exec'],['Connor is last out and locks every door by 9:30.','Connor'],['Open item: leave the room set overnight, or do the full DDQIC reset?','Needs an answer']],
  run(p,sc,prev){F.food='Dinner';F.foodP=1-seg(p,.1,.4);if(F.foodP<=0)F.food=null;F.bags=p<.35;F.screen=0;F.lock=p>.93;
   EXEC.forEach((a,i)=>{const pp=prev.post(a); if(a.name=='Connor')seq(a,[[0,pp,0],[.15,ws(a),0],[.86,ws(a),0],[.93,[1030,870],0],[1,null,.3]],p); else seq(a,[[0,pp,0],[.15,ws(a),0],[.6+i*.008,ws(a),0],[.84+i*.006,null]],p)});
   if(p>.93)bub([1030,830],'Locked')}});
@@ -321,31 +343,31 @@ S(0,'Teardown and lock-up','20:30','21:30',8,{base:'set',execDef:'hide',cam:[[0,
 /* ---------- SUNDAY ---------- */
 S(1,'Open up · coffee run · breakfast setup','08:30','09:15',9,{base:'set',execDef:ws,exec:{Connor:[960,800],Chloe:PO.av,Brooke:PO.lect,Ty:PO.lect2,Ben:PO.desk[1],Dani:PO.buf[0],Anna:PO.buf[1],Lincoln:PO.buf[2],'FYR 3':[300,790],Avery:PO.buf[3],Gavin:PO.drinks},cam:[[0,VL]],
  win:a=>a.name=='Connor'?[0,.1]:[.1,.35],
- notes:[['Open Rose Commons (booking starts 9:00, early access being confirmed).','Connor'],['9:00 CoGro coffee + tea pickup, by car.','Avery, Gavin'],['Breakfast table from the Costco run; balloons; check-in desk.','Dani, FYRs, Ben'],['AV test with the Day 2 slides.','Chloe, Brooke, Ty']],
+ notes:[['Open Rose Commons (booking starts 9:00, early access being confirmed).','Connor'],['9:00 Coffee pickup from CoGro in the ARC, then set up coffee.','Lincoln, Anna, Chloe'],['Breakfast foods; balloons; west hallway tables, chairs and signage.','Dels + Marketing; Speakers; Ops & Outreach'],['Check the ILC: rooms unlocked, signage up.','Sponsorship'],['Sound system, projector and Day 2 slides.','Logs (Chloe), Brooke, Ty']],
  run(p){F.lock=p<.1;F.food='Breakfast';F.foodP=seg(p,.35,.92)*(p<.85?.7:1);F.screen=p>.5;F.signin=p>.4;
-  ['Avery','Gavin'].forEach((n,i)=>{const a=X(n);seq(a,[[0,null,.35],[.3,[1060+i*40,800],0],[.48,null,0],[.6,null,0],[.86,i?PO.drinks:PO.buf[3]]],p); if(p>.6&&p<.86&&a.vis)F.carry.push({p:[a.x+14,a.y],type:'box'})});
+  ['Anna','Lincoln'].forEach((n,i)=>{const a=X(n);seq(a,[[0,null,.35],[.3,[1060+i*40,800],0],[.48,null,0],[.6,null,0],[.86,PO.buf[1+i]]],p); if(p>.6&&p<.86&&a.vis)F.carry.push({p:[a.x+14,a.y],type:'box'})});
   if(p>.3&&p<.6)bub([1080,740],'CoGro pickup 9:00'); if(p>.86)bub([150,640],'Coffee + tea out')}});
 S(1,'Delegates check in · coffee and breakfast','09:15','09:30',12,{base:'set',del:'seat',via:[900,905],food:1,exec:{Ben:PO.desk[0],Andrea:PO.desk[1],Julia:PO.desk[2],Avery:PO.buf[3],Anna:PO.buf[1],Lincoln:PO.buf[2],Dani:PO.buf[0],Brooke:PO.lect2,Ty:[790,1340],Chloe:PO.av},cam:[[0,VL]],
  win:a=>a.kind=='del'?[a.fo*.03+a.si*.004,a.fo*.03+a.si*.004+.17]:null,
- notes:[['Day 2 check-in at the desk; the table comes down once everyone is in.','Ben, Andrea, Julia'],['Coffee, tea, croissants, yogurt on the hallway buffet. Same loop as dinner.','Avery, FYRs']],
+ notes:[['Day 2 check-in at the desk (may be skipped on Sunday); the table comes down once everyone is in.','Ben, Andrea, Julia'],['Coffee, tea, croissants, yogurt on the hallway buffet. Same loop as dinner.','Avery, FYRs']],
  run(p){F.food='Breakfast';F.screen=1;F.signin=p<.5;doLoops(p,DEL,.5-.02,.02,.27)}});
 S(1,'Opening remarks · Speaker #2','09:30','10:15',8,{base:'set',del:'seat',men:mSign,spk:{spk2:PO.lect},exec:{Alyssa:PO.lect2,Chloe:PO.av,Dani:[215,1760],Khanyiso:[330,1850],Kaitlyn:[420,1850]},cam:[[0,VR]],
  win:a=>a.kind=='men'?[.4,.8]:['Dani','Khanyiso','Kaitlyn'].includes(a.name)?[0,.45]:null,
  inset:{view:VF1,label:'ILC · mentors greeted, rooms confirmed unlocked'},
- notes:[['9:30 Opening remarks.','Brooke, Ty'],['Greet Speaker #2 at 9:30, talk at 9:45. If it cancels, Work Period #2 starts 9:50.','Alyssa, Mia, Chloe'],['9:30 Confirm ILC rooms unlocked.','Dani'],['Greet in-person mentors at the ILC, hand out cards.','Khanyiso, Kaitlyn']],
+ notes:[['9:30 Opening remarks: how the judging period and the day will run.','Brooke, Ty'],['Greet Speaker #2, Martin, at 9:30; talk at 9:45. If it cancels, Work Period #2 starts 9:50.','Alyssa, Mia, Chloe'],['Greet in-person mentors at the ILC, hand out cards.','Khanyiso, Kaitlyn']],
  run(p,sc,prev){F.food='Breakfast';F.screen=1;
   seq(X('Brooke'),[[0,PO.lect,0],[.38,PO.lect,0],[.46,X('Brooke').seat]],p);seq(X('Ty'),[[0,PO.lect2,0],[.38,PO.lect2,0],[.46,X('Ty').seat]],p);
   seq(X('spk2'),[[0,null,.3],[.2,[975,870],0],[.3,X('spk2').seat,0],[.38,X('spk2').seat,0],[.46,PO.lect]],p);
   seq(X('Alyssa'),[[0,prev.post(X('Alyssa')),0],[.1,PO.doorA,0],[.2,PO.doorA,0],[.3,X('Alyssa').seat,0],[.38,X('Alyssa').seat,0],[.46,PO.lect2]],p);
   seq(X('Mia'),[[0,prev.post(X('Mia')),0],[.1,PO.doorB,0],[.2,PO.doorB,0],[.3,X('Mia').seat]],p);
-  bub([868,1250],p<.38?'Opening remarks':p>.46?'Speaker #2':'')}});
+  bub([868,1250],p<.38?'Opening remarks':p>.46?'Speaker #2 · Martin':'')}});
 S(1,'Walk to the ILC · same rooms as Saturday','10:15','10:20',10,{base:'set',del:'room',men:mSign,tags:1,work:1,exec:{Ben:[320,2040],Khanyiso:[520,2300],Kaitlyn:[860,2040],Anna:[640,2040],Lincoln:[640,2300],Dani:PO.buf[0],Chloe:PO.av},cam:[[0,VR],[.12,VR],[.72,VI],[1,VI]],
  win:a=>a.kind=='del'?[.05+a.ord*.32,.58+a.ord*.32]:a.kind=='spk'?[0,.3]:[0,.4],
  notes:[['Same route, same rooms.','Ben, Mentors team, FYR floor guides'],['Speaker #2 thanked and walked out.','Alyssa, Mia']],
  run(){F.food='Breakfast'}});
 S(1,'Work Period #2 · lunch prep · Miss Bao delivery','10:20','12:20',10,{base:'set',del:'room',men:a=>mSpot(a.i,4),exec:{Ben:[320,2040],Khanyiso:[520,2300],Kaitlyn:[860,2040],Anna:PO.buf[1],Lincoln:PO.buf[2],Connor:PO.liaison,Avery:PO.buf[0],Dani:PO.drinks,Gavin:[300,790],Charleigh:PO.raffle[0],Julia:PO.raffle[1],Sarah:PO.raffle[2],Chloe:PO.av},cam:[[0,VI]],cut:1,
  inset:{view:VL,label:'Rose Commons · breakfast cleared, lunch set'},
- notes:[['Teams work with their own mentor, in person or online.','Ben, Khanyiso, Kaitlyn'],['Breakfast cleanup; lunch prep: serving tables, compost bins, utensils, tags.','Logistics, Ops & Out, FYRs'],['Rubrics, time cards and judging materials.','Sponsorship, Co-Chairs'],['12:00 Receive Miss Bao at the parking lot / sidewalk.','Connor, Anna, Lincoln']],
+ notes:[['Teams work with their own mentor, in person or online.','Ben, Khanyiso, Kaitlyn'],['Breakfast cleanup; lunch prep: serving tables, compost bins, utensils, tags.','Logistics, Ops & Out, FYRs'],['Rubrics, time cards and judging materials.','Sponsorship, Co-Chairs'],['12:00 Receive Miss Bao at the Mitchell Lot (or the sidewalk); set out the food and dietary labels.','Logs (Connor), Anna, Lincoln']],
  run(p,sc,prev){mentorsCycle(p,prev,.1,1,4);
   if(p<.3){F.food='Breakfast';F.foodP=1-seg(p,.1,.3)} else if(p>.76){F.food='Lunch';F.foodP=seg(p,.8,.95)} else F.food=null;
   if(p>.68&&p<.93)F.van=[lerp(-400,105,ez(seg(p,.68,.74)))-lerp(0,500,ez(seg(p,.87,.93))),-70,'Miss Bao'];
@@ -353,7 +375,7 @@ S(1,'Work Period #2 · lunch prep · Miss Bao delivery','10:20','12:20',10,{base
   [['Connor',PO.liaison,[140,60]],['Anna',PO.buf[1],[75,75]],['Lincoln',PO.buf[2],[110,95]]].forEach(v=>seq(X(v[0]),[[0,v[1],0],[.7,v[1],0],[.77,v[2],0],[.82,v[2],0],[.9,v[1]]],p))}});
 S(1,'Back to Rose Commons · lunch','12:20','13:00',15,{base:'set',del:'seat',men:a=>a.i<4?null:a.seat,food:1,spk:{spk3:[975,870]},exec:{Avery:PO.buf[0],Anna:PO.buf[1],Lincoln:PO.buf[2],'FYR 3':PO.buf[3],Dani:PO.drinks,Gavin:PO.drinks2,Victoria:[170,330],Alyssa:PO.doorA,Mia:PO.doorB,Chloe:PO.av},cam:[[0,VA],[.28,VA],[.44,VL],[1,VL]],cut:1,
  win:a=>a.kind=='del'?[a.ord*.15,a.ord*.15+.3]:a.kind=='men'?(a.i<4?[.05,.3]:[.1,.42]):a.kind=='spk'?[.8,.95]:['Alyssa','Mia'].includes(a.name)?[.72,.8]:['Ben','Khanyiso','Kaitlyn'].includes(a.name)?[.1,.42]:null,
- notes:[['Thank departing in-person mentors; walk delegates back.','Khanyiso, Kaitlyn, Ben'],['Miss Bao lunch on the same buffet loop.','Avery + FYRs'],['Drinks, Red Bull out, photos.','Dani, Gavin, Victoria'],['12:45 Greet Scott Armstrong, test slides.','Alyssa, Mia, Chloe']],
+ notes:[['Thank departing in-person mentors; walk delegates back.','Khanyiso, Kaitlyn, Ben'],['Miss Bao lunch: dietary restrictions eat first, then the same buffet loop.','Logs, Anna, Lincoln'],['Drinks, Red Bull out, photos.','Dani, Gavin, Victoria'],['12:45 Greet Scott Armstrong, test slides.','Alyssa, Mia, Chloe']],
  run(p,sc){F.food='Lunch';doLoops(p,agents.filter(a=>a.vis&&sc.post(a)===a.seat),.44,.026,.26);if(p>.05&&p<.3)bub([330,1640],'Thank you, mentors')}});
 S(1,'Speaker #3 · Scott Armstrong, Entuitive','13:00','13:30',5,{base:'set',del:'seat',men:a=>a.i<4?null:a.seat,spk:{spk3:PO.lect},exec:{Alyssa:PO.lect2,Chloe:PO.av},cam:[[0,VR]],cut:1,
  notes:[['Intro, talk, thank-you and gift.','Alyssa, Mia'],['At dismissal: submit by 3:10, arrive 10 min before your slot, banquet 7:30.','Brooke, Ty']],
@@ -364,7 +386,7 @@ S(1,'Walk to the ILC with belongings','13:30','13:40',10,{base:'set',del:'room',
  run(){F.food='Lunch'}});
 S(1,'Round tables down · room turned for judging','13:40','14:20',12,{base:'set',del:'room',men:a=>a.i<4?null:mSpot(a.i,0),execDef:floatJ,exec:{...ILC3,...post9,Ty:[700,1925],Dani:[760,1925],Brooke:[860,1300],Chloe:PO.av},cam:[[0,VJ]],cut:1,
  inset:{view:VMM,label:'MMR · ILC 111 set up, screen-share test'},
- notes:[['Linens off, chairs racked, 11 KPR rounds folded and staged at the south entrance for the 5:00 pickup.','Connor + Logistics, Ops & Out, Marketing, Mentors, Speakers'],['4-person judges table facing the screen on the right wall; check-in table outside the North Entrance.','Connor'],['RC AV test.','Brooke, Chloe'],['Set up MMR + screen-share test.','Ty, Dani']],
+ notes:[['Linens off, chairs racked, 11 KPR rounds folded and staged at the south entrance for the 2:30 pickup.','Connor + Logistics, Ops & Out, Marketing, Mentors, Speakers'],['4-person judges table facing the screen on the right wall; check-in table outside the North Entrance.','Connor'],['RC AV test.','Brooke, Chloe'],['Set up MMR + screen-share test.','Ty, Dani']],
  run(p,sc,prev){
   F.food='Lunch';F.foodP=1-seg(p,0,.15);if(F.foodP<=0)F.food=null;F.chairs=1-seg(p,.06,.22);F.numbers=p<.05;F.stacks=p>.2;F.bags=0;F.mmr=p>.6;F.judging=p>.82;F.screen=p>.85;
   const tw0=i=>.2+Math.floor(i/5)*.19+(i%5)*.008, rt=i=>[[RT[i].x,RT[i].y],[962,870],[1050,870],[1100,1000],[1135,1190+i*14]];
@@ -374,12 +396,16 @@ S(1,'Round tables down · room turned for judging','13:40','14:20',12,{base:'set
       if(p<w){ const from=n2?rt(mine[n2-1]).slice(-1)[0]:pp, t0=n2?tw0(mine[n2-1])+.12:0; const q=along(route(from,start),seg(p,t0,w-.01)); put(a,[q[0]+off*.5,q[1]]);a.mv=1;done=1;break}
       if(p<w+.12){const q=along(r,seg(p,w,w+.12));put(a,[q[0]+off,q[1]]);a.mv=1;done=1;break}}
     if(!done){const li=mine[mine.length-1],e=tw0(li)+.12;go(a,route(rt(li).slice(-1)[0],post9[n]),seg(p,e+.02,e+.17))}});
-  if(p>.82)bub([740,1070],'Judges table set');if(p>.7)bub([1135,1160],'Staged for KPR 5:00');
+  if(p>.82)bub([740,1070],'Judges table set');if(p>.7)bub([1135,1160],'Staged for KPR 2:30');
  }});
-S(1,'Work Period #3 · submissions due 3:10','14:20','15:10',9,{base:'judging',del:'room',execDef:floatJ,exec:{...ILC3,Ty:[700,1925],Dani:[760,1925],Brooke:[860,1300],Mia:[1152,850]},cam:[[0,VI]],cut:1,
- inset:{view:VJ,label:'Rose Commons · judging layout ready, banquet items packed'},
- notes:[['ILC support; thank the last in-person mentors.','Sponsorship, FYRs, Khanyiso, Kaitlyn'],['2:45 group chat reminder; 3:00 knock on every room.','Ben'],['Download submissions; pack banquet items (balloons, raffle, AV).','Co-Chairs; Logistics, Ops & Out'],['3:10 submissions due.','']],
- run(p,sc,prev){MEN.forEach(a=>{if(a.i<4){a.vis=false;return} if(p<.58)put(a,mSpot(a.i)); else {const u=seg(p,.6,.88);if(u>=1)a.vis=false;else go(a,route(mSpot(a.i),OUT_W),u)}});
+S(1,'Work Period #3 · KPR pickup · submissions due 3:10','14:20','15:10',9,{base:'judging',del:'room',execDef:floatJ,exec:{...ILC3,Ty:[700,1925],Dani:[760,1925],Brooke:[860,1300],Mia:[1152,850]},cam:[[0,VI]],cut:1,
+ inset:{view:VJ,label:'Rose Commons · KPR pickup 2:30, judging layout ready'},
+ notes:[['ILC support; thank the last in-person mentors.','Sponsorship, Anna, Lincoln; Mentors team'],['2:45 group chat reminder; 3:00 knock on every room; 3:10 submissions due.','Sponsorship, Anna, Lincoln'],["2:30 KPR picks up the furniture at the Mitchell Lot; linens left in the West Hallway for Queen's Catering (Monday).",'Logs'],['Download submissions; pack banquet items (balloons, raffle, AV).','Co-Chairs; Ops & Outreach']],
+ run(p,sc,prev){F.staged=Math.round(11*(1-seg(p,.22,.3)));
+  if(p>.14&&p<.38)F.truck=[lerp(1700,930,ez(seg(p,.14,.18)))+lerp(0,900,ez(seg(p,.34,.38))),1500,'KPR'];
+  const kd=X('kpr'); if(p>.18&&p<.33)put(kd,[1010,1452]); else kd.vis=false;
+  if(p>.15&&p<.32)bub([1135,1160],'2:30 KPR pickup');
+  MEN.forEach(a=>{if(a.i<4){a.vis=false;return} if(p<.58)put(a,mSpot(a.i)); else {const u=seg(p,.6,.88);if(u>=1)a.vis=false;else go(a,route(mSpot(a.i),OUT_W),u)}});
   if(p>.42&&p<.6)bub([320,2000],'2:45 reminder in the group chat');if(p>.68&&p<.86)bub([640,2000],'3:00 room reminders');if(p>.9){F.submitted=1;bub([586,2262],'3:10 submitted')}}});
 S(1,'Judges arrive · rubric briefing · check-in tables','15:10','15:30',9,{base:'judging',del:a=>a.team==1?wM(a):a.team==2?wR(a):null,jdg:'seat',execDef:floatJ,exec:{Ty:[700,1925],Brooke:[860,1300],Mia:[1152,850],Charleigh:[1152,890],Ben:[465,1942],Dani:[505,1942],Alyssa:PO.doorA,Julia:[860,2040],Sarah:[900,2300]},
  entry:a=>a.kind=='del'?OUT_W:null,
@@ -387,9 +413,9 @@ S(1,'Judges arrive · rubric briefing · check-in tables','15:10','15:30',9,{bas
  panes:[{view:VJ2,vp:TOPP,label:'Rose Commons · judging room 2'},{view:VMM,vp:BOTP,label:'MMR · ILC 111 · judging room 1'}],cut:1,
  notes:[['Delegates are dismissed until their slot. First teams wait outside each room.','Ben'],['3:15 Judges welcomed, then rubric briefing in both rooms.','Alyssa, Mia; Brooke, Ty'],['Check-in tables: MMR and Rose Commons.','Ben, Dani / Mia, Charleigh'],['3:30 Underage wristband list handed to the FYRs.','Ben']],
  run(p){if(p>.68){bub([740,1070],'Rubric briefing');bub([860,1765],'Rubric briefing')}}});
-S(1,'Judging round 1 · two rooms in parallel','15:30','17:14',22,{base:'judging',jdg:'seat',execDef:floatJ,exec:{Ty:[700,1925],Brooke:[860,1300],Mia:[1152,850],Charleigh:[1152,890],Ben:[465,1942],Dani:[505,1942],Julia:[860,2040],Sarah:[900,2300],Khanyiso:[1130,1120],Kaitlyn:[1060,1150],Lucas:[330,870],Connor:'hide'},
+S(1,'Judging round 1 · two rooms in parallel','15:30','17:14',22,{base:'judging',jdg:'seat',execDef:floatJ,exec:{Ty:[700,1925],Brooke:[860,1300],Mia:[1152,850],Charleigh:[1152,890],Ben:[465,1942],Dani:[505,1942],Julia:[860,2040],Sarah:[900,2300],Lucas:[330,870],Connor:'hide'},
  panes:[{view:VJ2,vp:TOPP,label:'Rose Commons · room lead Brooke'},{view:VMM,vp:BOTP,label:'MMR · ILC 111 · room lead Ty'}],cut:1,
- notes:[['13-minute slots. Teams arrive 10 min early, wait outside, present, then are free until the banquet.','Brooke (RC), Ty (MMR)'],['Check-in and time cards.','Mia, Charleigh / Ben, Dani'],['Clean ILC rooms as they empty.','Julia, Sarah'],['5:00 KPR pickup at the south entrance. Connor hands the RC key to Lucas, then goes to Night Owl.','Connor; loaders Khanyiso, Kaitlyn']],
+ notes:[['13-minute slots. Teams arrive 10 min early, wait outside, present, then are free until the banquet.','Brooke (RC), Ty (MMR)'],['Check-in and time cards.','Mia, Charleigh / Ben, Dani'],['Clean ILC rooms as they empty.','Julia, Sarah'],['5:00 Connor hands the Rose Commons key to Lucas, then heads to Night Owl.','Connor']],
  run(p,sc,prev){const q=p*8,ks=Math.min(7,Math.floor(q)),ls=q-ks;
   DEL.forEach(a=>{const t=a.team,k=t==15?7:(t-1)>>1,mm=t%2==1,l=q-k,Wp=mm?wM(a):wR(a),Pp=mm?pM(a):pR(a),Xp=mm?OUT_W:ENT;
     if(l<-1||l>=1.3){a.vis=false;return}
@@ -399,32 +425,31 @@ S(1,'Judging round 1 · two rooms in parallel','15:30','17:14',22,{base:'judging
   const mins=930+ks*13,lab=m=>`${((Math.floor(m/60)+11)%12)+1}:${String(m%60).padStart(2,'0')}`;
   if(ks<7)bub([900,1066],`${lab(mins)} · Team ${ks*2+2}`); bub([1054,1765],`${lab(mins)} · Team ${ks<7?ks*2+1:15}`);
   const card=ls>.92?'1 MIN':ls>.69?'4 MIN':''; if(card){if(ks<7)bub([860,1270],card);bub([700,1895],card)}
-  F.staged=Math.round(11*(1-seg(p,.86,.93)));if(p>.8&&p<.97)F.truck=[lerp(1700,930,ez(seg(p,.8,.84)))+lerp(0,900,ez(seg(p,.93,.97))),1500,'KPR'];
   seq(X('Connor'),[[0,floatJ(X('Connor')),0],[.84,floatJ(X('Connor')),0],[.88,[370,880],0],[.9,[370,880],0],[.96,null]],p);
   if(p>.87&&p<.91)bub([370,845],'RC key → Lucas');
  }});
 S(1,'Deliberation · Top 4 notified · everyone to MMR','17:14','17:55',10,{base:'judging',del:a=>TOP4.includes(a.team)?tw(a):null,jdg:a=>a.rm=='rc'?[826,1792+a.i*34]:a.seat,execDef:floatJ,
- exec:{Ty:[700,1925],Brooke:[740,1925],Alyssa:[660,1890],Ben:[465,1942],Dani:[505,1942],Mia:[800,900],Lucas:[330,870],Khanyiso:[400,930],Kaitlyn:[460,870],Julia:[860,2040],Sarah:[900,2300],Connor:'hide',Chloe:'hide',Avery:'hide',Gavin:'hide',Andrea:'hide',Victoria:'hide',Jorja:'hide',Anna:'hide',Lincoln:'hide','FYR 3':'hide'},
+ exec:{Ty:[700,1925],Brooke:[740,1925],Mia:[660,1890],Charleigh:[620,1890],Ben:[465,1942],Dani:[505,1942],Alyssa:[800,900],Lucas:[330,870],Khanyiso:[400,930],Kaitlyn:[460,870],Avery:[520,930],Gavin:[580,870],Julia:[860,2040],Sarah:[900,2300],Connor:'hide',Chloe:'hide',Andrea:'hide',Victoria:'hide',Jorja:'hide',Anna:'hide',Lincoln:'hide','FYR 3':'hide'},
  entry:a=>a.kind=='del'?OUT_W:null,
- win:a=>a.kind=='del'?[.45+a.ord*.1,.8+a.ord*.1]:a.kind=='jdg'||['Brooke','Alyssa'].includes(a.name)?[.38,.85]:[.15,.4],
+ win:a=>a.kind=='del'?[.45+a.ord*.1,.8+a.ord*.1]:a.kind=='jdg'||['Brooke','Mia','Charleigh'].includes(a.name)?[.38,.85]:[.15,.4],
  cam:[[0,VJ2],[.3,VJ2],[.5,VA],[.72,VM],[1,VM]],cut:1,
- notes:[['5:20 Each room picks two teams. Top 4 notified on Teams.','Brooke (teams 1–2), Ty (teams 3–4)'],['5:30 All of Logistics, plus Gavin, Andrea, Victoria, Jorja and the FYRs, leave for Night Owl.','Connor'],['5:35 RC judges and the Top 4 move to MMR.','Alyssa (judges), Ben (teams)'],['Top 4 shown here are placeholders.','']],
+ notes:[['5:20 Each set of judges picks two teams; 5:35 Top 4 notified.','Brooke (teams 1–2), Ty (teams 3–4)'],['5:30 Banquet set-up crew leaves for Night Owl with the balloons and raffle items.','Connor, Chloe, FYRs, Andrea, Victoria, Jorja'],['5:35 Top 4 and the Rose Commons judges walk over to MMR.','Brooke, Mia, Charleigh'],['Top 4 shown here are placeholders.','']],
  run(p){F.staged=0;if(p<.34){bub([700,1070],'Each room picks 2')} else if(p<.5)bub([700,1070],'Top 4 notified · move to MMR')}});
-S(1,'Top 4 finals · Rose Commons reset and lock-up','17:55','19:00',12,{base:'judging',jdg:a=>a.rm=='rc'?[826,1792+a.i*34]:a.seat,execDef:'hide',exec:{Ty:[700,1925],Brooke:[740,1925],Alyssa:[660,1890],Ben:[465,1942],Dani:[505,1942]},
+S(1,'Top 4 finals · Rose Commons reset and lock-up','17:55','19:00',12,{base:'judging',jdg:a=>a.rm=='rc'?[826,1792+a.i*34]:a.seat,execDef:'hide',exec:{Ty:[700,1925],Brooke:[740,1925],Charleigh:[620,1890],Ben:[465,1942],Dani:[505,1942]},
  panes:[{view:VJ2,vp:TOPP,label:'Rose Commons · pack-down to the DDQIC layout'},{view:VMM,vp:BOTP,label:'MMR · ILC 111 · Top 4 finals'}],cut:1,
- notes:[['Four 13-minute finals in MMR, then judges pick the top 3.','Brooke, Ty, Ben, Dani'],['RC back to the DDQIC layout: chairs stacked 12 high, tables folded to the wall, garbage out.','Lucas (lead), Mia, Khanyiso, Kaitlyn'],['Lucas locks Rose Commons by 7:00.','Lucas'],['Pack down MMR at 7:00.','Ty, Dani']],
+ notes:[['Four 13-minute finals in MMR, then judges pick the top 3. If they are not notified before the banquet, Brooke and Ty announce them there.','Brooke, Ty, Ben, Dani'],['5:30 to 7:00 Rose Commons back to the DDQIC layout: chairs stacked 12 high, tables folded to the wall, garbage out.','Avery, Mia, Alyssa, Gavin, Khanyiso, Kaitlyn'],['Clean up the ILC rooms; pack down MMR at 7:00.','Sponsorship; Ty, Dani'],['Lucas locks Rose Commons by 7:00.','Lucas']],
  run(p,sc,prev){F.staged=0;F.judging=p<.25;F.balloons=p<.15;F.screen=p<.2;F.buffet=7-Math.floor(seg(p,.3,.7)*7);F.lock=p>.93;
   DEL.forEach(a=>{const qi=TOP4.indexOf(a.team); if(qi<0){a.vis=false;return} const l=p/.2-qi;
     if(l<0)put(a,tw(a)); else if(l<1)go(a,[tw(a),[545,1845],[600,1845],pM(a)],seg(l,0,.15)); else if(l<1.3)go(a,route(pM(a),OUT_W),seg(l,1,1.3)); else a.vis=false});
   if(p<.8)bub([1054,1765],`Final ${Math.min(4,Math.floor(p/.2)+1)} of 4`); else bub([850,1765],'Judges pick the top 3');
-  [['Lucas',[650,1200],[150,520]],['Mia',[720,1210],[150,360]],['Khanyiso',[600,1100],[900,760]],['Kaitlyn',[760,1100],[960,1100]]].forEach((v,i)=>{const a=X(v[0]),pp=prev.post(a);
-    seq(a,[[0,pp,0],[.15,v[1],0],[.3,v[1],0],[.45,v[2],0],[.76,v[2],0],[v[0]=='Lucas'?.93:.84+i*.02,[1030,870],0],[v[0]=='Lucas'?1:.92+i*.02,null,v[0]=='Lucas'?.4:0]],p)});
+  [['Lucas',[650,1200],[150,520]],['Mia',[720,1210],[150,360]],['Khanyiso',[600,1100],[900,760]],['Kaitlyn',[760,1100],[960,1100]],['Alyssa',[540,1150],[150,440]],['Avery',[820,1150],[600,760]],['Gavin',[480,1050],[960,900]]].forEach((v,i)=>{const a=X(v[0]),pp=prev.post(a);
+    seq(a,[[0,pp,0],[.15,v[1],0],[.3,v[1],0],[.45,v[2],0],[.76,v[2],0],[v[0]=='Lucas'?.93:.8+i*.02,[1030,870],0],[v[0]=='Lucas'?1:.88+i*.02,null,v[0]=='Lucas'?.4:0]],p)});
   if(p>.93)bub([1030,830],'Locked by 7:00');
  }});
-S(1,'Banquet at Night Owl','19:30','21:30',7,{base:'reset',execDef:'hide',cam:[[0,VA]],cut:1,
+S(1,'Everyone to Night Owl · banquet','19:00','21:30',7,{base:'reset',execDef:'hide',cam:[[0,VA]],cut:1,
  win:()=>[0,.4],
- notes:[['7:00 Doors: drink tickets and underage wristbands.','Andrea; FYRs with Ben\'s list'],['Raffle, team presentations, winners 8:15 to 8:45.','Dani; Brooke, Ty'],['Closing 8:45; clean up and final check with Night Owl at 9:00.','All exec; Connor']],
- run(p){F.lock=1;F.card=['Off the map: Night Owl','Banquet set since 5:30 by Connor, Chloe, Avery, Gavin, Andrea, Victoria, Jorja and the FYRs.','7:30 banquet · 8:15 winners · 8:45 closing · 9:00 clean up','Monday: key + fob and mics + clicker back to DDQIC.']}});
+ notes:[['7:00 to 7:20 Round up the stragglers; everyone heads to Night Owl.','Everyone'],['Doors: drink tickets and underage wristbands.','Andrea; FYRs with Ben\'s list'],['7:30 Banquet. 8:15 to 8:45 team presentations, raffle and winners.','Dani (raffle); Ty, Brooke (winners)'],['8:45 Closing remarks: QUESST 2026 is officially over. 9:00 clean up.','Brooke, Ty; all exec']],
+ run(p){F.lock=1;F.card=['Off the map: Night Owl','Banquet set from 5:30 by Connor, Chloe, Andrea, Victoria, Jorja and the FYRs.','7:30 banquet · 8:15 presentations + winners · 8:45 closing · 9:00 clean up','Monday: key + fob and mics + clicker back to DDQIC; Queen\'s Catering collects the linens.']}});
 
 /* ============ timeline ============ */
 let acc=0; SC.forEach((s,i)=>{s.i=i;s.start=acc;acc+=s.dur}); const TOTAL=acc;
@@ -610,78 +635,106 @@ window.__seek=t=>{T=t;playing=false;sync()};
 /* ============ schedule view (from the exec SCHEDULE sheet) ============ */
 // Row: t time, at start (24h, for the Map jump), len, ev, loc, note, who.
 // A {v,rs} value spans rs rows (merged cells in the sheet); null = covered by a span above.
-const RC='Rose Commons',RC2I='Rose Commons to ILC',I2RC='ILC to Rose Commons',BOTH='ILC / Rose Commons',NO='Night Owl';
-const ARRIVE='all delegates must arrive 10 minutes before their slot and wait outside, ready';
+const RC='Rose Commons',RC2I='Rose Commons to ILC',I2RC='ILC to Rose Commons',BOTH='ILC / Rose Commons',NO='Night Owl',WH='West Hallway',ML='Mitchell Lot';
+const ARRIVE='All delegates must arrive 10 minutes before their slot and wait outside, ready';
+// c: row type from the sheet's colour key. d delegate, e exec, t transition / mobilizing, x external (logs).
+const KINDS={d:'Delegate',e:'Exec',t:'Transition / mobilizing',x:'External (logs)'};
 const SCHED=[
  {title:'Saturday, November 21',rows:[
-  {t:'2:00 – 3:00 PM',at:'14:00',len:'60 min',ev:'Set up',loc:RC,note:'Audio, mic and projector for presentations; name tags, table numbers, sign-in desk, chairs, tables, food, delegate bags',who:'All: Logs (AV); Sponz (make delegate bags, put out raffle items); everyone else (general setup)'},
-  {t:'3:00 – 3:30 PM',at:'15:00',len:'30 min',ev:'Delegates arrive, meet each other, network',loc:RC,note:'Get delegates signed in and seated at their table',who:'Sign-in: Ben, Dani, Andrea, Julia'},
-  {t:'3:15 – 3:30 PM',at:'15:15',len:'15 min',ev:'Greet Indigenous speaker',loc:RC2I,who:'Brooke, Ty, Dani (Dani is the main contact for Al)'},
-  {t:'3:30 – 3:45 PM',at:'15:30',len:'15 min',ev:'Welcome and kickoff',loc:RC,note:'Co-chair speeches and weekend overview',who:'Brooke, Ty'},
-  {t:'3:45 – 4:00 PM',at:'15:45',len:'15 min',ev:'Speaker: Al Doxtater',loc:RC},
-  {t:'4:00 – 4:15 PM',at:'16:00',len:'15 min',ev:'Transition: move delegates to the ILC',loc:RC2I,note:'Guide delegates from the main venue to the ILC and help them find their rooms',who:'Mentors (sign in mentors), Dani, Chloe, Sarah, Ben'},
-  {t:'4:15 – 6:15 PM',at:'16:15',len:'2 hr',ev:'Work period #1',loc:'ILC',note:'First work period',who:'Mentors team and Ben stay in the ILC; everyone else in Rose Commons'},
-  {t:'6:00 – 6:20 PM',at:'18:00',len:'20 min',ev:'Set up dinner',loc:RC,note:"Queen's Catering handles this; be there to help and check in",who:'Logs, Anna, Lincoln'},
-  {t:'6:15 – 6:30 PM',at:'18:15',len:'15 min',ev:'Greet and welcome Speaker #1',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
-  {t:'6:15 – 6:25 PM',at:'18:15',len:'10 min',ev:'Transition',loc:I2RC,note:'Guide delegates from the ILC back to the main venue',who:'Mentors team and Ben'},
-  {t:'6:30 – 7:00 PM',at:'18:30',len:'30 min',ev:'Speaker #1: OPG',loc:RC,note:'All exec in the main venue watching, engaged, asking questions and setting the example for delegates',who:'Alyssa/Mia introduce the speaker and thank them afterwards'},
-  {t:'7:00 – 8:00 PM',at:'19:00',len:'1 hr',ev:"Dinner: Queen's Catering",loc:RC},
-  {t:'8:00 – 8:15 PM',at:'20:00',len:'15 min',ev:'Closing remarks',loc:RC,note:'Dismiss everyone, say thank you, reminders for tomorrow',who:'Brooke, Ty'},
-  {t:'8:15 – 8:30 PM',at:'20:15',len:'15 min',ev:'Delegates dismissed (welcome to stay until 8:30 PM)',loc:RC},
-  {t:'8:30 PM',at:'20:30',len:'As long as needed',ev:'Take down',loc:RC,who:'All'}]},
+  {sec:'Set-up'},
+  {c:'x',t:'1:30 PM',at:'13:30',ev:'Linens arrive',loc:WH,note:"Queen's Catering brings 14 round linens + buffet linens",who:'Co-Chairs & Logs'},
+  {c:'x',t:'2:00 PM',at:'14:00',ev:'Furniture arrives',loc:ML,note:'Kingston Party Rentals brings 11 round tables + 10 folding chairs',who:'Co-Chairs & Logs'},
+  {c:'e',t:'2:00 – 3:00 PM',at:'14:30',len:'60 min',ev:'Set up',loc:RC,note:['Logs: audio, mic and projector for presentations','Ops & Outreach: tables, chairs','Dels + Marketing: team numbers, name tags','Mentors: sign-in desk','Speakers: food','Sponz: make delegate bags, put out raffle items','Others: float'],who:'Everyone (see tasks)'},
+  {sec:'Kickoff'},
+  {c:'d',t:'3:00 – 3:30 PM',at:'15:00',len:'30 min',ev:'Delegates arrive, meet each other, network',loc:RC,note:'Get delegates signed in and seated at tables',who:'Ben, Dani, Andrea, Julia'},
+  {c:'e',t:'3:15 – 3:30 PM',at:'15:15',len:'15 min',ev:'Greet Indigenous speaker',loc:RC2I,who:'Brooke, Ty, Dani (Dani is the main contact for Al)'},
+  {c:'d',t:'3:30 – 3:45 PM',at:'15:30',len:'15 min',ev:'Welcome and kickoff',loc:RC,note:'Co-chair speeches and weekend overview',who:'Brooke, Ty'},
+  {c:'d',t:'3:45 – 4:00 PM',at:'15:45',len:'15 min',ev:'Speaker: Al Doxtater',loc:RC},
+  {c:'t',t:'4:00 – 4:15 PM',at:'16:00',len:'15 min',ev:'Transition (delegates to the ILC)',loc:RC2I,note:'Sign in mentors, guide delegates from the main venue to the ILC and help them find their rooms',who:['Mentors team: sign in mentors','Dani, Chloe, Sarah, Ben: guide delegates']},
+  {sec:'Work Period #1'},
+  {c:'d',t:'4:15 – 6:15 PM',at:'16:15',len:'2 hr',ev:'Work period #1',loc:'ILC',note:'First work period',who:['Mentors team + Ben: stay in the ILC','Everyone else: Rose Commons']},
+  {c:'x',t:'5:00 – 7:00 PM',at:'17:00',len:'2 hr',ev:"Queen's Catering dinner",loc:WH,note:'QC sets up food and china; they have a server for the buffet',who:'Logs, Anna, Lincoln: greet QC'},
+  {c:'x',t:'6:30 – 6:45 PM',at:'18:30',ev:'Food arrives',loc:RC,note:"Queen's Catering arrives with dinner, dishes and cutlery. Ready for service at 6:45 PM",who:'Logs, Anna, Lincoln'},
+  {c:'e',t:'5:00 – 6:30 PM',at:'17:00',len:'1.5 hr',ev:'Point of contact for QC',loc:RC,note:"Point of contact for Queen's Catering; help set up and organize",who:'Connor'},
+  {c:'e',t:'6:00 – 6:20 PM',at:'18:00',len:'20 min',ev:'Set up dinner',loc:RC,note:'Be there to help and check in',who:'Logs, Anna, Lincoln'},
+  {c:'e',t:'6:15 – 6:30 PM',at:'18:15',len:'15 min',ev:'Greet and welcome Speaker #1',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
+  {c:'t',t:'6:15 – 6:25 PM',at:'18:15',len:'10 min',ev:'Transition (delegates to Rose Commons)',loc:I2RC,note:'Guide delegates from the ILC back to the main venue',who:'Mentors team + Ben'},
+  {sec:'Speaker #1 & Dinner'},
+  {c:'d',t:'6:30 – 7:00 PM',at:'18:30',len:'30 min',ev:'Speaker #1: OPG',loc:RC,note:'All exec in the main venue watching, engaged, asking questions and setting the example for delegates',who:['Alyssa/Mia: introduce the speaker and thank them afterwards','Everyone: listen!']},
+  {c:'d',t:'7:00 – 8:00 PM',at:'19:00',len:'1 hr',ev:"Dinner: Queen's Catering",loc:RC,note:'Individuals with dietary restrictions eat first!',who:'Logs: ensure this'},
+  {c:'d',t:'8:00 – 8:15 PM',at:'20:00',len:'15 min',ev:'Closing remarks',loc:RC,note:'Dismiss everyone, say thank you, reminders for tomorrow',who:'Brooke, Ty'},
+  {c:'d',t:'8:15 – 8:30 PM',at:'20:15',len:'15 min',ev:'Delegates dismissed (welcome to stay until 8:30 PM)',loc:RC},
+  {c:'x',t:'8:15 – 8:30 PM',at:'20:15',ev:'Dinner taken away',loc:RC,note:"Queen's Catering takes any dirty linens and china",who:'Logs: survey, identify dirty linens'},
+  {c:'e',t:'8:30 PM',at:'20:30',len:'As long as needed',ev:'Take down',loc:RC,note:['Move the hallway tables in','Clear out any garbage'],who:'All'}]},
  {title:'Sunday, November 22',rows:[
-  {t:'8:30 – 9:15 AM',at:'08:30',len:'45 min',ev:'Exec team arrives and sets up',loc:RC,note:'Chairs, tables, balloons, sound system and projector',who:'All: Logs (AV)'},
-  {t:'9:15 – 9:30 AM',at:'09:15',len:'15 min',ev:'Delegates arrive',loc:RC,note:'Check in delegates; serve coffee and light snacks'},
-  {t:'9:30 – 9:45 AM',at:'09:30',len:'15 min',ev:'Greet and welcome Speaker #2',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
-  {t:'9:30 – 9:45 AM',at:'09:30',len:'15 min',ev:'Opening remarks',loc:RC,who:'Brooke, Ty'},
-  {t:'9:45 – 10:15 AM',at:'09:45',len:'30 min',ev:'Speaker #2',loc:RC,who:'Alyssa/Mia introduce and thank afterwards'},
-  {t:'10:15 – 10:20 AM',at:'10:15',len:'5 min',ev:'Transition: move delegates to the ILC',loc:RC2I,note:'Rooms are the same as yesterday. Mentors team supports and checks in the in-person mentors (hand out cards to all of them)',who:'Mentors team and Ben'},
-  {t:'10:20 AM – 12:20 PM',at:'10:20',len:'2 hr',ev:'Work period #2',loc:'ILC',who:'Mentors team and Ben stay in the ILC for support (can rotate)'},
-  {t:'12:20 – 12:30 PM',at:'12:20',len:'10 min',ev:'Transition: move delegates to the main venue',loc:I2RC,note:'Mentors team thanks the in-person mentors leaving after this session',who:'Delegates: Mentors team and Ben; lunch: Logs, Anna, Lincoln'},
-  {t:'12:30 – 1:00 PM',at:'12:30',len:'30 min',ev:'Lunch: Miss Bao',loc:RC,note:'Miss Bao was scheduled for 12:15 PM and has been asked to arrive at 12:00 PM (to confirm). Drop-off at the Mitchell parking lot or along the sidewalk',who:'Logs, Anna, Lincoln set up; put out dietary tags'},
-  {t:'12:45 – 1:00 PM',at:'12:45',len:'15 min',ev:'Greet and welcome Speaker #3',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
-  {t:'1:00 – 1:30 PM',at:'13:00',len:'30 min',ev:'Speaker #3',loc:RC,note:'At dismissal, remind delegates to take all their belongings, arrive 10 minutes before their slot (promptly) and wait outside to be checked in',who:'Alyssa/Mia introduce and thank afterwards'},
-  {t:'1:30 – 1:40 PM',at:'13:30',len:'10 min',ev:'Transition: move delegates to the ILC',loc:RC2I,note:'Guide delegates from Rose Commons to the ILC',who:'Sponz, Anna, Lincoln'},
-  {t:'1:40 – 2:20 PM',at:'13:40',len:'30 min',ev:'Rearrange Rose Commons for presentations',loc:RC,note:'Take down the round tables and set up one table for four judges',who:'Available exec'},
-  {t:'1:40 – 2:20 PM',at:'13:40',len:'30 min',ev:'Set up BMH 111 (MMR) judging room',loc:'ILC',note:'Set up the room layout',who:'Ty, Dani'},
-  {t:'1:40 – 3:10 PM',at:'14:20',len:'1 hr 30 min',ev:'Work period #3',loc:'ILC',note:'Remind teams 10 minutes before the deadline to send their presentations',who:'Sponz, Anna, Lincoln stay in the ILC; Mentors team comes at the end to thank departing mentors'},
-  {t:'3:10 – 3:20 PM',at:'15:10',len:'10 min',ev:'Transition',loc:I2RC,note:'Delegates dismissed until their presentation. Presentations due by 3:10 PM (with a quiet 10-minute grace period, to 3:20)',who:'Sponz, Anna, Lincoln field questions about judging and the evening'},
-  {t:'3:15 – 3:30 PM',at:'15:15',len:'15 min',ev:'Judges arrive; rubric and judging procedure explained',loc:BOTH,note:'Co-chairs at the judging rooms by 3:10. Exec outside each presentation room sign in presenting delegates',who:'Speakers team welcomes; Ty and Brooke explain judging'},
-  {t:'3:30 – 7:00 PM',at:'15:30',len:'3 hr 30 min',ev:'Judging',loc:BOTH,note:'Delegates dismissed as soon as their presentation is done',who:{v:`Ty, Dani, Ben to ILC 111 (Dani and Ben sign in delegates; ${ARRIVE})`,rs:4}},
-  {sub:1,t:'3:30 – 3:43 PM',at:'15:30',len:'13 min',ev:'Team 1 & 2',loc:BOTH,who:null},
-  {sub:1,t:'3:43 – 3:56 PM',at:'15:43',len:'13 min',ev:'Team 3 & 4',loc:BOTH,who:null},
-  {sub:1,t:'3:56 – 4:09 PM',at:'15:56',len:'13 min',ev:'Team 5 & 6',loc:BOTH,who:null},
-  {sub:1,t:'4:09 – 4:22 PM',at:'16:09',len:'13 min',ev:'Team 7 & 8',loc:BOTH,who:{v:`Brooke, Mia, Charleigh to Rose Commons (Mia and Charleigh sign in delegates; ${ARRIVE})`,rs:4}},
-  {sub:1,t:'4:22 – 4:35 PM',at:'16:22',len:'13 min',ev:'Team 9 & 10',loc:BOTH,who:null},
-  {sub:1,t:'4:35 – 4:48 PM',at:'16:35',len:'13 min',ev:'Team 11 & 12',loc:BOTH,who:null},
-  {sub:1,t:'4:48 – 5:01 PM',at:'16:48',len:'13 min',ev:'Team 13 & 14',loc:BOTH,who:null},
-  {sub:1,t:'5:01 – 5:14 PM',at:'17:01',len:'13 min',ev:'Team 15',loc:'ILC',who:{v:'Ty, Brooke, Dani, Ben',rs:10}},
-  {t:'5:14 – 5:20 PM',at:'17:14',len:'6 min',ev:'Buffer time',who:null},
-  {t:'5:20 – 5:35 PM',at:'17:20',len:'15 min',ev:'Judges deliberate: Top 4 decided (each set chooses 2)',loc:RC,note:'Brooke sends out for teams (1) and (2); Ty for teams (3) and (4)',who:null},
-  {t:'5:35 PM',at:'17:35',ev:'Top 4 notified',who:null},
-  {t:'5:35 – 5:55 PM',at:'17:35',len:'20 min',ev:'Top 4 and the Rose Commons judges move to the ILC (MMR)',who:null},
-  {sub:1,t:'5:55 – 6:08 PM',at:'17:55',len:'13 min',ev:'Top 4 (1) presents',loc:'ILC',who:null},
-  {sub:1,t:'6:08 – 6:21 PM',at:'18:08',len:'13 min',ev:'Top 4 (2) presents',loc:'ILC',who:null},
-  {sub:1,t:'6:21 – 6:34 PM',at:'18:21',len:'13 min',ev:'Top 4 (3) presents',loc:'ILC',who:null},
-  {sub:1,t:'6:34 – 6:47 PM',at:'18:34',len:'13 min',ev:'Top 4 (4) presents',loc:'ILC',who:null},
-  {t:'6:47 – 7:00 PM',at:'18:47',len:'13 min',ev:'Judges deliberate: choose the top 3',loc:'ILC',note:'Ideally the top 3 are notified before the banquet. If not, Brooke and Ty announce them at the banquet (teams are not notified by text or email during it)',who:null},
-  {t:{v:'5:30 – 7:00 PM',rs:3},at:'17:30',len:'1 hr 30 min',ev:'Clean up main venue',loc:RC,who:'Avery, Mia, Alyssa, Gavin, Khanyiso, Kaitlyn'},
-  {t:null,at:'17:30',len:'1 hr 30 min',ev:'Clean up ILC rooms',loc:'ILC',who:'Sponz'},
-  {t:null,at:'17:30',len:'1 hr 30 min',ev:'Set up banquet',loc:NO,note:'Bring the balloons and raffle items to the banquet',who:'Connor, Chloe, FYRs, Andrea, Victoria, Jorja'},
-  {t:'7:30 – 9:30 PM',at:'19:30',len:'2 hr',ev:'Banquet begins',loc:NO},
-  {t:'8:15 – 8:45 PM',at:'20:15',len:'30 min',ev:'Team presentations',loc:NO},
-  {sub:1,at:'20:15',ev:'Raffle items announced',loc:NO,who:'Dani'},
-  {sub:1,at:'20:15',ev:'QUESST winners announced',loc:NO,who:'Ty, Brooke'},
-  {t:'8:45 – 9:00 PM',at:'20:45',len:'15 min',ev:'Closing remarks: QUESST 2026 officially over',loc:NO,who:'Brooke, Ty'},
-  {t:'9:00 PM',at:'21:00',ev:'Clean up',who:'All'}]}];
+  {sec:'Set-up'},
+  {c:'e',t:'8:30 – 9:15 AM',at:'08:30',len:'45 min',ev:'Exec team arrives and sets up',loc:RC,note:['Logs: sound system and projector','Sponz: check the ILC (rooms unlocked, signage)','Ops: chairs, tables and signage look good; set up tables in the west hallway','Lincoln, Anna, Chloe: set up coffee','Dels + Marketing: set up breakfast foods','Speakers: balloons','Others: help'],who:'Everyone'},
+  {c:'x',t:'9:00 AM',at:'09:00',ev:'Coffee pickup',loc:'CoGro in the ARC',note:'Collect coffee from CoGro',who:'Lincoln, Anna, Chloe'},
+  {sec:'Kickoff & Speaker #2'},
+  {c:'d',t:'9:15 – 9:30 AM',at:'09:15',len:'15 min',ev:'Delegates arrive',loc:RC,note:'Check in delegates; serve coffee and light snacks. A Sunday check-in might not happen'},
+  {c:'e',t:'9:30 – 9:45 AM',at:'09:30',len:'15 min',ev:'Greet and welcome Speaker #2: Martin',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
+  {c:'d',t:'9:30 – 9:45 AM',at:'09:30',len:'15 min',ev:'Opening remarks',loc:RC,note:'How the judging period and the day will run',who:'Brooke, Ty'},
+  {c:'d',t:'9:45 – 10:15 AM',at:'09:45',len:'30 min',ev:'Speaker #2',loc:RC,who:'Alyssa/Mia introduce and thank afterwards'},
+  {c:'t',t:'10:15 – 10:20 AM',at:'10:15',len:'5 min',ev:'Transition (delegates to the ILC)',loc:RC2I,note:'Guide delegates to the ILC; rooms are the same as yesterday. Mentors team supports and checks in the in-person mentors (hand out cards to all of them)',who:['Ben: guide delegates','Mentors team: support mentors']},
+  {sec:'Work Period #2'},
+  {c:'d',t:'10:20 AM – 12:20 PM',at:'10:20',len:'2 hr',ev:'Work period #2',loc:'ILC',who:'Mentors team + Ben stay in the ILC for support if needed (can rotate)'},
+  {c:'x',t:'12:00 PM',at:'12:00',ev:'Miss Bao arrives',loc:ML,note:'Miss Bao scheduled to arrive at 12:00 PM. Drop-off at the Mitchell parking lot or along the sidewalk',who:'Logs, Anna, Lincoln: receive the delivery, set up the food, put out dietary restriction labels'},
+  {c:'t',t:'12:20 – 12:30 PM',at:'12:20',len:'10 min',ev:'Transition (delegates to Rose Commons)',loc:I2RC,note:'Mentors team thanks the in-person mentors leaving after this session',who:['Ben: guide delegates','Mentors team: thank mentors']},
+  {sec:'Lunch & Speaker #3'},
+  {c:'d',t:'12:30 – 1:00 PM',at:'12:30',len:'30 min',ev:'Lunch: Miss Bao',loc:RC,note:'Dietary restrictions eat first',who:'Logs, Anna, Lincoln'},
+  {c:'e',t:'12:45 – 1:00 PM',at:'12:45',len:'15 min',ev:'Greet and welcome Speaker #3',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
+  {c:'d',t:'1:00 – 1:30 PM',at:'13:00',len:'30 min',ev:'Speaker #3',loc:RC,note:'At dismissal, remind delegates to take all their belongings, arrive 10 minutes before their slot (promptly) and wait outside to be checked in',who:'Alyssa/Mia introduce and thank afterwards'},
+  {c:'t',t:'1:30 – 1:40 PM',at:'13:30',len:'10 min',ev:'Transition (delegates to the ILC)',loc:RC2I,note:'Guide delegates from Rose Commons to the ILC',who:'Sponz, Anna, Lincoln'},
+  {sec:'Work Period #3'},
+  {c:'e',t:'1:40 – 2:20 PM',at:'13:40',len:'30 min',ev:'Rearrange Rose Commons for presentations',loc:RC,note:'Take down the round tables and set up one table for four judges',who:'Available exec'},
+  {c:'x',t:'2:30 PM',at:'14:30',ev:'Furniture removed',loc:ML,note:'Kingston Party Rentals picks up the rental furniture',who:'Logs: facilitate furniture removal'},
+  {c:'x',t:'2:30 PM',at:'14:30',ev:'Linens gathered',loc:WH,note:"Linens left in the west hallway for Queen's Catering to pick up on Monday",who:'Logs'},
+  {c:'e',t:'1:40 – 2:20 PM',at:'13:40',len:'30 min',ev:'Set up BMH 111 (MMR) judging room',loc:'ILC',note:'Set up the room layout',who:'Ty, Dani'},
+  {c:'d',t:'1:40 – 3:10 PM',at:'14:20',len:'1 hr 30 min',ev:'Work period #3',loc:'ILC',note:'Remind teams 10 minutes before the deadline to send their presentations',who:['Sponz, Anna, Lincoln: stay in the ILC for support','Mentors team: come at the end to thank departing mentors']},
+  {c:'t',t:'3:10 – 3:20 PM',at:'15:10',len:'10 min',ev:'Transition',loc:I2RC,note:'Delegates dismissed until their presentation. Presentations due by 3:10 PM (with a quiet 10-minute grace period, to 3:20)',who:'Sponz, Anna, Lincoln: field questions about judging and the evening'},
+  {sec:'Judging'},
+  {c:'e',t:'3:15 – 3:30 PM',at:'15:15',len:'15 min',ev:'Judges arrive; rubric and judging procedure explained',loc:BOTH,note:'Co-chairs at the judging rooms by 3:10. Exec outside each presentation room sign in presenting delegates',who:['Speakers team: welcome judges','Ty and Brooke: explain the judging procedure']},
+  {c:'d',t:'3:30 – 7:00 PM',at:'15:30',len:'3 hr 30 min',ev:'Judging',loc:BOTH,note:'Delegates dismissed as soon as their presentation is done',who:{v:['Ty, Dani, Ben to ILC 111 (Dani + Ben sign in delegates)',ARRIVE],rs:4}},
+  {c:'d',sub:1,t:'3:30 – 3:43 PM',at:'15:30',len:'13 min',ev:'Team 1 & 2',loc:BOTH,who:null},
+  {c:'d',sub:1,t:'3:43 – 3:56 PM',at:'15:43',len:'13 min',ev:'Team 3 & 4',loc:BOTH,who:null},
+  {c:'d',sub:1,t:'3:56 – 4:09 PM',at:'15:56',len:'13 min',ev:'Team 5 & 6',loc:BOTH,who:null},
+  {c:'d',sub:1,t:'4:09 – 4:22 PM',at:'16:09',len:'13 min',ev:'Team 7 & 8',loc:BOTH,who:{v:['Brooke, Mia, Charleigh to Rose Commons (Mia + Charleigh sign in delegates)',ARRIVE],rs:4}},
+  {c:'d',sub:1,t:'4:22 – 4:35 PM',at:'16:22',len:'13 min',ev:'Team 9 & 10',loc:BOTH,who:null},
+  {c:'d',sub:1,t:'4:35 – 4:48 PM',at:'16:35',len:'13 min',ev:'Team 11 & 12',loc:BOTH,who:null},
+  {c:'d',sub:1,t:'4:48 – 5:01 PM',at:'16:48',len:'13 min',ev:'Team 13 & 14',loc:BOTH,who:null},
+  {c:'d',sub:1,t:'5:01 – 5:14 PM',at:'17:01',len:'13 min',ev:'Team 15',loc:'ILC'},
+  {c:'d',t:'5:14 – 5:20 PM',at:'17:14',len:'6 min',ev:'Buffer time'},
+  {c:'d',t:'5:20 – 5:35 PM',at:'17:20',len:'15 min',ev:'Judges deliberate',loc:RC,note:'Top 4 decided: each set of judges chooses 2 teams'},
+  {c:'e',t:'5:35 PM',at:'17:35',ev:'Top 4 notified',note:'Brooke sends out for teams (1) and (2); Ty for teams (3) and (4)',who:'Ty, Brooke'},
+  {c:'t',t:'5:35 – 5:55 PM',at:'17:35',len:'20 min',ev:'Transition (finalists to the ILC)',note:'Top 4 + the Rose Commons judges walk over to the ILC (MMR) for finals',who:'Brooke, Mia & Charleigh'},
+  {sec:'Final 4 teams'},
+  {c:'d',t:'5:55 – 6:08 PM',at:'17:55',len:'13 min',ev:'Top 4 (1) presents',loc:'ILC'},
+  {c:'d',t:'6:08 – 6:21 PM',at:'18:08',len:'13 min',ev:'Top 4 (2) presents',loc:'ILC'},
+  {c:'d',t:'6:21 – 6:34 PM',at:'18:21',len:'13 min',ev:'Top 4 (3) presents',loc:'ILC'},
+  {c:'d',t:'6:34 – 6:47 PM',at:'18:34',len:'13 min',ev:'Top 4 (4) presents',loc:'ILC'},
+  {c:'d',t:'6:47 – 7:00 PM',at:'18:47',len:'13 min',ev:'Judges deliberate: choose the winners (top 3)',loc:'ILC',note:'Ideally the top 3 are notified before the banquet. If not, Brooke and Ty announce them at the banquet (teams are not notified by text or email during it)'},
+  {c:'e',t:{v:'5:30 – 7:00 PM',rs:3},at:'17:30',len:'1 hr 30 min',ev:'Clean up main venue',loc:RC,who:'Avery, Mia, Alyssa, Gavin, Khanyiso, Kaitlyn'},
+  {c:'e',t:null,at:'17:30',len:'1 hr 30 min',ev:'Clean up ILC rooms',loc:'ILC',who:'Sponz'},
+  {c:'e',t:null,at:'17:30',len:'1 hr 30 min',ev:'Set up banquet',loc:NO,note:'Reminder to bring the balloons and raffle items to the banquet',who:'Connor, Chloe, FYRs, Andrea, Victoria, Jorja'},
+  {c:'t',t:'7:00 – 7:20 PM',at:'19:00',len:'20 min',ev:'Transition (to Night Owl)',loc:'ILC / Rose Commons to Night Owl',note:'Round up the remaining stragglers; everyone migrates to Night Owl!',who:'Everyone'},
+  {sec:'Banquet'},
+  {c:'d',t:'7:30 – 9:30 PM',at:'19:30',len:'2 hr',ev:'Banquet begins',loc:NO},
+  {c:'d',t:'8:15 – 8:45 PM',at:'20:15',len:'30 min',ev:'Team presentations',loc:NO},
+  {c:'d',sub:1,at:'20:15',ev:'Raffle items announced',loc:NO,who:'Dani'},
+  {c:'d',sub:1,at:'20:15',ev:'QUESST winners announced',loc:NO,who:'Ty, Brooke'},
+  {c:'d',t:'8:45 – 9:00 PM',at:'20:45',len:'15 min',ev:'Closing remarks: QUESST 2026 officially over',loc:NO,who:'Brooke, Ty'},
+  {c:'e',t:'9:00 PM',at:'21:00',ev:'Clean up',who:'All'}]}];
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const cell=(v,cls)=>{if(v===null)return'';let rs='';if(v&&typeof v=='object'){rs=` rowspan="${v.rs}"`;v=v.v}return`<td class="${cls}"${rs}>${esc(v||'')}</td>`};
+const lines=v=>Array.isArray(v)?v.map(esc).join('<br>'):esc(v||'');
+const cell=(v,cls)=>{if(v===null)return'';let rs='';if(v&&typeof v=='object'&&!Array.isArray(v)){rs=` rowspan="${v.rs}"`;v=v.v}return`<td class="${cls}"${rs}>${lines(v)}</td>`};
+$('legend').innerHTML=Object.entries(KINDS).map(([k,l])=>`<span class="k-${k}">${esc(l)}</span>`).join('');
 let schedDay=0;
 function buildSched(d){
   schedDay=d;$('sdSat').setAttribute('aria-pressed',d==0);$('sdSun').setAttribute('aria-pressed',d==1);
   const D=SCHED[d];
-  $('sched').innerHTML=`<caption>${esc(D.title)}</caption><thead><tr><th scope="col">Time</th><th scope="col">Event</th><th scope="col">Location</th><th scope="col">Notes</th><th scope="col">Team</th></tr></thead><tbody>`+
-   D.rows.map(r=>`<tr${r.sub?' class="sub"':''}>${cell(r.t,'t')}<td class="ev"><div class="evh"><b>${esc(r.ev)}</b><button class="jump" type="button" data-at="${r.at}" aria-label="Show ${esc(r.ev)} on the walkthrough map">Map ▸</button></div>${r.len?`<small>${esc(r.len)}</small>`:''}</td>${cell(r.loc,'loc')}${cell(r.note,'note')}${cell(r.who,'who')}</tr>`).join('')+'</tbody>';
+  $('sched').innerHTML=`<caption>${esc(D.title)}</caption><thead><tr><th scope="col">Time</th><th scope="col">Event</th><th scope="col">Location</th><th scope="col">Task</th><th scope="col">Team</th></tr></thead><tbody>`+
+   D.rows.map(r=>r.sec?`<tr class="sec"><th colspan="5" scope="rowgroup">${esc(r.sec)}</th></tr>`:
+    `<tr class="k-${r.c}${r.sub?' sub':''}">${cell(r.t,'t')}<td class="ev"><div class="evh"><b>${esc(r.ev)}</b><button class="jump" type="button" data-at="${r.at}" aria-label="Show ${esc(r.ev)} on the walkthrough map">Map ▸</button></div><small>${esc(KINDS[r.c])}${r.len?' · '+esc(r.len):''}</small></td>${cell(r.loc,'loc')}${cell(r.note,'note')}${cell(r.who,'who')}</tr>`).join('')+'</tbody>';
 }
 let resumePlay=false;
 function setView(v){
