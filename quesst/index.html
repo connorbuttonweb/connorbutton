@@ -52,11 +52,52 @@ h2{font:600 15px var(--display);letter-spacing:.12em;text-transform:uppercase;co
 p.note{color:var(--dim);font-size:14px;line-height:1.5;max-width:95ch;margin:0}
 a.back{align-self:flex-start;font:600 15px var(--display);letter-spacing:.08em;text-transform:uppercase;color:var(--dim);text-decoration:none}
 a.back:hover,a.back:focus-visible{color:var(--accent)}
+[hidden]{display:none!important}
+.views{display:flex;flex-wrap:wrap;gap:6px}
+#mapView,#schedView{display:flex;flex-direction:column;gap:12px}
+.sched-wrap{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--panel)}
+table.sched{width:100%;min-width:820px;border-collapse:collapse;font-size:14px;line-height:1.45}
+.sched caption{text-align:left;padding:12px 12px 4px;font:600 22px var(--display);letter-spacing:.04em;color:var(--text)}
+.sched th{font:600 13px var(--display);letter-spacing:.1em;text-transform:uppercase;color:var(--dim);text-align:left;padding:8px 12px;border-bottom:1px solid var(--line)}
+.sched td{padding:9px 12px;border-top:1px solid var(--line);vertical-align:top}
+.sched td.t{white-space:nowrap;font-weight:600;font-variant-numeric:tabular-nums;width:130px}
+.sched td.ev{width:26%}
+.sched td.loc{width:13%;color:var(--dim)}
+.sched td.note{color:var(--dim)}
+.sched td.who{width:22%}
+.sched .evh{display:flex;justify-content:space-between;align-items:flex-start;gap:8px}
+.sched .evh b{font-weight:600}
+.sched td.ev small{display:block;color:var(--dim);font-size:13px}
+.sched tr.sub td.ev{padding-left:26px}
+.sched button.jump{flex:none;font-size:12px;font-weight:500;padding:2px 8px}
+@media (max-width:700px){
+  table.sched{min-width:0}
+  .sched thead{display:none}
+  .sched tr{display:block;padding:10px 12px;border-top:1px solid var(--line)}
+  .sched tr.sub{padding-left:28px}
+  .sched td,.sched td.t,.sched td.ev,.sched td.loc,.sched td.who{display:block;width:auto;border:0;padding:2px 0}
+  .sched tr.sub td.ev{padding-left:0}
+  .sched td:empty{display:none}
+  .sched td.who::before{content:"Team · ";color:var(--dim)}
+}
 </style>
 </head>
 <body>
 <main>
   <a href="/portfolios/" class="back">← Portfolios</a>
+  <div class="views" role="group" aria-label="View">
+    <button id="vMap" type="button" aria-pressed="true">Walkthrough</button>
+    <button id="vSched" type="button" aria-pressed="false">Schedule</button>
+  </div>
+  <section id="schedView" hidden>
+    <div class="views" role="group" aria-label="Schedule day">
+      <button id="sdSat" type="button" aria-pressed="true">Saturday</button>
+      <button id="sdSun" type="button" aria-pressed="false">Sunday</button>
+    </div>
+    <div class="sched-wrap"><table class="sched" id="sched"></table></div>
+    <p class="note">The exec team's run sheet for the weekend. "Map" jumps the walkthrough to that moment.</p>
+  </section>
+  <div id="mapView">
   <canvas id="cv" width="1920" height="1080" aria-label="Animated bird's-eye walkthrough of the QUESST 2026 weekend"></canvas>
   <div class="bar">
     <button id="play" type="button">Pause</button>
@@ -70,6 +111,7 @@ a.back:hover,a.back:focus-visible{color:var(--accent)}
   <h2>Work rooms (hover a team to find it on the map)</h2>
   <div class="rooms" id="rooms"></div>
   <p class="note">Hover any dot for who it is. Space plays and pauses. Room numbers come from the ILC booking; the team-to-room split, which teams judge in which room, the Top 4 teams and which nine teams get the in-person mentors (shown as Teams 1–9), and the south-entrance and drop-off spots are placeholders until the co-chairs' tables are in. Purple judges and grey vendors are added to the layout's colour key. Seating: 4 per team (8 per team table); 9 at each exec table, the mentors table and the Team 15 table with Ty, Brooke and the three speaker seats. Connor and Chloe are shown standing.</p>
+  </div>
 </main>
 <script>
 "use strict";
@@ -91,7 +133,7 @@ const COL={del:'#2f9e4f',exec:'#5d86c4',men:'#f29cc0',spk:'#f2cf1d',jdg:'#8a5cd1
 /* ============ world data ============ */
 const RT=[
  {id:'E1',x:130,y:937,label:'Exec'},{id:'E2',x:110,y:1176,label:'Exec'},
- {id:'D0',x:336,y:876,label:'1 · 2'},{id:'D1',x:530,y:873,label:'3 · 4'},{id:'M',x:733,y:873,label:'Mentors'},
+ {id:'D0',x:733,y:873,label:'1 · 2'},{id:'D1',x:530,y:873,label:'3 · 4'},{id:'M',x:336,y:876,label:'Mentors'},
  {id:'D2',x:285,y:1073,label:'5 · 6'},{id:'D3',x:478,y:1080,label:'7 · 8'},{id:'D6',x:665,y:1067,label:'13 · 14'},
  {id:'D4',x:287,y:1276,label:'9 · 10'},{id:'D5',x:482,y:1275,label:'11 · 12'},{id:'D7',x:680,y:1270,label:'15'}];
 const TB={}; RT.forEach((t,i)=>{TB[t.id]=t;t.i=i;t.seats=[]});
@@ -553,17 +595,111 @@ let chipDay=-1;
 function sync(){const sc=sceneAt(T);if(sc.day!=chipDay){chipDay=sc.day;buildChips(sc.day);$('sat').setAttribute('aria-pressed',sc.day==0);$('sun').setAttribute('aria-pressed',sc.day==1)}
   [...chips.children].forEach(b=>b.classList.toggle('on',+b.dataset.i==sc.i));scrub.value=Math.round(T/TOTAL*1000);
   clockEl.textContent=(sc.day?'Sun ':'Sat ')+clockStr(lerp(sc.t0,sc.t1,clamp((T-sc.start)/sc.dur)));playB.textContent=playing?'Pause':T>=TOTAL-.01?'Replay':'Play';render(T)}
-function tick(ts){const dt=Math.min(.1,(ts-last)/1000||0);last=ts;if(playing){T+=dt*speed;if(T>=TOTAL){T=TOTAL-.001;playing=false}}sync();requestAnimationFrame(tick)}
+function tick(ts){const dt=Math.min(.1,(ts-last)/1000||0);last=ts;if(playing){T+=dt*speed;if(T>=TOTAL){T=TOTAL-.001;playing=false}}if(!$('mapView').hidden)sync();requestAnimationFrame(tick)}
 playB.onclick=()=>{if(!playing&&T>=TOTAL-.01)T=0;playing=!playing;sync()};
 $('sat').onclick=()=>{T=dayStart(0)+.001;sync()};$('sun').onclick=()=>{T=dayStart(1)+.001;sync()};
 $('speed').onchange=e=>speed=+e.target.value;
 scrub.oninput=()=>{T=clamp(scrub.value/1000*TOTAL,0,TOTAL-.001);sync()};
-document.addEventListener('keydown',e=>{if(e.code=='Space'&&!['BUTTON','SELECT','INPUT'].includes(document.activeElement.tagName)){e.preventDefault();playB.onclick()}});
+document.addEventListener('keydown',e=>{if(e.code=='Space'&&!$('mapView').hidden&&!['BUTTON','SELECT','INPUT'].includes(document.activeElement.tagName)){e.preventDefault();playB.onclick()}});
 cv.addEventListener('mousemove',e=>{const r=cv.getBoundingClientRect(),mx=(e.clientX-r.left)*W/r.width,my=(e.clientY-r.top)*H/r.height;let best=null,bd=18;hits.forEach(h=>{const d=Math.hypot(h.sx-mx,h.sy-my);if(d<bd){bd=d;best=h.a}});hover=best});
 cv.addEventListener('mouseleave',()=>hover=null);
 const rooms=$('rooms');for(let t=1;t<=15;t++){const s=document.createElement('span');s.innerHTML=`<b>Team ${t}</b> → ILC ${TEAMROOM[t].n} · ${t<=9?'in-person':'online'} mentor`;s.onmouseenter=()=>hlTeam=t;s.onmouseleave=()=>hlTeam=0;rooms.appendChild(s)}
 {const s=document.createElement('span');s.textContent='Spare: 230, 231, 327, 329, 330';rooms.appendChild(s)}
 window.__seek=t=>{T=t;playing=false;sync()};
+
+/* ============ schedule view (from the exec SCHEDULE sheet) ============ */
+// Row: t time, at start (24h, for the Map jump), len, ev, loc, note, who.
+// A {v,rs} value spans rs rows (merged cells in the sheet); null = covered by a span above.
+const RC='Rose Commons',RC2I='Rose Commons to ILC',I2RC='ILC to Rose Commons',BOTH='ILC / Rose Commons',NO='Night Owl';
+const ARRIVE='all delegates must arrive 10 minutes before their slot and wait outside, ready';
+const SCHED=[
+ {title:'Saturday, November 21',rows:[
+  {t:'2:00 – 3:00 PM',at:'14:00',len:'60 min',ev:'Set up',loc:RC,note:'Audio, mic and projector for presentations; name tags, table numbers, sign-in desk, chairs, tables, food, delegate bags',who:'All: Logs (AV); Sponz (make delegate bags, put out raffle items); everyone else (general setup)'},
+  {t:'3:00 – 3:30 PM',at:'15:00',len:'30 min',ev:'Delegates arrive, meet each other, network',loc:RC,note:'Get delegates signed in and seated at their table',who:'Sign-in: Ben, Dani, Andrea, Julia'},
+  {t:'3:15 – 3:30 PM',at:'15:15',len:'15 min',ev:'Greet Indigenous speaker',loc:RC2I,who:'Brooke, Ty, Dani (Dani is the main contact for Al)'},
+  {t:'3:30 – 3:45 PM',at:'15:30',len:'15 min',ev:'Welcome and kickoff',loc:RC,note:'Co-chair speeches and weekend overview',who:'Brooke, Ty'},
+  {t:'3:45 – 4:00 PM',at:'15:45',len:'15 min',ev:'Speaker: Al Doxtater',loc:RC},
+  {t:'4:00 – 4:15 PM',at:'16:00',len:'15 min',ev:'Transition: move delegates to the ILC',loc:RC2I,note:'Guide delegates from the main venue to the ILC and help them find their rooms',who:'Mentors (sign in mentors), Dani, Chloe, Sarah, Ben'},
+  {t:'4:15 – 6:15 PM',at:'16:15',len:'2 hr',ev:'Work period #1',loc:'ILC',note:'First work period',who:'Mentors team and Ben stay in the ILC; everyone else in Rose Commons'},
+  {t:'6:00 – 6:20 PM',at:'18:00',len:'20 min',ev:'Set up dinner',loc:RC,note:"Queen's Catering handles this; be there to help and check in",who:'Logs, Anna, Lincoln'},
+  {t:'6:15 – 6:30 PM',at:'18:15',len:'15 min',ev:'Greet and welcome Speaker #1',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
+  {t:'6:15 – 6:25 PM',at:'18:15',len:'10 min',ev:'Transition',loc:I2RC,note:'Guide delegates from the ILC back to the main venue',who:'Mentors team and Ben'},
+  {t:'6:30 – 7:00 PM',at:'18:30',len:'30 min',ev:'Speaker #1: OPG',loc:RC,note:'All exec in the main venue watching, engaged, asking questions and setting the example for delegates',who:'Alyssa/Mia introduce the speaker and thank them afterwards'},
+  {t:'7:00 – 8:00 PM',at:'19:00',len:'1 hr',ev:"Dinner: Queen's Catering",loc:RC},
+  {t:'8:00 – 8:15 PM',at:'20:00',len:'15 min',ev:'Closing remarks',loc:RC,note:'Dismiss everyone, say thank you, reminders for tomorrow',who:'Brooke, Ty'},
+  {t:'8:15 – 8:30 PM',at:'20:15',len:'15 min',ev:'Delegates dismissed (welcome to stay until 8:30 PM)',loc:RC},
+  {t:'8:30 PM',at:'20:30',len:'As long as needed',ev:'Take down',loc:RC,who:'All'}]},
+ {title:'Sunday, November 22',rows:[
+  {t:'8:30 – 9:15 AM',at:'08:30',len:'45 min',ev:'Exec team arrives and sets up',loc:RC,note:'Chairs, tables, balloons, sound system and projector',who:'All: Logs (AV)'},
+  {t:'9:15 – 9:30 AM',at:'09:15',len:'15 min',ev:'Delegates arrive',loc:RC,note:'Check in delegates; serve coffee and light snacks'},
+  {t:'9:30 – 9:45 AM',at:'09:30',len:'15 min',ev:'Greet and welcome Speaker #2',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
+  {t:'9:30 – 9:45 AM',at:'09:30',len:'15 min',ev:'Opening remarks',loc:RC,who:'Brooke, Ty'},
+  {t:'9:45 – 10:15 AM',at:'09:45',len:'30 min',ev:'Speaker #2',loc:RC,who:'Alyssa/Mia introduce and thank afterwards'},
+  {t:'10:15 – 10:20 AM',at:'10:15',len:'5 min',ev:'Transition: move delegates to the ILC',loc:RC2I,note:'Rooms are the same as yesterday. Mentors team supports and checks in the in-person mentors (hand out cards to all of them)',who:'Mentors team and Ben'},
+  {t:'10:20 AM – 12:20 PM',at:'10:20',len:'2 hr',ev:'Work period #2',loc:'ILC',who:'Mentors team and Ben stay in the ILC for support (can rotate)'},
+  {t:'12:20 – 12:30 PM',at:'12:20',len:'10 min',ev:'Transition: move delegates to the main venue',loc:I2RC,note:'Mentors team thanks the in-person mentors leaving after this session',who:'Delegates: Mentors team and Ben; lunch: Logs, Anna, Lincoln'},
+  {t:'12:30 – 1:00 PM',at:'12:30',len:'30 min',ev:'Lunch: Miss Bao',loc:RC,note:'Miss Bao was scheduled for 12:15 PM and has been asked to arrive at 12:00 PM (to confirm). Drop-off at the Mitchell parking lot or along the sidewalk',who:'Logs, Anna, Lincoln set up; put out dietary tags'},
+  {t:'12:45 – 1:00 PM',at:'12:45',len:'15 min',ev:'Greet and welcome Speaker #3',loc:RC,note:'Greet the speaker and get them set up',who:'Alyssa, Mia'},
+  {t:'1:00 – 1:30 PM',at:'13:00',len:'30 min',ev:'Speaker #3',loc:RC,note:'At dismissal, remind delegates to take all their belongings, arrive 10 minutes before their slot (promptly) and wait outside to be checked in',who:'Alyssa/Mia introduce and thank afterwards'},
+  {t:'1:30 – 1:40 PM',at:'13:30',len:'10 min',ev:'Transition: move delegates to the ILC',loc:RC2I,note:'Guide delegates from Rose Commons to the ILC',who:'Sponz, Anna, Lincoln'},
+  {t:'1:40 – 2:20 PM',at:'13:40',len:'30 min',ev:'Rearrange Rose Commons for presentations',loc:RC,note:'Take down the round tables and set up one table for four judges',who:'Available exec'},
+  {t:'1:40 – 2:20 PM',at:'13:40',len:'30 min',ev:'Set up BMH 111 (MMR) judging room',loc:'ILC',note:'Set up the room layout',who:'Ty, Dani'},
+  {t:'1:40 – 3:10 PM',at:'14:20',len:'1 hr 30 min',ev:'Work period #3',loc:'ILC',note:'Remind teams 10 minutes before the deadline to send their presentations',who:'Sponz, Anna, Lincoln stay in the ILC; Mentors team comes at the end to thank departing mentors'},
+  {t:'3:10 – 3:20 PM',at:'15:10',len:'10 min',ev:'Transition',loc:I2RC,note:'Delegates dismissed until their presentation. Presentations due by 3:10 PM (with a quiet 10-minute grace period, to 3:20)',who:'Sponz, Anna, Lincoln field questions about judging and the evening'},
+  {t:'3:15 – 3:30 PM',at:'15:15',len:'15 min',ev:'Judges arrive; rubric and judging procedure explained',loc:BOTH,note:'Co-chairs at the judging rooms by 3:10. Exec outside each presentation room sign in presenting delegates',who:'Speakers team welcomes; Ty and Brooke explain judging'},
+  {t:'3:30 – 7:00 PM',at:'15:30',len:'3 hr 30 min',ev:'Judging',loc:BOTH,note:'Delegates dismissed as soon as their presentation is done',who:{v:`Ty, Dani, Ben to ILC 111 (Dani and Ben sign in delegates; ${ARRIVE})`,rs:4}},
+  {sub:1,t:'3:30 – 3:43 PM',at:'15:30',len:'13 min',ev:'Team 1 & 2',loc:BOTH,who:null},
+  {sub:1,t:'3:43 – 3:56 PM',at:'15:43',len:'13 min',ev:'Team 3 & 4',loc:BOTH,who:null},
+  {sub:1,t:'3:56 – 4:09 PM',at:'15:56',len:'13 min',ev:'Team 5 & 6',loc:BOTH,who:null},
+  {sub:1,t:'4:09 – 4:22 PM',at:'16:09',len:'13 min',ev:'Team 7 & 8',loc:BOTH,who:{v:`Brooke, Mia, Charleigh to Rose Commons (Mia and Charleigh sign in delegates; ${ARRIVE})`,rs:4}},
+  {sub:1,t:'4:22 – 4:35 PM',at:'16:22',len:'13 min',ev:'Team 9 & 10',loc:BOTH,who:null},
+  {sub:1,t:'4:35 – 4:48 PM',at:'16:35',len:'13 min',ev:'Team 11 & 12',loc:BOTH,who:null},
+  {sub:1,t:'4:48 – 5:01 PM',at:'16:48',len:'13 min',ev:'Team 13 & 14',loc:BOTH,who:null},
+  {sub:1,t:'5:01 – 5:14 PM',at:'17:01',len:'13 min',ev:'Team 15',loc:'ILC',who:{v:'Ty, Brooke, Dani, Ben',rs:10}},
+  {t:'5:14 – 5:20 PM',at:'17:14',len:'6 min',ev:'Buffer time',who:null},
+  {t:'5:20 – 5:35 PM',at:'17:20',len:'15 min',ev:'Judges deliberate: Top 4 decided (each set chooses 2)',loc:RC,note:'Brooke sends out for teams (1) and (2); Ty for teams (3) and (4)',who:null},
+  {t:'5:35 PM',at:'17:35',ev:'Top 4 notified',who:null},
+  {t:'5:35 – 5:55 PM',at:'17:35',len:'20 min',ev:'Top 4 and the Rose Commons judges move to the ILC (MMR)',who:null},
+  {sub:1,t:'5:55 – 6:08 PM',at:'17:55',len:'13 min',ev:'Top 4 (1) presents',loc:'ILC',who:null},
+  {sub:1,t:'6:08 – 6:21 PM',at:'18:08',len:'13 min',ev:'Top 4 (2) presents',loc:'ILC',who:null},
+  {sub:1,t:'6:21 – 6:34 PM',at:'18:21',len:'13 min',ev:'Top 4 (3) presents',loc:'ILC',who:null},
+  {sub:1,t:'6:34 – 6:47 PM',at:'18:34',len:'13 min',ev:'Top 4 (4) presents',loc:'ILC',who:null},
+  {t:'6:47 – 7:00 PM',at:'18:47',len:'13 min',ev:'Judges deliberate: choose the top 3',loc:'ILC',note:'Ideally the top 3 are notified before the banquet. If not, Brooke and Ty announce them at the banquet (teams are not notified by text or email during it)',who:null},
+  {t:{v:'5:30 – 7:00 PM',rs:3},at:'17:30',len:'1 hr 30 min',ev:'Clean up main venue',loc:RC,who:'Avery, Mia, Alyssa, Gavin, Khanyiso, Kaitlyn'},
+  {t:null,at:'17:30',len:'1 hr 30 min',ev:'Clean up ILC rooms',loc:'ILC',who:'Sponz'},
+  {t:null,at:'17:30',len:'1 hr 30 min',ev:'Set up banquet',loc:NO,note:'Bring the balloons and raffle items to the banquet',who:'Connor, Chloe, FYRs, Andrea, Victoria, Jorja'},
+  {t:'7:30 – 9:30 PM',at:'19:30',len:'2 hr',ev:'Banquet begins',loc:NO},
+  {t:'8:15 – 8:45 PM',at:'20:15',len:'30 min',ev:'Team presentations',loc:NO},
+  {sub:1,at:'20:15',ev:'Raffle items announced',loc:NO,who:'Dani'},
+  {sub:1,at:'20:15',ev:'QUESST winners announced',loc:NO,who:'Ty, Brooke'},
+  {t:'8:45 – 9:00 PM',at:'20:45',len:'15 min',ev:'Closing remarks: QUESST 2026 officially over',loc:NO,who:'Brooke, Ty'},
+  {t:'9:00 PM',at:'21:00',ev:'Clean up',who:'All'}]}];
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const cell=(v,cls)=>{if(v===null)return'';let rs='';if(v&&typeof v=='object'){rs=` rowspan="${v.rs}"`;v=v.v}return`<td class="${cls}"${rs}>${esc(v||'')}</td>`};
+let schedDay=0;
+function buildSched(d){
+  schedDay=d;$('sdSat').setAttribute('aria-pressed',d==0);$('sdSun').setAttribute('aria-pressed',d==1);
+  const D=SCHED[d];
+  $('sched').innerHTML=`<caption>${esc(D.title)}</caption><thead><tr><th scope="col">Time</th><th scope="col">Event</th><th scope="col">Location</th><th scope="col">Notes</th><th scope="col">Team</th></tr></thead><tbody>`+
+   D.rows.map(r=>`<tr${r.sub?' class="sub"':''}>${cell(r.t,'t')}<td class="ev"><div class="evh"><b>${esc(r.ev)}</b><button class="jump" type="button" data-at="${r.at}" aria-label="Show ${esc(r.ev)} on the walkthrough map">Map ▸</button></div>${r.len?`<small>${esc(r.len)}</small>`:''}</td>${cell(r.loc,'loc')}${cell(r.note,'note')}${cell(r.who,'who')}</tr>`).join('')+'</tbody>';
+}
+let resumePlay=false;
+function setView(v){
+  const map=v=='map';
+  if(!map){resumePlay=playing;playing=false;buildSched(sceneAt(T).day)}else playing=resumePlay;
+  $('mapView').hidden=!map;$('schedView').hidden=map;
+  $('vMap').setAttribute('aria-pressed',map);$('vSched').setAttribute('aria-pressed',!map);
+  if(map)sync();
+}
+$('vMap').onclick=()=>setView('map');$('vSched').onclick=()=>setView('sched');
+$('sdSat').onclick=()=>buildSched(0);$('sdSun').onclick=()=>buildSched(1);
+$('sched').addEventListener('click',e=>{
+  const b=e.target.closest('button.jump');if(!b)return;
+  const[h,mm]=b.dataset.at.split(':'),m=+h*60+ +mm,list=SC.filter(s=>s.day==schedDay);
+  let s=list[0];list.forEach(x=>{if(x.t0<=m)s=x});
+  T=Math.min(s.start+clamp((m-s.t0)/(s.t1-s.t0))*s.dur+.001,TOTAL-.001);
+  setView('map');$('vMap').scrollIntoView({block:'start'});
+});
 (document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve()).then(()=>requestAnimationFrame(tick));
 sync();
 </script>
