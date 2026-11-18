@@ -446,7 +446,7 @@ S(1,'Top 4 finals · Rose Commons reset and lock-up','17:55','19:00',12,{base:'j
     seq(a,[[0,pp,0],[.15,v[1],0],[.3,v[1],0],[.45,v[2],0],[.76,v[2],0],[v[0]=='Lucas'?.93:.8+i*.02,[1030,870],0],[v[0]=='Lucas'?1:.88+i*.02,null,v[0]=='Lucas'?.4:0]],p)});
   if(p>.93)bub([1030,830],'Locked by 7:00');
  }});
-S(1,'Night Owl · banquet, winners and the party','19:00','21:30',10,{base:'reset',execDef:'hide',club:1,cam:[[0,VA]],cut:1,
+S(1,'Night Owl · banquet, winners and the party','19:00','21:30',30,{base:'reset',execDef:'hide',club:1,cam:[[0,VA]],cut:1,
  win:()=>[0,.4],
  notes:[['7:00 to 7:20 Round up the stragglers; everyone heads to Night Owl. Set up since 5:30.','Everyone; set-up crew Connor, Chloe, Andrea, Victoria, Jorja, FYRs'],['Doors: drink tickets and underage wristbands.','Andrea; FYRs with Ben\'s list'],['7:30 Banquet. 8:15 to 8:45 team presentations, raffle and winners.','Dani (raffle); Ty, Brooke (winners)'],['8:45 Closing remarks: QUESST 2026 is officially over. 9:00 clean up, then the dance floor.','Brooke, Ty; all exec']],
  run(p){F.lock=1;
@@ -601,13 +601,12 @@ const CL=(()=>{
       crew:crew.includes(a.name),door:door[a.name]}});
   return {tables,ppl};
 })();
-const STAGE=[1170,165], DJ=[1655,170];
+const STAGE=[1170,165];
 function visit(p,from,to,w0,w1,tr=.008){if(p<w0)return from;if(p<w0+tr)return along([from,to],ez(seg(p,w0,w0+tr)));if(w1>=1||p<w1-tr)return to;if(p<w1)return along([to,from],ez(seg(p,w1-tr,w1)));return from}
 function clubPos(c,p){
   let q=c.seat;
   if(c.door){if(p<.16)return c.door;if(p<.18)return along([c.door,c.seat],ez(seg(p,.16,.18)))}
   else if(!c.crew){const s=.005+c.ord*.085,e=s+.05;if(p<s)return null;if(p<e)return along([[535,1110],[535,1005],c.seat],ez(seg(p,s,e)))}
-  if(c.name=='Chloe')return DJ;
   const home=q;
   if(c.kind=='del'){const ti=TOP4.indexOf(c.team);if(ti>=0){const w0=.5+ti*.025;q=visit(p,home,[1065+c.m*70,135],w0,w0+.025,.006)}}
   if(c.name=='Dani')q=visit(p,home,STAGE,.6,.65);
@@ -657,12 +656,12 @@ function drawClub(sc,p){
   if(p>=.65&&p<.8){ctx.fillStyle='#f2c23a';ctx.beginPath();ctx.moveTo(1150,92);ctx.lineTo(1190,92);ctx.quadraticCurveTo(1188,124,1170,128);ctx.quadraticCurveTo(1152,124,1150,92);ctx.fill();ctx.fillRect(1166,126,8,12);ctx.fillRect(1156,138,28,6)}
   // people
   CL.ppl.forEach(c=>{let q=clubPos(c,p);if(!q)return;
-    if(p>.86&&c.name!='Chloe')q=[q[0]+Math.sin(amb*7+c.k)*5*party,q[1]+Math.cos(amb*5.3+c.k*1.7)*5*party];
+    if(p>.86)q=[q[0]+Math.sin(amb*7+c.k)*5*party,q[1]+Math.cos(amb*5.3+c.k*1.7)*5*party];
     if(party>0){ctx.save();ctx.shadowColor=COL[c.kind];ctx.shadowBlur=14*party}
     ctx.beginPath();ctx.arc(q[0],q[1],11,0,7);ctx.fillStyle=COL[c.kind];ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='rgba(255,255,255,.8)';ctx.stroke();
     if(party>0)ctx.restore();
     hits.push({a:c,sx:q[0],sy:q[1]});
-    if(c.kind=='exec'&&(c.name=='Chloe'||q[1]<250||(c.door&&p<.18)))txt(c.name,q[0],q[1]-21,14,{c:'#eef2f6',w:600})});
+    if(c.kind=='exec'&&(q[1]<250||(c.door&&p<.18)))txt(c.name,q[0],q[1]-21,14,{c:'#eef2f6',w:600})});
   // confetti from closing remarks on
   if(p>.7){const a0=seg(p,.7,.72);for(let i=0;i<150;i++){const h1=fr(Math.sin(i*91.7)*4375.1),h2=fr(Math.sin(i*17.3)*9127.7),x=PW+40+h1*(W-PW-80),y=(h2*1120+amb*(60+h2*90))%1120-20;
     ctx.save();ctx.globalAlpha=a0;ctx.translate(x,y);ctx.rotate(amb*2+i);ctx.fillStyle=`hsl(${i*47%360},90%,62%)`;ctx.fillRect(-5,-2.5,10,5);ctx.restore()}}
