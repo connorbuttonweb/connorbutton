@@ -446,10 +446,18 @@ S(1,'Top 4 finals · Rose Commons reset and lock-up','17:55','19:00',12,{base:'j
     seq(a,[[0,pp,0],[.15,v[1],0],[.3,v[1],0],[.45,v[2],0],[.76,v[2],0],[v[0]=='Lucas'?.93:.8+i*.02,[1030,870],0],[v[0]=='Lucas'?1:.88+i*.02,null,v[0]=='Lucas'?.4:0]],p)});
   if(p>.93)bub([1030,830],'Locked by 7:00');
  }});
-S(1,'Everyone to Night Owl · banquet','19:00','21:30',7,{base:'reset',execDef:'hide',cam:[[0,VA]],cut:1,
+S(1,'Night Owl · banquet, winners and the party','19:00','21:30',10,{base:'reset',execDef:'hide',club:1,cam:[[0,VA]],cut:1,
  win:()=>[0,.4],
- notes:[['7:00 to 7:20 Round up the stragglers; everyone heads to Night Owl.','Everyone'],['Doors: drink tickets and underage wristbands.','Andrea; FYRs with Ben\'s list'],['7:30 Banquet. 8:15 to 8:45 team presentations, raffle and winners.','Dani (raffle); Ty, Brooke (winners)'],['8:45 Closing remarks: QUESST 2026 is officially over. 9:00 clean up.','Brooke, Ty; all exec']],
- run(p){F.lock=1;F.card=['Off the map: Night Owl','Banquet set from 5:30 by Connor, Chloe, Andrea, Victoria, Jorja and the FYRs.','7:30 banquet · 8:15 presentations + winners · 8:45 closing · 9:00 clean up','Monday: key + fob and mics + clicker back to DDQIC; Queen\'s Catering collects the linens.']}});
+ notes:[['7:00 to 7:20 Round up the stragglers; everyone heads to Night Owl. Set up since 5:30.','Everyone; set-up crew Connor, Chloe, Andrea, Victoria, Jorja, FYRs'],['Doors: drink tickets and underage wristbands.','Andrea; FYRs with Ben\'s list'],['7:30 Banquet. 8:15 to 8:45 team presentations, raffle and winners.','Dani (raffle); Ty, Brooke (winners)'],['8:45 Closing remarks: QUESST 2026 is officially over. 9:00 clean up, then the dance floor.','Brooke, Ty; all exec']],
+ run(p){F.lock=1;
+  if(p<.14)bub([560,985],'Drink tickets + wristbands');
+  else if(p<.5)bub([1170,60],p<.2?'7:30 Banquet':'Dinner · Night Owl');
+  else if(p<.6)bub([1170,60],`8:15 Team presentations · ${Math.min(4,Math.floor((p-.5)/.025)+1)} of 4`);
+  else if(p<.65)bub([1170,60],'Raffle · Dani');
+  else if(p<.7)bub([1170,60],'And the QUESST 2026 winners are…');
+  else if(p<.8)bub([1170,60],'8:45 QUESST 2026 is officially over!');
+  else if(p<.86)bub([1170,300],'9:00 Clean up, then…');
+  else bub([1170,300],"That's a wrap, QUESST 2026!")}});
 
 /* ============ timeline ============ */
 let acc=0; SC.forEach((s,i)=>{s.i=i;s.start=acc;acc+=s.dur}); const TOTAL=acc;
@@ -582,6 +590,95 @@ function drawWorld(sc,view,vp,o={}){
   ctx.restore();SCALE=1;
   if(o.label){ctx.font=`600 17px ${FD}`;const w=ctx.measureText(o.label.toUpperCase()).width+22;ctx.fillStyle='rgba(19,28,40,.92)';rr(vp[0]+12,vp[1]+12,w,30,4);ctx.fill();txt(o.label.toUpperCase(),vp[0]+23,vp[1]+28,17,{a:'left',c:'#eef2f6',w:600,d:1})}
 }
+/* ============ Night Owl finale (off the campus map, drawn as its own room) ============ */
+const RM=matchMedia('(prefers-reduced-motion: reduce)').matches, fr=x=>x-Math.floor(x);
+const CL=(()=>{
+  const tables=[[680,340],[680,560],[680,780],[1590,400],[1590,620],[1800,400],[1800,620],[760,930],[1000,930],[1240,930],[1480,930],[1720,880]];
+  const crew=['Connor','Chloe','Andrea','Victoria','Jorja','Anna','Lincoln','FYR 3'], door={Andrea:[610,985],Anna:[650,1015],Lincoln:[690,985],'FYR 3':[730,1015]};
+  const ppl=[...DEL,...EXEC].map((a,k)=>{const t=tables[Math.floor(k/7)],ang=(k%7)*2*Math.PI/7-Math.PI/2;
+    return {tip:a.kind=='del'?`Team ${a.team} · delegate`:a.tip,vis:true,kind:a.kind,name:a.name,team:a.team,m:a.m,k,ord:k/82,
+      seat:[t[0]+Math.cos(ang)*58,t[1]+Math.sin(ang)*58],dance:[915+fr(Math.sin(k*12.9898)*43758.5453)*510,325+fr(Math.sin(k*78.233)*12543.21)*340],
+      crew:crew.includes(a.name),door:door[a.name]}});
+  return {tables,ppl};
+})();
+const STAGE=[1170,165], DJ=[1655,170];
+function visit(p,from,to,w0,w1,tr=.008){if(p<w0)return from;if(p<w0+tr)return along([from,to],ez(seg(p,w0,w0+tr)));if(w1>=1||p<w1-tr)return to;if(p<w1)return along([to,from],ez(seg(p,w1-tr,w1)));return from}
+function clubPos(c,p){
+  let q=c.seat;
+  if(c.door){if(p<.16)return c.door;if(p<.18)return along([c.door,c.seat],ez(seg(p,.16,.18)))}
+  else if(!c.crew){const s=.005+c.ord*.085,e=s+.05;if(p<s)return null;if(p<e)return along([[535,1110],[535,1005],c.seat],ez(seg(p,s,e)))}
+  if(c.name=='Chloe')return DJ;
+  const home=q;
+  if(c.kind=='del'){const ti=TOP4.indexOf(c.team);if(ti>=0){const w0=.5+ti*.025;q=visit(p,home,[1065+c.m*70,135],w0,w0+.025,.006)}}
+  if(c.name=='Dani')q=visit(p,home,STAGE,.6,.65);
+  if(c.name=='Ty')q=visit(p,home,[1130,175],.65,.8);
+  if(c.name=='Brooke')q=visit(p,home,[1210,175],.65,.8);
+  if(p>.8)q=visit(p,q,c.dance,.8+c.ord*.04,1,.03);
+  return q;
+}
+function neon(s,x,y,px,color,o={}){ctx.save();ctx.shadowColor=color;ctx.shadowBlur=o.blur||26;txt(s,x,y,px,{c:color,w:700,d:1,rot:o.rot});ctx.shadowBlur=6;txt(s,x,y,px,{c:o.core||'#fff2fb',w:700,d:1,rot:o.rot});ctx.restore()}
+function drawClub(sc,p){
+  const amb=RM?0:performance.now()/1000, vibe=p<.14?.35:p<.5?.6:p<.8?.45:1, party=seg(p,.8,.86), stageOn=p>=.5&&p<.8;
+  ctx.save();ctx.beginPath();ctx.rect(PW,0,W-PW,H);ctx.clip();
+  const g=ctx.createLinearGradient(PW,0,W,H);g.addColorStop(0,'#1a0d36');g.addColorStop(1,'#0a0a1c');ctx.fillStyle=g;ctx.fillRect(PW,0,W-PW,H);
+  // walls, with the entrance gap bottom-left
+  ctx.strokeStyle='#3d2b6b';ctx.lineWidth=6;ctx.strokeRect(440,40,1460,1000);ctx.fillStyle='#0b0a1d';ctx.fillRect(480,1034,110,12);
+  // bar + stools + bottles
+  rr(452,110,64,640,8);ctx.fillStyle='#3a2418';ctx.fill();ctx.strokeStyle='#8a5530';ctx.lineWidth=2;ctx.stroke();
+  for(let i=0;i<9;i++){ctx.beginPath();ctx.arc(540,145+i*68,10,0,7);ctx.fillStyle='#2c2142';ctx.fill();ctx.strokeStyle='#4b3a73';ctx.stroke()}
+  for(let i=0;i<14;i++){ctx.beginPath();ctx.arc(470+(i%2)*14,130+i*44,4,0,7);ctx.fillStyle=`hsl(${i*53%360},80%,62%)`;ctx.fill()}
+  // stage, screen, lectern
+  rr(980,60,380,180,12);ctx.fillStyle='#26124d';ctx.fill();ctx.strokeStyle=`hsla(320,95%,65%,${.5+.3*vibe})`;ctx.lineWidth=3;ctx.stroke();
+  box(1010,46,320,8,'#7fb0ea');box(1155,198,30,22,'#c9a46b');
+  // DJ booth with a live equalizer
+  rr(1560,110,190,110,10);ctx.fillStyle='#1c1934';ctx.fill();ctx.strokeStyle='hsla(185,95%,60%,.8)';ctx.lineWidth=2.5;ctx.stroke();
+  for(let i=0;i<10;i++){const h=(.25+.75*Math.abs(Math.sin(amb*(3+i*.7)+i)))*44*(.4+.6*vibe);ctx.fillStyle=`hsl(${170+i*14},90%,60%)`;ctx.fillRect(1578+i*16,206-h,10,h)}
+  // dance floor
+  const tick=Math.floor(amb*3);
+  for(let i=0;i<9;i++)for(let j=0;j<6;j++){const on=(i+j+tick)%3==0,hue=(i*40+j*60+tick*47)%360;
+    ctx.fillStyle=`hsla(${hue},85%,55%,${(on?.6:.14)*(.35+.65*vibe)})`;ctx.fillRect(900+i*60+1,310+j*60+1,58,58)}
+  ctx.strokeStyle='rgba(255,255,255,.12)';ctx.lineWidth=2;ctx.strokeRect(900,310,540,360);
+  // light: sweeping beams, a stage spot and disco-ball sparkles
+  ctx.globalCompositeOperation='lighter';
+  [[600,45,300],[960,45,190],[1380,45,50],[1890,45,140]].forEach((b,i)=>{const a=Math.PI/2+Math.sin(amb*(.55+i*.17)+i*2)*.75+(i<2?-.25:.25),L=950,s=.11;
+    const gr=ctx.createRadialGradient(b[0],b[1],0,b[0],b[1],L);gr.addColorStop(0,`hsla(${b[2]},95%,60%,${.28*vibe})`);gr.addColorStop(1,`hsla(${b[2]},95%,60%,0)`);
+    ctx.fillStyle=gr;ctx.beginPath();ctx.moveTo(b[0],b[1]);ctx.lineTo(b[0]+Math.cos(a-s)*L,b[1]+Math.sin(a-s)*L);ctx.lineTo(b[0]+Math.cos(a+s)*L,b[1]+Math.sin(a+s)*L);ctx.closePath();ctx.fill()});
+  if(stageOn){const gr=ctx.createRadialGradient(STAGE[0],STAGE[1],10,STAGE[0],STAGE[1],230);gr.addColorStop(0,'rgba(255,240,200,.38)');gr.addColorStop(1,'rgba(255,240,200,0)');ctx.fillStyle=gr;ctx.fillRect(940,0,460,420)}
+  if(p>.13)for(let i=0;i<46;i++){const a=amb*.6+i*2.4,r=40+(i*37%280);ctx.beginPath();ctx.arc(1170+Math.cos(a)*r*1.5,490+Math.sin(a)*r*.75,3,0,7);ctx.fillStyle=`rgba(255,255,255,${.55*vibe})`;ctx.fill()}
+  ctx.globalCompositeOperation='source-over';
+  // disco ball
+  {const bx=1170,by=490,br=28,gr=ctx.createRadialGradient(bx-9,by-9,3,bx,by,br);gr.addColorStop(0,'#ffffff');gr.addColorStop(1,'#7d8597');
+   ctx.beginPath();ctx.arc(bx,by,br,0,7);ctx.fillStyle=gr;ctx.fill();ctx.save();ctx.clip();ctx.strokeStyle='rgba(30,30,50,.45)';ctx.lineWidth=1;
+   const off=fr(amb*.4)*9;for(let k=-4;k<=4;k++){ctx.beginPath();ctx.moveTo(bx+k*9+off-9,by-br);ctx.lineTo(bx+k*9+off-9,by+br);ctx.stroke();ctx.beginPath();ctx.moveTo(bx-br,by+k*9);ctx.lineTo(bx+br,by+k*9);ctx.stroke()}ctx.restore()}
+  // banquet tables with candles
+  CL.tables.forEach((t,i)=>{ctx.beginPath();ctx.arc(t[0],t[1],36,0,7);ctx.fillStyle='#2a1f47';ctx.fill();ctx.strokeStyle='rgba(240,178,62,.55)';ctx.lineWidth=2;ctx.stroke();
+    const f=.55+.25*Math.sin(amb*9+i*1.7),gr=ctx.createRadialGradient(t[0],t[1],0,t[0],t[1],22);gr.addColorStop(0,`rgba(255,196,90,${f})`);gr.addColorStop(1,'rgba(255,196,90,0)');ctx.fillStyle=gr;ctx.beginPath();ctx.arc(t[0],t[1],22,0,7);ctx.fill()});
+  // trophy for the winners
+  if(p>=.65&&p<.8){ctx.fillStyle='#f2c23a';ctx.beginPath();ctx.moveTo(1150,92);ctx.lineTo(1190,92);ctx.quadraticCurveTo(1188,124,1170,128);ctx.quadraticCurveTo(1152,124,1150,92);ctx.fill();ctx.fillRect(1166,126,8,12);ctx.fillRect(1156,138,28,6)}
+  // people
+  CL.ppl.forEach(c=>{let q=clubPos(c,p);if(!q)return;
+    if(p>.86&&c.name!='Chloe')q=[q[0]+Math.sin(amb*7+c.k)*5*party,q[1]+Math.cos(amb*5.3+c.k*1.7)*5*party];
+    if(party>0){ctx.save();ctx.shadowColor=COL[c.kind];ctx.shadowBlur=14*party}
+    ctx.beginPath();ctx.arc(q[0],q[1],11,0,7);ctx.fillStyle=COL[c.kind];ctx.fill();ctx.lineWidth=2;ctx.strokeStyle='rgba(255,255,255,.8)';ctx.stroke();
+    if(party>0)ctx.restore();
+    hits.push({a:c,sx:q[0],sy:q[1]});
+    if(c.kind=='exec'&&(c.name=='Chloe'||q[1]<250||(c.door&&p<.18)))txt(c.name,q[0],q[1]-21,14,{c:'#eef2f6',w:600})});
+  // confetti from closing remarks on
+  if(p>.7){const a0=seg(p,.7,.72);for(let i=0;i<150;i++){const h1=fr(Math.sin(i*91.7)*4375.1),h2=fr(Math.sin(i*17.3)*9127.7),x=PW+40+h1*(W-PW-80),y=(h2*1120+amb*(60+h2*90))%1120-20;
+    ctx.save();ctx.globalAlpha=a0;ctx.translate(x,y);ctx.rotate(amb*2+i);ctx.fillStyle=`hsl(${i*47%360},90%,62%)`;ctx.fillRect(-5,-2.5,10,5);ctx.restore()}}
+  // signage
+  const flick=RM||Math.sin(amb*13)>-.97?1:.45;ctx.globalAlpha=flick;
+  neon('NIGHT OWL',760,165,72,'#ff4fd8');
+  [[722,85],[798,85]].forEach(e=>{ctx.save();ctx.shadowColor='#f0b23e';ctx.shadowBlur=18;ctx.strokeStyle='#ffd27a';ctx.lineWidth=4;ctx.beginPath();ctx.arc(e[0],e[1],22,0,7);ctx.stroke();
+    if(fr(amb/4)<.04){ctx.beginPath();ctx.moveTo(e[0]-14,e[1]);ctx.lineTo(e[0]+14,e[1]);ctx.stroke()}else{ctx.beginPath();ctx.arc(e[0],e[1],8,0,7);ctx.fillStyle='#ffd27a';ctx.fill()}ctx.restore()});
+  ctx.globalAlpha=1;
+  neon('BAR',484,800,30,'#3ee8ff',{rot:-Math.PI/2,blur:18});
+  neon('DJ',1655,92,26,'#3ee8ff',{blur:16});
+  txt('STAGE',1170,252,15,{c:'#c9b8f0',w:600,d:1});txt('DANCE FLOOR',1170,688,15,{c:'#c9b8f0',w:600,d:1});
+  txt('ENTRANCE',535,1062,15,{c:'#c9b8f0',w:600,d:1});
+  drawBubbles();
+  ctx.restore();
+}
 function wrap(s,x,y,maxw,lh,font,color){ctx.font=font;ctx.fillStyle=color;ctx.textAlign='left';ctx.textBaseline='top';const words=s.split(' ');let ln='';for(const w of words){const t=ln?ln+' '+w:w;if(ctx.measureText(t).width>maxw&&ln){ctx.fillText(ln,x,y);y+=lh;ln=w}else ln=t}if(ln){ctx.fillText(ln,x,y);y+=lh}return y}
 const clockStr=m=>{m=Math.round(m);const h=Math.floor(m/60),mm=m%60;return `${((h+11)%12)+1}:${String(mm).padStart(2,'0')} ${h<12?'AM':'PM'}`};
 function drawPanel(sc,p){
@@ -604,6 +701,7 @@ function render(T){
   resetF(sc.spec.base);defMove(sc,prev,p);if(sc.run)sc.run(p,sc,prev);
   hits=[];ctx.clearRect(0,0,W,H);
   if(sc.spec.panes){sc.spec.panes.forEach(pn=>drawWorld(sc,pn.view,pn.vp,{label:pn.label}));ctx.fillStyle='#131c28';ctx.fillRect(PW,618,W-PW,4)}
+  else if(sc.spec.club)drawClub(sc,p);
   else drawWorld(sc,camAt(sc.spec.cam,p),MAIN);
   if(F.card){ctx.fillStyle='rgba(13,20,29,.78)';ctx.fillRect(PW,0,W-PW,H);const cx=PW+(W-PW)/2;txt(F.card[0],cx,400,84,{c:'#f0b23e',w:700,d:1});txt(F.card[1],cx,490,24,{c:'#eef2f6'});txt(F.card[2],cx,540,26,{c:'#eef2f6',w:600});txt(F.card[3],cx,600,20,{c:'#93a1b3'})}
   if(sc.spec.cut){const t=(T-sc.start);if(t<.35){ctx.fillStyle=`rgba(19,28,40,${1-t/.35})`;ctx.fillRect(PW,0,W-PW,H)}}
