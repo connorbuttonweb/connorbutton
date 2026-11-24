@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-11-23T22:46:16.362Z",
-  "as_of": "2026-11-23",
+  "generated_at": "2026-11-24T22:46:39.999Z",
+  "as_of": "2026-11-24",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4351
+   "USDCAD": 1.4365
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 2012.59,
+   "cash": 2012.61,
    "currency": "CAD",
-   "buying_power": 12.06
+   "buying_power": 12.09
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 315,
    "avg_cost": 32.7436,
-   "price": 31.3,
-   "prev_close": 30.55,
-   "market_value": 9859.5,
-   "open_pnl": -454.72,
+   "price": 30.98,
+   "prev_close": 31.13,
+   "market_value": 9758.7,
+   "open_pnl": -555.52,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 621.6746,
    "avg_cost": 12.6041,
-   "price": 9.74,
-   "prev_close": 9.19,
-   "market_value": 6055.11,
-   "open_pnl": -1780.54,
+   "price": 9.75,
+   "prev_close": 9.74,
+   "market_value": 6061.33,
+   "open_pnl": -1774.32,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 300,
    "avg_cost": 22.4277,
-   "price": 18.39,
-   "prev_close": 17.23,
-   "market_value": 5517,
-   "open_pnl": -1211.31,
+   "price": 17.59,
+   "prev_close": 18.39,
+   "market_value": 5277,
+   "open_pnl": -1451.31,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 44,
    "avg_cost": 18.1688,
-   "price": 15.059,
-   "prev_close": 12.239,
-   "market_value": 662.6,
-   "open_pnl": -136.83,
+   "price": 13.02,
+   "prev_close": 14.71,
+   "market_value": 572.88,
+   "open_pnl": -226.55,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -117,10 +117,10 @@
    "currency": "CAD",
    "quantity": -2,
    "avg_cost": 0.35,
-   "price": 0.7,
+   "price": 1.05,
    "prev_close": 0.7,
-   "market_value": -1.4,
-   "open_pnl": -0.7,
+   "market_value": -2.1,
+   "open_pnl": -1.4,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -23123,10 +23123,27 @@
     "date": "2026-11-23",
     "value": 24394.78,
     "net_flow": 0
+   },
+   {
+    "date": "2026-11-24",
+    "value": 23931.56,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-03-29",
+     "level": 162.41
+    },
+    {
+     "date": "2026-04-05",
+     "level": 167.26
+    },
+    {
+     "date": "2026-04-12",
+     "level": 172.99
+    },
     {
      "date": "2026-04-19",
      "level": 173.6
@@ -23250,6 +23267,10 @@
     {
      "date": "2026-11-15",
      "level": 176.29
+    },
+    {
+     "date": "2026-11-22",
+     "level": 184.72
     }
    ]
   }
