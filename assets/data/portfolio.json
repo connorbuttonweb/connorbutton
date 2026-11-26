@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-11-24T22:46:39.999Z",
-  "as_of": "2026-11-24",
+  "generated_at": "2026-11-26T22:45:07.115Z",
+  "as_of": "2026-11-26",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4365
+   "USDCAD": 1.4216
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -14,7 +14,7 @@
  "profile": {
   "blended_mer": 0.0044,
   "distribution_yield": 0,
-  "holdings_count": 6,
+  "holdings_count": 7,
   "etf_count": 1,
   "benchmark_label": "S&P 500 (VFV.TO, CAD)"
  },
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 2012.61,
+   "cash": 2026.15,
    "currency": "CAD",
-   "buying_power": 12.09
+   "buying_power": 25.63
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 315,
    "avg_cost": 32.7436,
-   "price": 30.98,
-   "prev_close": 31.13,
-   "market_value": 9758.7,
-   "open_pnl": -555.52,
+   "price": 31.32,
+   "prev_close": 31.32,
+   "market_value": 9865.8,
+   "open_pnl": -448.42,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -51,12 +51,12 @@
    "account_id": "main",
    "asset_type": "Stock",
    "currency": "CAD",
-   "quantity": 621.6746,
-   "avg_cost": 12.6041,
-   "price": 9.75,
-   "prev_close": 9.74,
-   "market_value": 6061.33,
-   "open_pnl": -1774.32,
+   "quantity": 600,
+   "avg_cost": 12.5967,
+   "price": 10.06,
+   "prev_close": 10.06,
+   "market_value": 6036,
+   "open_pnl": -1522,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 300,
    "avg_cost": 22.4277,
-   "price": 17.59,
-   "prev_close": 18.39,
-   "market_value": 5277,
-   "open_pnl": -1451.31,
+   "price": 18.66,
+   "prev_close": 18.66,
+   "market_value": 5598,
+   "open_pnl": -1130.31,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,26 @@
    "currency": "USD",
    "quantity": 44,
    "avg_cost": 18.1688,
-   "price": 13.02,
-   "prev_close": 14.71,
-   "market_value": 572.88,
-   "open_pnl": -226.55,
+   "price": 12.85,
+   "prev_close": 12.85,
+   "market_value": 565.4,
+   "open_pnl": -234.03,
+   "sector": null,
+   "geography": null,
+   "market_cap_bucket": null
+  },
+  {
+   "symbol": "NXE15JAN27C13.50.MX",
+   "name": "NXE15JAN27C13.50.MX",
+   "account_id": "main",
+   "asset_type": "Stock",
+   "currency": "CAD",
+   "quantity": 17,
+   "avg_cost": 0.11,
+   "price": 0.11,
+   "prev_close": 0.11,
+   "market_value": 1.87,
+   "open_pnl": 0,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -118,7 +134,7 @@
    "quantity": -2,
    "avg_cost": 0.35,
    "price": 1.05,
-   "prev_close": 0.7,
+   "prev_close": 1.05,
    "market_value": -2.1,
    "open_pnl": -1.4,
    "sector": null,
@@ -23128,34 +23144,15 @@
     "date": "2026-11-24",
     "value": 23931.56,
     "net_flow": 0
+   },
+   {
+    "date": "2026-11-26",
+    "value": 24330.57,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
-    {
-     "date": "2026-03-29",
-     "level": 162.41
-    },
-    {
-     "date": "2026-04-05",
-     "level": 167.26
-    },
-    {
-     "date": "2026-04-12",
-     "level": 172.99
-    },
-    {
-     "date": "2026-04-19",
-     "level": 173.6
-    },
-    {
-     "date": "2026-04-26",
-     "level": 174.29
-    },
-    {
-     "date": "2026-05-03",
-     "level": 179.42
-    },
     {
      "date": "2026-05-10",
      "level": 180.84
@@ -23270,7 +23267,7 @@
     },
     {
      "date": "2026-11-22",
-     "level": 184.72
+     "level": 181.3
     }
    ]
   }
