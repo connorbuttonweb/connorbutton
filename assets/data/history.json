@@ -2,8 +2,8 @@
  "meta": {
   "base_currency": "CAD",
   "first_snapshot": "2026-05-14",
-  "generated_at": "2026-11-27T05:02:44.221Z",
-  "as_of": "2026-11-26",
+  "generated_at": "2026-11-27T22:46:14.106Z",
+  "as_of": "2026-11-27",
   "price_source": "yahoo via market-proxy",
   "approximated": [
    "ENB29MAY26C77.00",
@@ -6764,6 +6764,54 @@
      "last_price": 1.05
     }
    }
+  },
+  {
+   "date": "2026-11-27",
+   "cash": 2026.2,
+   "positions": {
+    "FINN.TO": {
+     "qty": 315,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 31.48
+    },
+    "NXE.TO": {
+     "qty": 600,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 10.42
+    },
+    "ARIS.TO": {
+     "qty": 300,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 19.64
+    },
+    "IREN": {
+     "qty": 44,
+     "currency": "USD",
+     "multiplier": 1,
+     "last_price": 13.62
+    },
+    "NXE15JAN27C13.50.MX": {
+     "qty": 17,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.11
+    },
+    "NXE15JAN27C14.50.MX": {
+     "qty": 3,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.36
+    },
+    "NXE15JAN27P10.00.MX": {
+     "qty": -2,
+     "currency": "CAD",
+     "multiplier": 1,
+     "last_price": 0.6
+    }
+   }
   }
  ],
  "flows": [
@@ -7020,7 +7068,7 @@
   },
   {
    "date": "2026-07-08",
-   "value": 30824.88,
+   "value": 30824.87,
    "net_flow": 0
   },
   {
@@ -7165,7 +7213,7 @@
   },
   {
    "date": "2026-08-19",
-   "value": 34249.66,
+   "value": 34249.67,
    "net_flow": 0
   },
   {
@@ -7510,7 +7558,12 @@
   },
   {
    "date": "2026-11-26",
-   "value": 24264.42,
+   "value": 24330.57,
+   "net_flow": 0
+  },
+  {
+   "date": "2026-11-27",
+   "value": 24941.2,
    "net_flow": 0
   }
  ],
@@ -7557,7 +7610,7 @@
   },
   {
    "date": "2026-05-29",
-   "level": 184.8264
+   "level": 184.8263
   },
   {
    "date": "2026-06-01",
@@ -8058,6 +8111,10 @@
   {
    "date": "2026-11-26",
    "level": 183.2
+  },
+  {
+   "date": "2026-11-27",
+   "level": 185.38
   }
  ],
  "hypothetical": [
@@ -8603,7 +8660,11 @@
   },
   {
    "date": "2026-11-26",
-   "value": 22237.42
+   "value": 22303.57
+  },
+  {
+   "date": "2026-11-27",
+   "value": 22913.25
   }
  ],
  "in_kind": [

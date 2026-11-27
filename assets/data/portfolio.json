@@ -1,10 +1,10 @@
 {
  "meta": {
-  "generated_at": "2026-11-26T22:45:07.115Z",
-  "as_of": "2026-11-26",
+  "generated_at": "2026-11-27T22:46:13.124Z",
+  "as_of": "2026-11-27",
   "base_currency": "CAD",
   "fx": {
-   "USDCAD": 1.4216
+   "USDCAD": 1.4252
   },
   "inception_date": "2026-05-14",
   "risk_free_rate": 0.029,
@@ -12,7 +12,7 @@
   "notes": "Positions, balances and transactions pulled from Questrade. Account numbers are deliberately not stored. The two self-directed accounts are combined; the custom-indexing account is excluded."
  },
  "profile": {
-  "blended_mer": 0.0044,
+  "blended_mer": 0.0043,
   "distribution_yield": 0,
   "holdings_count": 7,
   "etf_count": 1,
@@ -23,9 +23,9 @@
    "id": "main",
    "type": "Registered",
    "label": "Connor's Account",
-   "cash": 2026.15,
+   "cash": 2026.2,
    "currency": "CAD",
-   "buying_power": 25.63
+   "buying_power": 25.69
   }
  ],
  "positions": [
@@ -37,10 +37,10 @@
    "currency": "CAD",
    "quantity": 315,
    "avg_cost": 32.7436,
-   "price": 31.32,
+   "price": 31.48,
    "prev_close": 31.32,
-   "market_value": 9865.8,
-   "open_pnl": -448.42,
+   "market_value": 9916.2,
+   "open_pnl": -398.02,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -53,10 +53,10 @@
    "currency": "CAD",
    "quantity": 600,
    "avg_cost": 12.5967,
-   "price": 10.06,
+   "price": 10.42,
    "prev_close": 10.06,
-   "market_value": 6036,
-   "open_pnl": -1522,
+   "market_value": 6252,
+   "open_pnl": -1306,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -69,10 +69,10 @@
    "currency": "CAD",
    "quantity": 300,
    "avg_cost": 22.4277,
-   "price": 18.66,
+   "price": 19.64,
    "prev_close": 18.66,
-   "market_value": 5598,
-   "open_pnl": -1130.31,
+   "market_value": 5892,
+   "open_pnl": -836.31,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -85,10 +85,10 @@
    "currency": "USD",
    "quantity": 44,
    "avg_cost": 18.1688,
-   "price": 12.85,
-   "prev_close": 12.85,
-   "market_value": 565.4,
-   "open_pnl": -234.03,
+   "price": 13.62,
+   "prev_close": 12.86,
+   "market_value": 599.28,
+   "open_pnl": -200.15,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -133,10 +133,10 @@
    "currency": "CAD",
    "quantity": -2,
    "avg_cost": 0.35,
-   "price": 1.05,
+   "price": 0.6,
    "prev_close": 1.05,
-   "market_value": -2.1,
-   "open_pnl": -1.4,
+   "market_value": -1.2,
+   "open_pnl": -0.5,
    "sector": null,
    "geography": null,
    "market_cap_bucket": null
@@ -18048,6 +18048,30 @@
  },
  "activities": [
   {
+   "uid": "t_1c718e2ca0",
+   "date": "2026-11-26",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE15JAN27C13.50.MX",
+   "description": "CALL .NXE 01/15/27 13.50 NEXGEN ENERGY LTD WE ACTED AS AGENT AVG PRICE - ASK US FOR DETAILS",
+   "amount": -203.83,
+   "currency": "CAD",
+   "quantity": 17,
+   "price": 0.11
+  },
+  {
+   "uid": "t_54acdf1ca3",
+   "date": "2026-11-26",
+   "type": "Trade",
+   "account_id": "main",
+   "symbol": "NXE.TO",
+   "description": "NEXGEN ENERGY LTD COM WE ACTED AS AGENT",
+   "amount": 217.61,
+   "currency": "CAD",
+   "quantity": -21.6746,
+   "price": 10.04
+  },
+  {
    "uid": "t_6cd5db8c17",
    "date": "2026-11-13",
    "type": "Trade",
@@ -23149,10 +23173,59 @@
     "date": "2026-11-26",
     "value": 24330.57,
     "net_flow": 0
+   },
+   {
+    "date": "2026-11-27",
+    "value": 24942.24,
+    "net_flow": 0
    }
   ],
   "benchmarks": {
    "SPX": [
+    {
+     "date": "2026-02-22",
+     "level": 166.62
+    },
+    {
+     "date": "2026-03-01",
+     "level": 162.72
+    },
+    {
+     "date": "2026-03-08",
+     "level": 161.8
+    },
+    {
+     "date": "2026-03-15",
+     "level": 158.73
+    },
+    {
+     "date": "2026-03-22",
+     "level": 156.7
+    },
+    {
+     "date": "2026-03-29",
+     "level": 162.41
+    },
+    {
+     "date": "2026-04-05",
+     "level": 167.26
+    },
+    {
+     "date": "2026-04-12",
+     "level": 172.99
+    },
+    {
+     "date": "2026-04-19",
+     "level": 173.6
+    },
+    {
+     "date": "2026-04-26",
+     "level": 174.29
+    },
+    {
+     "date": "2026-05-03",
+     "level": 179.42
+    },
     {
      "date": "2026-05-10",
      "level": 180.84
@@ -23267,7 +23340,7 @@
     },
     {
      "date": "2026-11-22",
-     "level": 181.3
+     "level": 183.2
     }
    ]
   }
